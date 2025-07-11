@@ -1,19 +1,32 @@
+body {
+  margin: 0;
+  background: black;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 #phone-container {
   transition: width 0.3s ease;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Size tiers */
 .small {
-  width: 90px;
+  width: 70px; /* smaller initial closed phone */
 }
 
 .medium {
-  width: 140px;
+  width: 160px; /* larger final closed phone (50.png) */
 }
 
 .large {
-  width: 250px;
+  width: 250px; /* fully open phone */
 }
 
 #phone-frame {
