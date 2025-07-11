@@ -43,7 +43,7 @@ function playAnimation(frames, finalFrame, sizeClass, callback) {
   }, 100);
 }
 
-// Initial phone setup
+// Initial setup
 frame.src = "images/6.png";
 setSizeClass("small");
 container.classList.add("pulse-hover");
