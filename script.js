@@ -1,5 +1,4 @@
-const openFrames = [
-  "images/6.png",
+const openingFrames = [
   "images/25.png",
   "images/28.png",
   "images/30.png",
@@ -8,65 +7,69 @@ const openFrames = [
   "images/42.png"
 ];
 
-const closeFrames = [
+const closingFrames = [
   "images/46.png",
   "images/48.png",
-  "images/50.png",
-  "images/6.png"
+  "images/50.png"
 ];
 
-const reopenFrames = [...closeFrames].reverse();
+const container = document.getElementById("phone-container");
+const frame = document.getElementById("phone-frame");
 
-let currentFrame = 0;
-let animationPlayed = false;
+// Initial state
 let isOpen = false;
+let hasPlayed = false;
 let isAnimating = false;
 
-const container = document.getElementById("phone-container");
-const frameElement = document.getElementById("phone-frame");
-
-// Set initial image
-frameElement.src = "images/6.png";
+// Set to small closed phone
+frame.src = "images/6.png";
 container.classList.add("pulse-hover");
 
-function playFrames(frames, callback) {
+function playFrames(frames, onEnd) {
   isAnimating = true;
-  let index = 0;
+  let i = 0;
+
   const interval = setInterval(() => {
-    frameElement.src = frames[index];
-    index++;
-    if (index >= frames.length) {
+    frame.src = frames[i];
+    i++;
+    if (i >= frames.length) {
       clearInterval(interval);
       isAnimating = false;
-      callback && callback();
+      onEnd();
     }
-  }, 100); // faster animation
+  }, 100); // Faster animation
 }
 
-function handleClick() {
+container.addEventListener("click", () => {
   if (isAnimating) return;
 
-  if (!animationPlayed) {
-    // First time: open the phone
+  // FIRST TIME: Open phone
+  if (!hasPlayed) {
     container.classList.remove("pulse-hover");
     container.style.width = "250px";
-    playFrames(openFrames, () => {
-      animationPlayed = true;
+
+    playFrames(openingFrames, () => {
+      hasPlayed = true;
       isOpen = true;
     });
-  } else {
-    if (isOpen) {
-      playFrames(closeFrames, () => {
-        isOpen = false;
-        container.style.width = "120px";
-      });
-    } else {
-      container.style.width = "250px";
-      playFrames(reopenFrames, () => {
-        isOpen = true;
-      });
-    }
-  }
-}
 
-container.addEventListener("click", handleClick);
+    return;
+  }
+
+  // After first animation, toggle open/close
+  if (isOpen) {
+    // Closing
+    playFrames(closingFrames, () => {
+      frame.src = "images/50.png"; // stay at image 50 when closed
+      container.style.width = "120px";
+      isOpen = false;
+    });
+  } else {
+    // Reopening
+    container.style.width = "250px";
+    playFrames([...closingFrames].reverse(), () => {
+      frame.src = "images/42.png"; // fully open
+      isOpen = true;
+    });
+  }
+});
