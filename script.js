@@ -42,10 +42,12 @@ function setSizeClass(className) {
 function playAnimation(frames, finalFrame, sizeClass, callback) {
   isAnimating = true;
   let i = 0;
+
   const interval = setInterval(() => {
-    frame.src = frames[i];
-    i++;
-    if (i >= frames.length) {
+    if (i < frames.length) {
+      frame.src = frames[i];
+      i++;
+    } else {
       clearInterval(interval);
       frame.src = finalFrame;
       setSizeClass(sizeClass);
@@ -57,25 +59,25 @@ function playAnimation(frames, finalFrame, sizeClass, callback) {
 
 // Play sprite intro before showing phone
 function playSpriteIntro(callback) {
-  // sprite already points to frame 1 from HTML
   sprite.style.visibility = "visible";
   sprite.style.display = "block";
   container.style.display = "none";
 
-  let i = 2; // start from 2 since 1.png is already showing
+  let i = 2; // start from 2 since 1.png is already showing in HTML
 
   setTimeout(() => {
     const interval = setInterval(() => {
-      sprite.src = `DefineSprite_22/${i}.png`;
-      i++;
-      if (i > 16) {
+      if (i <= 16) {
+        sprite.src = `DefineSprite_22/${i}.png`;
+        i++;
+      } else {
         clearInterval(interval);
         sprite.style.display = "none";
         container.style.display = "flex";
         callback && callback();
       }
-    }, 150); // slower sprite speed
-  }, 150); // short delay to avoid race condition
+    }, 150); // sprite animation speed
+  }, 150);
 }
 
 // Run sprite intro then start flip phone animation
