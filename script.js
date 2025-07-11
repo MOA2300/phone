@@ -1,16 +1,16 @@
 const imageFrames = [
-  "6.png",
-  "25.png",
-  "28.png",
-  "30.png",
-  "32.png",
-  "34.png",
-  "36.png",
-  "38.png",
-  "42.png",
-  "46.png",
-  "48.png",
-  "50.png"
+  "images/6.png",
+  "images/25.png",
+  "images/28.png",
+  "images/30.png",
+  "images/32.png",
+  "images/34.png",
+  "images/36.png",
+  "images/38.png",
+  "images/42.png",
+  "images/46.png",
+  "images/48.png",
+  "images/50.png"
 ];
 
 let currentFrame = 0;
