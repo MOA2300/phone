@@ -1,16 +1,19 @@
-body {
-  margin: 0;
-  background: black;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-}
-
 #phone-container {
-  width: 90px;
   transition: width 0.3s ease;
   cursor: pointer;
+}
+
+/* Size tiers */
+.small {
+  width: 90px;
+}
+
+.medium {
+  width: 140px;
+}
+
+.large {
+  width: 250px;
 }
 
 #phone-frame {
