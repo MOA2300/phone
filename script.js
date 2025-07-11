@@ -14,18 +14,47 @@ const imageFrames = [
 ];
 
 let currentFrame = 0;
+let animationPlayed = false;
+let isOpen = true;
+
+const container = document.getElementById("phone-container");
 const frameElement = document.getElementById("phone-frame");
 
+// Initial image
+frameElement.src = "images/6.png";
+container.classList.add("pulse-hover");
+
 function playFlipAnimation() {
+  container.classList.remove("pulse-hover");
+  container.style.animation = "zoomRotate 3s ease-in-out forwards";
+
   const interval = setInterval(() => {
     if (currentFrame < imageFrames.length) {
       frameElement.src = imageFrames[currentFrame];
       currentFrame++;
     } else {
-      frameElement.src = imageFrames[imageFrames.length - 1]; // ensure last frame stays visible
       clearInterval(interval);
+      animationPlayed = true;
+      isOpen = true;
+      container.style.animation = ""; // Clear animation so it doesn't repeat
     }
-  }, 150);
+  }, 200);
 }
 
-window.onload = playFlipAnimation;
+function togglePhone() {
+  if (isOpen) {
+    frameElement.src = "images/6.png";
+    isOpen = false;
+  } else {
+    frameElement.src = "images/42.png";
+    isOpen = true;
+  }
+}
+
+container.addEventListener("click", () => {
+  if (!animationPlayed) {
+    playFlipAnimation();
+  } else {
+    togglePhone();
+  }
+});
