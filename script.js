@@ -1,4 +1,7 @@
-const openingFrames = [
+const frame = document.getElementById("phone-frame");
+const container = document.getElementById("phone-container");
+
+const openFrames = [
   "images/25.png",
   "images/28.png",
   "images/30.png",
@@ -7,68 +10,59 @@ const openingFrames = [
   "images/42.png"
 ];
 
-const closingFrames = [
+const closeFrames = [
   "images/46.png",
   "images/48.png",
   "images/50.png"
 ];
 
-const container = document.getElementById("phone-container");
-const frame = document.getElementById("phone-frame");
-
-// Initial state
-let isOpen = false;
-let hasPlayed = false;
+// Current state
 let isAnimating = false;
+let hasOpenedOnce = false;
+let isOpen = false;
 
-// Set to small closed phone
-frame.src = "images/6.png";
-container.classList.add("pulse-hover");
-
-function playFrames(frames, onEnd) {
+function playAnimation(frames, finalFrame, targetWidth, callback) {
   isAnimating = true;
   let i = 0;
 
   const interval = setInterval(() => {
     frame.src = frames[i];
     i++;
+
     if (i >= frames.length) {
       clearInterval(interval);
+      frame.src = finalFrame;
+      container.style.width = targetWidth;
       isAnimating = false;
-      onEnd();
+      if (callback) callback();
     }
-  }, 100); // Faster animation
+  }, 100);
 }
+
+// Initial phone setup
+frame.src = "images/6.png";
+container.classList.add("pulse-hover");
+container.style.width = "90px";
 
 container.addEventListener("click", () => {
   if (isAnimating) return;
 
-  // FIRST TIME: Open phone
-  if (!hasPlayed) {
+  if (!hasOpenedOnce) {
+    // First click: full opening sequence
     container.classList.remove("pulse-hover");
-    container.style.width = "250px";
-
-    playFrames(openingFrames, () => {
-      hasPlayed = true;
+    playAnimation(openFrames, "images/42.png", "250px", () => {
+      hasOpenedOnce = true;
       isOpen = true;
     });
-
-    return;
-  }
-
-  // After first animation, toggle open/close
-  if (isOpen) {
-    // Closing
-    playFrames(closingFrames, () => {
-      frame.src = "images/50.png"; // stay at image 50 when closed
-      container.style.width = "120px";
+  } else if (isOpen) {
+    // Phone is open → Close it
+    playAnimation(closeFrames, "images/50.png", "120px", () => {
       isOpen = false;
     });
   } else {
-    // Reopening
-    container.style.width = "250px";
-    playFrames([...closingFrames].reverse(), () => {
-      frame.src = "images/42.png"; // fully open
+    // Phone is closed → Reopen
+    const reopenFrames = [...closeFrames].reverse();
+    playAnimation(reopenFrames, "images/42.png", "250px", () => {
       isOpen = true;
     });
   }
