@@ -1,0 +1,39 @@
+body {
+  margin: 0;
+  background: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+#phone-container {
+  width: 250px;
+  height: auto;
+  transform-style: preserve-3d;
+  animation: zoomRotate 3s ease-in-out forwards;
+}
+
+#phone-frame {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: all 0.3s ease-in-out;
+}
+
+@keyframes zoomRotate {
+  0% {
+    transform: scale(0.1) rotateY(0deg);
+    opacity: 0;
+  }
+  30% {
+    transform: scale(0.3) rotateY(180deg);
+    opacity: 1;
+  }
+  60% {
+    transform: scale(0.6) rotateY(360deg);
+  }
+  100% {
+    transform: scale(1) rotateY(720deg);
+  }
+}
