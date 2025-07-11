@@ -8,50 +8,34 @@ body {
 }
 
 #phone-container {
-  width: 200px;
-  height: auto;
-  transform-style: preserve-3d;
+  width: 120px; /* small size at start */
   cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
 #phone-frame {
   width: 100%;
   height: auto;
   display: block;
-  transition: transform 0.3s ease-in-out;
 }
 
-/* Pulse on hover before animation */
 .pulse-hover:hover {
   animation: pulse 1s infinite;
 }
 
 @keyframes pulse {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.08);
-  }
-  100% {
-    transform: scale(1);
-  }
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
 }
 
-/* Optional: open animation container */
 @keyframes zoomRotate {
   0% {
-    transform: scale(0.1) rotateY(0deg);
+    transform: scale(0.3) rotateY(0deg);
     opacity: 0;
-  }
-  30% {
-    transform: scale(0.4) rotateY(180deg);
-    opacity: 1;
-  }
-  60% {
-    transform: scale(0.7) rotateY(360deg);
   }
   100% {
     transform: scale(1) rotateY(720deg);
+    opacity: 1;
   }
 }
