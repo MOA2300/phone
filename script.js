@@ -2,12 +2,13 @@ const sprite = document.getElementById("sprite");
 const frame = document.getElementById("phone-frame");
 const container = document.getElementById("phone-container");
 
-// Sprite filenames (1.png to 16.png)
+// Sprite animation frames (1.png to 16.png)
 const spriteFrames = [];
 for (let i = 1; i <= 16; i++) {
   spriteFrames.push(`DefineSprite_22/${i}.png`);
 }
 
+// Phone opening and closing sequences
 const openFrames = [
   "images/25.png",
   "images/28.png",
@@ -23,15 +24,18 @@ const closeFrames = [
   "images/50.png"
 ];
 
+// Animation state tracking
 let isAnimating = false;
 let hasOpenedOnce = false;
 let isOpen = false;
 
+// Set initial phone size
 function setSizeClass(className) {
   container.classList.remove("small", "medium", "large");
   container.classList.add(className);
 }
 
+// Play frame-by-frame animation
 function playAnimation(frames, finalFrame, sizeClass, callback) {
   isAnimating = true;
   let i = 0;
@@ -43,11 +47,12 @@ function playAnimation(frames, finalFrame, sizeClass, callback) {
       frame.src = finalFrame;
       setSizeClass(sizeClass);
       isAnimating = false;
-      callback && callback();
+      if (callback) callback();
     }
-  }, 100);
+  }, 100); // flip animation speed
 }
 
+// Play sprite intro before showing phone
 function playSpriteIntro(callback) {
   sprite.style.display = "block";
   container.style.display = "none";
@@ -62,12 +67,17 @@ function playSpriteIntro(callback) {
       container.style.display = "flex";
       callback && callback();
     }
-  }, 70); // adjust speed if needed
+  }, 150); // slower sprite playback speed
 }
 
+// Run sprite intro then start flip phone animation
 window.onload = () => {
-  // Start sprite animation, then play phone opening
+  setSizeClass("small");
+  frame.src = "images/6.png";
+  container.classList.add("pulse-hover");
+
   playSpriteIntro(() => {
+    container.classList.remove("pulse-hover");
     playAnimation(openFrames, "images/42.png", "large", () => {
       hasOpenedOnce = true;
       isOpen = true;
@@ -75,6 +85,7 @@ window.onload = () => {
   });
 };
 
+// Toggle phone open/close on click
 container.addEventListener("click", () => {
   if (isAnimating || !hasOpenedOnce) return;
 
