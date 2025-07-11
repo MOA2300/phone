@@ -16,12 +16,16 @@ const closeFrames = [
   "images/50.png"
 ];
 
-// Current state
 let isAnimating = false;
 let hasOpenedOnce = false;
 let isOpen = false;
 
-function playAnimation(frames, finalFrame, targetWidth, callback) {
+function setSizeClass(className) {
+  container.classList.remove("small", "medium", "large");
+  container.classList.add(className);
+}
+
+function playAnimation(frames, finalFrame, sizeClass, callback) {
   isAnimating = true;
   let i = 0;
 
@@ -32,7 +36,7 @@ function playAnimation(frames, finalFrame, targetWidth, callback) {
     if (i >= frames.length) {
       clearInterval(interval);
       frame.src = finalFrame;
-      container.style.width = targetWidth;
+      setSizeClass(sizeClass);
       isAnimating = false;
       if (callback) callback();
     }
@@ -41,28 +45,25 @@ function playAnimation(frames, finalFrame, targetWidth, callback) {
 
 // Initial phone setup
 frame.src = "images/6.png";
+setSizeClass("small");
 container.classList.add("pulse-hover");
-container.style.width = "90px";
 
 container.addEventListener("click", () => {
   if (isAnimating) return;
 
   if (!hasOpenedOnce) {
-    // First click: full opening sequence
     container.classList.remove("pulse-hover");
-    playAnimation(openFrames, "images/42.png", "250px", () => {
+    playAnimation(openFrames, "images/42.png", "large", () => {
       hasOpenedOnce = true;
       isOpen = true;
     });
   } else if (isOpen) {
-    // Phone is open → Close it
-    playAnimation(closeFrames, "images/50.png", "120px", () => {
+    playAnimation(closeFrames, "images/50.png", "medium", () => {
       isOpen = false;
     });
   } else {
-    // Phone is closed → Reopen
     const reopenFrames = [...closeFrames].reverse();
-    playAnimation(reopenFrames, "images/42.png", "250px", () => {
+    playAnimation(reopenFrames, "images/42.png", "large", () => {
       isOpen = true;
     });
   }
