@@ -8,9 +8,9 @@ body {
 }
 
 #phone-container {
-  width: 120px; /* small size at start */
+  width: 90px; /* Smaller initial size */
   cursor: pointer;
-  transition: transform 0.3s ease;
+  transition: width 0.3s ease;
 }
 
 #phone-frame {
@@ -27,15 +27,4 @@ body {
   0% { transform: scale(1); }
   50% { transform: scale(1.08); }
   100% { transform: scale(1); }
-}
-
-@keyframes zoomRotate {
-  0% {
-    transform: scale(0.3) rotateY(0deg);
-    opacity: 0;
-  }
-  100% {
-    transform: scale(1) rotateY(720deg);
-    opacity: 1;
-  }
 }
