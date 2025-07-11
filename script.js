@@ -18,14 +18,14 @@ const frameElement = document.getElementById("phone-frame");
 
 function playFlipAnimation() {
   const interval = setInterval(() => {
-    frameElement.src = imageFrames[currentFrame];
-    currentFrame++;
-    if (currentFrame >= imageFrames.length) {
+    if (currentFrame < imageFrames.length) {
+      frameElement.src = imageFrames[currentFrame];
+      currentFrame++;
+    } else {
+      frameElement.src = imageFrames[imageFrames.length - 1]; // ensure last frame stays visible
       clearInterval(interval);
     }
-  }, 150); // Adjust frame delay if needed
+  }, 150);
 }
 
-window.onload = () => {
-  playFlipAnimation();
-};
+window.onload = playFlipAnimation;
