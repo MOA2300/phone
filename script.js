@@ -49,17 +49,17 @@ function playAnimation(frames, finalFrame, sizeClass, callback) {
       isAnimating = false;
       if (callback) callback();
     }
-  }, 100);
+  }, 100); // adjust animation speed as needed
 }
 
 // Play sprite intro before showing phone
 function playSpriteIntro(callback) {
-  sprite.src = "DefineSprite_22/1.png"; // preload first frame
+  // sprite already points to frame 1 from HTML
   sprite.style.visibility = "visible";
   sprite.style.display = "block";
   container.style.display = "none";
 
-  let i = 2; // start from second frame since we already loaded 1.png
+  let i = 2; // start from 2 since 1.png is already showing
 
   setTimeout(() => {
     const interval = setInterval(() => {
@@ -71,8 +71,8 @@ function playSpriteIntro(callback) {
         container.style.display = "flex";
         callback && callback();
       }
-    }, 150);
-  }, 150); // small delay so browser loads 1.png
+    }, 150); // slower sprite speed
+  }, 150); // short delay to avoid race condition
 }
 
 // Run sprite intro then start flip phone animation
