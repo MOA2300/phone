@@ -18,21 +18,27 @@ body {
 
 /* Size tiers */
 .small {
-  width: 70px; /* smaller initial closed phone */
+  width: 70px;
 }
 
 .medium {
-  width: 160px; /* larger final closed phone (50.png) */
+  width: 120px;
 }
 
 .large {
-  width: 250px; /* fully open phone */
+  width: 250px;
 }
 
 #phone-frame {
   width: 100%;
   height: auto;
   display: block;
+}
+
+#sprite {
+  width: 200px;
+  height: auto;
+  display: none;
 }
 
 .pulse-hover:hover {
