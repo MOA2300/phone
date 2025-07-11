@@ -8,9 +8,9 @@ body {
 }
 
 #phone-container {
-  width: 90px; /* Smaller initial size */
-  cursor: pointer;
+  width: 90px;
   transition: width 0.3s ease;
+  cursor: pointer;
 }
 
 #phone-frame {
