@@ -1,60 +1,71 @@
-const imageFrames = [
-  "images/6.png",
+const openFrames = [
   "images/25.png",
   "images/28.png",
   "images/30.png",
   "images/32.png",
   "images/34.png",
-  "images/36.png",
-  "images/38.png",
-  "images/42.png",
+  "images/42.png"
+];
+
+const closeFrames = [
   "images/46.png",
   "images/48.png",
-  "images/50.png"
+  "images/50.png",
+  "images/6.png"
 ];
+
+const reopenFrames = [...closeFrames].reverse();
 
 let currentFrame = 0;
 let animationPlayed = false;
-let isOpen = true;
+let isOpen = false;
+let isAnimating = false;
 
 const container = document.getElementById("phone-container");
 const frameElement = document.getElementById("phone-frame");
 
-// Initial image
+// Set initial image
 frameElement.src = "images/6.png";
 container.classList.add("pulse-hover");
 
-function playFlipAnimation() {
-  container.classList.remove("pulse-hover");
-  container.style.animation = "zoomRotate 3s ease-in-out forwards";
-
+function playFrames(frames, callback) {
+  isAnimating = true;
+  let index = 0;
   const interval = setInterval(() => {
-    if (currentFrame < imageFrames.length) {
-      frameElement.src = imageFrames[currentFrame];
-      currentFrame++;
-    } else {
+    frameElement.src = frames[index];
+    index++;
+    if (index >= frames.length) {
       clearInterval(interval);
+      isAnimating = false;
+      callback && callback();
+    }
+  }, 100); // faster animation
+}
+
+function handleClick() {
+  if (isAnimating) return;
+
+  if (!animationPlayed) {
+    // First time: open the phone
+    container.classList.remove("pulse-hover");
+    container.style.width = "250px";
+    playFrames(openFrames, () => {
       animationPlayed = true;
       isOpen = true;
-      container.style.animation = ""; // Clear animation so it doesn't repeat
+    });
+  } else {
+    if (isOpen) {
+      playFrames(closeFrames, () => {
+        isOpen = false;
+        container.style.width = "120px";
+      });
+    } else {
+      container.style.width = "250px";
+      playFrames(reopenFrames, () => {
+        isOpen = true;
+      });
     }
-  }, 200);
-}
-
-function togglePhone() {
-  if (isOpen) {
-    frameElement.src = "images/6.png";
-    isOpen = false;
-  } else {
-    frameElement.src = "images/42.png";
-    isOpen = true;
   }
 }
 
-container.addEventListener("click", () => {
-  if (!animationPlayed) {
-    playFlipAnimation();
-  } else {
-    togglePhone();
-  }
-});
+container.addEventListener("click", handleClick);
