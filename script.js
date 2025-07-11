@@ -1,4 +1,5 @@
 const openFrames = [
+  "images/6.png",
   "images/25.png",
   "images/28.png",
   "images/30.png",
