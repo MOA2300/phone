@@ -17,7 +17,7 @@ const openFrames = [
   "images/34.png",
   "images/36.png",
   "images/38.png",
-  "images/40.png",
+  "images/40.png", // ✅ make sure this file exists without spaces
   "images/42.png"
 ];
 
@@ -41,6 +41,7 @@ function setSizeClass(className) {
 // Play frame-by-frame animation
 function playAnimation(frames, finalFrame, sizeClass, callback) {
   isAnimating = true;
+  setSizeClass(sizeClass); // ✅ set correct size before animation
   let i = 0;
 
   const interval = setInterval(() => {
@@ -50,11 +51,10 @@ function playAnimation(frames, finalFrame, sizeClass, callback) {
     } else {
       clearInterval(interval);
       frame.src = finalFrame;
-      setSizeClass(sizeClass);
       isAnimating = false;
       if (callback) callback();
     }
-  }, 200); // adjust animation speed as needed
+  }, 200); // adjust animation speed if needed
 }
 
 // Play sprite intro before showing phone
@@ -63,7 +63,7 @@ function playSpriteIntro(callback) {
   sprite.style.display = "block";
   container.style.display = "none";
 
-  let i = 2; // start from 2 since 1.png is already showing in HTML
+  let i = 2; // start from 2 since 1.png is already in HTML
 
   setTimeout(() => {
     const interval = setInterval(() => {
@@ -77,7 +77,7 @@ function playSpriteIntro(callback) {
         callback && callback();
       }
     }, 150); // sprite animation speed
-  }, 150);
+  }, 150); // buffer delay to prevent visual glitch
 }
 
 // Run sprite intro then start flip phone animation
