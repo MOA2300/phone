@@ -2,11 +2,13 @@ const sprite = document.getElementById("sprite");
 const frame = document.getElementById("phone-frame");
 const container = document.getElementById("phone-container");
 
+// Sprite animation frames (DefineSprite_22/1.png to 16.png)
 const spriteFrames = [];
 for (let i = 1; i <= 16; i++) {
   spriteFrames.push(`DefineSprite_22/${i}.png`);
 }
 
+// Flip phone opening frames
 const openFrames = [
   "images/6.png",
   "images/25.png",
@@ -20,12 +22,14 @@ const openFrames = [
   "images/42.png"
 ];
 
+// Flip phone closing frames
 const closeFrames = [
   "images/46.png",
   "images/48.png",
   "images/50.png"
 ];
 
+// Preload all frames
 function preloadImages(paths) {
   paths.forEach(src => {
     const img = new Image();
@@ -46,7 +50,7 @@ function startSpriteLoop() {
   spriteInterval = setInterval(() => {
     spriteIndex = (spriteIndex + 1) % spriteFrames.length;
     sprite.src = spriteFrames[spriteIndex];
-  }, 160); // Adjust speed here
+  }, 160); // Slower for retro feel
 }
 
 function stopSpriteLoop() {
@@ -67,7 +71,7 @@ function playAnimation(frames, finalFrame, callback) {
       isAnimating = false;
       if (callback) callback();
     }
-  }, 90); // Adjust speed here
+  }, 90); // Smooth and consistent speed
 }
 
 window.onload = () => {
@@ -77,6 +81,7 @@ window.onload = () => {
     stopSpriteLoop();
     sprite.style.display = "none";
     container.style.display = "flex";
+
     playAnimation(openFrames, "images/42.png", () => {
       hasOpenedOnce = true;
       isOpen = true;
