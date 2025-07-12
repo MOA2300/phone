@@ -2,13 +2,13 @@ const sprite = document.getElementById("sprite");
 const frame = document.getElementById("phone-frame");
 const container = document.getElementById("phone-container");
 
-// Sprite animation frames (1.png to 16.png)
+// Sprite animation frames
 const spriteFrames = [];
 for (let i = 1; i <= 16; i++) {
   spriteFrames.push(`DefineSprite_22/${i}.png`);
 }
 
-// Phone opening and closing sequences
+// Opening frames (6.png should appear only after sprite)
 const openFrames = [
   "images/6.png",
   "images/25.png",
@@ -35,7 +35,7 @@ function preloadImages(paths) {
     img.src = src;
   });
 }
-preloadImages([...spriteFrames, ...openFrames, ...closeFrames, "images/6.png"]);
+preloadImages([...spriteFrames, ...openFrames, ...closeFrames]);
 
 let isAnimating = false;
 let hasOpenedOnce = false;
@@ -56,10 +56,10 @@ function playAnimation(frames, finalFrame, callback) {
       isAnimating = false;
       if (callback) callback();
     }
-  }, 90); // Adjust speed if needed
+  }, 90);
 }
 
-// Sprite animation intro
+// Sprite animation intro (small, not scaled)
 function playSpriteIntro(callback) {
   sprite.style.visibility = "visible";
   sprite.style.display = "block";
@@ -83,8 +83,10 @@ function playSpriteIntro(callback) {
 
 // On page load
 window.onload = () => {
-  frame.src = "images/6.png";
   container.classList.add("pulse-hover");
+
+  // Don't show frame initially
+  frame.src = "";
 
   playSpriteIntro(() => {
     container.classList.remove("pulse-hover");
