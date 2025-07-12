@@ -2,13 +2,13 @@ const sprite = document.getElementById("sprite");
 const frame = document.getElementById("phone-frame");
 const container = document.getElementById("phone-container");
 
-// Sprite animation frames (1.png to 16.png)
+// Sprite animation frames
 const spriteFrames = [];
 for (let i = 1; i <= 16; i++) {
   spriteFrames.push(`DefineSprite_22/${i}.png`);
 }
 
-// Phone opening and closing sequences
+// Phone open/close sequences
 const openFrames = [
   "images/25.png",
   "images/28.png",
@@ -27,18 +27,26 @@ const closeFrames = [
   "images/50.png"
 ];
 
-// Animation state tracking
+// Preload images for smoother transitions
+function preloadImages(paths) {
+  paths.forEach((src) => {
+    const img = new Image();
+    img.src = src;
+  });
+}
+
+// Preload everything
+preloadImages([...spriteFrames, ...openFrames, ...closeFrames, "images/6.png"]);
+
 let isAnimating = false;
 let hasOpenedOnce = false;
 let isOpen = false;
 
-// Set initial phone size
 function setSizeClass(className) {
   container.classList.remove("small", "medium", "large");
   container.classList.add(className);
 }
 
-// Play frame-by-frame animation
 function playAnimation(frames, finalFrame, sizeClass, callback) {
   isAnimating = true;
   setSizeClass(sizeClass);
@@ -54,16 +62,15 @@ function playAnimation(frames, finalFrame, sizeClass, callback) {
       isAnimating = false;
       if (callback) callback();
     }
-  }, 100); // ⚡ faster animation (was 200)
+  }, 65); // ⏱️ ~15 FPS for smoothness
 }
 
-// Play sprite intro before showing phone
 function playSpriteIntro(callback) {
   sprite.style.visibility = "visible";
   sprite.style.display = "block";
   container.style.display = "none";
 
-  let i = 2; // start from 2 since 1.png is already in HTML
+  let i = 2;
 
   setTimeout(() => {
     const interval = setInterval(() => {
@@ -76,11 +83,10 @@ function playSpriteIntro(callback) {
         container.style.display = "flex";
         callback && callback();
       }
-    }, 90); // ⚡ faster sprite speed (was 150)
+    }, 65); // ⏱️ match sprite FPS
   }, 100);
 }
 
-// Run sprite intro then start flip phone animation
 window.onload = () => {
   setSizeClass("small");
   frame.src = "images/6.png";
@@ -95,7 +101,6 @@ window.onload = () => {
   });
 };
 
-// Toggle phone open/close on click
 container.addEventListener("click", () => {
   if (isAnimating || !hasOpenedOnce) return;
 
