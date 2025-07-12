@@ -8,7 +8,7 @@ for (let i = 1; i <= 16; i++) {
   spriteFrames.push(`DefineSprite_22/${i}.png`);
 }
 
-// Flip phone animation sequences
+// Phone opening and closing frames
 const openFrames = [
   "images/6.png",
   "images/25.png",
@@ -41,11 +41,10 @@ let isAnimating = false;
 let hasOpenedOnce = false;
 let isOpen = false;
 
-// Animate phone frame through a series of images
+// Animate phone frame
 function playAnimation(frames, finalFrame, callback) {
   isAnimating = true;
   let i = 0;
-
   const interval = setInterval(() => {
     if (i < frames.length) {
       frame.src = frames[i];
@@ -56,39 +55,29 @@ function playAnimation(frames, finalFrame, callback) {
       isAnimating = false;
       if (callback) callback();
     }
-  }, 90); // smooth speed
+  }, 90);
 }
 
-// Sprite intro animation
+// Play sprite animation first
 function playSpriteIntro(callback) {
-  sprite.style.visibility = "visible";
-  sprite.style.display = "block";
-  container.style.display = "none";
-
   let i = 2;
-  setTimeout(() => {
-    const interval = setInterval(() => {
-      if (i <= 16) {
-        sprite.src = `DefineSprite_22/${i}.png`;
-        i++;
-      } else {
-        clearInterval(interval);
-        sprite.style.display = "none";
-        container.style.display = "flex";
-        frame.src = "images/6.png"; // only show this AFTER sprite
-        callback && callback();
-      }
-    }, 90);
-  }, 90); // slight delay to avoid visual jump
+  const interval = setInterval(() => {
+    if (i <= 16) {
+      sprite.src = `DefineSprite_22/${i}.png`;
+      i++;
+    } else {
+      clearInterval(interval);
+      sprite.style.display = "none";
+      container.style.display = "flex";
+      frame.src = "images/6.png"; // Show first phone frame here
+      if (callback) callback();
+    }
+  }, 90);
 }
 
-// Page load
+// Start everything
 window.onload = () => {
-  frame.src = ""; // empty initially
-  container.classList.add("pulse-hover");
-
   playSpriteIntro(() => {
-    container.classList.remove("pulse-hover");
     playAnimation(openFrames, "images/42.png", () => {
       hasOpenedOnce = true;
       isOpen = true;
@@ -96,7 +85,7 @@ window.onload = () => {
   });
 };
 
-// Toggle flip phone state
+// Toggle open/close
 container.addEventListener("click", () => {
   if (isAnimating || !hasOpenedOnce) return;
 
@@ -110,3 +99,4 @@ container.addEventListener("click", () => {
     });
   }
 });
+
