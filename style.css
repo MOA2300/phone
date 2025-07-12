@@ -9,24 +9,12 @@ body {
 }
 
 #phone-container {
-  transition: width 0.3s ease;
+  width: 250px; /* fixed size always */
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-/* Size tiers for different phone states */
-.small {
-  width: 70px;
-}
-
-.medium {
-  width: 120px;
-}
-
-.large {
-  width: 250px;
+  transition: none;
 }
 
 #phone-frame {
@@ -37,7 +25,7 @@ body {
 
 /* Sprite image (intro animation) */
 #sprite {
-  width: 70px; /* match small phone size */
+  width: 250px; /* match phone frame size */
   height: auto;
   display: none;
   margin: auto;
