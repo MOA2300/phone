@@ -9,7 +9,7 @@ body {
 }
 
 #phone-container {
-  width: 250px; /* fixed size always */
+  width: 250px; /* full size of open phone */
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -23,15 +23,13 @@ body {
   display: block;
 }
 
-/* Sprite image (intro animation) */
 #sprite {
-  width: 250px; /* match phone frame size */
+  width: 70px; /* small sprite */
   height: auto;
   display: none;
   margin: auto;
 }
 
-/* Pulse animation on hover */
 .pulse-hover:hover {
   animation: pulse 1s infinite;
 }
