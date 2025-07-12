@@ -2,13 +2,11 @@ const sprite = document.getElementById("sprite");
 const frame = document.getElementById("phone-frame");
 const container = document.getElementById("phone-container");
 
-// Sprite animation frames (1.png to 16.png)
 const spriteFrames = [];
 for (let i = 1; i <= 16; i++) {
   spriteFrames.push(`DefineSprite_22/${i}.png`);
 }
 
-// Phone opening and closing sequences
 const openFrames = [
   "images/6.png",
   "images/25.png",
@@ -28,9 +26,8 @@ const closeFrames = [
   "images/50.png"
 ];
 
-// Preload all images
 function preloadImages(paths) {
-  paths.forEach((src) => {
+  paths.forEach(src => {
     const img = new Image();
     img.src = src;
   });
@@ -40,19 +37,22 @@ preloadImages([...spriteFrames, ...openFrames, ...closeFrames]);
 let isAnimating = false;
 let hasOpenedOnce = false;
 let isOpen = false;
-let spriteIndex = 0;
-let spriteLoop;
-let animationStarted = false;
 
-// Loop sprite animation
+// Looping sprite animation
+let spriteIndex = 0;
+let spriteInterval;
+
 function startSpriteLoop() {
-  spriteLoop = setInterval(() => {
+  spriteInterval = setInterval(() => {
     spriteIndex = (spriteIndex + 1) % spriteFrames.length;
     sprite.src = spriteFrames[spriteIndex];
-  }, 100);
+  }, 160); // Adjust speed here
 }
 
-// Flip phone animation
+function stopSpriteLoop() {
+  clearInterval(spriteInterval);
+}
+
 function playAnimation(frames, finalFrame, callback) {
   isAnimating = true;
   let i = 0;
@@ -67,27 +67,23 @@ function playAnimation(frames, finalFrame, callback) {
       isAnimating = false;
       if (callback) callback();
     }
-  }, 90);
+  }, 90); // Adjust speed here
 }
 
-// Sprite click handler
-sprite.addEventListener("click", () => {
-  if (animationStarted) return;
+window.onload = () => {
+  startSpriteLoop();
 
-  animationStarted = true;
-  clearInterval(spriteLoop);
-  sprite.style.display = "none";
-  container.style.display = "flex";
-
-  frame.src = "images/6.png";
-
-  playAnimation(openFrames, "images/42.png", () => {
-    hasOpenedOnce = true;
-    isOpen = true;
+  sprite.addEventListener("click", () => {
+    stopSpriteLoop();
+    sprite.style.display = "none";
+    container.style.display = "flex";
+    playAnimation(openFrames, "images/42.png", () => {
+      hasOpenedOnce = true;
+      isOpen = true;
+    });
   });
-});
+};
 
-// Phone click to toggle open/close
 container.addEventListener("click", () => {
   if (isAnimating || !hasOpenedOnce) return;
 
@@ -102,10 +98,3 @@ container.addEventListener("click", () => {
     });
   }
 });
-
-// Start sprite loop on load
-window.onload = () => {
-  startSpriteLoop();
-};
-
-
