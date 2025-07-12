@@ -9,22 +9,20 @@ body {
 }
 
 #phone-container {
-  width: 250px; /* full size of open phone */
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: none;
 }
 
 #phone-frame {
-  width: 100%;
+  width: 250px; /* final size of open phone */
   height: auto;
   display: block;
 }
 
 #sprite {
-  width: 70px; /* small sprite */
+  width: 250px; /* match phone size */
   height: auto;
   display: none;
   margin: auto;
