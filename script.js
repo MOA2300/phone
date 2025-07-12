@@ -40,13 +40,7 @@ let isAnimating = false;
 let hasOpenedOnce = false;
 let isOpen = false;
 
-// Consistent size: just always use .large for now
-function setSizeClass(className) {
-  container.classList.remove("small", "medium", "large");
-  container.classList.add(className);
-}
-
-// Play animation (no scaling changes)
+// Frame animation logic
 function playAnimation(frames, finalFrame, callback) {
   isAnimating = true;
   let i = 0;
@@ -61,17 +55,16 @@ function playAnimation(frames, finalFrame, callback) {
       isAnimating = false;
       if (callback) callback();
     }
-  }, 90); // Adjust speed here if needed
+  }, 90); // Adjust speed if needed
 }
 
-// Play sprite intro
+// Sprite animation intro
 function playSpriteIntro(callback) {
   sprite.style.visibility = "visible";
   sprite.style.display = "block";
   container.style.display = "none";
 
   let i = 2;
-
   setTimeout(() => {
     const interval = setInterval(() => {
       if (i <= 16) {
@@ -89,7 +82,6 @@ function playSpriteIntro(callback) {
 
 // On page load
 window.onload = () => {
-  setSizeClass("large"); // ✅ Force full size from the beginning
   frame.src = "images/6.png";
   container.classList.add("pulse-hover");
 
@@ -102,7 +94,7 @@ window.onload = () => {
   });
 };
 
-// Toggle open/close on click
+// Toggle on click
 container.addEventListener("click", () => {
   if (isAnimating || !hasOpenedOnce) return;
 
