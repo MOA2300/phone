@@ -8,7 +8,7 @@ for (let i = 1; i <= 16; i++) {
   spriteFrames.push(`DefineSprite_22/${i}.png`);
 }
 
-// Opening frames (6.png should appear only after sprite)
+// Flip phone animation sequences
 const openFrames = [
   "images/6.png",
   "images/25.png",
@@ -28,9 +28,9 @@ const closeFrames = [
   "images/50.png"
 ];
 
-// Preload all images
+// Preload images
 function preloadImages(paths) {
-  paths.forEach((src) => {
+  paths.forEach(src => {
     const img = new Image();
     img.src = src;
   });
@@ -41,7 +41,7 @@ let isAnimating = false;
 let hasOpenedOnce = false;
 let isOpen = false;
 
-// Frame animation logic
+// Animate phone frame through a series of images
 function playAnimation(frames, finalFrame, callback) {
   isAnimating = true;
   let i = 0;
@@ -56,10 +56,10 @@ function playAnimation(frames, finalFrame, callback) {
       isAnimating = false;
       if (callback) callback();
     }
-  }, 90);
+  }, 90); // smooth speed
 }
 
-// Sprite animation intro (small, not scaled)
+// Sprite intro animation
 function playSpriteIntro(callback) {
   sprite.style.visibility = "visible";
   sprite.style.display = "block";
@@ -75,18 +75,17 @@ function playSpriteIntro(callback) {
         clearInterval(interval);
         sprite.style.display = "none";
         container.style.display = "flex";
+        frame.src = "images/6.png"; // only show this AFTER sprite
         callback && callback();
       }
     }, 90);
-  }, 100);
+  }, 90); // slight delay to avoid visual jump
 }
 
-// On page load
+// Page load
 window.onload = () => {
+  frame.src = ""; // empty initially
   container.classList.add("pulse-hover");
-
-  // Don't show frame initially
-  frame.src = "";
 
   playSpriteIntro(() => {
     container.classList.remove("pulse-hover");
@@ -97,7 +96,7 @@ window.onload = () => {
   });
 };
 
-// Toggle on click
+// Toggle flip phone state
 container.addEventListener("click", () => {
   if (isAnimating || !hasOpenedOnce) return;
 
@@ -106,8 +105,7 @@ container.addEventListener("click", () => {
       isOpen = false;
     });
   } else {
-    const reopenFrames = [...closeFrames].reverse();
-    playAnimation(reopenFrames, "images/42.png", () => {
+    playAnimation([...closeFrames].reverse(), "images/42.png", () => {
       isOpen = true;
     });
   }
