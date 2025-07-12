@@ -2,13 +2,13 @@ const sprite = document.getElementById("sprite");
 const frame = document.getElementById("phone-frame");
 const container = document.getElementById("phone-container");
 
-// Sprite animation frames
+// Sprite animation frames (1.png to 16.png)
 const spriteFrames = [];
 for (let i = 1; i <= 16; i++) {
   spriteFrames.push(`DefineSprite_22/${i}.png`);
 }
 
-// Phone opening and closing frames
+// Phone opening and closing sequences
 const openFrames = [
   "images/6.png",
   "images/25.png",
@@ -28,9 +28,9 @@ const closeFrames = [
   "images/50.png"
 ];
 
-// Preload images
+// Preload all images
 function preloadImages(paths) {
-  paths.forEach(src => {
+  paths.forEach((src) => {
     const img = new Image();
     img.src = src;
   });
@@ -40,11 +40,23 @@ preloadImages([...spriteFrames, ...openFrames, ...closeFrames]);
 let isAnimating = false;
 let hasOpenedOnce = false;
 let isOpen = false;
+let spriteIndex = 0;
+let spriteLoop;
+let animationStarted = false;
 
-// Animate phone frame
+// Loop sprite animation
+function startSpriteLoop() {
+  spriteLoop = setInterval(() => {
+    spriteIndex = (spriteIndex + 1) % spriteFrames.length;
+    sprite.src = spriteFrames[spriteIndex];
+  }, 100);
+}
+
+// Flip phone animation
 function playAnimation(frames, finalFrame, callback) {
   isAnimating = true;
   let i = 0;
+
   const interval = setInterval(() => {
     if (i < frames.length) {
       frame.src = frames[i];
@@ -58,34 +70,24 @@ function playAnimation(frames, finalFrame, callback) {
   }, 90);
 }
 
-// Play sprite animation first
-function playSpriteIntro(callback) {
-  let i = 2;
-  const interval = setInterval(() => {
-    if (i <= 16) {
-      sprite.src = `DefineSprite_22/${i}.png`;
-      i++;
-    } else {
-      clearInterval(interval);
-      sprite.style.display = "none";
-      container.style.display = "flex";
-      frame.src = "images/6.png"; // Show first phone frame here
-      if (callback) callback();
-    }
-  }, 90);
-}
+// Sprite click handler
+sprite.addEventListener("click", () => {
+  if (animationStarted) return;
 
-// Start everything
-window.onload = () => {
-  playSpriteIntro(() => {
-    playAnimation(openFrames, "images/42.png", () => {
-      hasOpenedOnce = true;
-      isOpen = true;
-    });
+  animationStarted = true;
+  clearInterval(spriteLoop);
+  sprite.style.display = "none";
+  container.style.display = "flex";
+
+  frame.src = "images/6.png";
+
+  playAnimation(openFrames, "images/42.png", () => {
+    hasOpenedOnce = true;
+    isOpen = true;
   });
-};
+});
 
-// Toggle open/close
+// Phone click to toggle open/close
 container.addEventListener("click", () => {
   if (isAnimating || !hasOpenedOnce) return;
 
@@ -94,9 +96,16 @@ container.addEventListener("click", () => {
       isOpen = false;
     });
   } else {
-    playAnimation([...closeFrames].reverse(), "images/42.png", () => {
+    const reopenFrames = [...closeFrames].reverse();
+    playAnimation(reopenFrames, "images/42.png", () => {
       isOpen = true;
     });
   }
 });
+
+// Start sprite loop on load
+window.onload = () => {
+  startSpriteLoop();
+};
+
 
