@@ -10,6 +10,7 @@ for (let i = 1; i <= 16; i++) {
 
 // Phone opening and closing sequences
 const openFrames = [
+  "images/6.png",
   "images/25.png",
   "images/28.png",
   "images/30.png",
