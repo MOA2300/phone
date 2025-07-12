@@ -16,15 +16,15 @@ body {
 }
 
 #phone-frame {
-  width: 250px; /* final size of open phone */
+  width: 250px;
   height: auto;
   display: block;
 }
 
 #sprite {
-  width: 250px; /* match phone size */
+  width: 70px; /* SMALL loading size */
   height: auto;
-  display: none;
+  display: block;
   margin: auto;
 }
 
