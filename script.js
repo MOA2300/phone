@@ -27,7 +27,7 @@ const closeFrames = [
   "images/50.png"
 ];
 
-// Preload images for smoother transitions
+// Preload images
 function preloadImages(paths) {
   paths.forEach((src) => {
     const img = new Image();
@@ -35,7 +35,6 @@ function preloadImages(paths) {
   });
 }
 
-// Preload everything
 preloadImages([...spriteFrames, ...openFrames, ...closeFrames, "images/6.png"]);
 
 let isAnimating = false;
@@ -62,7 +61,7 @@ function playAnimation(frames, finalFrame, sizeClass, callback) {
       isAnimating = false;
       if (callback) callback();
     }
-  }, 65); // ⏱️ ~15 FPS for smoothness
+  }, 90); // ⏳ Slightly slower for video match
 }
 
 function playSpriteIntro(callback) {
@@ -83,7 +82,7 @@ function playSpriteIntro(callback) {
         container.style.display = "flex";
         callback && callback();
       }
-    }, 65); // ⏱️ match sprite FPS
+    }, 90); // Match sprite speed too
   }, 100);
 }
 
