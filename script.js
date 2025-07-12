@@ -2,13 +2,13 @@ const sprite = document.getElementById("sprite");
 const frame = document.getElementById("phone-frame");
 const container = document.getElementById("phone-container");
 
-// Sprite animation frames
+// Sprite frames
 const spriteFrames = [];
 for (let i = 1; i <= 16; i++) {
   spriteFrames.push(`DefineSprite_22/${i}.png`);
 }
 
-// Phone open/close sequences
+// Flip animation frames
 const openFrames = [
   "images/25.png",
   "images/28.png",
@@ -34,7 +34,6 @@ function preloadImages(paths) {
     img.src = src;
   });
 }
-
 preloadImages([...spriteFrames, ...openFrames, ...closeFrames, "images/6.png"]);
 
 let isAnimating = false;
@@ -46,22 +45,35 @@ function setSizeClass(className) {
   container.classList.add(className);
 }
 
-function playAnimation(frames, finalFrame, sizeClass, callback) {
+// Play animation with dynamic scaling
+function playAnimation(frames, finalFrame, finalSizeClass, callback) {
   isAnimating = true;
-  setSizeClass(sizeClass);
+
   let i = 0;
+  const total = frames.length;
 
   const interval = setInterval(() => {
-    if (i < frames.length) {
+    if (i < total) {
       frame.src = frames[i];
+
+      // Progressive scaling (small → medium → large)
+      if (i <= total / 3) {
+        setSizeClass("small");
+      } else if (i <= (2 * total) / 3) {
+        setSizeClass("medium");
+      } else {
+        setSizeClass("large");
+      }
+
       i++;
     } else {
       clearInterval(interval);
       frame.src = finalFrame;
+      setSizeClass(finalSizeClass);
       isAnimating = false;
       if (callback) callback();
     }
-  }, 90); // ⏳ Slightly slower for video match
+  }, 90); // ~11 FPS
 }
 
 function playSpriteIntro(callback) {
@@ -82,7 +94,7 @@ function playSpriteIntro(callback) {
         container.style.display = "flex";
         callback && callback();
       }
-    }, 90); // Match sprite speed too
+    }, 90);
   }, 100);
 }
 
@@ -114,3 +126,4 @@ container.addEventListener("click", () => {
     });
   }
 });
+
