@@ -54,7 +54,7 @@ function playAnimation(frames, finalFrame, sizeClass, callback) {
       isAnimating = false;
       if (callback) callback();
     }
-  }, 500); // adjust animation speed if needed
+  }, 200); // adjust animation speed if needed
 }
 
 // Play sprite intro before showing phone
