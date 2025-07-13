@@ -29,14 +29,19 @@ const closeFrames = [
   "images/50.png"
 ];
 
-// Preload all frames
-function preloadImages(paths) {
-  paths.forEach(src => {
+// Preload all frames and sounds
+function preloadAssets() {
+  const allImages = [...spriteFrames, ...openFrames, ...closeFrames];
+  allImages.forEach(src => {
     const img = new Image();
     img.src = src;
   });
+
+  // Preload sounds
+  new Audio("sounds/27.mp3");
+  new Audio("sounds/28.mp3");
 }
-preloadImages([...spriteFrames, ...openFrames, ...closeFrames]);
+preloadAssets();
 
 let isAnimating = false;
 let hasOpenedOnce = false;
@@ -50,7 +55,7 @@ function startSpriteLoop() {
   spriteInterval = setInterval(() => {
     spriteIndex = (spriteIndex + 1) % spriteFrames.length;
     sprite.src = spriteFrames[spriteIndex];
-  }, 160); // Slower for retro feel
+  }, 160); // Retro speed
 }
 
 function stopSpriteLoop() {
@@ -71,13 +76,21 @@ function playAnimation(frames, finalFrame, callback) {
       isAnimating = false;
       if (callback) callback();
     }
-  }, 90); // Smooth and consistent speed
+  }, 90); // Smooth flip speed
 }
 
 window.onload = () => {
+  // Preload sounds for sprite click
+  const sound1 = new Audio("sounds/27.mp3");
+  const sound2 = new Audio("sounds/28.mp3");
+
   startSpriteLoop();
 
   sprite.addEventListener("click", () => {
+    // Play sounds when sprite is clicked
+    sound1.play();
+    setTimeout(() => sound2.play(), 150); // Slight delay for layering
+
     stopSpriteLoop();
     sprite.style.display = "none";
     container.style.display = "flex";
