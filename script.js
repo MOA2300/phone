@@ -1,101 +1,120 @@
-const spriteIntro = document.getElementById("sprite-intro");
+const sprite = document.getElementById("sprite");
 const frame = document.getElementById("phone-frame");
-const sprite339 = document.getElementById("sprite-339");
+const overlay = document.getElementById("sprite-overlay");
 const container = document.getElementById("phone-container");
 
-// Sprite frame sources
-const spriteIntroFrames = Array.from({ length: 16 }, (_, i) => `DefineSprite_22/${i + 1}.png`);
+const spriteFrames = Array.from({ length: 16 }, (_, i) => `DefineSprite_22/${i + 1}.png`);
 const sprite339Frames = Array.from({ length: 18 }, (_, i) => `DefineSprite_339/${i + 1}.png`);
 
-// Phone open/close frames
-const openFrames = ["images/25.png", "images/28.png", "images/30.png", "images/32.png", "images/34.png", "images/36.png", "images/38.png", "images/40.png", "images/42.png"];
-const closeFrames = ["images/46.png", "images/48.png", "images/50.png"];
+const openFrames = [
+  "images/6.png",
+  "images/25.png",
+  "images/28.png",
+  "images/30.png",
+  "images/32.png",
+  "images/34.png",
+  "images/36.png",
+  "images/38.png",
+  "images/40.png",
+  "images/42.png"
+];
 
-let isAnimating = false;
-let hasOpenedOnce = false;
-let isOpen = false;
-let spriteIntroIndex = 1;
-let sprite339Index = 1;
-let sprite339Interval;
+const closeFrames = [
+  "images/46.png",
+  "images/48.png",
+  "images/50.png"
+];
 
-function preloadImages(arr) {
-  arr.forEach(src => {
+function preloadImages(paths) {
+  paths.forEach(src => {
     const img = new Image();
     img.src = src;
   });
 }
 
-preloadImages([...spriteIntroFrames, ...sprite339Frames, ...openFrames, ...closeFrames]);
+preloadImages([...spriteFrames, ...openFrames, ...closeFrames, ...sprite339Frames]);
 
-function playSpriteIntro(callback) {
-  spriteIntro.style.display = "block";
-  container.classList.remove("pulse-hover");
+let spriteIndex = 0;
+let spriteInterval = null;
+let overlayIndex = 0;
+let overlayInterval = null;
+let hasOpened = false;
+let isAnimating = false;
 
-  let i = 1;
-  const interval = setInterval(() => {
-    if (i < spriteIntroFrames.length) {
-      spriteIntro.src = spriteIntroFrames[i++];
-    } else {
-      clearInterval(interval);
-      spriteIntro.style.display = "none";
-      callback();
-    }
+// Play sprite 22 loop
+function playSpriteLoop() {
+  sprite.style.display = "block";
+  frame.style.display = "none";
+  spriteInterval = setInterval(() => {
+    spriteIndex = (spriteIndex + 1) % spriteFrames.length;
+    sprite.src = spriteFrames[spriteIndex];
   }, 90);
 }
 
+// Play sprite 339 loop overlay
+function playOverlayLoop() {
+  overlay.style.display = "block";
+  overlayInterval = setInterval(() => {
+    overlayIndex = (overlayIndex + 1) % sprite339Frames.length;
+    overlay.src = sprite339Frames[overlayIndex];
+  }, 100);
+}
+
+// Flip animation
 function playAnimation(frames, finalFrame, callback) {
   isAnimating = true;
   let i = 0;
-
   const interval = setInterval(() => {
-    if (i < frames.length) {
-      frame.src = frames[i++];
-    } else {
+    frame.src = frames[i];
+    i++;
+    if (i >= frames.length) {
       clearInterval(interval);
       frame.src = finalFrame;
       isAnimating = false;
+      if (finalFrame === "images/42.png") {
+        playOverlayLoop();
+      } else {
+        overlay.style.display = "none";
+        clearInterval(overlayInterval);
+      }
       callback && callback();
     }
   }, 90);
 }
 
-function loopSprite339() {
-  sprite339.style.display = "block";
-  sprite339Interval = setInterval(() => {
-    sprite339.src = sprite339Frames[sprite339Index++ % sprite339Frames.length];
-  }, 100);
-}
+sprite.addEventListener("click", () => {
+  if (isAnimating || hasOpened) return;
 
-// On load
-window.onload = () => {
-  frame.src = "images/6.png";
-  container.classList.add("pulse-hover");
-
-  playSpriteIntro(() => {
-    playAnimation(openFrames, "images/42.png", () => {
-      hasOpenedOnce = true;
-      isOpen = true;
-      loopSprite339();
-    });
+  clearInterval(spriteInterval);
+  sprite.style.display = "none";
+  frame.style.display = "block";
+  playAnimation(openFrames, "images/42.png", () => {
+    hasOpened = true;
   });
-};
+});
 
+// Click to toggle
 container.addEventListener("click", (e) => {
-  if (isAnimating || !hasOpenedOnce) return;
+  if (!hasOpened || isAnimating) return;
 
   const rect = container.getBoundingClientRect();
   const clickY = e.clientY - rect.top;
+  const containerHeight = rect.height;
 
-  if (isOpen && clickY < rect.height / 2) {
-    clearInterval(sprite339Interval);
-    sprite339.style.display = "none";
+  if (frame.src.includes("42.png") && clickY < containerHeight / 2) {
+    // Clicked upper half — close phone
     playAnimation(closeFrames, "images/50.png", () => {
-      isOpen = false;
+      hasOpened = false;
     });
-  } else if (!isOpen && clickY > rect.height / 2) {
+  } else if (frame.src.includes("50.png") && clickY >= containerHeight / 2) {
+    // Clicked lower half — open phone
     playAnimation([...closeFrames].reverse(), "images/42.png", () => {
-      isOpen = true;
-      loopSprite339();
+      hasOpened = true;
     });
   }
 });
+
+// Start sprite intro
+window.onload = () => {
+  playSpriteLoop();
+};
