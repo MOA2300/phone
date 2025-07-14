@@ -1,11 +1,21 @@
 const sprite = document.getElementById("sprite");
 const frame = document.getElementById("phone-frame");
-const overlay = document.getElementById("sprite-overlay");
 const container = document.getElementById("phone-container");
+const overlaySprite = document.getElementById("overlay-sprite");
 
-const spriteFrames = Array.from({ length: 16 }, (_, i) => `DefineSprite_22/${i + 1}.png`);
-const sprite339Frames = Array.from({ length: 18 }, (_, i) => `DefineSprite_339/${i + 1}.png`);
+// Sprite 22 frames (intro)
+const sprite22Frames = [];
+for (let i = 1; i <= 16; i++) {
+  sprite22Frames.push(`DefineSprite_22/${i}.png`);
+}
 
+// Sprite 339 frames (screen overlay)
+const sprite339Frames = [];
+for (let i = 1; i <= 18; i++) {
+  sprite339Frames.push(`DefineSprite_339/${i}.png`);
+}
+
+// Phone opening and closing sequences
 const openFrames = [
   "images/6.png",
   "images/25.png",
@@ -25,96 +35,102 @@ const closeFrames = [
   "images/50.png"
 ];
 
+// Audio setup
+const sound1 = new Audio("sounds/27_fixed.mp3");
+const sound2 = new Audio("sounds/28_fixed.mp3");
+
+let isAnimating = false;
+let hasOpenedOnce = false;
+let isOpen = false;
+let introPlayed = false;
+
+// Preload all images
 function preloadImages(paths) {
   paths.forEach(src => {
     const img = new Image();
     img.src = src;
   });
 }
+preloadImages([...sprite22Frames, ...sprite339Frames, ...openFrames, ...closeFrames]);
 
-preloadImages([...spriteFrames, ...openFrames, ...closeFrames, ...sprite339Frames]);
+// Animate sprite sequence
+function playSpriteAnimation(frames, imgElement, intervalTime = 100, loop = true) {
+  let i = 0;
+  imgElement.style.visibility = "visible";
+  imgElement.style.display = "block";
 
-let spriteIndex = 0;
-let spriteInterval = null;
-let overlayIndex = 0;
-let overlayInterval = null;
-let hasOpened = false;
-let isAnimating = false;
-
-// Play sprite 22 loop
-function playSpriteLoop() {
-  sprite.style.display = "block";
-  frame.style.display = "none";
-  spriteInterval = setInterval(() => {
-    spriteIndex = (spriteIndex + 1) % spriteFrames.length;
-    sprite.src = spriteFrames[spriteIndex];
-  }, 90);
+  return setInterval(() => {
+    imgElement.src = frames[i];
+    i = (i + 1) % frames.length;
+    if (!loop && i === 0) {
+      clearInterval(interval);
+      imgElement.style.display = "none";
+    }
+  }, intervalTime);
 }
 
-// Play sprite 339 loop overlay
-function playOverlayLoop() {
-  overlay.style.display = "block";
-  overlayInterval = setInterval(() => {
-    overlayIndex = (overlayIndex + 1) % sprite339Frames.length;
-    overlay.src = sprite339Frames[overlayIndex];
-  }, 100);
-}
-
-// Flip animation
-function playAnimation(frames, finalFrame, callback) {
+// Play frame-by-frame animation
+function playFrameAnimation(frames, finalFrame, callback) {
   isAnimating = true;
   let i = 0;
   const interval = setInterval(() => {
-    frame.src = frames[i];
-    i++;
-    if (i >= frames.length) {
+    if (i < frames.length) {
+      frame.src = frames[i];
+      i++;
+    } else {
       clearInterval(interval);
       frame.src = finalFrame;
       isAnimating = false;
-      if (finalFrame === "images/42.png") {
-        playOverlayLoop();
-      } else {
-        overlay.style.display = "none";
-        clearInterval(overlayInterval);
-      }
-      callback && callback();
+      if (callback) callback();
     }
-  }, 90);
+  }, 100);
 }
 
-sprite.addEventListener("click", () => {
-  if (isAnimating || hasOpened) return;
+// Initial sprite loop (Sprite 22)
+let sprite22Loop;
+window.onload = () => {
+  frame.style.display = "none";
+  overlaySprite.style.display = "none";
+  sprite22Loop = playSpriteAnimation(sprite22Frames, sprite, 100, true);
+};
 
-  clearInterval(spriteInterval);
-  sprite.style.display = "none";
-  frame.style.display = "block";
-  playAnimation(openFrames, "images/42.png", () => {
-    hasOpened = true;
-  });
-});
-
-// Click to toggle
+// On first click: stop sprite, play sound, and open phone
 container.addEventListener("click", (e) => {
-  if (!hasOpened || isAnimating) return;
+  if (isAnimating) return;
 
+  if (!introPlayed) {
+    introPlayed = true;
+    clearInterval(sprite22Loop);
+    sprite.style.display = "none";
+    frame.style.display = "block";
+    sound1.play().catch(err => console.warn("Sound 1 error:", err));
+    setTimeout(() => {
+      sound2.play().catch(err => console.warn("Sound 2 error:", err));
+    }, 300);
+    playFrameAnimation(openFrames, "images/42.png", () => {
+      hasOpenedOnce = true;
+      isOpen = true;
+      overlaySprite.style.display = "block";
+      playSpriteAnimation(sprite339Frames, overlaySprite, 120, true);
+    });
+    return;
+  }
+
+  // Handle open/close toggle after intro
   const rect = container.getBoundingClientRect();
   const clickY = e.clientY - rect.top;
   const containerHeight = rect.height;
+  const clickedTop = clickY < containerHeight / 2;
 
-  if (frame.src.includes("42.png") && clickY < containerHeight / 2) {
-    // Clicked upper half — close phone
-    playAnimation(closeFrames, "images/50.png", () => {
-      hasOpened = false;
+  if (isOpen && clickedTop) {
+    playFrameAnimation(closeFrames, "images/50.png", () => {
+      isOpen = false;
+      overlaySprite.style.display = "none";
     });
-  } else if (frame.src.includes("50.png") && clickY >= containerHeight / 2) {
-    // Clicked lower half — open phone
-    playAnimation([...closeFrames].reverse(), "images/42.png", () => {
-      hasOpened = true;
+  } else if (!isOpen && !clickedTop) {
+    playFrameAnimation([...closeFrames].reverse(), "images/42.png", () => {
+      isOpen = true;
+      overlaySprite.style.display = "block";
     });
   }
 });
-
-// Start sprite intro
-window.onload = () => {
-  playSpriteLoop();
-};
