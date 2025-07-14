@@ -1,43 +1,33 @@
 body {
   margin: 0;
-  padding: 0;
-  background-color: black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background: black;
   height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
-}
-
-#phone-container {
   position: relative;
-  width: 300px;
-  height: auto;
-  cursor: pointer;
 }
 
 #sprite {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
+  width: 70px;
+  height: auto;
   display: block;
-  z-index: 2;
+  position: absolute;
+}
+
+#phone-container {
+  display: none;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
 #phone-frame {
-  position: relative;
-  width: 100%;
-  display: none;
-  z-index: 1;
-}
-
-#overlay-sprite {
-  position: absolute;
-  top: 18%;
-  left: 21%;
-  width: 58%;
-  display: none;
-  z-index: 3;
-  pointer-events: none;
+  width: 250px;
+  height: auto;
+  display: block;
+  user-select: none;
 }
