@@ -1,38 +1,43 @@
 body {
   margin: 0;
+  padding: 0;
   background-color: black;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  overflow: hidden;
 }
 
 #phone-container {
   position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#sprite, #phone-frame, #sprite-overlay {
-  position: absolute;
-  max-width: 100%;
+  width: 300px;
   height: auto;
+  cursor: pointer;
 }
 
 #sprite {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: block;
   z-index: 2;
 }
 
 #phone-frame {
+  position: relative;
+  width: 100%;
+  display: none;
   z-index: 1;
 }
 
-#sprite-overlay {
+#overlay-sprite {
+  position: absolute;
+  top: 18%;
+  left: 21%;
+  width: 58%;
   display: none;
   z-index: 3;
-  top: 27%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 75px; /* Adjust to fit inside screen area */
+  pointer-events: none;
 }
