@@ -80,5 +80,22 @@ container.addEventListener("click", (e) => {
     playAnimation(reopenFrames, "images/42.png", () => {
       isOpen = true;
     });
+
+    .phone-button {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  z-index: 2;
+}
+
+.phone-button:active {
+  background-color: rgba(0, 255, 0, 0.4); /* Green flash */
+}
+
   }
 });
