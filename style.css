@@ -12,8 +12,6 @@ body {
 
 #sprite {
   width: 70px;
-  height: auto;
-  display: block;
   position: absolute;
   z-index: 10;
 }
@@ -22,15 +20,14 @@ body {
   display: none;
   position: relative;
   width: 236px;
-  height: auto;
+  height: 656px; /* Must match image size */
   z-index: 1;
 }
 
 #phone-frame {
-  width: 236px;
+  width: 100%;
   height: auto;
   display: block;
-  user-select: none;
 }
 
 .phone-button {
@@ -46,5 +43,5 @@ body {
 }
 
 .phone-button.flash {
-  background-color: rgba(0, 255, 0, 0.4); /* flash green */
+  background-color: rgba(0, 255, 0, 0.4);
 }
