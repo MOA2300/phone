@@ -60,7 +60,7 @@ sprite.addEventListener("click", () => {
   });
 });
 
-// Handle clicks on phone container
+// Handle phone flip close/open
 container.addEventListener("click", (e) => {
   if (isAnimating) return;
 
@@ -79,11 +79,14 @@ container.addEventListener("click", (e) => {
   }
 });
 
-// Keypad button press
+// Flash feedback when buttons are clicked
 document.querySelectorAll('.phone-button').forEach(btn => {
   btn.addEventListener('click', (e) => {
-    e.stopPropagation(); // prevent triggering container animation
-    console.log(`${btn.id} pressed`);
-    // Add sound or interaction here if needed
+    e.stopPropagation(); // prevent triggering flip behavior
+    btn.classList.add('flash');
+    setTimeout(() => {
+      btn.classList.remove('flash');
+    }, 150);
+    console.log(`${btn.id} clicked`);
   });
 });
