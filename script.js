@@ -40,6 +40,7 @@ function playAnimation(frames, finalFrame, callback) {
   }, 90);
 }
 
+// 💡 Avoid flicker: delay assigning src until click
 sprite.addEventListener("click", () => {
   if (isAnimating) return;
 
@@ -49,28 +50,12 @@ sprite.addEventListener("click", () => {
   sound1.play().catch(console.error);
   setTimeout(() => sound2.play().catch(console.error), 300);
 
-  playAnimation(openFrames, "images/42.png", () => {
-    container.style.display = "block";
-    isOpen = true;
+  frame.src = ""; // blank until animation runs
 
-    // Now that final frame is loaded, position buttons
-    const positions = [
-      [410, 38], [410, 98], [410, 158],
-      [468, 38], [468, 98], [468, 158],
-      [526, 38], [526, 98], [526, 158],
-      [584, 38], [584, 98], [584, 158]
-    ];
-    const ids = [
-      "key1", "key2", "key3",
-      "key4", "key5", "key6",
-      "key7", "key8", "key9",
-      "key*", "key0", "key#"
-    ];
-    ids.forEach((id, i) => {
-      const btn = document.getElementById(id);
-      btn.style.top = positions[i][0] + "px";
-      btn.style.left = positions[i][1] + "px";
-    });
+  container.style.display = "block"; // show frame AFTER
+  playAnimation(openFrames, "images/42.png", () => {
+    isOpen = true;
+    positionButtons();
   });
 });
 
@@ -90,22 +75,46 @@ container.addEventListener("click", (e) => {
     container.style.display = "block";
     playAnimation(reopenFrames, "images/42.png", () => {
       isOpen = true;
+      positionButtons();
     });
   }
 });
 
+function positionButtons() {
+  const positions = [
+    [410, 38], [410, 98], [410, 158],
+    [468, 38], [468, 98], [468, 158],
+    [526, 38], [526, 98], [526, 158],
+    [584, 38], [584, 98], [584, 158]
+  ];
+
+  const ids = [
+    "key1", "key2", "key3",
+    "key4", "key5", "key6",
+    "key7", "key8", "key9",
+    "key*", "key0", "key#"
+  ];
+
+  ids.forEach((id, i) => {
+    const btn = document.getElementById(id);
+    btn.style.top = positions[i][0] + "px";
+    btn.style.left = positions[i][1] + "px";
+  });
+}
+
+// ✅ Button Flash (guaranteed with forced redraw)
 document.querySelectorAll('.phone-button').forEach(btn => {
   btn.addEventListener('click', (e) => {
-    e.stopImmediatePropagation(); // override outer listeners
+    e.stopPropagation();
     btn.classList.remove('flash');
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        btn.classList.add('flash');
-        setTimeout(() => {
-          btn.classList.remove('flash');
-        }, 150);
-      });
-    });
+
+    // force flash reflow
+    void btn.offsetWidth;
+
+    btn.classList.add('flash');
+    setTimeout(() => {
+      btn.classList.remove('flash');
+    }, 150);
     console.log(`${btn.id} clicked`);
   });
 });
