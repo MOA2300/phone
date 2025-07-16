@@ -2,11 +2,10 @@ const sprite = document.getElementById("sprite");
 const frame = document.getElementById("phone-frame");
 const container = document.getElementById("phone-container");
 
-// Audio
 const sound1 = new Audio("sounds/27_fixed.mp3");
 const sound2 = new Audio("sounds/28_fixed.mp3");
 
-// Sprite animation loop (1.png to 16.png)
+// Set sprite animation
 let spriteIndex = 1;
 let spriteLoop = setInterval(() => {
   spriteIndex = spriteIndex < 16 ? spriteIndex + 1 : 1;
@@ -27,6 +26,7 @@ const closeFrames = [
 let isAnimating = false;
 let isOpen = false;
 
+// Animate phone frame
 function playAnimation(frames, finalFrame, callback) {
   isAnimating = true;
   let i = 0;
@@ -43,7 +43,7 @@ function playAnimation(frames, finalFrame, callback) {
   }, 90);
 }
 
-// Start sprite intro
+// Sprite click starts animation
 sprite.addEventListener("click", () => {
   if (isAnimating) return;
 
@@ -54,12 +54,12 @@ sprite.addEventListener("click", () => {
   setTimeout(() => sound2.play().catch(console.error), 300);
 
   playAnimation(openFrames, "images/42.png", () => {
-    container.style.display = "block"; // Show after animation finishes
+    container.style.display = "block";
     isOpen = true;
   });
 });
 
-// Flip phone close/open logic
+// Phone flip logic
 container.addEventListener("click", (e) => {
   if (isAnimating) return;
 
@@ -80,10 +80,33 @@ container.addEventListener("click", (e) => {
   }
 });
 
-// Flash effect on button press
+// 💡 Set button positions only after image loads
+frame.addEventListener("load", () => {
+  const positions = [
+    [410, 38], [410, 98], [410, 158], // 1–3
+    [468, 38], [468, 98], [468, 158], // 4–6
+    [526, 38], [526, 98], [526, 158], // 7–9
+    [584, 38], [584, 98], [584, 158]  // *, 0, #
+  ];
+
+  const ids = [
+    "key1", "key2", "key3",
+    "key4", "key5", "key6",
+    "key7", "key8", "key9",
+    "key*", "key0", "key#"
+  ];
+
+  ids.forEach((id, i) => {
+    const btn = document.getElementById(id);
+    btn.style.top = positions[i][0] + "px";
+    btn.style.left = positions[i][1] + "px";
+  });
+});
+
+// Flash feedback
 document.querySelectorAll('.phone-button').forEach(btn => {
   btn.addEventListener('click', (e) => {
-    e.stopPropagation(); // prevent flip logic
+    e.stopPropagation();
     btn.classList.remove('flash');
     requestAnimationFrame(() => {
       btn.classList.add('flash');
