@@ -15,14 +15,15 @@ body {
   height: auto;
   display: block;
   position: absolute;
+  z-index: 10;
 }
 
 #phone-container {
   display: none;
-  cursor: pointer;
-  align-items: center;
-  justify-content: center;
   position: relative;
+  width: 236px;
+  height: auto;
+  z-index: 1;
 }
 
 #phone-frame {
