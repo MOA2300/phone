@@ -20,7 +20,7 @@ body {
   display: none;
   position: relative;
   width: 236px;
-  height: 656px; /* Must match image size */
+  height: 656px; /* exact size of the phone */
   z-index: 1;
 }
 
@@ -34,7 +34,7 @@ body {
   position: absolute;
   width: 40px;
   height: 40px;
-  background-color: transparent;
+  background-color: rgba(255, 0, 0, 0.1); /* light red for visibility */
   border: none;
   border-radius: 50%;
   cursor: pointer;
@@ -43,5 +43,6 @@ body {
 }
 
 .phone-button.flash {
-  background-color: rgba(0, 255, 0, 0.4);
+  background-color: rgba(0, 255, 0, 0.6) !important;
 }
+
