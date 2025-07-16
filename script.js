@@ -27,7 +27,6 @@ const closeFrames = [
 let isAnimating = false;
 let isOpen = false;
 
-// Animate frame sequence
 function playAnimation(frames, finalFrame, callback) {
   isAnimating = true;
   let i = 0;
@@ -44,7 +43,7 @@ function playAnimation(frames, finalFrame, callback) {
   }, 90);
 }
 
-// Handle click on sprite
+// Start sprite intro
 sprite.addEventListener("click", () => {
   if (isAnimating) return;
 
@@ -54,13 +53,13 @@ sprite.addEventListener("click", () => {
   sound1.play().catch(console.error);
   setTimeout(() => sound2.play().catch(console.error), 300);
 
-  container.style.display = "flex";
   playAnimation(openFrames, "images/42.png", () => {
+    container.style.display = "block"; // Show after animation finishes
     isOpen = true;
   });
 });
 
-// Handle phone flip close/open
+// Flip phone close/open logic
 container.addEventListener("click", (e) => {
   if (isAnimating) return;
 
@@ -69,24 +68,29 @@ container.addEventListener("click", (e) => {
 
   if (isOpen && clickY < rect.top + rect.height / 2) {
     playAnimation(closeFrames, "images/50.png", () => {
+      container.style.display = "none";
       isOpen = false;
     });
   } else if (!isOpen && clickY >= rect.top + rect.height / 2) {
     const reopenFrames = [...closeFrames].reverse();
+    container.style.display = "block";
     playAnimation(reopenFrames, "images/42.png", () => {
       isOpen = true;
     });
   }
 });
 
-// Flash feedback when buttons are clicked
+// Flash effect on button press
 document.querySelectorAll('.phone-button').forEach(btn => {
   btn.addEventListener('click', (e) => {
-    e.stopPropagation(); // prevent triggering flip behavior
-    btn.classList.add('flash');
-    setTimeout(() => {
-      btn.classList.remove('flash');
-    }, 150);
+    e.stopPropagation(); // prevent flip logic
+    btn.classList.remove('flash');
+    requestAnimationFrame(() => {
+      btn.classList.add('flash');
+      setTimeout(() => {
+        btn.classList.remove('flash');
+      }, 150);
+    });
     console.log(`${btn.id} clicked`);
   });
 });
