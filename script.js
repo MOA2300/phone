@@ -48,29 +48,25 @@ function playAnimation(frames, finalFrame, callback) {
 sprite.addEventListener("click", () => {
   if (isAnimating) return;
 
-  // Stop sprite animation
   clearInterval(spriteLoop);
   sprite.style.display = "none";
 
-  // Play sound
   sound1.play().catch(console.error);
   setTimeout(() => sound2.play().catch(console.error), 300);
 
-  // Show phone and animate open
   container.style.display = "flex";
   playAnimation(openFrames, "images/42.png", () => {
     isOpen = true;
   });
 });
 
-// Handle clicks on phone
+// Handle clicks on phone container
 container.addEventListener("click", (e) => {
   if (isAnimating) return;
 
   const rect = frame.getBoundingClientRect();
   const clickY = e.clientY;
 
-  // Close if clicked top half, Open if clicked bottom half
   if (isOpen && clickY < rect.top + rect.height / 2) {
     playAnimation(closeFrames, "images/50.png", () => {
       isOpen = false;
@@ -80,15 +76,14 @@ container.addEventListener("click", (e) => {
     playAnimation(reopenFrames, "images/42.png", () => {
       isOpen = true;
     });
-
-    // Button press feedback
-document.querySelectorAll('.phone-button').forEach(btn => {
-  btn.addEventListener('click', () => {
-    console.log(`${btn.id} pressed`);
-    // You can trigger more logic here
-  });
+  }
 });
 
-
-  }
+// Keypad button press
+document.querySelectorAll('.phone-button').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation(); // prevent triggering container animation
+    console.log(`${btn.id} pressed`);
+    // Add sound or interaction here if needed
+  });
 });
