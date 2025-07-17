@@ -2,7 +2,7 @@ const sprite = document.getElementById("sprite");
 const frame = document.getElementById("phone-frame");
 const container = document.getElementById("phone-container");
 
-// Sprite animation frames (DefineSprite_22/1.png to 16.png)
+// Sprite animation frames
 const spriteFrames = [];
 for (let i = 1; i <= 16; i++) {
   spriteFrames.push(`DefineSprite_22/${i}.png`);
@@ -33,7 +33,6 @@ let isAnimating = false;
 let hasOpenedOnce = false;
 let isOpen = false;
 
-// Sprite animation loop
 let spriteIndex = 0;
 let spriteInterval;
 
@@ -69,7 +68,7 @@ window.onload = () => {
   startSpriteLoop();
 
   sprite.addEventListener("click", () => {
-    // Load and play both sound files
+    // Load and play both sounds fully
     const sound1 = new Audio("sounds/27_fixed.mp3");
     const sound2 = new Audio("sounds/28_fixed.mp3");
 
@@ -81,12 +80,7 @@ window.onload = () => {
     container.style.display = "flex";
 
     playAnimation(openFrames, "images/42.png", () => {
-      // Stop both sounds when animation completes
-      [sound1, sound2].forEach(sound => {
-        sound.pause();
-        sound.currentTime = 0;
-      });
-
+      // Do NOT stop the sound — let it finish playing
       hasOpenedOnce = true;
       isOpen = true;
     });
