@@ -68,10 +68,8 @@ window.onload = () => {
   startSpriteLoop();
 
   sprite.addEventListener("click", () => {
-    // Load and play both sounds fully
     const sound1 = new Audio("sounds/27_fixed.mp3");
     const sound2 = new Audio("sounds/28_fixed.mp3");
-
     sound1.play();
     sound2.play();
 
@@ -80,7 +78,6 @@ window.onload = () => {
     container.style.display = "flex";
 
     playAnimation(openFrames, "images/42.png", () => {
-      // Do NOT stop the sound — let it finish playing
       hasOpenedOnce = true;
       isOpen = true;
     });
@@ -99,5 +96,47 @@ window.onload = () => {
         isOpen = true;
       });
     }
+  });
+
+  // Key overlay buttons
+  const keyOverlay = document.getElementById("key-overlay");
+  const keyMap = {
+    key0: { x: 92, y: 315 },
+    key1: { x: 55, y: 285 },
+    key2: { x: 92, y: 285 },
+    key3: { x: 129, y: 285 },
+    key4: { x: 55, y: 255 },
+    key5: { x: 92, y: 255 },
+    key6: { x: 129, y: 255 },
+    key7: { x: 55, y: 225 },
+    key8: { x: 92, y: 225 },
+    key9: { x: 129, y: 225 },
+    key10: { x: 55, y: 345 },           // star
+    keyhash: { x: 129, y: 345 },        // hash
+    keyanswerphone: { x: 35, y: 195 },  // green
+    keyhangup: { x: 140, y: 195 }       // red
+  };
+
+  Object.entries(keyMap).forEach(([key, pos]) => {
+    const button = document.createElement("button");
+    button.className = "key-button";
+    button.style.left = `${pos.x}px`;
+    button.style.top = `${pos.y}px`;
+
+    const flashImg = document.createElement("img");
+    flashImg.src = `compressed/${key}.png`;
+    flashImg.className = "key-image";
+    flashImg.style.left = `${pos.x}px`;
+    flashImg.style.top = `${pos.y}px`;
+
+    keyOverlay.appendChild(button);
+    keyOverlay.appendChild(flashImg);
+
+    button.addEventListener("click", () => {
+      flashImg.style.display = "block";
+      setTimeout(() => {
+        flashImg.style.display = "none";
+      }, 200);
+    });
   });
 };
