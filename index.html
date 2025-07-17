@@ -1,36 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Flip Phone</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <img id="sprite" src="DefineSprite_22/1.png" alt="Sprite animation">
-
-  <div id="phone-container">
-    <img id="phone-frame" src="images/42.png" alt="Phone frame">
-
-    <!-- Keypad buttons -->
-    <div id="keypad">
-      <img src="extracted_keys/key1.png" class="phone-key" id="key1">
-      <img src="extracted_keys/key2.png" class="phone-key" id="key2">
-      <img src="extracted_keys/key3.png" class="phone-key" id="key3">
-      <img src="extracted_keys/key4.png" class="phone-key" id="key4">
-      <img src="extracted_keys/key5.png" class="phone-key" id="key5">
-      <img src="extracted_keys/key6.png" class="phone-key" id="key6">
-      <img src="extracted_keys/key7.png" class="phone-key" id="key7">
-      <img src="extracted_keys/key8.png" class="phone-key" id="key8">
-      <img src="extracted_keys/key9.png" class="phone-key" id="key9">
-      <img src="extracted_keys/key10.png" class="phone-key" id="key_star">
-      <img src="extracted_keys/key0.png" class="phone-key" id="key0">
-      <img src="extracted_keys/key.png" class="phone-key" id="key_hash">
-      <img src="extracted_keys/keyanswerphone.png" class="phone-key" id="key_answer">
-      <img src="extracted_keys/keyhangup.png" class="phone-key" id="key_hangup">
-    </div>
+  <div id="container">
+    <canvas id="spriteCanvas" width="240" height="160"></canvas>
+    <img id="phoneImage" src="images/42.png" alt="Phone" />
   </div>
-
+  <audio id="flipSound" src="sounds/flip.mp3" preload="auto"></audio>
   <script src="script.js"></script>
 </body>
 </html>
