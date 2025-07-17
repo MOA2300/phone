@@ -13,7 +13,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
+  cursor: default;
   position: relative;
 }
 
@@ -51,4 +51,12 @@ body {
   height: 20px;
   display: none;
   pointer-events: none;
+}
+
+#flip-trigger {
+  position: absolute;
+  width: 40px;
+  height: 25px;
+  background: transparent;
+  cursor: pointer;
 }
