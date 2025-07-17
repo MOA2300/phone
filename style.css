@@ -1,41 +1,25 @@
 body {
-  background: black;
   margin: 0;
-  overflow: hidden;
+  background: black;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-#container {
-  position: relative;
-  width: 236px;
-  height: 656px;
-  margin: auto;
-  top: 20px;
+#phone-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
 
-#spriteCanvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
-}
-
-#phoneImage {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 236px;
-  height: 656px;
-  z-index: 2;
-}
-
-.flash-button {
-  position: absolute;
-  z-index: 3;
-  pointer-events: none;
-  animation: flash 0.2s linear forwards;
-}
-
-@keyframes flash {
-  0% { opacity: 1; filter: drop-shadow(0 0 4px lime); }
-  100% { opacity: 0; filter: none; }
+#phone-frame,
+#sprite {
+  display: block;
+  height: auto;
+  width: auto;
+  max-width: 100vw;
+  max-height: 100vh;
 }
