@@ -1,51 +1,41 @@
 body {
-  margin: 0;
   background: black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  margin: 0;
   overflow: hidden;
-  position: relative;
 }
 
-#sprite {
-  width: 70px;
-  position: absolute;
-  z-index: 10;
-  top: 20px;
-}
-
-#phone-container {
-  display: none;
+#container {
   position: relative;
   width: 236px;
   height: 656px;
+  margin: auto;
+  top: 20px;
 }
 
-#phone-frame {
-  width: 100%;
-  display: block;
-}
-
-#keypad {
+#spriteCanvas {
   position: absolute;
-  top: 270px;
-  left: 30px;
-  width: 176px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-  justify-content: center;
+  top: 0;
+  left: 0;
+  z-index: 1;
 }
 
-.phone-key {
-  width: 50px;
-  height: auto;
-  cursor: pointer;
-  transition: filter 0.2s ease;
+#phoneImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 236px;
+  height: 656px;
+  z-index: 2;
 }
 
-.phone-key.flash {
-  filter: drop-shadow(0 0 8px lime);
+.flash-button {
+  position: absolute;
+  z-index: 3;
+  pointer-events: none;
+  animation: flash 0.2s linear forwards;
+}
+
+@keyframes flash {
+  0% { opacity: 1; filter: drop-shadow(0 0 4px lime); }
+  100% { opacity: 0; filter: none; }
 }
