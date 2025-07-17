@@ -1,6 +1,8 @@
 const sprite = document.getElementById("sprite");
 const frame = document.getElementById("phone-frame");
 const container = document.getElementById("phone-container");
+const keyOverlay = document.getElementById("key-overlay");
+const flipTrigger = document.getElementById("flip-trigger");
 
 // Sprite animation frames
 const spriteFrames = [];
@@ -8,7 +10,7 @@ for (let i = 1; i <= 16; i++) {
   spriteFrames.push(`DefineSprite_22/${i}.png`);
 }
 
-// Flip phone opening and closing frames
+// Opening and closing frames
 const openFrames = [
   "images/6.png", "images/25.png", "images/28.png", "images/30.png",
   "images/32.png", "images/34.png", "images/36.png", "images/38.png",
@@ -19,7 +21,7 @@ const closeFrames = [
   "images/46.png", "images/48.png", "images/50.png"
 ];
 
-// Preload all frames
+// Preload all images
 function preloadImages(paths) {
   paths.forEach(src => {
     const img = new Image();
@@ -79,14 +81,10 @@ window.onload = () => {
     playAnimation(openFrames, "images/42.png", () => {
       hasOpenedOnce = true;
       isOpen = true;
-      setFlipTriggerArea(); // Update area after phone is open
+      setFlipTriggerArea();
     });
   });
 
-  const keyOverlay = document.getElementById("key-overlay");
-  const flipTrigger = document.getElementById("flip-trigger");
-
-  // Only allow flip via correct trigger zone
   flipTrigger.addEventListener("click", () => {
     if (isAnimating || !hasOpenedOnce) return;
 
@@ -104,38 +102,39 @@ window.onload = () => {
     }
   });
 
-  // Update the clickable flip zone depending on open/closed state
   function setFlipTriggerArea() {
+    // Adjust these based on your image scale/size
     if (isOpen) {
-      // white circled area (top latch of open phone)
-      flipTrigger.style.left = "113px";
-      flipTrigger.style.top = "60px";
+      flipTrigger.style.left = "100px";
+      flipTrigger.style.top = "20px";
+      flipTrigger.style.width = "180px";
+      flipTrigger.style.height = "90px";
     } else {
-      // red circled area (bottom lip of closed phone)
-      flipTrigger.style.left = "115px";
-      flipTrigger.style.top = "405px";
+      flipTrigger.style.left = "90px";
+      flipTrigger.style.top = "450px";
+      flipTrigger.style.width = "200px";
+      flipTrigger.style.height = "80px";
     }
   }
 
-  // KEY POSITION MAPPING (lowered Y values)
+  // Key positions (SHIFTED DOWN)
   const keyMap = {
-    key0: { x: 92, y: 340 },
-    key1: { x: 55, y: 310 },
-    key2: { x: 92, y: 310 },
-    key3: { x: 129, y: 310 },
-    key4: { x: 55, y: 280 },
-    key5: { x: 92, y: 280 },
-    key6: { x: 129, y: 280 },
-    key7: { x: 55, y: 250 },
-    key8: { x: 92, y: 250 },
-    key9: { x: 129, y: 250 },
-    key10: { x: 55, y: 370 },
-    keyhash: { x: 129, y: 370 },
-    keyanswerphone: { x: 35, y: 220 },
-    keyhangup: { x: 140, y: 220 }
+    key0: { x: 92, y: 410 },
+    key1: { x: 55, y: 380 },
+    key2: { x: 92, y: 380 },
+    key3: { x: 129, y: 380 },
+    key4: { x: 55, y: 350 },
+    key5: { x: 92, y: 350 },
+    key6: { x: 129, y: 350 },
+    key7: { x: 55, y: 320 },
+    key8: { x: 92, y: 320 },
+    key9: { x: 129, y: 320 },
+    key10: { x: 55, y: 440 },
+    keyhash: { x: 129, y: 440 },
+    keyanswerphone: { x: 35, y: 280 },
+    keyhangup: { x: 140, y: 280 }
   };
 
-  // Create clickable overlays for keys
   Object.entries(keyMap).forEach(([key, pos]) => {
     const button = document.createElement("button");
     button.className = "key-button";
@@ -152,6 +151,8 @@ window.onload = () => {
     keyOverlay.appendChild(flashImg);
 
     button.addEventListener("click", () => {
+      if (!isOpen) return; // LOCK keys if phone is closed
+
       flashImg.style.display = "block";
       setTimeout(() => {
         flashImg.style.display = "none";
