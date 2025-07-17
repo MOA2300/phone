@@ -3,15 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Flip Phone</title>
+  <title>Flip Phone Animation</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div id="container">
-    <canvas id="spriteCanvas" width="240" height="160"></canvas>
-    <img id="phoneImage" src="images/42.png" alt="Phone" />
+  <!-- Sprite animation (loops until click) -->
+  <img id="sprite" src="DefineSprite_22/1.png" alt="Loading sprite..." />
+
+  <!-- Flip phone container (hidden at first) -->
+  <div id="phone-container" style="display: none;">
+    <img id="phone-frame" src="images/6.png" alt="Flip Phone Frame" />
   </div>
-  <audio id="flipSound" src="sounds/flip.mp3" preload="auto"></audio>
+
   <script src="script.js"></script>
 </body>
 </html>
