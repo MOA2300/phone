@@ -55,8 +55,10 @@ body {
 
 #flip-trigger {
   position: absolute;
-  width: 40px;
-  height: 25px;
-  background: transparent;
+  background: rgba(255, 255, 255, 0.05);
   cursor: pointer;
+}
+
+#flip-trigger.debug {
+  outline: 2px dashed lime;
 }
