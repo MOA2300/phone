@@ -8,14 +8,13 @@ for (let i = 1; i <= 16; i++) {
   spriteFrames.push(`DefineSprite_22/${i}.png`);
 }
 
-// Flip phone opening frames
+// Flip phone opening and closing frames
 const openFrames = [
   "images/6.png", "images/25.png", "images/28.png", "images/30.png",
   "images/32.png", "images/34.png", "images/36.png", "images/38.png",
   "images/40.png", "images/42.png"
 ];
 
-// Flip phone closing frames
 const closeFrames = [
   "images/46.png", "images/48.png", "images/50.png"
 ];
@@ -80,43 +79,63 @@ window.onload = () => {
     playAnimation(openFrames, "images/42.png", () => {
       hasOpenedOnce = true;
       isOpen = true;
+      setFlipTriggerArea(); // Update area after phone is open
     });
   });
 
-  container.addEventListener("click", () => {
+  const keyOverlay = document.getElementById("key-overlay");
+  const flipTrigger = document.getElementById("flip-trigger");
+
+  // Only allow flip via correct trigger zone
+  flipTrigger.addEventListener("click", () => {
     if (isAnimating || !hasOpenedOnce) return;
 
     if (isOpen) {
       playAnimation(closeFrames, "images/50.png", () => {
         isOpen = false;
+        setFlipTriggerArea();
       });
     } else {
       const reopenFrames = [...closeFrames].reverse();
       playAnimation(reopenFrames, "images/42.png", () => {
         isOpen = true;
+        setFlipTriggerArea();
       });
     }
   });
 
-  // Key overlay buttons
-  const keyOverlay = document.getElementById("key-overlay");
+  // Update the clickable flip zone depending on open/closed state
+  function setFlipTriggerArea() {
+    if (isOpen) {
+      // white circled area (top latch of open phone)
+      flipTrigger.style.left = "113px";
+      flipTrigger.style.top = "60px";
+    } else {
+      // red circled area (bottom lip of closed phone)
+      flipTrigger.style.left = "115px";
+      flipTrigger.style.top = "405px";
+    }
+  }
+
+  // KEY POSITION MAPPING (lowered Y values)
   const keyMap = {
-    key0: { x: 92, y: 315 },
-    key1: { x: 55, y: 285 },
-    key2: { x: 92, y: 285 },
-    key3: { x: 129, y: 285 },
-    key4: { x: 55, y: 255 },
-    key5: { x: 92, y: 255 },
-    key6: { x: 129, y: 255 },
-    key7: { x: 55, y: 225 },
-    key8: { x: 92, y: 225 },
-    key9: { x: 129, y: 225 },
-    key10: { x: 55, y: 345 },           // star
-    keyhash: { x: 129, y: 345 },        // hash
-    keyanswerphone: { x: 35, y: 195 },  // green
-    keyhangup: { x: 140, y: 195 }       // red
+    key0: { x: 92, y: 340 },
+    key1: { x: 55, y: 310 },
+    key2: { x: 92, y: 310 },
+    key3: { x: 129, y: 310 },
+    key4: { x: 55, y: 280 },
+    key5: { x: 92, y: 280 },
+    key6: { x: 129, y: 280 },
+    key7: { x: 55, y: 250 },
+    key8: { x: 92, y: 250 },
+    key9: { x: 129, y: 250 },
+    key10: { x: 55, y: 370 },
+    keyhash: { x: 129, y: 370 },
+    keyanswerphone: { x: 35, y: 220 },
+    keyhangup: { x: 140, y: 220 }
   };
 
+  // Create clickable overlays for keys
   Object.entries(keyMap).forEach(([key, pos]) => {
     const button = document.createElement("button");
     button.className = "key-button";
