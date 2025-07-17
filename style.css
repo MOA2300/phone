@@ -1,11 +1,10 @@
 body {
   margin: 0;
   background: black;
-  height: 100vh;
-  width: 100vw;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  height: 100vh;
   overflow: hidden;
   position: relative;
 }
@@ -14,6 +13,7 @@ body {
   width: 70px;
   position: absolute;
   z-index: 10;
+  top: 20px;
 }
 
 #phone-container {
@@ -21,27 +21,31 @@ body {
   position: relative;
   width: 236px;
   height: 656px;
-  z-index: 1;
 }
 
 #phone-frame {
   width: 100%;
-  height: auto;
   display: block;
 }
 
-.phone-button {
+#keypad {
   position: absolute;
-  width: 40px;
-  height: 40px;
-  background-color: transparent;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  z-index: 3;
-  transition: background-color 0.2s ease;
+  top: 270px;
+  left: 30px;
+  width: 176px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: center;
 }
 
-.phone-button.flash {
-  background-color: rgba(0, 255, 0, 0.6);
+.phone-key {
+  width: 50px;
+  height: auto;
+  cursor: pointer;
+  transition: filter 0.2s ease;
+}
+
+.phone-key.flash {
+  filter: drop-shadow(0 0 8px lime);
 }
