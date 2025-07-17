@@ -1,29 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Flip Phone Demo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flip Phone</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <img id="sprite" src="DefineSprite_22/1.png" alt="Loading sprite..." />
+  <img id="sprite" src="DefineSprite_22/1.png" alt="Sprite animation">
+
   <div id="phone-container">
-    <img id="phone-frame" alt="Flip Phone Frame" />
+    <img id="phone-frame" src="images/42.png" alt="Phone frame">
+
     <!-- Keypad buttons -->
-    <button class="phone-button" id="key1"></button>
-    <button class="phone-button" id="key2"></button>
-    <button class="phone-button" id="key3"></button>
-    <button class="phone-button" id="key4"></button>
-    <button class="phone-button" id="key5"></button>
-    <button class="phone-button" id="key6"></button>
-    <button class="phone-button" id="key7"></button>
-    <button class="phone-button" id="key8"></button>
-    <button class="phone-button" id="key9"></button>
-    <button class="phone-button" id="key*"></button>
-    <button class="phone-button" id="key0"></button>
-    <button class="phone-button" id="key#"></button>
+    <div id="keypad">
+      <img src="extracted_keys/key1.png" class="phone-key" id="key1">
+      <img src="extracted_keys/key2.png" class="phone-key" id="key2">
+      <img src="extracted_keys/key3.png" class="phone-key" id="key3">
+      <img src="extracted_keys/key4.png" class="phone-key" id="key4">
+      <img src="extracted_keys/key5.png" class="phone-key" id="key5">
+      <img src="extracted_keys/key6.png" class="phone-key" id="key6">
+      <img src="extracted_keys/key7.png" class="phone-key" id="key7">
+      <img src="extracted_keys/key8.png" class="phone-key" id="key8">
+      <img src="extracted_keys/key9.png" class="phone-key" id="key9">
+      <img src="extracted_keys/key10.png" class="phone-key" id="key_star">
+      <img src="extracted_keys/key0.png" class="phone-key" id="key0">
+      <img src="extracted_keys/key.png" class="phone-key" id="key_hash">
+      <img src="extracted_keys/keyanswerphone.png" class="phone-key" id="key_answer">
+      <img src="extracted_keys/keyhangup.png" class="phone-key" id="key_hangup">
+    </div>
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>
