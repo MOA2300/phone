@@ -106,8 +106,8 @@ window.onload = () => {
     // Adjust these based on your image scale/size
     if (isOpen) {
       flipTrigger.style.left = "30px";
-      flipTrigger.style.top = "20px";
-      flipTrigger.style.width = "180px";
+      flipTrigger.style.top = "40px";
+      flipTrigger.style.width = "125px";
       flipTrigger.style.height = "90px";
     } else {
       flipTrigger.style.left = "120px";
