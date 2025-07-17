@@ -89,18 +89,25 @@ window.onload = () => {
   });
 };
 
-container.addEventListener("click", () => {
-  if (isAnimating || !hasOpenedOnce) return;
+sprite.addEventListener("click", () => {
+  // Load and play the sound
+  const transitionSound = new Audio("sounds/open.mp3"); // update path if needed
+  transitionSound.play();
 
-  if (isOpen) {
-    playAnimation(closeFrames, "images/50.png", () => {
-      isOpen = false;
-    });
-  } else {
-    const reopenFrames = [...closeFrames].reverse();
-    playAnimation(reopenFrames, "images/42.png", () => {
-      isOpen = true;
-    });
+  stopSpriteLoop();
+  sprite.style.display = "none";
+  container.style.display = "flex";
+
+  playAnimation(openFrames, "images/42.png", () => {
+    // Stop the sound once final frame is shown
+    transitionSound.pause();
+    transitionSound.currentTime = 0;
+
+    hasOpenedOnce = true;
+    isOpen = true;
+  });
+});
+
   }
 });
 
