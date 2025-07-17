@@ -1,119 +1,106 @@
-const spriteCanvas = document.getElementById('spriteCanvas');
-const ctx = spriteCanvas.getContext('2d');
-const phoneImage = document.getElementById('phoneImage');
-const flipSound = document.getElementById('flipSound');
+const sprite = document.getElementById("sprite");
+const frame = document.getElementById("phone-frame");
+const container = document.getElementById("phone-container");
 
-let spriteFrames = [];
-let currentFrame = 0;
-let spriteLoaded = false;
-let animationDone = false;
+// Sprite animation frames (DefineSprite_22/1.png to 16.png)
+const spriteFrames = [];
+for (let i = 1; i <= 16; i++) {
+  spriteFrames.push(`DefineSprite_22/${i}.png`);
+}
 
-// Load sprite animation (DefineSprite_22)
-for (let i = 1; i <= 22; i++) {
-  const img = new Image();
-  img.src = `DefineSprite_22/${i}.png`;
-  img.onload = () => {
-    spriteFrames[i - 1] = img;
-    if (spriteFrames.length === 22) {
-      spriteLoaded = true;
-      requestAnimationFrame(drawSprite);
+// Flip phone opening frames
+const openFrames = [
+  "images/6.png",
+  "images/25.png",
+  "images/28.png",
+  "images/30.png",
+  "images/32.png",
+  "images/34.png",
+  "images/36.png",
+  "images/38.png",
+  "images/40.png",
+  "images/42.png"
+];
+
+// Flip phone closing frames
+const closeFrames = [
+  "images/46.png",
+  "images/48.png",
+  "images/50.png"
+];
+
+// Preload all frames
+function preloadImages(paths) {
+  paths.forEach(src => {
+    const img = new Image();
+    img.src = src;
+  });
+}
+preloadImages([...spriteFrames, ...openFrames, ...closeFrames]);
+
+let isAnimating = false;
+let hasOpenedOnce = false;
+let isOpen = false;
+
+// Looping sprite animation
+let spriteIndex = 0;
+let spriteInterval;
+
+function startSpriteLoop() {
+  spriteInterval = setInterval(() => {
+    spriteIndex = (spriteIndex + 1) % spriteFrames.length;
+    sprite.src = spriteFrames[spriteIndex];
+  }, 160); // Slower for retro feel
+}
+
+function stopSpriteLoop() {
+  clearInterval(spriteInterval);
+}
+
+function playAnimation(frames, finalFrame, callback) {
+  isAnimating = true;
+  let i = 0;
+
+  const interval = setInterval(() => {
+    if (i < frames.length) {
+      frame.src = frames[i];
+      i++;
+    } else {
+      clearInterval(interval);
+      frame.src = finalFrame;
+      isAnimating = false;
+      if (callback) callback();
     }
-  };
+  }, 90); // Smooth and consistent speed
 }
 
-function drawSprite() {
-  if (!spriteLoaded || animationDone) return;
+window.onload = () => {
+  startSpriteLoop();
 
-  ctx.clearRect(0, 0, spriteCanvas.width, spriteCanvas.height);
-  ctx.drawImage(spriteFrames[currentFrame], 0, 0, 236, 656);
+  sprite.addEventListener("click", () => {
+    stopSpriteLoop();
+    sprite.style.display = "none";
+    container.style.display = "flex";
 
-  currentFrame++;
-  if (currentFrame < spriteFrames.length) {
-    requestAnimationFrame(drawSprite);
+    playAnimation(openFrames, "images/42.png", () => {
+      hasOpenedOnce = true;
+      isOpen = true;
+    });
+  });
+};
+
+container.addEventListener("click", () => {
+  if (isAnimating || !hasOpenedOnce) return;
+
+  if (isOpen) {
+    playAnimation(closeFrames, "images/50.png", () => {
+      isOpen = false;
+    });
   } else {
-    animationDone = true;
-    spriteCanvas.style.display = 'none';
-    phoneImage.style.display = 'block';
-    flipSound.play();
-  }
-}
-
-// Handle key flashes
-document.getElementById('container').addEventListener('click', (e) => {
-  const x = e.offsetX;
-  const y = e.offsetY;
-  const key = getKeyAtPosition(x, y);
-
-  if (key) {
-    flashKey(key);
+    const reopenFrames = [...closeFrames].reverse();
+    playAnimation(reopenFrames, "images/42.png", () => {
+      isOpen = true;
+    });
   }
 });
 
-function flashKey(keyId) {
-  const img = document.createElement('img');
-  img.src = `compressed/${keyId}.png`;
-  img.className = 'flash-button';
-  img.style.left = getKeyLeft(keyId) + 'px';
-  img.style.top = getKeyTop(keyId) + 'px';
-  img.style.width = '45px';
-  img.style.height = '25px';
-
-  document.getElementById('container').appendChild(img);
-
-  setTimeout(() => {
-    img.remove();
-  }, 200);
-}
-
-function getKeyAtPosition(x, y) {
-  // Estimate positions (you can fine-tune these)
-  const keyMap = [
-    { id: 'key1', x: 90, y: 340 },
-    { id: 'key2', x: 135, y: 340 },
-    { id: 'key3', x: 180, y: 340 },
-    { id: 'key4', x: 90, y: 370 },
-    { id: 'key5', x: 135, y: 370 },
-    { id: 'key6', x: 180, y: 370 },
-    { id: 'key7', x: 90, y: 400 },
-    { id: 'key8', x: 135, y: 400 },
-    { id: 'key9', x: 180, y: 400 },
-    { id: 'key0', x: 135, y: 430 },
-    { id: 'key10', x: 90, y: 430 }, // Star
-    { id: 'key', x: 180, y: 430 },  // Hash
-    { id: 'keyanswerphone', x: 70, y: 470 },
-    { id: 'keyhangup', x: 170, y: 470 }
-  ];
-
-  for (const key of keyMap) {
-    if (
-      x >= key.x && x <= key.x + 45 &&
-      y >= key.y && y <= key.y + 25
-    ) {
-      return key.id;
-    }
-  }
-
-  return null;
-}
-
-function getKeyLeft(id) {
-  const map = {
-    key1: 90, key2: 135, key3: 180,
-    key4: 90, key5: 135, key6: 180,
-    key7: 90, key8: 135, key9: 180,
-    key0: 135, key10: 90, key: 180,
-    keyanswerphone: 70, keyhangup: 170
-  };
-  return map[id] || 0;
-}
-
-function getKeyTop(id) {
-  const map = {
-    key1: 340, key2: 340, key3: 340,
-    key4: 370, key5: 370, key6: 370,
-    key7: 400, key8: 400, key9: 400,
-    key0: 430, key10: 430, key: 430,
-    keyanswerphone: 470, keyhangup: 470
-  };
-  return map[id] || 0;
-}
