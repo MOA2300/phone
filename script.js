@@ -111,8 +111,8 @@ window.onload = () => {
       flipTrigger.style.height = "50px";
     } else {
       flipTrigger.style.left = "40px";
-      flipTrigger.style.top = "300px";
-      flipTrigger.style.width = "200px";
+      flipTrigger.style.top = "310px";
+      flipTrigger.style.width = "125px";
       flipTrigger.style.height = "80px";
     }
   }
