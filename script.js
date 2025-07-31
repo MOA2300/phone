@@ -4,13 +4,11 @@ const container = document.getElementById("phone-container");
 const keyOverlay = document.getElementById("key-overlay");
 const flipTrigger = document.getElementById("flip-trigger");
 
-// Sprite animation frames
 const spriteFrames = [];
 for (let i = 1; i <= 16; i++) {
   spriteFrames.push(`DefineSprite_22/${i}.png`);
 }
 
-// Opening and closing frames
 const openFrames = [
   "images/6.png", "images/25.png", "images/28.png", "images/30.png",
   "images/32.png", "images/34.png", "images/36.png", "images/38.png",
@@ -21,7 +19,6 @@ const closeFrames = [
   "images/46.png", "images/48.png", "images/50.png"
 ];
 
-// Preload all images
 function preloadImages(paths) {
   paths.forEach(src => {
     const img = new Image();
@@ -103,36 +100,41 @@ window.onload = () => {
   });
 
   function setFlipTriggerArea() {
-    // Adjust these based on your image scale/size
     if (isOpen) {
-      flipTrigger.style.left = "40px";
-      flipTrigger.style.top = "7px";
-      flipTrigger.style.width = "125px";
-      flipTrigger.style.height = "50px";
+      flipTrigger.style.left = "100px";
+      flipTrigger.style.top = "20px";
+      flipTrigger.style.width = "180px";
+      flipTrigger.style.height = "90px";
     } else {
-      flipTrigger.style.left = "40px";
-      flipTrigger.style.top = "310px";
-      flipTrigger.style.width = "125px";
+      flipTrigger.style.left = "90px";
+      flipTrigger.style.top = "450px";
+      flipTrigger.style.width = "200px";
       flipTrigger.style.height = "80px";
     }
   }
 
-  // Key positions (SHIFTED DOWN)
   const keyMap = {
-    key0: { x: 92, y: 410 },
-    key1: { x: 55, y: 380 },
-    key2: { x: 92, y: 380 },
-    key3: { x: 129, y: 380 },
-    key4: { x: 55, y: 350 },
-    key5: { x: 92, y: 350 },
-    key6: { x: 129, y: 350 },
-    key7: { x: 55, y: 320 },
-    key8: { x: 92, y: 320 },
-    key9: { x: 129, y: 320 },
-    key10: { x: 55, y: 440 },
-    keyhash: { x: 129, y: 440 },
-    keyanswerphone: { x: 35, y: 280 },
-    keyhangup: { x: 140, y: 280 }
+    "0key": { x: 92, y: 410 },
+    "1key": { x: 55, y: 380 },
+    "2key": { x: 92, y: 380 },
+    "3key": { x: 129, y: 380 },
+    "4key": { x: 55, y: 350 },
+    "5key": { x: 92, y: 350 },
+    "6key": { x: 129, y: 350 },
+    "7key": { x: 55, y: 320 },
+    "8key": { x: 92, y: 320 },
+    "9key": { x: 129, y: 320 },
+    "starkey": { x: 55, y: 440 },
+    "hashkey": { x: 129, y: 440 },
+    "answerphonekey": { x: 35, y: 280 },
+    "hangupkey": { x: 140, y: 280 },
+    "middlekey": { x: 91, y: 292 },
+    "leftarrowkey": { x: 57, y: 292 },
+    "rightarrowkey": { x: 125, y: 292 },
+    "uparrowkey": { x: 91, y: 265 },
+    "downarrowkey": { x: 91, y: 317 },
+    "emailkey": { x: 55, y: 252 },
+    "camerakey": { x: 129, y: 252 }
   };
 
   Object.entries(keyMap).forEach(([key, pos]) => {
@@ -141,22 +143,20 @@ window.onload = () => {
     button.style.left = `${pos.x}px`;
     button.style.top = `${pos.y}px`;
 
-    const flashImg = document.createElement("img");
-    flashImg.src = `compressed/${key}.png`;
-    flashImg.className = "key-image";
-    flashImg.style.left = `${pos.x}px`;
-    flashImg.style.top = `${pos.y}px`;
+    const hoverImg = document.createElement("img");
+    hoverImg.src = `normal keys/${key}.png`;
+
+    button.appendChild(hoverImg);
+
+    // Disable clicking when phone is closed
+    button.addEventListener("click", e => {
+      if (!isOpen) {
+        e.preventDefault();
+        return;
+      }
+      console.log(`Key ${key} pressed`);
+    });
 
     keyOverlay.appendChild(button);
-    keyOverlay.appendChild(flashImg);
-
-    button.addEventListener("click", () => {
-      if (!isOpen) return; // LOCK keys if phone is closed
-
-      flashImg.style.display = "block";
-      setTimeout(() => {
-        flashImg.style.display = "none";
-      }, 200);
-    });
   });
 };
