@@ -126,7 +126,7 @@ window.onload = () => {
     "0key": { x: 537, y: 585 },
     "starkey": { x: 478, y: 585 },
     "hashkey": { x: 595, y: 585 },
-    "emailkey": { x: 437, y: 365 },
+    "emailkey": { x: 437, y: 345 },
     "camerakey": { x: 640, y: 365 },
     "answerphonekey": { x: 450, y: 625 },
     "hangupkey": { x: 620, y: 625 },
