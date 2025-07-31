@@ -113,6 +113,7 @@ window.onload = () => {
     }
   }
 
+  // Adjust these positions based on your image layout
   const keyMap = {
     "0key": { x: 92, y: 410 },
     "1key": { x: 55, y: 380 },
@@ -134,7 +135,8 @@ window.onload = () => {
     "uparrowkey": { x: 91, y: 265 },
     "downarrowkey": { x: 91, y: 317 },
     "emailkey": { x: 55, y: 252 },
-    "camerakey": { x: 129, y: 252 }
+    "camerakey": { x: 129, y: 252 },
+    "toprightkey": { x: 160, y: 210 }
   };
 
   Object.entries(keyMap).forEach(([key, pos]) => {
@@ -148,13 +150,12 @@ window.onload = () => {
 
     button.appendChild(hoverImg);
 
-    // Disable clicking when phone is closed
     button.addEventListener("click", e => {
       if (!isOpen) {
         e.preventDefault();
         return;
       }
-      console.log(`Key ${key} pressed`);
+      console.log(`Key ${key} clicked`);
     });
 
     keyOverlay.appendChild(button);
