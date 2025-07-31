@@ -42,15 +42,18 @@ body {
   border: 2px dashed blue; /* Debug outline for alignment */
   padding: 0;
   z-index: 10;
+  width: 40px;
+  height: 40px;
 }
 
-.key-button img {
-  display: none;
+.key-overlay-img {
   position: absolute;
+  display: none;
   pointer-events: none;
+  z-index: 11;
 }
 
-.key-button:hover img {
+.key-button:hover + .key-overlay-img {
   display: block;
 }
 
