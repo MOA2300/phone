@@ -113,31 +113,32 @@ window.onload = () => {
     }
   }
 
-  // Adjust these positions based on your image layout
   const keyMap = {
-    "0key": { x: 92, y: 410 },
-    "1key": { x: 55, y: 380 },
-    "2key": { x: 92, y: 380 },
-    "3key": { x: 129, y: 380 },
-    "4key": { x: 55, y: 350 },
-    "5key": { x: 92, y: 350 },
-    "6key": { x: 129, y: 350 },
-    "7key": { x: 55, y: 320 },
-    "8key": { x: 92, y: 320 },
-    "9key": { x: 129, y: 320 },
-    "starkey": { x: 55, y: 440 },
-    "hashkey": { x: 115, y: 494 },
-    "answerphonekey": { x: 35, y: 280 },
-    "hangupkey": { x: 140, y: 280 },
-    "middlekey": { x: 91, y: 292 },
-    "leftarrowkey": { x: 57, y: 292 },
-    "rightarrowkey": { x: 125, y: 292 },
-    "uparrowkey": { x: 91, y: 265 },
-    "downarrowkey": { x: 91, y: 317 },
-    "emailkey": { x: 55, y: 252 },
-    "camerakey": { x: 129, y: 252 },
-    "toprightkey": { x: 160, y: 210 }
+    "1key": { x: 478, y: 420 },
+    "2key": { x: 537, y: 420 },
+    "3key": { x: 595, y: 420 },
+    "4key": { x: 478, y: 475 },
+    "5key": { x: 537, y: 475 },
+    "6key": { x: 595, y: 475 },
+    "7key": { x: 478, y: 530 },
+    "8key": { x: 537, y: 530 },
+    "9key": { x: 595, y: 530 },
+    "0key": { x: 537, y: 585 },
+    "starkey": { x: 478, y: 585 },
+    "hashkey": { x: 595, y: 585 },
+    "emailkey": { x: 437, y: 365 },
+    "camerakey": { x: 640, y: 365 },
+    "answerphonekey": { x: 450, y: 625 },
+    "hangupkey": { x: 620, y: 625 },
+    "middlekey": { x: 537, y: 365 },
+    "uparrowkey": { x: 537, y: 335 },
+    "downarrowkey": { x: 537, y: 395 },
+    "leftarrowkey": { x: 507, y: 365 },
+    "rightarrowkey": { x: 567, y: 365 },
+    "toprightkey": { x: 660, y: 310 }
   };
+
+  keyOverlay.innerHTML = "";
 
   Object.entries(keyMap).forEach(([key, pos]) => {
     const button = document.createElement("button");
@@ -147,8 +148,9 @@ window.onload = () => {
 
     const hoverImg = document.createElement("img");
     hoverImg.src = `normal keys/${key}.png`;
-
-    button.appendChild(hoverImg);
+    hoverImg.className = "key-overlay-img";
+    hoverImg.style.left = `${pos.x}px`;
+    hoverImg.style.top = `${pos.y}px`;
 
     button.addEventListener("click", e => {
       if (!isOpen) {
@@ -159,5 +161,6 @@ window.onload = () => {
     });
 
     keyOverlay.appendChild(button);
+    keyOverlay.appendChild(hoverImg);
   });
 };
