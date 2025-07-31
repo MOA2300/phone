@@ -126,7 +126,7 @@ window.onload = () => {
     "8key": { x: 92, y: 320 },
     "9key": { x: 129, y: 320 },
     "starkey": { x: 55, y: 440 },
-    "hashkey": { x: 145, y: 500 },
+    "hashkey": { x: 140, y: 500 },
     "answerphonekey": { x: 35, y: 280 },
     "hangupkey": { x: 140, y: 280 },
     "middlekey": { x: 91, y: 292 },
