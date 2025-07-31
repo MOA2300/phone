@@ -37,20 +37,16 @@ body {
 
 .key-button {
   position: absolute;
-  width: 32px;
-  height: 20px;
   pointer-events: auto;
   background: transparent;
-  border: 2px dashed blue; /* Debug outline */
+  border: 2px dashed blue; /* Debug outline for alignment */
   padding: 0;
   z-index: 10;
 }
 
 .key-button img {
-  position: absolute;
-  width: 32px;
-  height: 20px;
   display: none;
+  position: absolute;
   pointer-events: none;
 }
 
