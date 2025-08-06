@@ -120,7 +120,7 @@ window.onload = () => {
     keyOverlay.innerHTML = ""; // clear previous
 
     const key = "1key";
-    const pos = { x: 478, y: 420 }; // Adjust as needed
+    const pos = { x: 478, y: 565 }; // Adjust this to align with the actual key
 
     const button = document.createElement("button");
     button.className = "key-button";
@@ -130,8 +130,8 @@ window.onload = () => {
     const hoverImg = document.createElement("img");
     hoverImg.src = `normal keys/${key}.png`;
     hoverImg.className = "key-overlay-img";
-    hoverImg.style.left = `${pos.x}px`;
-    hoverImg.style.top = `${pos.y}px`;
+
+    button.appendChild(hoverImg);
 
     button.addEventListener("click", e => {
       if (!isOpen) {
@@ -142,6 +142,5 @@ window.onload = () => {
     });
 
     keyOverlay.appendChild(button);
-    keyOverlay.appendChild(hoverImg);
   }
 };
