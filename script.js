@@ -1,82 +1,147 @@
+const sprite = document.getElementById("sprite");
+const frame = document.getElementById("phone-frame");
+const container = document.getElementById("phone-container");
+const keyOverlay = document.getElementById("key-overlay");
+const flipTrigger = document.getElementById("flip-trigger");
+
+const spriteFrames = [];
+for (let i = 1; i <= 16; i++) {
+  spriteFrames.push(`DefineSprite_22/${i}.png`);
+}
+
+const openFrames = [
+  "images/6.png", "images/25.png", "images/28.png", "images/30.png",
+  "images/32.png", "images/34.png", "images/36.png", "images/38.png",
+  "images/40.png", "images/42.png"
+];
+
+const closeFrames = [
+  "images/46.png", "images/48.png", "images/50.png"
+];
+
+function preloadImages(paths) {
+  paths.forEach(src => {
+    const img = new Image();
+    img.src = src;
+  });
+}
+preloadImages([...spriteFrames, ...openFrames, ...closeFrames]);
+
+let isAnimating = false;
+let hasOpenedOnce = false;
 let isOpen = false;
-let spriteContainer;
-let keyOverlay;
+
+let spriteIndex = 0;
+let spriteInterval;
+
+function startSpriteLoop() {
+  spriteInterval = setInterval(() => {
+    spriteIndex = (spriteIndex + 1) % spriteFrames.length;
+    sprite.src = spriteFrames[spriteIndex];
+  }, 160);
+}
+
+function stopSpriteLoop() {
+  clearInterval(spriteInterval);
+}
+
+function playAnimation(frames, finalFrame, callback) {
+  isAnimating = true;
+  let i = 0;
+
+  const interval = setInterval(() => {
+    if (i < frames.length) {
+      frame.src = frames[i];
+      i++;
+    } else {
+      clearInterval(interval);
+      frame.src = finalFrame;
+      isAnimating = false;
+      if (callback) callback();
+    }
+  }, 90);
+}
 
 window.onload = () => {
-  spriteContainer = document.getElementById("spriteContainer");
-  keyOverlay = document.getElementById("keyOverlay");
+  startSpriteLoop();
 
-  document.getElementById("closedPhone").addEventListener("click", e => {
-    const rect = e.target.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+  sprite.addEventListener("click", () => {
+    const sound1 = new Audio("sounds/27_fixed.mp3");
+    const sound2 = new Audio("sounds/28_fixed.mp3");
+    sound1.play();
+    sound2.play();
 
-    // Red area on closed phone
-    if (x >= 100 && x <= 160 && y >= 340 && y <= 390) {
-      openPhone();
+    stopSpriteLoop();
+    sprite.style.display = "none";
+    container.style.display = "flex";
+
+    playAnimation(openFrames, "images/42.png", () => {
+      hasOpenedOnce = true;
+      isOpen = true;
+      setFlipTriggerArea();
+      renderKeys(); // only after fully opened
+    });
+  });
+
+  flipTrigger.addEventListener("click", () => {
+    if (isAnimating || !hasOpenedOnce) return;
+
+    if (isOpen) {
+      playAnimation(closeFrames, "images/50.png", () => {
+        isOpen = false;
+        setFlipTriggerArea();
+        keyOverlay.innerHTML = ""; // remove keys on close
+      });
+    } else {
+      const reopenFrames = [...closeFrames].reverse();
+      playAnimation(reopenFrames, "images/42.png", () => {
+        isOpen = true;
+        setFlipTriggerArea();
+        renderKeys();
+      });
     }
   });
 
-  document.getElementById("openPhone").addEventListener("click", e => {
-    const rect = e.target.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    // White area on open phone
-    if (x >= 125 && x <= 170 && y >= 0 && y <= 40) {
-      closePhone();
+  function setFlipTriggerArea() {
+    if (isOpen) {
+      flipTrigger.style.left = "100px";
+      flipTrigger.style.top = "20px";
+      flipTrigger.style.width = "180px";
+      flipTrigger.style.height = "90px";
+    } else {
+      flipTrigger.style.left = "90px";
+      flipTrigger.style.top = "450px";
+      flipTrigger.style.width = "200px";
+      flipTrigger.style.height = "80px";
     }
-  });
+  }
+
+  function renderKeys() {
+    keyOverlay.innerHTML = ""; // clear previous
+
+    const key = "1key";
+    const pos = { x: 478, y: 420 }; // Adjust as needed
+
+    const button = document.createElement("button");
+    button.className = "key-button";
+    button.style.left = `${pos.x}px`;
+    button.style.top = `${pos.y}px`;
+
+    const hoverImg = document.createElement("img");
+    hoverImg.src = `normal keys/${key}.png`;
+    hoverImg.className = "key-overlay-img";
+    hoverImg.style.left = `${pos.x}px`;
+    hoverImg.style.top = `${pos.y}px`;
+
+    button.addEventListener("click", e => {
+      if (!isOpen) {
+        e.preventDefault();
+        return;
+      }
+      console.log(`Key ${key} clicked`);
+    });
+
+    keyOverlay.appendChild(button);
+    keyOverlay.appendChild(hoverImg);
+  }
 };
-
-function openPhone() {
-  document.getElementById("closedPhone").style.display = "none";
-  document.getElementById("openPhone").style.display = "block";
-  playSound("27_fixed.mp3");
-  isOpen = true;
-  renderKeys();
-}
-
-function closePhone() {
-  document.getElementById("closedPhone").style.display = "block";
-  document.getElementById("openPhone").style.display = "none";
-  playSound("28_fixed.mp3");
-  isOpen = false;
-  keyOverlay.innerHTML = ""; // clear keys
-}
-
-function playSound(file) {
-  const audio = new Audio(`sounds/${file}`);
-  audio.play();
-}
-
-function renderKeys() {
-  keyOverlay.innerHTML = ""; // clear previous
-
-  if (!isOpen) return;
-
-  const key = "1key";
-  const pos = { x: 478, y: 565 }; // Adjust this to position the key correctly
-
-  const button = document.createElement("button");
-  button.className = "key-button";
-  button.style.left = `${pos.x}px`;
-  button.style.top = `${pos.y}px`;
-
-  const hoverImg = document.createElement("img");
-  hoverImg.src = `normal keys/${key}.png`;
-  hoverImg.className = "key-overlay-img";
-  hoverImg.style.left = `0px`;
-  hoverImg.style.top = `0px`;
-
-  button.addEventListener("click", e => {
-    if (!isOpen) {
-      e.preventDefault();
-      return;
-    }
-    console.log(`Key ${key} clicked`);
-  });
-
-  button.appendChild(hoverImg);
-  keyOverlay.appendChild(button);
-}
