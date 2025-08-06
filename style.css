@@ -48,12 +48,18 @@ body {
 
 .key-overlay-img {
   position: absolute;
-  display: none;
+  top: 0;
+  left: 0;
+  width: auto;
+  height: auto;
+  max-width: none;
+  max-height: none;
   pointer-events: none;
+  display: none;
   z-index: 11;
 }
 
-.key-button:hover + .key-overlay-img {
+.key-button:hover .key-overlay-img {
   display: block;
 }
 
@@ -67,3 +73,4 @@ body {
 #flip-trigger.debug {
   outline: 2px dashed lime;
 }
+
