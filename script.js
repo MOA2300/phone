@@ -104,7 +104,7 @@ window.onload = () => {
 
   function setFlipTriggerArea() {
     if (isOpen) {
-      flipTrigger.style.left = "100px";
+      flipTrigger.style.left = "90px";
       flipTrigger.style.top = "20px";
       flipTrigger.style.width = "180px";
       flipTrigger.style.height = "90px";
@@ -120,7 +120,7 @@ window.onload = () => {
     keyOverlay.innerHTML = ""; // clear previous
 
     const key = "1key";
-    const pos = { x: 478, y: 420 }; // Adjust as needed
+    const pos = { x: 464, y: 430 }; // Adjust as needed
 
     const button = document.createElement("button");
     button.className = "key-button";
@@ -145,3 +145,4 @@ window.onload = () => {
     keyOverlay.appendChild(hoverImg);
   }
 };
+
