@@ -104,8 +104,8 @@ window.onload = () => {
 
   function setFlipTriggerArea() {
     if (isOpen) {
-      flipTrigger.style.left = "10px";
-      flipTrigger.style.top = "50px";
+      flipTrigger.style.left = "14px";
+      flipTrigger.style.top = "30px";
       flipTrigger.style.width = "110px";
       flipTrigger.style.height = "90px";
     } else {
@@ -145,6 +145,7 @@ window.onload = () => {
     keyOverlay.appendChild(hoverImg);
   }
 };
+
 
 
 
