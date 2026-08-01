@@ -1,7 +1,7 @@
 "use strict";
 
 /* ---------------------------------
-   ELEMENTS
+   HTML ELEMENTS
 --------------------------------- */
 
 const spriteButton =
@@ -10,20 +10,17 @@ const spriteButton =
 const sprite =
   document.getElementById("sprite");
 
-const phoneContainer =
-  document.getElementById("phone-container");
-
-const phoneFrame =
+const frame =
   document.getElementById("phone-frame");
 
-const openScreenClock =
-  document.getElementById("open-screen-clock");
+const container =
+  document.getElementById("phone-container");
 
-const openScreenDate =
-  document.getElementById("open-screen-date");
+const keyOverlay =
+  document.getElementById("key-overlay");
 
-const openScreenTime =
-  document.getElementById("open-screen-time");
+const flipTrigger =
+  document.getElementById("flip-trigger");
 
 const frontScreen =
   document.getElementById("front-screen");
@@ -34,28 +31,30 @@ const frontScreenDate =
 const frontScreenTime =
   document.getElementById("front-screen-time");
 
+const openScreenClock =
+  document.getElementById("open-screen-clock");
+
+const openScreenDate =
+  document.getElementById("open-screen-date");
+
+const openScreenTime =
+  document.getElementById("open-screen-time");
+
 const phoneMenu =
   document.getElementById("phone-menu");
 
-const menuItems = Array.from(
-  document.querySelectorAll(".phone-menu-item")
-);
-
-const keyOverlay =
-  document.getElementById("key-overlay");
-
-const phoneKeys = Array.from(
-  document.querySelectorAll(".phone-key")
-);
-
-const flipTrigger =
-  document.getElementById("flip-trigger");
+const menuItems =
+  Array.from(
+    document.querySelectorAll(
+      ".phone-menu-item"
+    )
+  );
 
 const contentPanel =
   document.getElementById("content-panel");
 
-const contentPanelTitle =
-  document.getElementById("content-panel-title");
+const panelTitle =
+  document.getElementById("panel-title");
 
 const panelPage =
   document.getElementById("panel-page");
@@ -73,10 +72,18 @@ const panelClose =
   document.getElementById("panel-close");
 
 /* ---------------------------------
-   PHONE ANIMATION FRAMES
+   PHONE IMAGE FRAMES
 --------------------------------- */
 
-const OPEN_PHONE_FRAMES = [
+const spriteFrames = [];
+
+for (let i = 1; i <= 16; i += 1) {
+  spriteFrames.push(
+    `DefineSprite_22/${i}.png`
+  );
+}
+
+const openFrames = [
   "images/6.png",
   "images/25.png",
   "images/28.png",
@@ -89,280 +96,781 @@ const OPEN_PHONE_FRAMES = [
   "images/42.png"
 ];
 
-const CLOSE_PHONE_FRAMES = [
+const closeFrames = [
   "images/46.png",
   "images/48.png",
   "images/50.png"
 ];
 
-const PHONE_FRAME_SPEED = 90;
+/* ---------------------------------
+   CONTENT
+--------------------------------- */
+
+const sectionContent = {
+  about: {
+    title: "ABOUT",
+
+    pages: [
+      `
+        <p class="panel-kicker">
+          PAGE 01 · ORIGIN STORY
+        </p>
+
+        <h2>
+          Art was the beginning.
+          People became the purpose.
+        </h2>
+
+        <p>
+          I began as an artist drawn to
+          photography, printmaking, video
+          and visual storytelling.
+        </p>
+
+        <p>
+          Over time, I realized that the
+          strongest creative work does more
+          than look polished. It helps people
+          feel seen, understood and curious.
+        </p>
+
+        <p>
+          That realization led me from studio
+          art into design, marketing and
+          interactive digital experiences,
+          without leaving my artistic instincts
+          behind.
+        </p>
+      `,
+
+      `
+        <p class="panel-kicker">
+          PAGE 02 · CREATIVE EVOLUTION
+        </p>
+
+        <h2>
+          I learned to move between worlds.
+        </h2>
+
+        <p>
+          As a staff photographer, I learned
+          to notice the moment before it
+          disappeared.
+        </p>
+
+        <p>
+          As a graphic designer, I learned
+          to turn ideas into clear visual
+          systems.
+        </p>
+
+        <p>
+          As a marketing intern, I learned
+          how culture, audience behavior and
+          timing shape the way a story travels.
+        </p>
+
+        <p>
+          Each role strengthened a different
+          creative muscle: observation,
+          collaboration, adaptability and
+          follow-through.
+        </p>
+      `,
+
+      `
+        <p class="panel-kicker">
+          PAGE 03 · WHY W+K
+        </p>
+
+        <h2>
+          I want to make work that earns
+          attention.
+        </h2>
+
+        <p>
+          Wieden+Kennedy’s program interests
+          me because it treats creativity as
+          more than decoration.
+        </p>
+
+        <p>
+          The work can be strange, human,
+          culturally aware and strategically
+          sharp—all at once.
+        </p>
+
+        <p>
+          I would bring a multidisciplinary
+          perspective, a willingness to
+          experiment and the habit of asking:
+          <strong>
+            What will make someone stop,
+            feel and remember?
+          </strong>
+        </p>
+      `,
+
+      `
+        <p class="panel-kicker">
+          PAGE 04 · NEXT CHAPTER
+        </p>
+
+        <h2>
+          Still learning. Already building.
+        </h2>
+
+        <p>
+          My next step is to grow inside a
+          creative environment where art
+          direction, storytelling, strategy,
+          design and culture collide.
+        </p>
+
+        <p class="panel-quote">
+          I do not want to make work that
+          simply fills space. I want to make
+          work that changes the temperature
+          of it.
+        </p>
+      `
+    ]
+  },
+
+  site: {
+    title: "SITE",
+
+    pages: [
+      `
+        <p class="panel-kicker">
+          PAGE 01 · PORTFOLIO
+        </p>
+
+        <h2>
+          Enter the rest of my creative world.
+        </h2>
+
+        <p>
+          My portfolio includes photography,
+          visual design, interactive projects
+          and work shaped by identity, music,
+          fashion and digital culture.
+        </p>
+
+        <p>
+          <a
+            href="https://leslieahuatzi.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Open leslieahuatzi.com ↗
+          </a>
+        </p>
+      `
+    ]
+  },
+
+  history: {
+    title: "HISTORY",
+
+    pages: [
+      `
+        <p class="panel-kicker">
+          THE ENTIRE HISTORY OF THE UNIVERSE
+        </p>
+
+        <p class="panel-quote">
+          Nothing became everything.
+          Everything became stars, planets,
+          dinosaurs, people, Wi-Fi and this
+          application. Now we make things
+          before the deadline.
+        </p>
+      `
+    ]
+  },
+
+  resume: {
+    title: "RESUME",
+
+    pages: [
+      `
+        <p class="panel-kicker">
+          PAGE 01 · PROFILE
+        </p>
+
+        <h2>
+          Leslie Ahuatzi
+        </h2>
+
+        <p class="resume-meta">
+          Digital Artist · Photographer ·
+          Designer · Marketer
+        </p>
+
+        <p>
+          Multidisciplinary creative with
+          experience translating ideas into
+          photography, graphics, video,
+          digital content and audience-focused
+          marketing.
+        </p>
+
+        <p>
+          <strong>Email:</strong>
+          <a href="mailto:leslieahuatzi5@gmail.com">
+            leslieahuatzi5@gmail.com
+          </a>
+        </p>
+
+        <p>
+          <strong>Portfolio:</strong>
+          <a
+            href="https://leslieahuatzi.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            leslieahuatzi.com
+          </a>
+        </p>
+      `,
+
+      `
+        <p class="panel-kicker">
+          PAGE 02 · EDUCATION
+        </p>
+
+        <h2>
+          Scripps College
+        </h2>
+
+        <p class="resume-meta">
+          Bachelor of Arts, Digital Art
+        </p>
+
+        <ul>
+          <li>Cumulative GPA: 3.8</li>
+          <li>Dean’s List</li>
+          <li>Scripps College Grant</li>
+
+          <li>
+            Advanced coursework in digital art,
+            photography and video
+          </li>
+        </ul>
+      `,
+
+      `
+        <p class="panel-kicker">
+          PAGE 03 · PHOTOGRAPHY
+        </p>
+
+        <h2>
+          The Student Life
+        </h2>
+
+        <p class="resume-meta">
+          Staff Photographer ·
+          January 2024 – May 2025
+        </p>
+
+        <ul>
+          <li>
+            Produced more than 20 edited
+            photographs weekly
+          </li>
+
+          <li>
+            Covered sports, clubs and campus
+            events under deadline
+          </li>
+
+          <li>
+            Managed equipment and workflows
+            independently
+          </li>
+        </ul>
+      `,
+
+      `
+        <p class="panel-kicker">
+          PAGE 04 · GRAPHIC DESIGN
+        </p>
+
+        <h2>
+          Alicia’s Studio
+        </h2>
+
+        <p class="resume-meta">
+          Graphic Designer ·
+          December 2024 – March 2025
+        </p>
+
+        <ul>
+          <li>
+            Created graphics, posters and
+            digital artist materials
+          </li>
+
+          <li>
+            Incorporated editorial feedback
+            and delivered polished assets
+          </li>
+        </ul>
+      `,
+
+      `
+        <p class="panel-kicker">
+          PAGE 05 · MARKETING
+        </p>
+
+        <h2>
+          HowRU?
+        </h2>
+
+        <p class="resume-meta">
+          Marketing Intern ·
+          September 2024 – January 2025
+        </p>
+
+        <ul>
+          <li>
+            Supported outreach and content
+            scheduling
+          </li>
+
+          <li>
+            Researched trends and fan behavior
+          </li>
+
+          <li>
+            Pitched social and event ideas
+          </li>
+        </ul>
+      `,
+
+      `
+        <p class="panel-kicker">
+          PAGE 06 · MEDIA SERVICES
+        </p>
+
+        <h2>
+          Scripps College
+        </h2>
+
+        <p class="resume-meta">
+          Media Services Intern ·
+          August 2023 – December 2023
+        </p>
+
+        <ul>
+          <li>
+            Supported students and faculty
+            with technical issues
+          </li>
+
+          <li>
+            Troubleshot AV equipment,
+            projectors and computers
+          </li>
+        </ul>
+      `,
+
+      `
+        <p class="panel-kicker">
+          PAGE 07 · FREELANCE
+        </p>
+
+        <h2>
+          Freelance Photographer
+        </h2>
+
+        <p class="resume-meta">
+          August 2021 – Present
+        </p>
+
+        <ul>
+          <li>
+            Photographed concerts and artists
+          </li>
+
+          <li>
+            Contributed published work to
+            Local Wolves Magazine
+          </li>
+
+          <li>
+            Built a fashion, portrait and
+            concert portfolio
+          </li>
+        </ul>
+      `,
+
+      `
+        <p class="panel-kicker">
+          PAGE 08 · TOOLKIT
+        </p>
+
+        <h2>
+          Skills and interests
+        </h2>
+
+        <h3>
+          Creative tools
+        </h3>
+
+        <p>
+          Photoshop, Lightroom, Illustrator,
+          Premiere Pro, Microsoft Office
+          and Google Suite
+        </p>
+
+        <h3>
+          Languages
+        </h3>
+
+        <p>
+          Fluent in English and Spanish
+        </p>
+      `
+    ]
+  }
+};
+
+/* ---------------------------------
+   PHONE KEYS
+--------------------------------- */
+
+const phoneKeys = [
+  {
+    name: "upper-left",
+    label: "Upper left key",
+    x: 49,
+    y: 341,
+    width: 36,
+    height: 21
+  },
+
+  {
+    name: "upper-right",
+    label: "Upper right key",
+    x: 139,
+    y: 341,
+    width: 36,
+    height: 21
+  },
+
+  {
+    name: "dpad-up",
+    label: "Up",
+    x: 105,
+    y: 345,
+    width: 12,
+    height: 6,
+    className: "dpad-key"
+  },
+
+  {
+    name: "dpad-left",
+    label: "Left",
+    x: 85,
+    y: 361,
+    width: 6,
+    height: 12,
+    className: "dpad-key"
+  },
+
+  {
+    name: "dpad-right",
+    label: "Right",
+    x: 131,
+    y: 361,
+    width: 6,
+    height: 12,
+    className: "dpad-key"
+  },
+
+  {
+    name: "dpad-down",
+    label: "Down",
+    x: 105,
+    y: 390,
+    width: 12,
+    height: 6,
+    className: "dpad-key"
+  },
+
+  {
+    name: "dpad-center",
+    label: "Open menu or select highlighted item",
+    x: 98,
+    y: 357,
+    width: 28,
+    height: 28
+  },
+
+  {
+    name: "lower-left",
+    label: "Lower left key",
+    x: 49,
+    y: 381,
+    width: 36,
+    height: 21
+  },
+
+  {
+    name: "lower-right",
+    label: "Back",
+    x: 139,
+    y: 381,
+    width: 36,
+    height: 21
+  },
+
+  {
+    name: "call",
+    label: "Call",
+    x: 48,
+    y: 408,
+    width: 39,
+    height: 23
+  },
+
+  {
+    name: "menu",
+    label: "Select highlighted menu item",
+    x: 94,
+    y: 408,
+    width: 38,
+    height: 23
+  },
+
+  {
+    name: "end",
+    label: "Back",
+    x: 139,
+    y: 408,
+    width: 38,
+    height: 23
+  },
+
+  {
+    name: "1",
+    label: "About shortcut",
+    x: 48,
+    y: 439,
+    width: 39,
+    height: 21
+  },
+
+  {
+    name: "2",
+    label: "Site shortcut",
+    x: 94,
+    y: 439,
+    width: 39,
+    height: 21
+  },
+
+  {
+    name: "3",
+    label: "History shortcut",
+    x: 139,
+    y: 439,
+    width: 39,
+    height: 21
+  },
+
+  {
+    name: "4",
+    label: "Resume shortcut",
+    x: 48,
+    y: 467,
+    width: 39,
+    height: 21
+  }
+];
 
 /* ---------------------------------
    STATE
 --------------------------------- */
 
-let isPhoneAnimating = false;
-let isPhoneOpen = false;
-let isPhoneClosed = false;
-
+let isAnimating = false;
+let hasOpenedOnce = false;
+let isOpen = false;
 let isMenuVisible = false;
+
+let spriteIndex = 0;
+let spriteInterval = null;
+let clockInterval = null;
+
 let selectedMenuIndex = 0;
-
-let currentPanelIndex = 0;
-
-/* ---------------------------------
-   PANEL CONTENT
---------------------------------- */
-
-const panelPages = [
-  {
-    id: "about",
-    title: "About",
-    content: `
-      <p class="panel-kicker">
-        DIGITAL ARTIST · DESIGNER · PHOTOGRAPHER
-      </p>
-
-      <h2>
-        Hi, I'm Leslie.
-      </h2>
-
-      <p class="panel-quote">
-        I create digital experiences that combine
-        clarity, creativity and care.
-      </p>
-
-      <p>
-        My work includes photography, graphic design,
-        video, interactive web projects and digital
-        marketing.
-      </p>
-
-      <p>
-        I am especially interested in nostalgic
-        technology, identity, visual storytelling and
-        experiences that feel human.
-      </p>
-    `
-  },
-
-  {
-    id: "site",
-    title: "Site",
-    content: `
-      <p class="panel-kicker">
-        PORTFOLIO
-      </p>
-
-      <h2>
-        Visit my website
-      </h2>
-
-      <p>
-        Explore my photography, design work, videos
-        and interactive digital projects.
-      </p>
-
-      <p>
-        <a
-          href="https://leslieahuatzi.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Open leslieahuatzi.com
-        </a>
-      </p>
-    `
-  },
-
-  {
-    id: "history",
-    title: "History",
-    content: `
-      <p class="panel-kicker">
-        CREATIVE TIMELINE
-      </p>
-
-      <h2>
-        From art to interaction
-      </h2>
-
-      <ul>
-        <li>
-          Studied Digital Art at Scripps College.
-        </li>
-
-        <li>
-          Developed experience in photography,
-          printmaking, video and graphic design.
-        </li>
-
-        <li>
-          Created interactive projects using HTML,
-          CSS, JavaScript, PIXI.js and Three.js.
-        </li>
-
-        <li>
-          Expanded into digital marketing, content
-          strategy and social media design.
-        </li>
-      </ul>
-    `
-  },
-
-  {
-    id: "resume",
-    title: "Résumé",
-    content: `
-      <p class="panel-kicker">
-        EXPERIENCE
-      </p>
-
-      <h2>
-        Creative and digital work
-      </h2>
-
-      <p class="resume-meta">
-        Photography · Design · Video · Marketing
-      </p>
-
-      <h3>
-        Digital Marketing
-      </h3>
-
-      <p>
-        Created social content, visual assets,
-        outreach materials and campaign ideas for
-        growing brands and organizations.
-      </p>
-
-      <h3>
-        Photography and Video
-      </h3>
-
-      <p>
-        Photographed portraits, concerts, events and
-        editorial projects while supporting production
-        and post-production workflows.
-      </p>
-
-      <h3>
-        Interactive Design
-      </h3>
-
-      <p>
-        Built browser-based experiences using HTML,
-        CSS and JavaScript with an emphasis on
-        nostalgic interfaces and playful interaction.
-      </p>
-    `
-  }
-];
+let activeSectionName = null;
+let activePageIndex = 0;
 
 /* ---------------------------------
-   IMAGE PRELOADING
+   PRELOAD
 --------------------------------- */
 
 function preloadImages(paths) {
-  paths.forEach((path) => {
+  paths.forEach((src) => {
     const image = new Image();
-    image.src = path;
+    image.src = src;
   });
 }
 
 preloadImages([
-  ...OPEN_PHONE_FRAMES,
-  ...CLOSE_PHONE_FRAMES
+  ...spriteFrames,
+  ...openFrames,
+  ...closeFrames,
+  "images/bunny.png"
 ]);
+
+/* ---------------------------------
+   STARTING SPRITE
+--------------------------------- */
+
+function startSpriteLoop() {
+  stopSpriteLoop();
+
+  sprite.src = spriteFrames[0];
+
+  spriteInterval =
+    window.setInterval(() => {
+      spriteIndex =
+        (spriteIndex + 1) %
+        spriteFrames.length;
+
+      sprite.src =
+        spriteFrames[spriteIndex];
+    }, 160);
+}
+
+function stopSpriteLoop() {
+  if (spriteInterval === null) {
+    return;
+  }
+
+  window.clearInterval(
+    spriteInterval
+  );
+
+  spriteInterval = null;
+}
 
 /* ---------------------------------
    CLOCK
 --------------------------------- */
 
-function formatDate(date) {
-  const year = date.getFullYear();
+function padNumber(value) {
+  return String(value).padStart(2, "0");
+}
 
-  const month = String(
-    date.getMonth() + 1
-  ).padStart(2, "0");
+function formatOpenPhoneDate(date) {
+  const weekdays = [
+    "Sun",
+    "Mon",
+    "Tue",
+    "Wed",
+    "Thu",
+    "Fri",
+    "Sat"
+  ];
 
-  const day = String(
-    date.getDate()
-  ).padStart(2, "0");
-
-  const weekday = date.toLocaleDateString(
-    "en-US",
-    {
-      weekday: "short"
-    }
+  return (
+    `${date.getFullYear()}/` +
+    `${padNumber(date.getMonth() + 1)}/` +
+    `${padNumber(date.getDate())}` +
+    `(${weekdays[date.getDay()]})`
   );
-
-  return `${year}/${month}/${day}(${weekday})`;
 }
 
-function formatTime(date) {
-  const hours = String(
-    date.getHours()
-  ).padStart(2, "0");
-
-  const minutes = String(
-    date.getMinutes()
-  ).padStart(2, "0");
-
-  const seconds = String(
-    date.getSeconds()
-  ).padStart(2, "0");
-
-  return `${hours}:${minutes}:${seconds}`;
+function formatOpenPhoneTime(date) {
+  return (
+    `${padNumber(date.getHours())}:` +
+    `${padNumber(date.getMinutes())}:` +
+    `${padNumber(date.getSeconds())}`
+  );
 }
 
-function updateClock() {
+function formatFrontPhoneDate(date) {
+  return (
+    `${date.getFullYear()}/` +
+    `${padNumber(date.getMonth() + 1)}/` +
+    `${padNumber(date.getDate())}`
+  );
+}
+
+function formatFrontPhoneTime(date) {
+  return (
+    `${padNumber(date.getHours())}:` +
+    `${padNumber(date.getMinutes())}`
+  );
+}
+
+function updatePhoneClock() {
   const now = new Date();
 
-  const dateText = formatDate(now);
-  const timeText = formatTime(now);
+  frontScreenDate.textContent =
+    formatFrontPhoneDate(now);
 
-  openScreenDate.textContent = dateText;
-  openScreenTime.textContent = timeText;
+  frontScreenTime.textContent =
+    formatFrontPhoneTime(now);
 
-  frontScreenDate.textContent = dateText;
-  frontScreenTime.textContent = timeText;
+  openScreenDate.textContent =
+    formatOpenPhoneDate(now);
+
+  openScreenTime.textContent =
+    formatOpenPhoneTime(now);
 }
 
-updateClock();
+function startPhoneClock() {
+  updatePhoneClock();
 
-window.setInterval(updateClock, 1000);
+  if (clockInterval !== null) {
+    window.clearInterval(
+      clockInterval
+    );
+  }
 
-/* ---------------------------------
-   GENERAL FRAME ANIMATION
---------------------------------- */
-
-function playFrameSequence(
-  frames,
-  speed = PHONE_FRAME_SPEED
-) {
-  return new Promise((resolve) => {
-    let frameIndex = 0;
-
-    phoneFrame.src = frames[frameIndex];
-
-    const timer = window.setInterval(() => {
-      frameIndex += 1;
-
-      if (frameIndex >= frames.length) {
-        window.clearInterval(timer);
-        resolve();
-        return;
-      }
-
-      phoneFrame.src = frames[frameIndex];
-    }, speed);
-  });
+  clockInterval =
+    window.setInterval(
+      updatePhoneClock,
+      1000
+    );
 }
 
 /* ---------------------------------
-   MENU VISIBILITY
+   VISIBILITY
 --------------------------------- */
+
+function setFrontScreenVisible(visible) {
+  frontScreen.style.display =
+    visible
+      ? "block"
+      : "none";
+
+  frontScreen.setAttribute(
+    "aria-hidden",
+    visible
+      ? "false"
+      : "true"
+  );
+}
+
+function setOpenClockVisible(visible) {
+  openScreenClock.style.display =
+    visible
+      ? "block"
+      : "none";
+
+  openScreenClock.setAttribute(
+    "aria-hidden",
+    visible
+      ? "false"
+      : "true"
+  );
+}
 
 function setPhoneMenuVisible(visible) {
   isMenuVisible = visible;
@@ -372,31 +880,69 @@ function setPhoneMenuVisible(visible) {
     visible
   );
 
-  if (visible) {
-    selectedMenuIndex = 0;
-    updateMenuSelection();
-  }
+  phoneMenu.setAttribute(
+    "aria-hidden",
+    visible
+      ? "false"
+      : "true"
+  );
+}
+
+function setKeysEnabled(enabled) {
+  const buttons =
+    keyOverlay.querySelectorAll(
+      ".phone-key"
+    );
+
+  buttons.forEach((button) => {
+    button.disabled = !enabled;
+
+    button.classList.remove(
+      "is-pressed"
+    );
+  });
+
+  keyOverlay.style.visibility =
+    enabled
+      ? "visible"
+      : "hidden";
+
+  keyOverlay.style.pointerEvents =
+    enabled
+      ? "auto"
+      : "none";
+
+  keyOverlay.setAttribute(
+    "aria-hidden",
+    enabled
+      ? "false"
+      : "true"
+  );
 }
 
 /* ---------------------------------
-   MENU SELECTION
+   MENU
 --------------------------------- */
 
 function updateMenuSelection() {
-  menuItems.forEach((item, index) => {
-    const isSelected =
-      index === selectedMenuIndex;
+  menuItems.forEach(
+    (item, index) => {
+      const selected =
+        index === selectedMenuIndex;
 
-    item.classList.toggle(
-      "is-selected",
-      isSelected
-    );
+      item.classList.toggle(
+        "is-selected",
+        selected
+      );
 
-    item.setAttribute(
-      "aria-current",
-      isSelected ? "true" : "false"
-    );
-  });
+      item.setAttribute(
+        "aria-selected",
+        selected
+          ? "true"
+          : "false"
+      );
+    }
+  );
 }
 
 function moveMenuSelection(direction) {
@@ -404,41 +950,51 @@ function moveMenuSelection(direction) {
     return;
   }
 
-  const columns = 2;
-  const rows = 2;
+  const row =
+    Math.floor(
+      selectedMenuIndex / 2
+    );
 
-  const currentRow =
-    Math.floor(selectedMenuIndex / columns);
+  const column =
+    selectedMenuIndex % 2;
 
-  const currentColumn =
-    selectedMenuIndex % columns;
-
-  let nextRow = currentRow;
-  let nextColumn = currentColumn;
+  let nextRow = row;
+  let nextColumn = column;
 
   if (direction === "up") {
     nextRow =
-      (currentRow - 1 + rows) % rows;
+      Math.max(
+        0,
+        row - 1
+      );
   }
 
   if (direction === "down") {
     nextRow =
-      (currentRow + 1) % rows;
+      Math.min(
+        1,
+        row + 1
+      );
   }
 
   if (direction === "left") {
     nextColumn =
-      (currentColumn - 1 + columns) %
-      columns;
+      Math.max(
+        0,
+        column - 1
+      );
   }
 
   if (direction === "right") {
     nextColumn =
-      (currentColumn + 1) % columns;
+      Math.min(
+        1,
+        column + 1
+      );
   }
 
   selectedMenuIndex =
-    nextRow * columns + nextColumn;
+    nextRow * 2 + nextColumn;
 
   updateMenuSelection();
 }
@@ -455,171 +1011,36 @@ function selectCurrentMenuItem() {
     return;
   }
 
-  openPanelById(
-    selectedItem.dataset.page
+  openContentPanel(
+    selectedItem.dataset.section
   );
-}
-
-/* ---------------------------------
-   PHONE OPENING
---------------------------------- */
-
-async function openPhone() {
-  if (
-    isPhoneAnimating ||
-    isPhoneOpen
-  ) {
-    return;
-  }
-
-  isPhoneAnimating = true;
-  isPhoneClosed = false;
-
-  spriteButton.hidden = true;
-
-  phoneContainer.style.display = "block";
-
-  frontScreen.style.display = "none";
-  openScreenClock.style.display = "none";
-  keyOverlay.style.visibility = "hidden";
-
-  setPhoneMenuVisible(false);
-
-  await playFrameSequence(
-    OPEN_PHONE_FRAMES
-  );
-
-  phoneFrame.src =
-    OPEN_PHONE_FRAMES[
-      OPEN_PHONE_FRAMES.length - 1
-    ];
-
-  isPhoneOpen = true;
-  isPhoneAnimating = false;
-
-  openScreenClock.style.display = "block";
-  keyOverlay.style.visibility = "visible";
-}
-
-/* ---------------------------------
-   PHONE CLOSING
---------------------------------- */
-
-async function closePhone() {
-  if (
-    isPhoneAnimating ||
-    !isPhoneOpen
-  ) {
-    return;
-  }
-
-  closePanel();
-  setPhoneMenuVisible(false);
-
-  isPhoneAnimating = true;
-
-  openScreenClock.style.display = "none";
-  keyOverlay.style.visibility = "hidden";
-
-  await playFrameSequence(
-    CLOSE_PHONE_FRAMES
-  );
-
-  phoneFrame.src =
-    CLOSE_PHONE_FRAMES[
-      CLOSE_PHONE_FRAMES.length - 1
-    ];
-
-  isPhoneOpen = false;
-  isPhoneClosed = true;
-  isPhoneAnimating = false;
-
-  frontScreen.style.display = "block";
-}
-
-/* ---------------------------------
-   REOPEN PHONE
---------------------------------- */
-
-async function reopenPhone() {
-  if (
-    isPhoneAnimating ||
-    !isPhoneClosed
-  ) {
-    return;
-  }
-
-  isPhoneAnimating = true;
-
-  frontScreen.style.display = "none";
-
-  setPhoneMenuVisible(false);
-
-  const reverseCloseFrames = [
-    ...CLOSE_PHONE_FRAMES
-  ].reverse();
-
-  await playFrameSequence(
-    reverseCloseFrames
-  );
-
-  await playFrameSequence(
-    OPEN_PHONE_FRAMES
-  );
-
-  phoneFrame.src =
-    OPEN_PHONE_FRAMES[
-      OPEN_PHONE_FRAMES.length - 1
-    ];
-
-  isPhoneClosed = false;
-  isPhoneOpen = true;
-  isPhoneAnimating = false;
-
-  openScreenClock.style.display = "block";
-  keyOverlay.style.visibility = "visible";
 }
 
 /* ---------------------------------
    CONTENT PANEL
 --------------------------------- */
 
-function updatePanel() {
-  const page =
-    panelPages[currentPanelIndex];
+function openContentPanel(sectionName) {
+  const section =
+    sectionContent[sectionName];
 
-  contentPanelTitle.textContent =
-    page.title;
-
-  panelPage.innerHTML =
-    page.content;
-
-  panelPageNumber.textContent =
-    `${currentPanelIndex + 1} / ${panelPages.length}`;
-
-  panelPrevious.disabled =
-    currentPanelIndex === 0;
-
-  panelNext.disabled =
-    currentPanelIndex ===
-    panelPages.length - 1;
-}
-
-function openPanelById(pageId) {
-  const pageIndex =
-    panelPages.findIndex(
-      (page) => page.id === pageId
-    );
-
-  if (pageIndex === -1) {
+  if (!section) {
     return;
   }
 
-  currentPanelIndex = pageIndex;
-
-  updatePanel();
-
   setPhoneMenuVisible(false);
+
+  activeSectionName =
+    sectionName;
+
+  activePageIndex =
+    0;
+
+  renderPanelPage();
+
+  document.body.classList.add(
+    "panel-open"
+  );
 
   contentPanel.classList.add(
     "is-open"
@@ -629,13 +1050,13 @@ function openPanelById(pageId) {
     "aria-hidden",
     "false"
   );
-
-  document.body.classList.add(
-    "panel-open"
-  );
 }
 
-function closePanel() {
+function closeContentPanel() {
+  document.body.classList.remove(
+    "panel-open"
+  );
+
   contentPanel.classList.remove(
     "is-open"
   );
@@ -645,45 +1066,298 @@ function closePanel() {
     "true"
   );
 
-  document.body.classList.remove(
-    "panel-open"
-  );
+  activeSectionName =
+    null;
+
+  activePageIndex =
+    0;
 }
 
-function showPreviousPanelPage() {
-  if (currentPanelIndex <= 0) {
+function renderPanelPage() {
+  const section =
+    sectionContent[activeSectionName];
+
+  if (!section) {
     return;
   }
 
-  currentPanelIndex -= 1;
-  updatePanel();
+  const totalPages =
+    section.pages.length;
+
+  panelTitle.textContent =
+    section.title;
+
+  panelPage.innerHTML =
+    section.pages[activePageIndex];
+
+  panelPageNumber.textContent =
+    `${padNumber(activePageIndex + 1)} / ` +
+    `${padNumber(totalPages)}`;
+
+  panelPrevious.disabled =
+    activePageIndex === 0;
+
+  panelNext.disabled =
+    activePageIndex ===
+    totalPages - 1;
+
+  panelPage.scrollTop =
+    0;
+
+  panelPage.style.animation =
+    "none";
+
+  requestAnimationFrame(() => {
+    panelPage.style.animation = "";
+  });
 }
 
-function showNextPanelPage() {
+function showPreviousPanelPage() {
   if (
-    currentPanelIndex >=
-    panelPages.length - 1
+    !activeSectionName ||
+    activePageIndex <= 0
   ) {
     return;
   }
 
-  currentPanelIndex += 1;
-  updatePanel();
+  activePageIndex -= 1;
+
+  renderPanelPage();
+}
+
+function showNextPanelPage() {
+  if (!activeSectionName) {
+    return;
+  }
+
+  const section =
+    sectionContent[activeSectionName];
+
+  if (
+    !section ||
+    activePageIndex >=
+    section.pages.length - 1
+  ) {
+    return;
+  }
+
+  activePageIndex += 1;
+
+  renderPanelPage();
 }
 
 /* ---------------------------------
-   PHONE KEY HANDLING
+   PHONE FRAME ANIMATION
 --------------------------------- */
 
-function flashPhoneKey(button) {
-  button.classList.add("is-pressed");
+function playAnimation(
+  frames,
+  finalFrame,
+  callback
+) {
+  if (
+    isAnimating ||
+    frames.length === 0
+  ) {
+    return;
+  }
 
-  window.setTimeout(() => {
-    button.classList.remove(
-      "is-pressed"
-    );
-  }, 120);
+  isAnimating =
+    true;
+
+  flipTrigger.disabled =
+    true;
+
+  setKeysEnabled(false);
+
+  let index = 0;
+
+  const interval =
+    window.setInterval(() => {
+      if (index < frames.length) {
+        frame.src =
+          frames[index];
+
+        index += 1;
+
+        return;
+      }
+
+      window.clearInterval(
+        interval
+      );
+
+      frame.src =
+        finalFrame;
+
+      isAnimating =
+        false;
+
+      flipTrigger.disabled =
+        false;
+
+      if (
+        typeof callback ===
+        "function"
+      ) {
+        callback();
+      }
+    }, 90);
 }
+
+/* ---------------------------------
+   FLIP AREA
+--------------------------------- */
+
+function setFlipTriggerArea() {
+  if (isOpen) {
+    flipTrigger.style.left =
+      "62px";
+
+    flipTrigger.style.top =
+      "0px";
+
+    flipTrigger.style.width =
+      "112px";
+
+    flipTrigger.style.height =
+      "62px";
+
+    flipTrigger.setAttribute(
+      "aria-label",
+      "Close phone"
+    );
+  } else {
+    flipTrigger.style.left =
+      "18px";
+
+    flipTrigger.style.top =
+      "80px";
+
+    flipTrigger.style.width =
+      "200px";
+
+    flipTrigger.style.height =
+      "496px";
+
+    flipTrigger.setAttribute(
+      "aria-label",
+      "Open phone"
+    );
+  }
+}
+
+/* ---------------------------------
+   CREATE PHONE KEYS
+--------------------------------- */
+
+function renderKeys() {
+  keyOverlay.innerHTML = "";
+
+  phoneKeys.forEach((key) => {
+    const button =
+      document.createElement(
+        "button"
+      );
+
+    button.type =
+      "button";
+
+    button.className =
+      "phone-key";
+
+    if (key.className) {
+      button.classList.add(
+        key.className
+      );
+    }
+
+    button.dataset.key =
+      key.name;
+
+    button.setAttribute(
+      "aria-label",
+      key.label
+    );
+
+    button.style.left =
+      `${key.x}px`;
+
+    button.style.top =
+      `${key.y}px`;
+
+    button.style.width =
+      `${key.width}px`;
+
+    button.style.height =
+      `${key.height}px`;
+
+    button.addEventListener(
+      "pointerdown",
+      () => {
+        if (
+          !isOpen ||
+          isAnimating
+        ) {
+          return;
+        }
+
+        button.classList.add(
+          "is-pressed"
+        );
+      }
+    );
+
+    const releaseKey = () => {
+      button.classList.remove(
+        "is-pressed"
+      );
+    };
+
+    button.addEventListener(
+      "pointerup",
+      releaseKey
+    );
+
+    button.addEventListener(
+      "pointercancel",
+      releaseKey
+    );
+
+    button.addEventListener(
+      "pointerleave",
+      releaseKey
+    );
+
+    button.addEventListener(
+      "click",
+      (event) => {
+        event.stopPropagation();
+
+        if (
+          !isOpen ||
+          isAnimating
+        ) {
+          return;
+        }
+
+        handlePhoneKey(
+          key.name
+        );
+      }
+    );
+
+    keyOverlay.appendChild(
+      button
+    );
+  });
+
+  setKeysEnabled(false);
+}
+
+/* ---------------------------------
+   PHONE KEY ACTIONS
+--------------------------------- */
 
 function handlePhoneKey(keyName) {
   const panelIsOpen =
@@ -691,208 +1365,509 @@ function handlePhoneKey(keyName) {
       "is-open"
     );
 
+  /*
+    When the content panel is open,
+    left and right change pages.
+  */
+
   if (panelIsOpen) {
-    if (keyName === "dpad-left") {
-      showPreviousPanelPage();
-      return;
+    switch (keyName) {
+      case "dpad-left":
+        showPreviousPanelPage();
+        return;
+
+      case "dpad-right":
+        showNextPanelPage();
+        return;
+
+      case "end":
+      case "lower-right":
+        closeContentPanel();
+        return;
+
+      default:
+        return;
     }
-
-    if (keyName === "dpad-right") {
-      showNextPanelPage();
-      return;
-    }
-
-    if (
-      keyName === "end" ||
-      keyName === "lower-right"
-    ) {
-      closePanel();
-    }
-
-    return;
   }
 
-  if (keyName === "dpad-center") {
-    if (!isMenuVisible) {
-      setPhoneMenuVisible(true);
-      return;
-    }
+  switch (keyName) {
+    /*
+      First center-circle press:
+      opens the menu.
 
-    selectCurrentMenuItem();
-    return;
-  }
+      When the menu is already visible:
+      selects the highlighted item.
+    */
 
-  if (
-    keyName === "menu" &&
-    !isMenuVisible
-  ) {
-    setPhoneMenuVisible(true);
-    return;
-  }
+    case "dpad-center":
+      if (!isMenuVisible) {
+        setPhoneMenuVisible(true);
+        updateMenuSelection();
+      } else {
+        selectCurrentMenuItem();
+      }
 
-  if (keyName === "dpad-up") {
-    moveMenuSelection("up");
-    return;
-  }
+      break;
 
-  if (keyName === "dpad-down") {
-    moveMenuSelection("down");
-    return;
-  }
+    case "dpad-up":
+      if (isMenuVisible) {
+        moveMenuSelection("up");
+      }
 
-  if (keyName === "dpad-left") {
-    moveMenuSelection("left");
-    return;
-  }
+      break;
 
-  if (keyName === "dpad-right") {
-    moveMenuSelection("right");
-    return;
-  }
+    case "dpad-down":
+      if (isMenuVisible) {
+        moveMenuSelection("down");
+      }
 
-  if (
-    keyName === "end" ||
-    keyName === "lower-right"
-  ) {
-    setPhoneMenuVisible(false);
+      break;
+
+    case "dpad-left":
+      if (isMenuVisible) {
+        moveMenuSelection("left");
+      }
+
+      break;
+
+    case "dpad-right":
+      if (isMenuVisible) {
+        moveMenuSelection("right");
+      }
+
+      break;
+
+    case "menu":
+      if (isMenuVisible) {
+        selectCurrentMenuItem();
+      }
+
+      break;
+
+    case "end":
+    case "lower-right":
+      setPhoneMenuVisible(false);
+      break;
+
+    case "1":
+      if (isMenuVisible) {
+        openContentPanel("about");
+      }
+
+      break;
+
+    case "2":
+      if (isMenuVisible) {
+        openContentPanel("site");
+      }
+
+      break;
+
+    case "3":
+      if (isMenuVisible) {
+        openContentPanel("history");
+      }
+
+      break;
+
+    case "4":
+      if (isMenuVisible) {
+        openContentPanel("resume");
+      }
+
+      break;
+
+    default:
+      console.log(
+        `Phone key pressed: ${keyName}`
+      );
   }
 }
 
 /* ---------------------------------
-   EVENT LISTENERS
+   FIRST OPENING
 --------------------------------- */
 
-spriteButton.addEventListener(
-  "click",
-  openPhone
-);
-
-flipTrigger.addEventListener(
-  "click",
-  () => {
-    if (isPhoneOpen) {
-      closePhone();
-      return;
-    }
-
-    if (isPhoneClosed) {
-      reopenPhone();
-    }
+function openPhoneForFirstTime() {
+  if (
+    isAnimating ||
+    hasOpenedOnce
+  ) {
+    return;
   }
-);
 
-phoneKeys.forEach((button) => {
-  button.addEventListener(
-    "click",
+  stopSpriteLoop();
+
+  spriteButton.hidden =
+    true;
+
+  spriteButton.style.display =
+    "none";
+
+  sprite.style.display =
+    "none";
+
+  setKeysEnabled(false);
+
+  setFrontScreenVisible(false);
+
+  setOpenClockVisible(false);
+
+  setPhoneMenuVisible(false);
+
+  container.style.display =
+    "block";
+
+  const sound1 =
+    new Audio(
+      "sounds/27_fixed.mp3"
+    );
+
+  const sound2 =
+    new Audio(
+      "sounds/28_fixed.mp3"
+    );
+
+  sound1
+    .play()
+    .catch(() => {});
+
+  sound2
+    .play()
+    .catch(() => {});
+
+  playAnimation(
+    openFrames,
+    "images/42.png",
     () => {
+      hasOpenedOnce =
+        true;
+
+      isOpen =
+        true;
+
+      setFlipTriggerArea();
+
+      setKeysEnabled(true);
+
+      setFrontScreenVisible(false);
+
+      setOpenClockVisible(true);
+
+      /*
+        Main menu remains hidden
+        until the center circle
+        is pressed.
+      */
+
+      setPhoneMenuVisible(false);
+
+      updateMenuSelection();
+    }
+  );
+}
+
+/* ---------------------------------
+   CLOSE PHONE
+--------------------------------- */
+
+function closePhone() {
+  if (
+    isAnimating ||
+    !hasOpenedOnce ||
+    !isOpen
+  ) {
+    return;
+  }
+
+  closeContentPanel();
+
+  setKeysEnabled(false);
+
+  setFrontScreenVisible(false);
+
+  setOpenClockVisible(false);
+
+  setPhoneMenuVisible(false);
+
+  isOpen =
+    false;
+
+  playAnimation(
+    closeFrames,
+    "images/50.png",
+    () => {
+      setFlipTriggerArea();
+
+      setFrontScreenVisible(true);
+
+      setOpenClockVisible(false);
+
+      setPhoneMenuVisible(false);
+    }
+  );
+}
+
+/* ---------------------------------
+   REOPEN PHONE
+--------------------------------- */
+
+function reopenPhone() {
+  if (
+    isAnimating ||
+    !hasOpenedOnce ||
+    isOpen
+  ) {
+    return;
+  }
+
+  setFrontScreenVisible(false);
+
+  setOpenClockVisible(false);
+
+  setPhoneMenuVisible(false);
+
+  setKeysEnabled(false);
+
+  const reopenFrames =
+    [...closeFrames].reverse();
+
+  playAnimation(
+    reopenFrames,
+    "images/42.png",
+    () => {
+      isOpen =
+        true;
+
+      setFlipTriggerArea();
+
+      setKeysEnabled(true);
+
+      setFrontScreenVisible(false);
+
+      setOpenClockVisible(true);
+
+      /*
+        Menu remains hidden after
+        reopening.
+      */
+
+      setPhoneMenuVisible(false);
+
+      updateMenuSelection();
+    }
+  );
+}
+
+/* ---------------------------------
+   MENU AND PANEL EVENTS
+--------------------------------- */
+
+function initializeMenuEvents() {
+  menuItems.forEach(
+    (item, index) => {
+      item.addEventListener(
+        "click",
+        (event) => {
+          event.stopPropagation();
+
+          if (!isMenuVisible) {
+            return;
+          }
+
+          selectedMenuIndex =
+            index;
+
+          updateMenuSelection();
+
+          openContentPanel(
+            item.dataset.section
+          );
+        }
+      );
+    }
+  );
+
+  panelClose.addEventListener(
+    "click",
+    closeContentPanel
+  );
+
+  panelPrevious.addEventListener(
+    "click",
+    showPreviousPanelPage
+  );
+
+  panelNext.addEventListener(
+    "click",
+    showNextPanelPage
+  );
+
+  document.addEventListener(
+    "keydown",
+    (event) => {
       if (
-        !isPhoneOpen ||
-        isPhoneAnimating
+        !isOpen ||
+        isAnimating
       ) {
         return;
       }
 
-      flashPhoneKey(button);
+      const panelIsOpen =
+        contentPanel.classList.contains(
+          "is-open"
+        );
 
-      handlePhoneKey(
-        button.dataset.key
-      );
-    }
-  );
-});
-
-menuItems.forEach((item, index) => {
-  item.addEventListener(
-    "mouseenter",
-    () => {
-      selectedMenuIndex = index;
-      updateMenuSelection();
-    }
-  );
-
-  item.addEventListener(
-    "click",
-    () => {
-      selectedMenuIndex = index;
-
-      updateMenuSelection();
-      selectCurrentMenuItem();
-    }
-  );
-});
-
-panelPrevious.addEventListener(
-  "click",
-  showPreviousPanelPage
-);
-
-panelNext.addEventListener(
-  "click",
-  showNextPanelPage
-);
-
-panelClose.addEventListener(
-  "click",
-  closePanel
-);
-
-/* Keyboard controls */
-
-document.addEventListener(
-  "keydown",
-  (event) => {
-    if (!isPhoneOpen) {
-      return;
-    }
-
-    const panelIsOpen =
-      contentPanel.classList.contains(
-        "is-open"
-      );
-
-    if (event.key === "Escape") {
       if (panelIsOpen) {
-        closePanel();
-      } else {
-        setPhoneMenuVisible(false);
+        if (
+          event.key ===
+          "ArrowLeft"
+        ) {
+          event.preventDefault();
+
+          showPreviousPanelPage();
+        }
+
+        if (
+          event.key ===
+          "ArrowRight"
+        ) {
+          event.preventDefault();
+
+          showNextPanelPage();
+        }
+
+        if (
+          event.key ===
+          "Escape"
+        ) {
+          closeContentPanel();
+        }
+
+        return;
       }
 
-      return;
-    }
+      /*
+        Enter/space behaves like
+        the center circle.
+      */
 
-    if (event.key === "ArrowUp") {
-      event.preventDefault();
-      handlePhoneKey("dpad-up");
-    }
+      if (
+        event.key === "Enter" ||
+        event.key === " "
+      ) {
+        event.preventDefault();
 
-    if (event.key === "ArrowDown") {
-      event.preventDefault();
-      handlePhoneKey("dpad-down");
-    }
+        if (!isMenuVisible) {
+          setPhoneMenuVisible(true);
 
-    if (event.key === "ArrowLeft") {
-      event.preventDefault();
-      handlePhoneKey("dpad-left");
-    }
+          updateMenuSelection();
+        } else {
+          selectCurrentMenuItem();
+        }
 
-    if (event.key === "ArrowRight") {
-      event.preventDefault();
-      handlePhoneKey("dpad-right");
-    }
+        return;
+      }
 
-    if (
-      event.key === "Enter" ||
-      event.key === " "
-    ) {
-      event.preventDefault();
-      handlePhoneKey("dpad-center");
+      if (
+        event.key ===
+        "Escape"
+      ) {
+        setPhoneMenuVisible(false);
+        return;
+      }
+
+      if (!isMenuVisible) {
+        return;
+      }
+
+      if (
+        event.key ===
+        "ArrowUp"
+      ) {
+        event.preventDefault();
+
+        moveMenuSelection("up");
+      }
+
+      if (
+        event.key ===
+        "ArrowDown"
+      ) {
+        event.preventDefault();
+
+        moveMenuSelection("down");
+      }
+
+      if (
+        event.key ===
+        "ArrowLeft"
+      ) {
+        event.preventDefault();
+
+        moveMenuSelection("left");
+      }
+
+      if (
+        event.key ===
+        "ArrowRight"
+      ) {
+        event.preventDefault();
+
+        moveMenuSelection("right");
+      }
     }
-  }
-);
+  );
+}
 
 /* ---------------------------------
-   INITIAL SETUP
+   INITIALIZE
 --------------------------------- */
 
-updateMenuSelection();
-updatePanel();
+function initializePhone() {
+  renderKeys();
+
+  initializeMenuEvents();
+
+  setKeysEnabled(false);
+
+  setFrontScreenVisible(false);
+
+  setOpenClockVisible(false);
+
+  setPhoneMenuVisible(false);
+
+  startSpriteLoop();
+
+  startPhoneClock();
+
+  spriteButton.addEventListener(
+    "click",
+    openPhoneForFirstTime
+  );
+
+  flipTrigger.addEventListener(
+    "click",
+    (event) => {
+      event.stopPropagation();
+
+      if (
+        isAnimating ||
+        !hasOpenedOnce
+      ) {
+        return;
+      }
+
+      if (isOpen) {
+        closePhone();
+      } else {
+        reopenPhone();
+      }
+    }
+  );
+}
+
+window.addEventListener(
+  "DOMContentLoaded",
+  initializePhone
+);
