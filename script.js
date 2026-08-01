@@ -40,8 +40,39 @@ const openScreenDate =
 const openScreenTime =
   document.getElementById("open-screen-time");
 
+const phoneMenu =
+  document.getElementById("phone-menu");
+
+const menuItems =
+  Array.from(
+    document.querySelectorAll(
+      ".phone-menu-item"
+    )
+  );
+
+const contentPanel =
+  document.getElementById("content-panel");
+
+const panelTitle =
+  document.getElementById("panel-title");
+
+const panelPage =
+  document.getElementById("panel-page");
+
+const panelPageNumber =
+  document.getElementById("panel-page-number");
+
+const panelPrevious =
+  document.getElementById("panel-previous");
+
+const panelNext =
+  document.getElementById("panel-next");
+
+const panelClose =
+  document.getElementById("panel-close");
+
 /* ---------------------------------
-   SMALL STARTING PHONE FRAMES
+   STARTING SPRITE FRAMES
 --------------------------------- */
 
 const spriteFrames = [];
@@ -80,14 +111,550 @@ const closeFrames = [
 ];
 
 /* ---------------------------------
-   PHONE KEY COORDINATES
+   MENU CONTENT
+--------------------------------- */
 
-   Based on the 236 × 656 open phone.
+const sectionContent = {
+  about: {
+    title: "ABOUT",
+
+    pages: [
+      `
+        <p class="panel-kicker">
+          PAGE 01 · ORIGIN STORY
+        </p>
+
+        <h2>
+          Art was the beginning.
+          People became the purpose.
+        </h2>
+
+        <p>
+          I began as an artist drawn to
+          photography, printmaking, video
+          and visual storytelling.
+        </p>
+
+        <p>
+          Over time, I realized that the
+          strongest creative work does more
+          than look polished. It helps people
+          feel seen, understood and curious.
+        </p>
+
+        <p>
+          That realization led me from studio
+          art into design, marketing and
+          interactive digital experiences,
+          without leaving my artistic instincts
+          behind.
+        </p>
+      `,
+
+      `
+        <p class="panel-kicker">
+          PAGE 02 · CREATIVE EVOLUTION
+        </p>
+
+        <h2>
+          I learned to move between worlds.
+        </h2>
+
+        <p>
+          As a staff photographer, I learned
+          to notice the moment before it
+          disappeared.
+        </p>
+
+        <p>
+          As a graphic designer, I learned
+          to turn ideas into clear visual
+          systems.
+        </p>
+
+        <p>
+          As a marketing intern, I learned
+          how culture, audience behavior and
+          timing shape the way a story travels.
+        </p>
+
+        <p>
+          Each role strengthened a different
+          creative muscle: observation,
+          collaboration, adaptability and
+          follow-through.
+        </p>
+      `,
+
+      `
+        <p class="panel-kicker">
+          PAGE 03 · WHY THIS PROGRAM
+        </p>
+
+        <h2>
+          I want to make work that earns
+          attention.
+        </h2>
+
+        <p>
+          Wieden+Kennedy’s program interests
+          me because it treats creativity as
+          more than decoration.
+        </p>
+
+        <p>
+          The work can be strange, human,
+          culturally aware and strategically
+          sharp—all at once.
+        </p>
+
+        <p>
+          I would bring a multidisciplinary
+          perspective, a willingness to
+          experiment and the habit of asking:
+          <strong>
+            What will make someone stop,
+            feel and remember?
+          </strong>
+        </p>
+      `,
+
+      `
+        <p class="panel-kicker">
+          PAGE 04 · NEXT CHAPTER
+        </p>
+
+        <h2>
+          Still learning. Already building.
+        </h2>
+
+        <p>
+          My next step is to grow inside a
+          creative environment where different
+          disciplines collide: art direction,
+          storytelling, strategy, design
+          and culture.
+        </p>
+
+        <p class="panel-quote">
+          I do not want to make work that
+          simply fills space. I want to make
+          work that changes the temperature
+          of it.
+        </p>
+      `
+    ]
+  },
+
+  site: {
+    title: "SITE",
+
+    pages: [
+      `
+        <p class="panel-kicker">
+          PAGE 01 · PORTFOLIO ACCESS
+        </p>
+
+        <h2>
+          Enter the rest of my creative world.
+        </h2>
+
+        <p>
+          My portfolio includes photography,
+          visual design, interactive projects
+          and work shaped by identity, music,
+          fashion and digital culture.
+        </p>
+
+        <p>
+          <a
+            href="https://leslieahuatzi.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Open leslieahuatzi.com ↗
+          </a>
+        </p>
+
+        <p>
+          Best viewed with curiosity and at
+          least one browser tab you are willing
+          to sacrifice.
+        </p>
+      `,
+
+      `
+        <p class="panel-kicker">
+          PAGE 02 · WHAT YOU WILL FIND
+        </p>
+
+        <h2>
+          A portfolio built across mediums.
+        </h2>
+
+        <ul>
+          <li>
+            Editorial, portrait and concert
+            photography
+          </li>
+
+          <li>
+            Graphic and campaign design
+          </li>
+
+          <li>
+            Video and digital storytelling
+          </li>
+
+          <li>
+            Interactive web experiments
+          </li>
+
+          <li>
+            Work exploring culture, identity
+            and nostalgia
+          </li>
+        </ul>
+      `
+    ]
+  },
+
+  history: {
+    title: "HISTORY",
+
+    pages: [
+      `
+        <p class="panel-kicker">
+          EXPLAIN THE ENTIRE HISTORY OF THE
+          UNIVERSE AS BRIEFLY AS POSSIBLE
+        </p>
+
+        <p class="panel-quote">
+          Nothing exploded into everything.
+          Everything cooled, collided and
+          became stars, planets, dinosaurs,
+          people, Wi-Fi and this application.
+          We are temporary stardust making
+          things—and trying to meet the
+          deadline.
+        </p>
+      `
+    ]
+  },
+
+  resume: {
+    title: "RESUME",
+
+    pages: [
+      `
+        <p class="panel-kicker">
+          PAGE 01 · PROFILE
+        </p>
+
+        <h2>
+          Leslie Ahuatzi
+        </h2>
+
+        <p class="resume-meta">
+          Digital Artist · Photographer ·
+          Designer · Marketer
+        </p>
+
+        <p>
+          Multidisciplinary creative with
+          experience translating ideas into
+          photography, graphics, video,
+          digital content and audience-focused
+          marketing.
+        </p>
+
+        <p>
+          <strong>Email:</strong>
+          <a href="mailto:leslieahuatzi5@gmail.com">
+            leslieahuatzi5@gmail.com
+          </a>
+        </p>
+
+        <p>
+          <strong>Portfolio:</strong>
+          <a
+            href="https://leslieahuatzi.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            leslieahuatzi.com
+          </a>
+        </p>
+      `,
+
+      `
+        <p class="panel-kicker">
+          PAGE 02 · EDUCATION
+        </p>
+
+        <h2>
+          Scripps College
+        </h2>
+
+        <p class="resume-meta">
+          Bachelor of Arts, Digital Art ·
+          Claremont, California
+        </p>
+
+        <ul>
+          <li>
+            Cumulative GPA: 3.8
+          </li>
+
+          <li>
+            Dean’s List and Scripps College
+            Grant
+          </li>
+
+          <li>
+            Coursework in advanced digital
+            art, photography, video art,
+            black-and-white photography,
+            and art and ecology
+          </li>
+        </ul>
+      `,
+
+      `
+        <p class="panel-kicker">
+          PAGE 03 · THE STUDENT LIFE
+        </p>
+
+        <h2>
+          Staff Photographer
+        </h2>
+
+        <p class="resume-meta">
+          January 2024 – May 2025
+        </p>
+
+        <ul>
+          <li>
+            Produced more than 20 edited
+            photographs each week across
+            sports, clubs and campus events
+          </li>
+
+          <li>
+            Adapted quickly to changing
+            assignments and deadlines
+          </li>
+
+          <li>
+            Managed photography equipment
+            and workflows independently
+          </li>
+
+          <li>
+            Solved on-site technical problems
+            and delivered edited work using
+            Adobe Lightroom Classic
+          </li>
+        </ul>
+      `,
+
+      `
+        <p class="panel-kicker">
+          PAGE 04 · GRAPHIC DESIGN
+        </p>
+
+        <h2>
+          Alicia’s Studio
+        </h2>
+
+        <p class="resume-meta">
+          Graphic Designer ·
+          December 2024 – March 2025
+        </p>
+
+        <ul>
+          <li>
+            Created digital graphics, posters
+            and artist materials under tight
+            deadlines
+          </li>
+
+          <li>
+            Produced work for artists including
+            Psychic Fever, Beno, Andre Martin
+            and Enrico
+          </li>
+
+          <li>
+            Coordinated with editors,
+            incorporated feedback and
+            delivered polished assets
+          </li>
+        </ul>
+      `,
+
+      `
+        <p class="panel-kicker">
+          PAGE 05 · MARKETING
+        </p>
+
+        <h2>
+          HowRU?
+        </h2>
+
+        <p class="resume-meta">
+          Marketing Intern ·
+          September 2024 – January 2025
+        </p>
+
+        <ul>
+          <li>
+            Supported outreach, content
+            schedules, visual assets and
+            social-channel updates
+          </li>
+
+          <li>
+            Researched trends and fan behavior
+            for weekly marketing meetings
+          </li>
+
+          <li>
+            Pitched social and event ideas
+            for artists including Bayli,
+            Tiana Major9, Frex and Esther Yu
+          </li>
+
+          <li>
+            Wrote weekly project recaps while
+            maintaining organized and
+            confidential documentation
+          </li>
+        </ul>
+      `,
+
+      `
+        <p class="panel-kicker">
+          PAGE 06 · MEDIA SERVICES
+        </p>
+
+        <h2>
+          Scripps College
+        </h2>
+
+        <p class="resume-meta">
+          Media Services Intern ·
+          August 2023 – December 2023
+        </p>
+
+        <ul>
+          <li>
+            Provided first-line technical
+            assistance to students and faculty
+          </li>
+
+          <li>
+            Supported camera and AV-equipment
+            checkouts
+          </li>
+
+          <li>
+            Set up and troubleshot projectors,
+            computers and audio-visual hardware
+          </li>
+
+          <li>
+            Maintained equipment records and
+            supported time-sensitive classroom
+            needs
+          </li>
+        </ul>
+      `,
+
+      `
+        <p class="panel-kicker">
+          PAGE 07 · FREELANCE
+        </p>
+
+        <h2>
+          Freelance Photographer
+        </h2>
+
+        <p class="resume-meta">
+          August 2021 – Present
+        </p>
+
+        <ul>
+          <li>
+            Photographed concerts for
+            KLandMexico and Blender Magazine
+          </li>
+
+          <li>
+            Contributed published photography
+            to Local Wolves Magazine
+          </li>
+
+          <li>
+            Built a portfolio across fashion,
+            portrait and concert work
+          </li>
+
+          <li>
+            Photographed artists including
+            Seo In Guk, Psychic Fever,
+            Milena and Enjambre
+          </li>
+        </ul>
+      `,
+
+      `
+        <p class="panel-kicker">
+          PAGE 08 · TOOLKIT
+        </p>
+
+        <h2>
+          Skills and interests
+        </h2>
+
+        <h3>
+          Creative tools
+        </h3>
+
+        <p>
+          Adobe Photoshop, Lightroom,
+          Illustrator, Premiere Pro,
+          Capture One, Microsoft Office
+          and Google Suite
+        </p>
+
+        <h3>
+          Languages
+        </h3>
+
+        <p>
+          Fluent in English and Spanish
+        </p>
+
+        <h3>
+          Interests
+        </h3>
+
+        <p>
+          Photography, soccer, design,
+          printmaking, films and digital
+          marketing
+        </p>
+      `
+    ]
+  }
+};
+
+/* ---------------------------------
+   PHONE KEY COORDINATES
 --------------------------------- */
 
 const phoneKeys = [
-  /* Upper side buttons */
-
   {
     name: "upper-left",
     label: "Upper left key",
@@ -105,8 +672,6 @@ const phoneKeys = [
     width: 36,
     height: 21
   },
-
-  /* Small directional arrows */
 
   {
     name: "dpad-up",
@@ -148,8 +713,6 @@ const phoneKeys = [
     className: "dpad-key"
   },
 
-  /* Center select button */
-
   {
     name: "dpad-center",
     label: "Select",
@@ -158,8 +721,6 @@ const phoneKeys = [
     width: 28,
     height: 28
   },
-
-  /* Lower side buttons */
 
   {
     name: "lower-left",
@@ -178,8 +739,6 @@ const phoneKeys = [
     width: 36,
     height: 21
   },
-
-  /* Call, menu and hang-up */
 
   {
     name: "call",
@@ -201,14 +760,12 @@ const phoneKeys = [
 
   {
     name: "end",
-    label: "Hang up",
+    label: "Back",
     x: 139,
     y: 408,
     width: 38,
     height: 23
   },
-
-  /* Number row 1 */
 
   {
     name: "1",
@@ -237,8 +794,6 @@ const phoneKeys = [
     height: 21
   },
 
-  /* Number row 2 */
-
   {
     name: "4",
     label: "Number 4",
@@ -266,8 +821,6 @@ const phoneKeys = [
     height: 21
   },
 
-  /* Number row 3 */
-
   {
     name: "7",
     label: "Number 7",
@@ -294,8 +847,6 @@ const phoneKeys = [
     width: 39,
     height: 21
   },
-
-  /* Bottom number row */
 
   {
     name: "star",
@@ -337,6 +888,10 @@ let spriteIndex = 0;
 let spriteInterval = null;
 let clockInterval = null;
 
+let selectedMenuIndex = 0;
+let activeSectionName = null;
+let activePageIndex = 0;
+
 /* ---------------------------------
    PRELOAD IMAGES
 --------------------------------- */
@@ -356,7 +911,7 @@ preloadImages([
 ]);
 
 /* ---------------------------------
-   SMALL PHONE SPRITE LOOP
+   STARTING PHONE SPRITE LOOP
 --------------------------------- */
 
 function startSpriteLoop() {
@@ -380,23 +935,18 @@ function stopSpriteLoop() {
     return;
   }
 
-  window.clearInterval(
-    spriteInterval
-  );
+  window.clearInterval(spriteInterval);
 
   spriteInterval = null;
 }
 
 /* ---------------------------------
-   PHONE CLOCK
+   CLOCK
 --------------------------------- */
 
 function padNumber(value) {
   return String(value).padStart(2, "0");
 }
-
-/* Open phone:
-   year/month/day, weekday and seconds */
 
 function formatOpenPhoneDate(date) {
   const weekdays = [
@@ -423,11 +973,12 @@ function formatOpenPhoneDate(date) {
     );
 
   const weekday =
-    weekdays[
-      date.getDay()
-    ];
+    weekdays[date.getDay()];
 
-  return `${year}/${month}/${day}(${weekday})`;
+  return (
+    `${year}/${month}/${day}` +
+    `(${weekday})`
+  );
 }
 
 function formatOpenPhoneTime(date) {
@@ -446,11 +997,12 @@ function formatOpenPhoneTime(date) {
       date.getSeconds()
     );
 
-  return `${hours}:${minutes}:${seconds}`;
+  return (
+    `${hours}:` +
+    `${minutes}:` +
+    `${seconds}`
+  );
 }
-
-/* Closed phone:
-   no weekday and no seconds */
 
 function formatFrontPhoneDate(date) {
   const year =
@@ -516,7 +1068,7 @@ function startPhoneClock() {
 }
 
 /* ---------------------------------
-   SCREEN VISIBILITY
+   VISIBILITY HELPERS
 --------------------------------- */
 
 function setFrontScreenVisible(visible) {
@@ -527,7 +1079,9 @@ function setFrontScreenVisible(visible) {
 
   frontScreen.setAttribute(
     "aria-hidden",
-    visible ? "false" : "true"
+    visible
+      ? "false"
+      : "true"
   );
 }
 
@@ -539,13 +1093,25 @@ function setOpenClockVisible(visible) {
 
   openScreenClock.setAttribute(
     "aria-hidden",
-    visible ? "false" : "true"
+    visible
+      ? "false"
+      : "true"
   );
 }
 
-/* ---------------------------------
-   KEYPAD VISIBILITY
---------------------------------- */
+function setPhoneMenuVisible(visible) {
+  phoneMenu.style.display =
+    visible
+      ? "block"
+      : "none";
+
+  phoneMenu.setAttribute(
+    "aria-hidden",
+    visible
+      ? "false"
+      : "true"
+  );
+}
 
 function setKeysEnabled(enabled) {
   const buttons =
@@ -573,12 +1139,235 @@ function setKeysEnabled(enabled) {
 
   keyOverlay.setAttribute(
     "aria-hidden",
-    enabled ? "false" : "true"
+    enabled
+      ? "false"
+      : "true"
   );
 }
 
 /* ---------------------------------
-   GENERAL FRAME ANIMATION
+   MENU SELECTION
+--------------------------------- */
+
+function updateMenuSelection() {
+  menuItems.forEach(
+    (item, index) => {
+      const isSelected =
+        index === selectedMenuIndex;
+
+      item.classList.toggle(
+        "is-selected",
+        isSelected
+      );
+
+      item.setAttribute(
+        "aria-selected",
+        isSelected
+          ? "true"
+          : "false"
+      );
+    }
+  );
+}
+
+function moveMenuSelection(direction) {
+  const row =
+    Math.floor(
+      selectedMenuIndex / 2
+    );
+
+  const column =
+    selectedMenuIndex % 2;
+
+  let nextRow = row;
+  let nextColumn = column;
+
+  if (direction === "up") {
+    nextRow =
+      Math.max(
+        0,
+        row - 1
+      );
+  }
+
+  if (direction === "down") {
+    nextRow =
+      Math.min(
+        1,
+        row + 1
+      );
+  }
+
+  if (direction === "left") {
+    nextColumn =
+      Math.max(
+        0,
+        column - 1
+      );
+  }
+
+  if (direction === "right") {
+    nextColumn =
+      Math.min(
+        1,
+        column + 1
+      );
+  }
+
+  selectedMenuIndex =
+    nextRow * 2 + nextColumn;
+
+  updateMenuSelection();
+}
+
+function selectCurrentMenuItem() {
+  const selectedItem =
+    menuItems[selectedMenuIndex];
+
+  if (!selectedItem) {
+    return;
+  }
+
+  const sectionName =
+    selectedItem.dataset.section;
+
+  openContentPanel(sectionName);
+}
+
+/* ---------------------------------
+   CONTENT PANEL
+--------------------------------- */
+
+function openContentPanel(sectionName) {
+  const section =
+    sectionContent[sectionName];
+
+  if (!section) {
+    return;
+  }
+
+  activeSectionName =
+    sectionName;
+
+  activePageIndex =
+    0;
+
+  renderPanelPage();
+
+  document.body.classList.add(
+    "panel-open"
+  );
+
+  contentPanel.classList.add(
+    "is-open"
+  );
+
+  contentPanel.setAttribute(
+    "aria-hidden",
+    "false"
+  );
+}
+
+function closeContentPanel() {
+  document.body.classList.remove(
+    "panel-open"
+  );
+
+  contentPanel.classList.remove(
+    "is-open"
+  );
+
+  contentPanel.setAttribute(
+    "aria-hidden",
+    "true"
+  );
+
+  activeSectionName =
+    null;
+
+  activePageIndex =
+    0;
+}
+
+function renderPanelPage() {
+  const section =
+    sectionContent[activeSectionName];
+
+  if (!section) {
+    return;
+  }
+
+  const totalPages =
+    section.pages.length;
+
+  panelTitle.textContent =
+    section.title;
+
+  panelPage.innerHTML =
+    section.pages[activePageIndex];
+
+  panelPageNumber.textContent =
+    `${padNumber(activePageIndex + 1)} / ` +
+    `${padNumber(totalPages)}`;
+
+  panelPrevious.disabled =
+    activePageIndex === 0;
+
+  panelNext.disabled =
+    activePageIndex ===
+    totalPages - 1;
+
+  panelPage.scrollTop =
+    0;
+
+  panelPage.style.animation =
+    "none";
+
+  requestAnimationFrame(() => {
+    panelPage.style.animation = "";
+  });
+}
+
+function showPreviousPanelPage() {
+  if (!activeSectionName) {
+    return;
+  }
+
+  if (activePageIndex <= 0) {
+    return;
+  }
+
+  activePageIndex -= 1;
+
+  renderPanelPage();
+}
+
+function showNextPanelPage() {
+  if (!activeSectionName) {
+    return;
+  }
+
+  const section =
+    sectionContent[activeSectionName];
+
+  if (!section) {
+    return;
+  }
+
+  if (
+    activePageIndex >=
+    section.pages.length - 1
+  ) {
+    return;
+  }
+
+  activePageIndex += 1;
+
+  renderPanelPage();
+}
+
+/* ---------------------------------
+   PHONE FRAME ANIMATION
 --------------------------------- */
 
 function playAnimation(
@@ -595,7 +1384,8 @@ function playAnimation(
 
   isAnimating = true;
 
-  flipTrigger.disabled = true;
+  flipTrigger.disabled =
+    true;
 
   setKeysEnabled(false);
 
@@ -603,10 +1393,7 @@ function playAnimation(
 
   const interval =
     window.setInterval(() => {
-      if (
-        index <
-        frames.length
-      ) {
+      if (index < frames.length) {
         frame.src =
           frames[index];
 
@@ -622,7 +1409,8 @@ function playAnimation(
       frame.src =
         finalFrame;
 
-      isAnimating = false;
+      isAnimating =
+        false;
 
       flipTrigger.disabled =
         false;
@@ -637,14 +1425,14 @@ function playAnimation(
 }
 
 /* ---------------------------------
-   FLIP CLICK AREA
+   PHONE FLIP CLICK AREA
 --------------------------------- */
 
 function setFlipTriggerArea() {
   if (isOpen) {
     /*
       Open phone:
-      click the top cap to close it.
+      click the top cap to close.
     */
 
     flipTrigger.style.left =
@@ -666,8 +1454,8 @@ function setFlipTriggerArea() {
   } else {
     /*
       Closed phone:
-      click the complete front phone
-      to reopen it.
+      click the full phone front
+      to reopen.
     */
 
     flipTrigger.style.left =
@@ -690,7 +1478,7 @@ function setFlipTriggerArea() {
 }
 
 /* ---------------------------------
-   CREATE KEYPAD BUTTONS
+   CREATE PHONE KEY BUTTONS
 --------------------------------- */
 
 function renderKeys() {
@@ -798,92 +1586,101 @@ function renderKeys() {
 }
 
 /* ---------------------------------
-   KEY ACTIONS
+   PHONE KEY ACTIONS
 --------------------------------- */
 
 function handlePhoneKey(keyName) {
-  console.log(
-    `Phone key pressed: ${keyName}`
-  );
+  const panelIsOpen =
+    contentPanel.classList.contains(
+      "is-open"
+    );
+
+  /*
+    When the side panel is open,
+    left and right change pages.
+  */
+
+  if (panelIsOpen) {
+    switch (keyName) {
+      case "dpad-left":
+        showPreviousPanelPage();
+        return;
+
+      case "dpad-right":
+        showNextPanelPage();
+        return;
+
+      case "end":
+      case "lower-right":
+        closeContentPanel();
+        return;
+
+      default:
+        return;
+    }
+  }
+
+  /*
+    When the main menu is open,
+    directional buttons move
+    the selection.
+  */
 
   switch (keyName) {
-    case "end":
-      /*
-        Hang-up does not physically
-        close the flip phone.
-      */
-
-      console.log(
-        "Hang-up button pressed"
-      );
-
-      break;
-
-    case "call":
-      console.log(
-        "Call button pressed"
-      );
-
-      break;
-
-    case "menu":
-      console.log(
-        "Menu button pressed"
-      );
-
-      break;
-
     case "dpad-up":
-      console.log("Move up");
+      moveMenuSelection("up");
       break;
 
     case "dpad-down":
-      console.log("Move down");
+      moveMenuSelection("down");
       break;
 
     case "dpad-left":
-      console.log("Move left");
+      moveMenuSelection("left");
       break;
 
     case "dpad-right":
-      console.log("Move right");
+      moveMenuSelection("right");
       break;
 
     case "dpad-center":
-      console.log("Select");
+    case "menu":
+      selectCurrentMenuItem();
       break;
 
-    case "upper-left":
-    case "upper-right":
-    case "lower-left":
-    case "lower-right":
-    case "1":
-    case "2":
-    case "3":
-    case "4":
-    case "5":
-    case "6":
-    case "7":
-    case "8":
-    case "9":
-    case "star":
-    case "0":
-    case "hash":
-      console.log(
-        `${keyName} pressed`
-      );
+    /*
+      Number shortcuts:
+      1 About
+      2 Site
+      3 History
+      4 Resume
+    */
 
+    case "1":
+      openContentPanel("about");
+      break;
+
+    case "2":
+      openContentPanel("site");
+      break;
+
+    case "3":
+      openContentPanel("history");
+      break;
+
+    case "4":
+      openContentPanel("resume");
       break;
 
     default:
-      console.warn(
-        `No action assigned to ${keyName}`
+      console.log(
+        `Phone key pressed: ${keyName}`
       );
   }
 }
 
 /* ---------------------------------
-   FIRST OPENING
+   FIRST PHONE OPENING
 --------------------------------- */
 
 function openPhoneForFirstTime() {
@@ -896,10 +1693,6 @@ function openPhoneForFirstTime() {
 
   stopSpriteLoop();
 
-  /*
-    Hide the small phone immediately.
-  */
-
   spriteButton.hidden =
     true;
 
@@ -909,15 +1702,10 @@ function openPhoneForFirstTime() {
   sprite.style.display =
     "none";
 
-  /*
-    Hide all overlays while opening.
-  */
-
   setKeysEnabled(false);
-
   setFrontScreenVisible(false);
-
   setOpenClockVisible(false);
+  setPhoneMenuVisible(false);
 
   container.style.display =
     "block";
@@ -957,6 +1745,10 @@ function openPhoneForFirstTime() {
       setFrontScreenVisible(false);
 
       setOpenClockVisible(true);
+
+      setPhoneMenuVisible(true);
+
+      updateMenuSelection();
     }
   );
 }
@@ -974,11 +1766,15 @@ function closePhone() {
     return;
   }
 
+  closeContentPanel();
+
   setKeysEnabled(false);
 
   setFrontScreenVisible(false);
 
   setOpenClockVisible(false);
+
+  setPhoneMenuVisible(false);
 
   isOpen =
     false;
@@ -989,14 +1785,7 @@ function closePhone() {
     () => {
       setFlipTriggerArea();
 
-      /*
-        Show bunny, date and time after
-        the phone is fully closed.
-      */
-
       setFrontScreenVisible(true);
-
-      setOpenClockVisible(false);
     }
   );
 }
@@ -1018,6 +1807,8 @@ function reopenPhone() {
 
   setOpenClockVisible(false);
 
+  setPhoneMenuVisible(false);
+
   setKeysEnabled(false);
 
   const reopenFrames =
@@ -1034,9 +1825,153 @@ function reopenPhone() {
 
       setKeysEnabled(true);
 
-      setFrontScreenVisible(false);
-
       setOpenClockVisible(true);
+
+      setPhoneMenuVisible(true);
+
+      updateMenuSelection();
+    }
+  );
+}
+
+/* ---------------------------------
+   MENU AND PANEL EVENTS
+--------------------------------- */
+
+function initializeMenuEvents() {
+  menuItems.forEach(
+    (item, index) => {
+      item.addEventListener(
+        "click",
+        (event) => {
+          event.stopPropagation();
+
+          selectedMenuIndex =
+            index;
+
+          updateMenuSelection();
+
+          openContentPanel(
+            item.dataset.section
+          );
+        }
+      );
+    }
+  );
+
+  panelClose.addEventListener(
+    "click",
+    closeContentPanel
+  );
+
+  panelPrevious.addEventListener(
+    "click",
+    showPreviousPanelPage
+  );
+
+  panelNext.addEventListener(
+    "click",
+    showNextPanelPage
+  );
+
+  document.addEventListener(
+    "keydown",
+    (event) => {
+      if (
+        !isOpen ||
+        isAnimating
+      ) {
+        return;
+      }
+
+      const panelIsOpen =
+        contentPanel.classList.contains(
+          "is-open"
+        );
+
+      /*
+        Keyboard controls while
+        panel is open.
+      */
+
+      if (panelIsOpen) {
+        if (
+          event.key ===
+          "ArrowLeft"
+        ) {
+          event.preventDefault();
+
+          showPreviousPanelPage();
+        }
+
+        if (
+          event.key ===
+          "ArrowRight"
+        ) {
+          event.preventDefault();
+
+          showNextPanelPage();
+        }
+
+        if (
+          event.key ===
+          "Escape"
+        ) {
+          closeContentPanel();
+        }
+
+        return;
+      }
+
+      /*
+        Keyboard controls for
+        main phone menu.
+      */
+
+      if (
+        event.key ===
+        "ArrowUp"
+      ) {
+        event.preventDefault();
+
+        moveMenuSelection("up");
+      }
+
+      if (
+        event.key ===
+        "ArrowDown"
+      ) {
+        event.preventDefault();
+
+        moveMenuSelection("down");
+      }
+
+      if (
+        event.key ===
+        "ArrowLeft"
+      ) {
+        event.preventDefault();
+
+        moveMenuSelection("left");
+      }
+
+      if (
+        event.key ===
+        "ArrowRight"
+      ) {
+        event.preventDefault();
+
+        moveMenuSelection("right");
+      }
+
+      if (
+        event.key === "Enter" ||
+        event.key === " "
+      ) {
+        event.preventDefault();
+
+        selectCurrentMenuItem();
+      }
     }
   );
 }
@@ -1048,11 +1983,15 @@ function reopenPhone() {
 function initializePhone() {
   renderKeys();
 
+  initializeMenuEvents();
+
   setKeysEnabled(false);
 
   setFrontScreenVisible(false);
 
   setOpenClockVisible(false);
+
+  setPhoneMenuVisible(false);
 
   startSpriteLoop();
 
