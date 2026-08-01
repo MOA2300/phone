@@ -107,8 +107,7 @@ button {
 
   transform-origin: center center;
 
-  transition:
-    transform 420ms ease;
+  transition: transform 420ms ease;
 }
 
 body.panel-open .phone-container {
@@ -193,11 +192,7 @@ body.panel-open .phone-container {
 /* ---------------------------------
    MAIN PHONE MENU
 
-   The right edge has been reduced
-   by 10 pixels.
-
-   Previous width: 145px
-   Updated width: 135px
+   Updated width: 130px
 --------------------------------- */
 
 .phone-menu {
@@ -206,7 +201,7 @@ body.panel-open .phone-container {
   left: 47px;
   top: 124px;
 
-  width: 135px;
+  width: 130px;
   height: 122px;
 
   display: none;
