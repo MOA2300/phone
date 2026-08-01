@@ -95,13 +95,14 @@ img {
 
 /* ---------------------------------
    OPEN PHONE DATE AND TIME
+   moved down by 3px
 --------------------------------- */
 
 .open-screen-clock {
   position: absolute;
 
   left: 48px;
-  top: 84px;
+  top: 87px;
 
   width: 148px;
   height: 50px;
@@ -195,7 +196,6 @@ img {
 
 /* ---------------------------------
    FRONT SCREEN DATE AND TIME
-   moved down by 3px
 --------------------------------- */
 
 .front-screen-clock {
@@ -203,8 +203,6 @@ img {
 
   left: 4px;
   right: 4px;
-
-  /* previously 4px */
   bottom: 1px;
 
   z-index: 3;
@@ -224,7 +222,6 @@ img {
     Georgia,
     serif;
 
-  /* larger date */
   font-size: 12px;
   font-weight: 700;
   line-height: 1;
