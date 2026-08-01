@@ -66,9 +66,6 @@ img {
 
 /* ---------------------------------
    MAIN PHONE CONTAINER
-
-   Open phone image dimensions:
-   236px × 656px
 --------------------------------- */
 
 .phone-container {
@@ -98,19 +95,17 @@ img {
 
 /* ---------------------------------
    OPEN PHONE DATE AND TIME
-
-   Positioned higher inside the
-   upper red-box area.
+   moved higher toward the top line
 --------------------------------- */
 
 .open-screen-clock {
   position: absolute;
 
   left: 48px;
-  top: 96px;
+  top: 84px;
 
   width: 148px;
-  height: 52px;
+  height: 50px;
 
   display: none;
   z-index: 44;
@@ -137,7 +132,7 @@ img {
 }
 
 .open-screen-time {
-  margin-top: 2px;
+  margin-top: 1px;
 
   font-family:
     "Times New Roman",
@@ -177,9 +172,6 @@ img {
 
 /* ---------------------------------
    BUNNY IMAGE
-
-   The flash animation affects only
-   the bunny, not the clock text.
 --------------------------------- */
 
 #front-screen-image {
@@ -200,25 +192,20 @@ img {
   user-select: none;
   pointer-events: none;
 
-  animation:
-    bunnyFlash
-    1s
-    steps(2, end)
-    infinite;
+  animation: bunnyFlash 1s steps(2, end) infinite;
 }
 
 /* ---------------------------------
    FRONT SCREEN DATE AND TIME
-
-   Bigger and positioned at the bottom.
+   larger and positioned at bottom
 --------------------------------- */
 
 .front-screen-clock {
   position: absolute;
 
-  left: 5px;
-  right: 5px;
-  bottom: 5px;
+  left: 4px;
+  right: 4px;
+  bottom: 4px;
 
   z-index: 3;
 
@@ -237,7 +224,7 @@ img {
     Georgia,
     serif;
 
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 700;
   line-height: 1;
   white-space: nowrap;
@@ -251,7 +238,7 @@ img {
     Georgia,
     serif;
 
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 700;
   line-height: 1;
   white-space: nowrap;
@@ -273,9 +260,6 @@ img {
     filter: brightness(1.15);
   }
 }
-
-/* Reduce animation for users who prefer
-   less motion. */
 
 @media (prefers-reduced-motion: reduce) {
   #front-screen-image {
@@ -334,35 +318,19 @@ img {
 }
 
 .phone-key[data-key="dpad-up"] {
-  clip-path: polygon(
-    50% 0,
-    100% 100%,
-    0 100%
-  );
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
 }
 
 .phone-key[data-key="dpad-down"] {
-  clip-path: polygon(
-    0 0,
-    100% 0,
-    50% 100%
-  );
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
 }
 
 .phone-key[data-key="dpad-left"] {
-  clip-path: polygon(
-    0 50%,
-    100% 0,
-    100% 100%
-  );
+  clip-path: polygon(0 50%, 100% 0, 100% 100%);
 }
 
 .phone-key[data-key="dpad-right"] {
-  clip-path: polygon(
-    0 0,
-    100% 50%,
-    0 100%
-  );
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
 }
 
 .phone-key[data-key="dpad-center"] {
@@ -427,12 +395,6 @@ img {
 
 /* ---------------------------------
    DEBUG MODE
-
-   Change:
-   <body>
-
-   to:
-   <body class="debug">
 --------------------------------- */
 
 .debug .phone-key {
