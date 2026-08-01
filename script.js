@@ -266,46 +266,6 @@ const sectionContent = {
             Open leslieahuatzi.com ↗
           </a>
         </p>
-
-        <p>
-          Best viewed with curiosity and at
-          least one browser tab you are willing
-          to sacrifice.
-        </p>
-      `,
-
-      `
-        <p class="panel-kicker">
-          PAGE 02 · WHAT YOU WILL FIND
-        </p>
-
-        <h2>
-          A portfolio built across mediums.
-        </h2>
-
-        <ul>
-          <li>
-            Editorial, portrait and concert
-            photography
-          </li>
-
-          <li>
-            Graphic and campaign design
-          </li>
-
-          <li>
-            Video and digital storytelling
-          </li>
-
-          <li>
-            Interactive web experiments
-          </li>
-
-          <li>
-            Work exploring culture, identity
-            and nostalgia
-          </li>
-        </ul>
       `
     ]
   },
@@ -316,17 +276,15 @@ const sectionContent = {
     pages: [
       `
         <p class="panel-kicker">
-          EXPLAIN THE ENTIRE HISTORY OF THE
-          UNIVERSE AS BRIEFLY AS POSSIBLE
+          THE ENTIRE HISTORY OF THE UNIVERSE
         </p>
 
         <p class="panel-quote">
-          Nothing exploded into everything.
-          Everything cooled, collided and became
-          stars, planets, dinosaurs, people,
-          Wi-Fi and this application. We are
-          temporary stardust making things—and
-          trying to meet the deadline.
+          Nothing became everything.
+          Everything became stars, planets,
+          dinosaurs, people, Wi-Fi and this
+          application. Now we make things
+          before the deadline.
         </p>
       `
     ]
@@ -391,20 +349,12 @@ const sectionContent = {
         </p>
 
         <ul>
-          <li>
-            Cumulative GPA: 3.8
-          </li>
-
-          <li>
-            Dean’s List and Scripps College
-            Grant
-          </li>
-
+          <li>Cumulative GPA: 3.8</li>
+          <li>Dean’s List</li>
+          <li>Scripps College Grant</li>
           <li>
             Advanced coursework in digital art,
-            photography, video art,
-            black-and-white photography,
-            and art and ecology
+            photography and video
           </li>
         </ul>
       `,
@@ -435,13 +385,8 @@ const sectionContent = {
           </li>
 
           <li>
-            Managed equipment and photography
-            workflows independently
-          </li>
-
-          <li>
-            Edited and delivered work using
-            Adobe Lightroom Classic
+            Managed equipment and workflows
+            independently
           </li>
         </ul>
       `,
@@ -467,12 +412,6 @@ const sectionContent = {
           </li>
 
           <li>
-            Worked on projects involving
-            Psychic Fever, Beno, Andre Martin
-            and Enrico
-          </li>
-
-          <li>
             Incorporated editorial feedback
             and delivered polished assets
           </li>
@@ -495,8 +434,8 @@ const sectionContent = {
 
         <ul>
           <li>
-            Supported outreach, content
-            schedules and visual assets
+            Supported outreach and content
+            scheduling
           </li>
 
           <li>
@@ -505,12 +444,6 @@ const sectionContent = {
 
           <li>
             Pitched social and event ideas
-            for music artists
-          </li>
-
-          <li>
-            Wrote organized weekly project
-            recaps
           </li>
         </ul>
       `,
@@ -531,23 +464,13 @@ const sectionContent = {
 
         <ul>
           <li>
-            Assisted students and faculty
-            with urgent technical needs
+            Supported students and faculty
+            with technical issues
           </li>
 
           <li>
-            Supported camera and AV-equipment
-            checkouts
-          </li>
-
-          <li>
-            Troubleshot projectors, computers
-            and audio-visual hardware
-          </li>
-
-          <li>
-            Maintained accurate equipment
-            records
+            Troubleshot AV equipment,
+            projectors and computers
           </li>
         </ul>
       `,
@@ -567,8 +490,7 @@ const sectionContent = {
 
         <ul>
           <li>
-            Photographed concerts for
-            KLandMexico and Blender Magazine
+            Photographed concerts and artists
           </li>
 
           <li>
@@ -579,11 +501,6 @@ const sectionContent = {
           <li>
             Built a fashion, portrait and
             concert portfolio
-          </li>
-
-          <li>
-            Photographed Seo In Guk,
-            Psychic Fever, Milena and Enjambre
           </li>
         </ul>
       `,
@@ -597,32 +514,18 @@ const sectionContent = {
           Skills and interests
         </h2>
 
-        <h3>
-          Creative tools
-        </h3>
+        <h3>Creative tools</h3>
 
         <p>
-          Adobe Photoshop, Lightroom,
-          Illustrator, Premiere Pro,
-          Microsoft Office and Google Suite
+          Photoshop, Lightroom, Illustrator,
+          Premiere Pro, Microsoft Office
+          and Google Suite
         </p>
 
-        <h3>
-          Languages
-        </h3>
+        <h3>Languages</h3>
 
         <p>
           Fluent in English and Spanish
-        </p>
-
-        <h3>
-          Interests
-        </h3>
-
-        <p>
-          Photography, soccer, design,
-          printmaking, films and digital
-          marketing
         </p>
       `
     ]
@@ -630,7 +533,7 @@ const sectionContent = {
 };
 
 /* ---------------------------------
-   PHONE KEY COORDINATES
+   PHONE KEYS
 --------------------------------- */
 
 const phoneKeys = [
@@ -642,7 +545,6 @@ const phoneKeys = [
     width: 36,
     height: 21
   },
-
   {
     name: "upper-right",
     label: "Upper right key",
@@ -651,7 +553,6 @@ const phoneKeys = [
     width: 36,
     height: 21
   },
-
   {
     name: "dpad-up",
     label: "Up",
@@ -661,7 +562,6 @@ const phoneKeys = [
     height: 6,
     className: "dpad-key"
   },
-
   {
     name: "dpad-left",
     label: "Left",
@@ -671,7 +571,6 @@ const phoneKeys = [
     height: 12,
     className: "dpad-key"
   },
-
   {
     name: "dpad-right",
     label: "Right",
@@ -681,7 +580,6 @@ const phoneKeys = [
     height: 12,
     className: "dpad-key"
   },
-
   {
     name: "dpad-down",
     label: "Down",
@@ -691,16 +589,14 @@ const phoneKeys = [
     height: 6,
     className: "dpad-key"
   },
-
   {
     name: "dpad-center",
-    label: "Select",
+    label: "Open or close main menu",
     x: 98,
     y: 357,
     width: 28,
     height: 28
   },
-
   {
     name: "lower-left",
     label: "Lower left key",
@@ -709,16 +605,14 @@ const phoneKeys = [
     width: 36,
     height: 21
   },
-
   {
     name: "lower-right",
-    label: "Lower right key",
+    label: "Back",
     x: 139,
     y: 381,
     width: 36,
     height: 21
   },
-
   {
     name: "call",
     label: "Call",
@@ -727,16 +621,14 @@ const phoneKeys = [
     width: 39,
     height: 23
   },
-
   {
     name: "menu",
-    label: "Menu",
+    label: "Select highlighted menu item",
     x: 94,
     y: 408,
     width: 38,
     height: 23
   },
-
   {
     name: "end",
     label: "Back",
@@ -745,111 +637,35 @@ const phoneKeys = [
     width: 38,
     height: 23
   },
-
   {
     name: "1",
-    label: "Number 1",
+    label: "About shortcut",
     x: 48,
     y: 439,
     width: 39,
     height: 21
   },
-
   {
     name: "2",
-    label: "Number 2",
+    label: "Site shortcut",
     x: 94,
     y: 439,
     width: 39,
     height: 21
   },
-
   {
     name: "3",
-    label: "Number 3",
+    label: "History shortcut",
     x: 139,
     y: 439,
     width: 39,
     height: 21
   },
-
   {
     name: "4",
-    label: "Number 4",
+    label: "Resume shortcut",
     x: 48,
     y: 467,
-    width: 39,
-    height: 21
-  },
-
-  {
-    name: "5",
-    label: "Number 5",
-    x: 94,
-    y: 467,
-    width: 39,
-    height: 21
-  },
-
-  {
-    name: "6",
-    label: "Number 6",
-    x: 139,
-    y: 467,
-    width: 39,
-    height: 21
-  },
-
-  {
-    name: "7",
-    label: "Number 7",
-    x: 48,
-    y: 495,
-    width: 39,
-    height: 21
-  },
-
-  {
-    name: "8",
-    label: "Number 8",
-    x: 94,
-    y: 495,
-    width: 39,
-    height: 21
-  },
-
-  {
-    name: "9",
-    label: "Number 9",
-    x: 139,
-    y: 495,
-    width: 39,
-    height: 21
-  },
-
-  {
-    name: "star",
-    label: "Star",
-    x: 48,
-    y: 523,
-    width: 39,
-    height: 21
-  },
-
-  {
-    name: "0",
-    label: "Number 0",
-    x: 94,
-    y: 523,
-    width: 39,
-    height: 21
-  },
-
-  {
-    name: "hash",
-    label: "Hash",
-    x: 139,
-    y: 523,
     width: 39,
     height: 21
   }
@@ -862,6 +678,7 @@ const phoneKeys = [
 let isAnimating = false;
 let hasOpenedOnce = false;
 let isOpen = false;
+let isMenuVisible = false;
 
 let spriteIndex = 0;
 let spriteInterval = null;
@@ -872,7 +689,7 @@ let activeSectionName = null;
 let activePageIndex = 0;
 
 /* ---------------------------------
-   PRELOAD IMAGES
+   PRELOAD
 --------------------------------- */
 
 function preloadImages(paths) {
@@ -1023,13 +840,35 @@ function setOpenClockVisible(visible) {
 }
 
 function setPhoneMenuVisible(visible) {
-  phoneMenu.style.display =
-    visible ? "block" : "none";
+  isMenuVisible = visible;
+
+  phoneMenu.classList.toggle(
+    "is-visible",
+    visible
+  );
 
   phoneMenu.setAttribute(
     "aria-hidden",
     visible ? "false" : "true"
   );
+}
+
+function togglePhoneMenu() {
+  if (
+    !isOpen ||
+    isAnimating ||
+    contentPanel.classList.contains("is-open")
+  ) {
+    return;
+  }
+
+  setPhoneMenuVisible(
+    !isMenuVisible
+  );
+
+  if (isMenuVisible) {
+    updateMenuSelection();
+  }
 }
 
 function setKeysEnabled(enabled) {
@@ -1082,6 +921,10 @@ function updateMenuSelection() {
 }
 
 function moveMenuSelection(direction) {
+  if (!isMenuVisible) {
+    return;
+  }
+
   const row =
     Math.floor(selectedMenuIndex / 2);
 
@@ -1114,6 +957,10 @@ function moveMenuSelection(direction) {
 }
 
 function selectCurrentMenuItem() {
+  if (!isMenuVisible) {
+    return;
+  }
+
   const selectedItem =
     menuItems[selectedMenuIndex];
 
@@ -1137,6 +984,8 @@ function openContentPanel(sectionName) {
   if (!section) {
     return;
   }
+
+  setPhoneMenuVisible(false);
 
   activeSectionName = sectionName;
   activePageIndex = 0;
@@ -1291,7 +1140,7 @@ function playAnimation(
 }
 
 /* ---------------------------------
-   FLIP CLICK AREA
+   FLIP AREA
 --------------------------------- */
 
 function setFlipTriggerArea() {
@@ -1453,6 +1302,10 @@ function handlePhoneKey(keyName) {
   }
 
   switch (keyName) {
+    case "dpad-center":
+      togglePhoneMenu();
+      break;
+
     case "dpad-up":
       moveMenuSelection("up");
       break;
@@ -1469,25 +1322,37 @@ function handlePhoneKey(keyName) {
       moveMenuSelection("right");
       break;
 
-    case "dpad-center":
     case "menu":
       selectCurrentMenuItem();
       break;
 
+    case "end":
+    case "lower-right":
+      setPhoneMenuVisible(false);
+      break;
+
     case "1":
-      openContentPanel("about");
+      if (isMenuVisible) {
+        openContentPanel("about");
+      }
       break;
 
     case "2":
-      openContentPanel("site");
+      if (isMenuVisible) {
+        openContentPanel("site");
+      }
       break;
 
     case "3":
-      openContentPanel("history");
+      if (isMenuVisible) {
+        openContentPanel("history");
+      }
       break;
 
     case "4":
-      openContentPanel("resume");
+      if (isMenuVisible) {
+        openContentPanel("resume");
+      }
       break;
 
     default:
@@ -1516,11 +1381,7 @@ function openPhoneForFirstTime() {
   sprite.style.display = "none";
 
   setKeysEnabled(false);
-
-  /* Closed-screen bunny must be hidden
-     while opening the phone. */
   setFrontScreenVisible(false);
-
   setOpenClockVisible(false);
   setPhoneMenuVisible(false);
 
@@ -1549,10 +1410,12 @@ function openPhoneForFirstTime() {
       setFlipTriggerArea();
       setKeysEnabled(true);
 
-      /* Open-phone interface */
       setFrontScreenVisible(false);
       setOpenClockVisible(true);
-      setPhoneMenuVisible(true);
+
+      /* Menu stays hidden until the
+         center circle is clicked. */
+      setPhoneMenuVisible(false);
 
       updateMenuSelection();
     }
@@ -1575,9 +1438,6 @@ function closePhone() {
   closeContentPanel();
 
   setKeysEnabled(false);
-
-  /* Hide every screen overlay during
-     the closing animation. */
   setFrontScreenVisible(false);
   setOpenClockVisible(false);
   setPhoneMenuVisible(false);
@@ -1590,8 +1450,6 @@ function closePhone() {
     () => {
       setFlipTriggerArea();
 
-      /* Bunny, date and time appear only
-         after the phone is fully closed. */
       setFrontScreenVisible(true);
       setOpenClockVisible(false);
       setPhoneMenuVisible(false);
@@ -1612,10 +1470,7 @@ function reopenPhone() {
     return;
   }
 
-  /* Remove bunny screen before the
-     opening animation begins. */
   setFrontScreenVisible(false);
-
   setOpenClockVisible(false);
   setPhoneMenuVisible(false);
   setKeysEnabled(false);
@@ -1632,10 +1487,12 @@ function reopenPhone() {
       setFlipTriggerArea();
       setKeysEnabled(true);
 
-      /* Restore blue-screen interface */
       setFrontScreenVisible(false);
       setOpenClockVisible(true);
-      setPhoneMenuVisible(true);
+
+      /* Menu remains hidden after
+         reopening the phone. */
+      setPhoneMenuVisible(false);
 
       updateMenuSelection();
     }
@@ -1643,7 +1500,7 @@ function reopenPhone() {
 }
 
 /* ---------------------------------
-   MENU EVENTS
+   MENU AND PANEL EVENTS
 --------------------------------- */
 
 function initializeMenuEvents() {
@@ -1653,6 +1510,10 @@ function initializeMenuEvents() {
         "click",
         (event) => {
           event.stopPropagation();
+
+          if (!isMenuVisible) {
+            return;
+          }
 
           selectedMenuIndex = index;
 
@@ -1714,6 +1575,30 @@ function initializeMenuEvents() {
         return;
       }
 
+      if (
+        event.key === "Enter" ||
+        event.key === " "
+      ) {
+        event.preventDefault();
+
+        if (!isMenuVisible) {
+          togglePhoneMenu();
+        } else {
+          selectCurrentMenuItem();
+        }
+
+        return;
+      }
+
+      if (event.key === "Escape") {
+        setPhoneMenuVisible(false);
+        return;
+      }
+
+      if (!isMenuVisible) {
+        return;
+      }
+
       if (event.key === "ArrowUp") {
         event.preventDefault();
         moveMenuSelection("up");
@@ -1733,14 +1618,6 @@ function initializeMenuEvents() {
         event.preventDefault();
         moveMenuSelection("right");
       }
-
-      if (
-        event.key === "Enter" ||
-        event.key === " "
-      ) {
-        event.preventDefault();
-        selectCurrentMenuItem();
-      }
     }
   );
 }
@@ -1754,9 +1631,6 @@ function initializePhone() {
   initializeMenuEvents();
 
   setKeysEnabled(false);
-
-  /* No screen overlays appear before
-     the initial phone animation. */
   setFrontScreenVisible(false);
   setOpenClockVisible(false);
   setPhoneMenuVisible(false);
