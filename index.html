@@ -1,335 +1,266 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
+<head>
+  <meta charset="UTF-8" />
 
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1"
-    />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  />
 
-    <title>Leslie's Flip Phone</title>
+  <title>Leslie Ahuatzi | Creative Application</title>
 
-    <link rel="stylesheet" href="style.css" />
-  </head>
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+</head>
 
-  <body>
-    <main class="phone-stage">
-      <!-- Initial phone sprite -->
-      <button
-        id="sprite-button"
-        class="sprite-button"
-        type="button"
-        aria-label="Open phone"
-      >
-        <img
-          id="sprite"
-          src="images/DefineSprite_22/1.png"
-          alt="Closed flip phone"
-        />
-      </button>
+<body>
+  <main class="phone-stage">
 
-      <!-- Main phone -->
+    <!-- Initial animated phone sprite -->
+    <button
+      id="sprite-button"
+      class="sprite-button"
+      type="button"
+      aria-label="Open Leslie's interactive phone"
+    >
+      <img
+        id="sprite"
+        src="DefineSprite_22/1.png"
+        alt=""
+      />
+    </button>
+
+    <!-- Main interactive phone -->
+    <section
+      id="phone-container"
+      class="phone-container"
+      aria-label="Interactive flip phone portfolio"
+    >
+      <img
+        id="phone-frame"
+        src="images/6.png"
+        alt="Interactive flip phone"
+      />
+
+      <!-- Date and time on the blue interior screen -->
       <div
-        id="phone-container"
-        class="phone-container"
-        aria-label="Interactive flip phone"
-      >
-        <img
-          id="phone-frame"
-          src="images/6.png"
-          alt=""
-          aria-hidden="true"
-        />
-
-        <!-- Open phone clock -->
-        <div
-          id="open-screen-clock"
-          class="open-screen-clock"
-          aria-hidden="true"
-        >
-          <div
-            id="open-screen-date"
-            class="open-screen-date"
-          ></div>
-
-          <div
-            id="open-screen-time"
-            class="open-screen-time"
-          ></div>
-        </div>
-
-        <!-- Main menu -->
-        <section
-          id="phone-menu"
-          class="phone-menu"
-          aria-label="Main phone menu"
-        >
-          <h2 class="phone-menu-heading">
-            MAIN MENU
-          </h2>
-
-          <div class="phone-menu-grid">
-            <button
-              class="phone-menu-item is-selected"
-              type="button"
-              data-page="about"
-            >
-              <span
-                class="menu-icon menu-icon-about"
-                aria-hidden="true"
-              ></span>
-
-              <span class="menu-item-label">
-                ABOUT
-              </span>
-            </button>
-
-            <button
-              class="phone-menu-item"
-              type="button"
-              data-page="site"
-            >
-              <span
-                class="menu-icon menu-icon-site"
-                aria-hidden="true"
-              ></span>
-
-              <span class="menu-item-label">
-                SITE
-              </span>
-            </button>
-
-            <button
-              class="phone-menu-item"
-              type="button"
-              data-page="history"
-            >
-              <span
-                class="menu-icon menu-icon-history"
-                aria-hidden="true"
-              ></span>
-
-              <span class="menu-item-label">
-                HISTORY
-              </span>
-            </button>
-
-            <button
-              class="phone-menu-item"
-              type="button"
-              data-page="resume"
-            >
-              <span
-                class="menu-icon menu-icon-resume"
-                aria-hidden="true"
-              ></span>
-
-              <span class="menu-item-label">
-                RESUME
-              </span>
-            </button>
-          </div>
-
-          <p class="phone-menu-instruction">
-            ▲▼◀▶ MOVE · CENTER SELECT
-          </p>
-        </section>
-
-        <!-- Closed phone screen -->
-        <div
-          id="front-screen"
-          class="front-screen"
-          aria-hidden="true"
-        >
-          <img
-            id="front-screen-image"
-            src="images/bunny.png"
-            alt=""
-          />
-
-          <div class="front-screen-clock">
-            <div
-              id="front-screen-date"
-              class="front-screen-date"
-            ></div>
-
-            <div
-              id="front-screen-time"
-              class="front-screen-time"
-            ></div>
-          </div>
-        </div>
-
-        <!-- Phone keypad -->
-        <div
-          id="key-overlay"
-          class="key-overlay"
-          aria-label="Phone keypad"
-        >
-          <button
-            class="phone-key"
-            type="button"
-            data-key="upper-left"
-            aria-label="Upper-left button"
-          ></button>
-
-          <button
-            class="phone-key"
-            type="button"
-            data-key="upper-right"
-            aria-label="Upper-right button"
-          ></button>
-
-          <button
-            class="phone-key dpad-key"
-            type="button"
-            data-key="dpad-up"
-            aria-label="Move up"
-          ></button>
-
-          <button
-            class="phone-key dpad-key"
-            type="button"
-            data-key="dpad-left"
-            aria-label="Move left"
-          ></button>
-
-          <button
-            class="phone-key"
-            type="button"
-            data-key="dpad-center"
-            aria-label="Open menu or select"
-          ></button>
-
-          <button
-            class="phone-key dpad-key"
-            type="button"
-            data-key="dpad-right"
-            aria-label="Move right"
-          ></button>
-
-          <button
-            class="phone-key dpad-key"
-            type="button"
-            data-key="dpad-down"
-            aria-label="Move down"
-          ></button>
-
-          <button
-            class="phone-key"
-            type="button"
-            data-key="lower-left"
-            aria-label="Lower-left button"
-          ></button>
-
-          <button
-            class="phone-key"
-            type="button"
-            data-key="lower-right"
-            aria-label="Back"
-          ></button>
-
-          <button
-            class="phone-key"
-            type="button"
-            data-key="call"
-            aria-label="Call button"
-          ></button>
-
-          <button
-            class="phone-key"
-            type="button"
-            data-key="menu"
-            aria-label="Menu button"
-          ></button>
-
-          <button
-            class="phone-key"
-            type="button"
-            data-key="end"
-            aria-label="Close menu or panel"
-          ></button>
-        </div>
-
-        <!-- Invisible phone-flip button -->
-        <button
-          id="flip-trigger"
-          class="flip-trigger"
-          type="button"
-          aria-label="Close or reopen phone"
-        ></button>
-      </div>
-
-      <!-- External information panel -->
-      <aside
-        id="content-panel"
-        class="content-panel"
+        id="open-screen-clock"
+        class="open-screen-clock"
         aria-hidden="true"
       >
         <div
-          class="content-panel-edge"
-          aria-hidden="true"
+          id="open-screen-date"
+          class="open-screen-date"
         ></div>
 
-        <header class="content-panel-header">
-          <div>
-            <p class="content-panel-label">
-              LESLIE'S PHONE
-            </p>
+        <div
+          id="open-screen-time"
+          class="open-screen-time"
+        ></div>
+      </div>
 
-            <h1 id="content-panel-title">
-              About
-            </h1>
-          </div>
+      <!-- Menu inside the blue interior screen -->
+      <section
+        id="phone-menu"
+        class="phone-menu"
+        aria-label="Portfolio menu"
+        aria-hidden="true"
+      >
+        <p class="phone-menu-heading">
+          MAIN MENU
+        </p>
 
-          <button
-            id="panel-close"
-            class="panel-close"
-            type="button"
-            aria-label="Close information panel"
-          >
-            ×
-          </button>
-        </header>
-
-        <div class="content-panel-body">
-          <button
-            id="panel-previous"
-            class="panel-arrow"
-            type="button"
-            aria-label="Previous page"
-          >
-            ‹
-          </button>
-
-          <article
-            id="panel-page"
-            class="panel-page"
-          ></article>
+        <div class="phone-menu-grid">
 
           <button
-            id="panel-next"
-            class="panel-arrow"
+            class="phone-menu-item is-selected"
             type="button"
-            aria-label="Next page"
+            data-section="about"
+            data-menu-index="0"
+            aria-label="Open About section"
           >
-            ›
+            <span
+              class="menu-icon menu-icon-about"
+              aria-hidden="true"
+            ></span>
+
+            <span class="menu-item-label">
+              ABOUT
+            </span>
           </button>
+
+          <button
+            class="phone-menu-item"
+            type="button"
+            data-section="site"
+            data-menu-index="1"
+            aria-label="Open Site section"
+          >
+            <span
+              class="menu-icon menu-icon-site"
+              aria-hidden="true"
+            ></span>
+
+            <span class="menu-item-label">
+              SITE
+            </span>
+          </button>
+
+          <button
+            class="phone-menu-item"
+            type="button"
+            data-section="history"
+            data-menu-index="2"
+            aria-label="Open History section"
+          >
+            <span
+              class="menu-icon menu-icon-history"
+              aria-hidden="true"
+            ></span>
+
+            <span class="menu-item-label">
+              HISTORY
+            </span>
+          </button>
+
+          <button
+            class="phone-menu-item"
+            type="button"
+            data-section="resume"
+            data-menu-index="3"
+            aria-label="Open Resume section"
+          >
+            <span
+              class="menu-icon menu-icon-resume"
+              aria-hidden="true"
+            ></span>
+
+            <span class="menu-item-label">
+              RESUME
+            </span>
+          </button>
+
         </div>
 
-        <footer class="content-panel-footer">
-          <span>◀ PREVIOUS</span>
+        <p class="phone-menu-instruction">
+          ▲▼◀▶ MOVE · CENTER SELECT
+        </p>
+      </section>
 
-          <span id="panel-page-number">
-            1 / 4
-          </span>
+      <!-- Small screen shown only when phone is closed -->
+      <div
+        id="front-screen"
+        class="front-screen"
+        aria-hidden="true"
+      >
+        <img
+          id="front-screen-image"
+          src="images/bunny.png"
+          alt=""
+        />
 
-          <span>NEXT ▶</span>
-        </footer>
-      </aside>
-    </main>
+        <div class="front-screen-clock">
+          <div
+            id="front-screen-date"
+            class="front-screen-date"
+          ></div>
 
-    <script src="script.js"></script>
-  </body>
+          <div
+            id="front-screen-time"
+            class="front-screen-time"
+          ></div>
+        </div>
+      </div>
+
+      <!-- Invisible phone-button hit areas -->
+      <div
+        id="key-overlay"
+        class="key-overlay"
+        aria-hidden="true"
+      ></div>
+
+      <!-- Open/close phone trigger -->
+      <button
+        id="flip-trigger"
+        class="flip-trigger"
+        type="button"
+        aria-label="Close phone"
+      ></button>
+    </section>
+
+    <!-- Sliding content panel -->
+    <aside
+      id="content-panel"
+      class="content-panel"
+      aria-hidden="true"
+      aria-label="Portfolio information"
+    >
+      <div
+        class="content-panel-edge"
+        aria-hidden="true"
+      ></div>
+
+      <header class="content-panel-header">
+        <div>
+          <p class="content-panel-label">
+            LESLIE.AHUATZI.EXE
+          </p>
+
+          <h1 id="panel-title">
+            ABOUT
+          </h1>
+        </div>
+
+        <button
+          id="panel-close"
+          class="panel-close"
+          type="button"
+          aria-label="Close section"
+        >
+          ×
+        </button>
+      </header>
+
+      <div class="content-panel-body">
+
+        <button
+          id="panel-previous"
+          class="panel-arrow panel-arrow-left"
+          type="button"
+          aria-label="Previous page"
+        >
+          ‹
+        </button>
+
+        <article
+          id="panel-page"
+          class="panel-page"
+          aria-live="polite"
+        ></article>
+
+        <button
+          id="panel-next"
+          class="panel-arrow panel-arrow-right"
+          type="button"
+          aria-label="Next page"
+        >
+          ›
+        </button>
+
+      </div>
+
+      <footer class="content-panel-footer">
+        <span id="panel-page-number">
+          01 / 01
+        </span>
+
+        <span>
+          USE ◀ ▶ TO EXPLORE
+        </span>
+      </footer>
+    </aside>
+
+  </main>
+</body>
 </html>
