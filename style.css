@@ -18,9 +18,14 @@ body {
 body {
   min-height: 100vh;
   overflow: hidden;
+
   background: #000;
   color: #fff;
-  font-family: Arial, Helvetica, sans-serif;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
 }
 
 button,
@@ -111,7 +116,7 @@ body.panel-open .phone-container {
 }
 
 /* ---------------------------------
-   PHONE FRAME IMAGE
+   PHONE FRAME
 --------------------------------- */
 
 #phone-frame {
@@ -131,7 +136,10 @@ body.panel-open .phone-container {
 }
 
 /* ---------------------------------
-   OPEN PHONE DATE AND TIME
+   OPEN PHONE CLOCK
+
+   Positioned at the top of the
+   blue interior display.
 --------------------------------- */
 
 .open-screen-clock {
@@ -186,10 +194,7 @@ body.panel-open .phone-container {
 }
 
 /* ---------------------------------
-   PHONE MENU
-
-   Kept entirely inside the usable
-   blue interior screen.
+   MENU INSIDE BLUE SCREEN
 --------------------------------- */
 
 .phone-menu {
@@ -228,7 +233,7 @@ body.panel-open .phone-container {
 }
 
 /* ---------------------------------
-   MENU TITLE
+   MENU HEADING
 --------------------------------- */
 
 .phone-menu-heading {
@@ -265,7 +270,7 @@ body.panel-open .phone-container {
 }
 
 /* ---------------------------------
-   MENU BUTTONS
+   MENU ITEMS
 --------------------------------- */
 
 .phone-menu-item {
@@ -455,7 +460,7 @@ body.panel-open .phone-container {
   transform: rotate(-15deg);
 }
 
-/* Résumé icon */
+/* Resume icon */
 
 .menu-icon-resume::before {
   content: "";
@@ -482,7 +487,7 @@ body.panel-open .phone-container {
 }
 
 /* ---------------------------------
-   MENU INSTRUCTION
+   MENU INSTRUCTIONS
 --------------------------------- */
 
 .phone-menu-instruction {
@@ -510,6 +515,9 @@ body.panel-open .phone-container {
 
 /* ---------------------------------
    CLOSED PHONE FRONT SCREEN
+
+   Bunny and front clock only appear
+   after the phone is fully closed.
 --------------------------------- */
 
 .front-screen {
@@ -538,7 +546,7 @@ body.panel-open .phone-container {
 }
 
 /* ---------------------------------
-   BUNNY IMAGE
+   CLOSED PHONE BUNNY
 --------------------------------- */
 
 #front-screen-image {
@@ -653,7 +661,7 @@ body.panel-open .phone-container {
 }
 
 /* ---------------------------------
-   GENERAL PHONE KEY
+   GENERAL PHONE KEYS
 --------------------------------- */
 
 .phone-key {
@@ -680,7 +688,7 @@ body.panel-open .phone-container {
 }
 
 /* ---------------------------------
-   DIRECTION PAD
+   DIRECTION PAD SHAPES
 --------------------------------- */
 
 .phone-key.dpad-key {
@@ -791,7 +799,7 @@ body.panel-open .phone-container {
 }
 
 /* ---------------------------------
-   SIDE CONTENT PANEL
+   SLIDING CONTENT PANEL
 --------------------------------- */
 
 .content-panel {
@@ -1226,7 +1234,7 @@ body.panel-open .phone-container {
 }
 
 /* ---------------------------------
-   PANEL ANIMATION
+   PANEL PAGE ANIMATION
 --------------------------------- */
 
 @keyframes panelPageIn {
