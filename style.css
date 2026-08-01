@@ -80,8 +80,8 @@ img {
 /* ---------------------------------
    MAIN PHONE CONTAINER
 
-   The fully open phone image is:
-   236px wide × 656px tall.
+   Based on the open-phone PNG:
+   236px × 656px
 --------------------------------- */
 
 .phone-container {
@@ -118,14 +118,66 @@ img {
 }
 
 /* ---------------------------------
-   CLOSED-PHONE FRONT SCREEN
+   OPEN PHONE CLOCK
+--------------------------------- */
 
-   The closed frame is scaled and
-   centered inside the 236 × 656 area.
+.open-screen-clock {
+  position: absolute;
+
+  left: 43px;
+  top: 91px;
+
+  width: 150px;
+  height: 48px;
+
+  display: none;
+
+  z-index: 44;
+
+  color: #fff;
+
+  pointer-events: none;
+
+  text-shadow:
+    1px 1px 0 rgba(0, 0, 0, 0.8),
+    0 0 3px rgba(0, 0, 0, 0.7);
+}
+
+.open-screen-date {
+  font-family:
+    "Times New Roman",
+    Georgia,
+    serif;
+
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.open-screen-time {
+  margin-top: 2px;
+
+  font-family:
+    "Times New Roman",
+    Georgia,
+    serif;
+
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* ---------------------------------
+   CLOSED PHONE FRONT DISPLAY
 --------------------------------- */
 
 .front-screen {
   position: absolute;
+
+  /*
+    Position of the display on images/50.png.
+    Adjust these four values if needed.
+  */
 
   left: 83px;
   top: 278px;
@@ -137,29 +189,81 @@ img {
 
   overflow: hidden;
 
-  z-index: 40;
+  z-index: 42;
 
   pointer-events: none;
 
-  background: #e9ef16;
+  background: #e8ef17;
 
   border:
     1px solid
-    rgba(0, 0, 0, 0.55);
+    rgba(0, 0, 0, 0.65);
 
   border-radius: 2px;
 }
 
-/* Bunny image fitted inside the screen */
+/* Date and time at the top of the small display */
+
+.front-screen-clock {
+  position: absolute;
+
+  left: 3px;
+  top: 3px;
+
+  width: calc(100% - 6px);
+  height: 23px;
+
+  z-index: 2;
+
+  color: #fff;
+
+  pointer-events: none;
+
+  text-shadow:
+    1px 1px 0 rgba(0, 0, 0, 0.85),
+    0 0 2px rgba(0, 0, 0, 0.7);
+}
+
+.front-screen-date {
+  font-family:
+    "Times New Roman",
+    Georgia,
+    serif;
+
+  font-size: 7px;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.front-screen-time {
+  margin-top: 1px;
+
+  font-family:
+    "Times New Roman",
+    Georgia,
+    serif;
+
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* Bunny image below the clock */
 
 #front-screen-image {
+  position: absolute;
+
+  left: 0;
+  bottom: 0;
+
   display: block;
 
   width: 100%;
-  height: 100%;
+  height: 72%;
 
-  object-fit: cover;
-  object-position: center;
+  object-fit: contain;
+  object-position: center bottom;
 
   image-rendering: pixelated;
 
@@ -169,8 +273,6 @@ img {
 
 /* ---------------------------------
    KEYPAD OVERLAY
-
-   Hidden until the phone is fully open.
 --------------------------------- */
 
 .key-overlay {
@@ -208,8 +310,6 @@ img {
   pointer-events: auto;
   touch-action: manipulation;
 }
-
-/* Normal oval-shaped phone keys */
 
 .phone-key:not(.dpad-key):not([data-key="dpad-center"]) {
   border-radius: 45%;
@@ -325,7 +425,7 @@ img {
 /* ---------------------------------
    DEBUG MODE
 
-   Temporarily change:
+   Change:
 
    <body>
 
@@ -350,6 +450,10 @@ img {
 
 .debug .front-screen {
   outline: 2px dashed red;
+}
+
+.debug .open-screen-clock {
+  outline: 2px dashed orange;
 }
 
 /* ---------------------------------
