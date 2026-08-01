@@ -106,49 +106,55 @@ const phoneKeys = [
     height: 21
   },
 
-  /* Small directional arrows */
+  /*
+    Very small directional-arrow areas.
+
+    The left arrow has been moved
+    farther left to sit over the
+    visible arrow on the phone.
+  */
 
   {
     name: "dpad-up",
     label: "Up",
-    x: 101,
-    y: 348,
-    width: 20,
-    height: 10,
+    x: 104,
+    y: 349,
+    width: 14,
+    height: 8,
     className: "dpad-key"
   },
 
   {
     name: "dpad-left",
     label: "Left",
-    x: 93,
-    y: 361,
-    width: 10,
-    height: 16,
+    x: 86,
+    y: 360,
+    width: 8,
+    height: 14,
     className: "dpad-key"
   },
 
   {
     name: "dpad-right",
     label: "Right",
-    x: 124,
-    y: 361,
-    width: 10,
-    height: 16,
+    x: 129,
+    y: 360,
+    width: 8,
+    height: 14,
     className: "dpad-key"
   },
 
   {
     name: "dpad-down",
     label: "Down",
-    x: 101,
-    y: 386,
-    width: 20,
-    height: 10,
+    x: 104,
+    y: 389,
+    width: 14,
+    height: 8,
     className: "dpad-key"
   },
 
-  /* Center select */
+  /* Center select button */
 
   {
     name: "dpad-center",
@@ -635,7 +641,7 @@ function setFlipTriggerArea() {
   } else {
     /*
       Closed phone:
-      click the full phone to reopen it.
+      click the full front to reopen it.
     */
 
     flipTrigger.style.left =
@@ -776,21 +782,29 @@ function handlePhoneKey(keyName) {
 
   switch (keyName) {
     case "end":
+      /*
+        The hang-up key does not
+        close the physical phone.
+      */
+
       console.log(
         "Hang-up button pressed"
       );
+
       break;
 
     case "call":
       console.log(
         "Call button pressed"
       );
+
       break;
 
     case "menu":
       console.log(
         "Menu button pressed"
       );
+
       break;
 
     case "dpad-up":
@@ -832,6 +846,7 @@ function handlePhoneKey(keyName) {
       console.log(
         `${keyName} pressed`
       );
+
       break;
 
     default:
@@ -855,10 +870,6 @@ function openPhoneForFirstTime() {
 
   stopSpriteLoop();
 
-  /*
-    Hide the small phone immediately.
-  */
-
   spriteButton.hidden =
     true;
 
@@ -867,10 +878,6 @@ function openPhoneForFirstTime() {
 
   sprite.style.display =
     "none";
-
-  /*
-    Hide screen overlays during animation.
-  */
 
   setKeysEnabled(false);
 
@@ -948,11 +955,6 @@ function closePhone() {
     () => {
       setFlipTriggerArea();
 
-      /*
-        Show bunny and clock only after
-        the phone is fully closed.
-      */
-
       setFrontScreenVisible(true);
 
       setOpenClockVisible(false);
@@ -972,11 +974,6 @@ function reopenPhone() {
   ) {
     return;
   }
-
-  /*
-    Hide the closed-phone display
-    before animation begins.
-  */
 
   setFrontScreenVisible(false);
 
