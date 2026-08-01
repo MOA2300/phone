@@ -29,9 +29,7 @@ const flipTrigger =
 const spriteFrames = [];
 
 for (let i = 1; i <= 16; i += 1) {
-  spriteFrames.push(
-    `DefineSprite_22/${i}.png`
-  );
+  spriteFrames.push(`DefineSprite_22/${i}.png`);
 }
 
 /* ---------------------------------
@@ -86,43 +84,45 @@ const phoneKeys = [
     height: 21
   },
 
+  /* Smaller directional arrows */
+
   {
     name: "dpad-up",
     label: "Up",
-    x: 80,
-    y: 342,
-    width: 62,
-    height: 31,
+    x: 88,
+    y: 345,
+    width: 46,
+    height: 23,
     className: "dpad-key"
   },
 
   {
     name: "dpad-left",
     label: "Left",
-    x: 78,
-    y: 348,
-    width: 31,
-    height: 48,
+    x: 82,
+    y: 355,
+    width: 23,
+    height: 34,
     className: "dpad-key"
   },
 
   {
     name: "dpad-right",
     label: "Right",
-    x: 113,
-    y: 348,
-    width: 31,
-    height: 48,
+    x: 119,
+    y: 355,
+    width: 23,
+    height: 34,
     className: "dpad-key"
   },
 
   {
     name: "dpad-down",
     label: "Down",
-    x: 80,
-    y: 375,
-    width: 62,
-    height: 29,
+    x: 88,
+    y: 378,
+    width: 46,
+    height: 23,
     className: "dpad-key"
   },
 
@@ -326,15 +326,12 @@ function startSpriteLoop() {
 
   sprite.src = spriteFrames[0];
 
-  spriteInterval =
-    window.setInterval(() => {
-      spriteIndex =
-        (spriteIndex + 1) %
-        spriteFrames.length;
+  spriteInterval = window.setInterval(() => {
+    spriteIndex =
+      (spriteIndex + 1) % spriteFrames.length;
 
-      sprite.src =
-        spriteFrames[spriteIndex];
-    }, 160);
+    sprite.src = spriteFrames[spriteIndex];
+  }, 160);
 }
 
 function stopSpriteLoop() {
@@ -342,10 +339,7 @@ function stopSpriteLoop() {
     return;
   }
 
-  window.clearInterval(
-    spriteInterval
-  );
-
+  window.clearInterval(spriteInterval);
   spriteInterval = null;
 }
 
@@ -355,27 +349,18 @@ function stopSpriteLoop() {
 
 function setKeysEnabled(enabled) {
   const buttons =
-    keyOverlay.querySelectorAll(
-      ".phone-key"
-    );
+    keyOverlay.querySelectorAll(".phone-key");
 
   buttons.forEach((button) => {
     button.disabled = !enabled;
-
-    button.classList.remove(
-      "is-pressed"
-    );
+    button.classList.remove("is-pressed");
   });
 
   keyOverlay.style.visibility =
-    enabled
-      ? "visible"
-      : "hidden";
+    enabled ? "visible" : "hidden";
 
   keyOverlay.style.pointerEvents =
-    enabled
-      ? "auto"
-      : "none";
+    enabled ? "auto" : "none";
 
   keyOverlay.setAttribute(
     "aria-hidden",
@@ -400,34 +385,29 @@ function playAnimation(
   }
 
   isAnimating = true;
-
   flipTrigger.disabled = true;
 
   setKeysEnabled(false);
 
   let index = 0;
 
-  const interval =
-    window.setInterval(() => {
-      if (index < frames.length) {
-        frame.src = frames[index];
-        index += 1;
-        return;
-      }
+  const interval = window.setInterval(() => {
+    if (index < frames.length) {
+      frame.src = frames[index];
+      index += 1;
+      return;
+    }
 
-      window.clearInterval(interval);
+    window.clearInterval(interval);
 
-      frame.src = finalFrame;
+    frame.src = finalFrame;
+    isAnimating = false;
+    flipTrigger.disabled = false;
 
-      isAnimating = false;
-      flipTrigger.disabled = false;
-
-      if (
-        typeof callback === "function"
-      ) {
-        callback();
-      }
-    }, 90);
+    if (typeof callback === "function") {
+      callback();
+    }
+  }, 90);
 }
 
 /* ---------------------------------
@@ -436,44 +416,20 @@ function playAnimation(
 
 function setFlipTriggerArea() {
   if (isOpen) {
-    /*
-      Open phone:
-      Only the top cap closes it.
-    */
-
-    flipTrigger.style.left =
-      "62px";
-
-    flipTrigger.style.top =
-      "0px";
-
-    flipTrigger.style.width =
-      "112px";
-
-    flipTrigger.style.height =
-      "62px";
+    flipTrigger.style.left = "62px";
+    flipTrigger.style.top = "0px";
+    flipTrigger.style.width = "112px";
+    flipTrigger.style.height = "62px";
 
     flipTrigger.setAttribute(
       "aria-label",
       "Close phone"
     );
   } else {
-    /*
-      Closed phone:
-      The full front panel is clickable.
-    */
-
-    flipTrigger.style.left =
-      "24px";
-
-    flipTrigger.style.top =
-      "180px";
-
-    flipTrigger.style.width =
-      "190px";
-
-    flipTrigger.style.height =
-      "470px";
+    flipTrigger.style.left = "24px";
+    flipTrigger.style.top = "180px";
+    flipTrigger.style.width = "190px";
+    flipTrigger.style.height = "470px";
 
     flipTrigger.setAttribute(
       "aria-label",
@@ -491,59 +447,40 @@ function renderKeys() {
 
   phoneKeys.forEach((key) => {
     const button =
-      document.createElement(
-        "button"
-      );
+      document.createElement("button");
 
     button.type = "button";
     button.className = "phone-key";
 
     if (key.className) {
-      button.classList.add(
-        key.className
-      );
+      button.classList.add(key.className);
     }
 
-    button.dataset.key =
-      key.name;
+    button.dataset.key = key.name;
 
     button.setAttribute(
       "aria-label",
       key.label
     );
 
-    button.style.left =
-      `${key.x}px`;
-
-    button.style.top =
-      `${key.y}px`;
-
-    button.style.width =
-      `${key.width}px`;
-
-    button.style.height =
-      `${key.height}px`;
+    button.style.left = `${key.x}px`;
+    button.style.top = `${key.y}px`;
+    button.style.width = `${key.width}px`;
+    button.style.height = `${key.height}px`;
 
     button.addEventListener(
       "pointerdown",
       () => {
-        if (
-          !isOpen ||
-          isAnimating
-        ) {
+        if (!isOpen || isAnimating) {
           return;
         }
 
-        button.classList.add(
-          "is-pressed"
-        );
+        button.classList.add("is-pressed");
       }
     );
 
     const releaseKey = () => {
-      button.classList.remove(
-        "is-pressed"
-      );
+      button.classList.remove("is-pressed");
     };
 
     button.addEventListener(
@@ -566,22 +503,15 @@ function renderKeys() {
       (event) => {
         event.stopPropagation();
 
-        if (
-          !isOpen ||
-          isAnimating
-        ) {
+        if (!isOpen || isAnimating) {
           return;
         }
 
-        handlePhoneKey(
-          key.name
-        );
+        handlePhoneKey(key.name);
       }
     );
 
-    keyOverlay.appendChild(
-      button
-    );
+    keyOverlay.appendChild(button);
   });
 
   setKeysEnabled(false);
@@ -598,25 +528,15 @@ function handlePhoneKey(keyName) {
 
   switch (keyName) {
     case "end":
-      /*
-        The red hangup key does not
-        physically close the phone.
-      */
-      console.log(
-        "Hangup button pressed"
-      );
+      console.log("Hangup button pressed");
       break;
 
     case "call":
-      console.log(
-        "Call key pressed"
-      );
+      console.log("Call key pressed");
       break;
 
     case "menu":
-      console.log(
-        "Menu key pressed"
-      );
+      console.log("Menu key pressed");
       break;
 
     case "dpad-up":
@@ -655,9 +575,7 @@ function handlePhoneKey(keyName) {
     case "star":
     case "0":
     case "hash":
-      console.log(
-        `${keyName} pressed`
-      );
+      console.log(`${keyName} pressed`);
       break;
 
     default:
@@ -682,35 +600,21 @@ function openPhoneForFirstTime() {
   stopSpriteLoop();
 
   spriteButton.hidden = true;
-
-  spriteButton.style.display =
-    "none";
-
-  sprite.style.display =
-    "none";
+  spriteButton.style.display = "none";
+  sprite.style.display = "none";
 
   setKeysEnabled(false);
 
-  container.style.display =
-    "block";
+  container.style.display = "block";
 
   const sound1 =
-    new Audio(
-      "sounds/27_fixed.mp3"
-    );
+    new Audio("sounds/27_fixed.mp3");
 
   const sound2 =
-    new Audio(
-      "sounds/28_fixed.mp3"
-    );
+    new Audio("sounds/28_fixed.mp3");
 
-  sound1
-    .play()
-    .catch(() => {});
-
-  sound2
-    .play()
-    .catch(() => {});
+  sound1.play().catch(() => {});
+  sound2.play().catch(() => {});
 
   playAnimation(
     openFrames,
@@ -739,7 +643,6 @@ function closePhone() {
   }
 
   setKeysEnabled(false);
-
   isOpen = false;
 
   playAnimation(
@@ -787,7 +690,6 @@ function reopenPhone() {
 
 function initializePhone() {
   renderKeys();
-
   startSpriteLoop();
 
   spriteButton.addEventListener(
