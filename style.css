@@ -34,8 +34,10 @@ img {
 .phone-stage {
   width: 100vw;
   height: 100vh;
+
   display: grid;
   place-items: center;
+
   overflow: hidden;
   background: #000;
 }
@@ -46,10 +48,13 @@ img {
 
 .sprite-button {
   display: block;
+
   padding: 0;
   margin: 0;
+
   border: 0;
   appearance: none;
+
   background: transparent;
   cursor: pointer;
 }
@@ -60,19 +65,26 @@ img {
 
 #sprite {
   display: block;
+
   user-select: none;
   pointer-events: none;
 }
 
 /* ---------------------------------
    MAIN PHONE CONTAINER
+
+   Open-phone image dimensions:
+   236px × 656px
 --------------------------------- */
 
 .phone-container {
   position: relative;
+
   width: 236px;
   height: 656px;
+
   display: none;
+
   flex: 0 0 auto;
   transform-origin: center center;
 }
@@ -84,30 +96,37 @@ img {
 #phone-frame {
   position: absolute;
   inset: 0;
+
   display: block;
+
   width: 236px;
   height: 656px;
+
   object-fit: contain;
   object-position: center center;
+
   user-select: none;
   pointer-events: none;
 }
 
 /* ---------------------------------
-   OPEN PHONE CLOCK
+   OPEN PHONE DATE AND TIME
+
+   Positioned inside the upper portion
+   of the open phone screen.
 --------------------------------- */
 
 .open-screen-clock {
   position: absolute;
 
-  /* Positioned like the reference screen */
-  left: 47px;
-  top: 76px;
+  left: 56px;
+  top: 114px;
 
   width: 145px;
-  height: 42px;
+  height: 64px;
 
   display: none;
+
   z-index: 44;
 
   color: #fff;
@@ -128,11 +147,12 @@ img {
   font-size: 11px;
   font-weight: 700;
   line-height: 1;
+
   white-space: nowrap;
 }
 
 .open-screen-time {
-  margin-top: 1px;
+  margin-top: 4px;
 
   font-family:
     "Times New Roman",
@@ -142,6 +162,8 @@ img {
   font-size: 17px;
   font-weight: 700;
   line-height: 1;
+
+  white-space: nowrap;
 }
 
 /* ---------------------------------
@@ -161,6 +183,7 @@ img {
   overflow: hidden;
 
   z-index: 42;
+
   pointer-events: none;
 
   background: #e8ef17;
@@ -172,52 +195,7 @@ img {
   border-radius: 2px;
 }
 
-/* Clock overlays the bunny */
-
-.front-screen-clock {
-  position: absolute;
-
-  left: 4px;
-  top: 4px;
-
-  width: calc(100% - 8px);
-
-  z-index: 3;
-
-  color: #fff;
-  pointer-events: none;
-
-  text-shadow:
-    1px 1px 0 rgba(0, 0, 0, 0.85),
-    0 0 2px rgba(0, 0, 0, 0.7);
-}
-
-.front-screen-date {
-  font-family:
-    "Times New Roman",
-    Georgia,
-    serif;
-
-  font-size: 7px;
-  font-weight: 700;
-  line-height: 1;
-  white-space: nowrap;
-}
-
-.front-screen-time {
-  margin-top: 1px;
-
-  font-family:
-    "Times New Roman",
-    Georgia,
-    serif;
-
-  font-size: 11px;
-  font-weight: 700;
-  line-height: 1;
-}
-
-/* Bunny fills the front display */
+/* Bunny fills the complete display */
 
 #front-screen-image {
   position: absolute;
@@ -237,6 +215,55 @@ img {
 
   user-select: none;
   pointer-events: none;
+}
+
+/* Date and time sit over the bunny,
+   near the bottom of the display */
+
+.front-screen-clock {
+  position: absolute;
+
+  left: 4px;
+  right: 4px;
+  bottom: 4px;
+
+  z-index: 3;
+
+  color: #fff;
+  text-align: left;
+  pointer-events: none;
+
+  text-shadow:
+    1px 1px 0 rgba(0, 0, 0, 0.9),
+    0 0 2px rgba(0, 0, 0, 0.75);
+}
+
+.front-screen-date {
+  font-family:
+    "Times New Roman",
+    Georgia,
+    serif;
+
+  font-size: 8px;
+  font-weight: 700;
+  line-height: 1;
+
+  white-space: nowrap;
+}
+
+.front-screen-time {
+  margin-top: 2px;
+
+  font-family:
+    "Times New Roman",
+    Georgia,
+    serif;
+
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1;
+
+  white-space: nowrap;
 }
 
 /* ---------------------------------
@@ -262,6 +289,7 @@ img {
 
 .phone-key {
   position: absolute;
+
   display: block;
 
   padding: 0;
@@ -271,6 +299,7 @@ img {
   appearance: none;
 
   background: transparent;
+
   cursor: pointer;
 
   pointer-events: auto;
@@ -361,6 +390,7 @@ img {
 
 .flip-trigger {
   position: absolute;
+
   display: block;
 
   padding: 0;
@@ -383,6 +413,12 @@ img {
 
 /* ---------------------------------
    DEBUG MODE
+
+   Change:
+   <body>
+
+   to:
+   <body class="debug">
 --------------------------------- */
 
 .debug .phone-key {
