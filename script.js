@@ -72,7 +72,7 @@ const panelClose =
   document.getElementById("panel-close");
 
 /* ---------------------------------
-   STARTING SPRITE FRAMES
+   PHONE IMAGE FRAMES
 --------------------------------- */
 
 const spriteFrames = [];
@@ -82,10 +82,6 @@ for (let i = 1; i <= 16; i += 1) {
     `DefineSprite_22/${i}.png`
   );
 }
-
-/* ---------------------------------
-   PHONE OPENING FRAMES
---------------------------------- */
 
 const openFrames = [
   "images/6.png",
@@ -100,10 +96,6 @@ const openFrames = [
   "images/42.png"
 ];
 
-/* ---------------------------------
-   PHONE CLOSING FRAMES
---------------------------------- */
-
 const closeFrames = [
   "images/46.png",
   "images/48.png",
@@ -111,7 +103,7 @@ const closeFrames = [
 ];
 
 /* ---------------------------------
-   MENU CONTENT
+   PANEL CONTENT
 --------------------------------- */
 
 const sectionContent = {
@@ -131,8 +123,8 @@ const sectionContent = {
 
         <p>
           I began as an artist drawn to
-          photography, printmaking, video
-          and visual storytelling.
+          photography, printmaking, video and
+          visual storytelling.
         </p>
 
         <p>
@@ -188,7 +180,7 @@ const sectionContent = {
 
       `
         <p class="panel-kicker">
-          PAGE 03 · WHY THIS PROGRAM
+          PAGE 03 · WHY W+K
         </p>
 
         <h2>
@@ -230,10 +222,9 @@ const sectionContent = {
 
         <p>
           My next step is to grow inside a
-          creative environment where different
-          disciplines collide: art direction,
-          storytelling, strategy, design
-          and culture.
+          creative environment where art
+          direction, storytelling, strategy,
+          design and culture collide.
         </p>
 
         <p class="panel-quote">
@@ -252,7 +243,7 @@ const sectionContent = {
     pages: [
       `
         <p class="panel-kicker">
-          PAGE 01 · PORTFOLIO ACCESS
+          PAGE 01 · PORTFOLIO
         </p>
 
         <h2>
@@ -397,8 +388,7 @@ const sectionContent = {
         </h2>
 
         <p class="resume-meta">
-          Bachelor of Arts, Digital Art ·
-          Claremont, California
+          Bachelor of Arts, Digital Art
         </p>
 
         <ul>
@@ -412,8 +402,8 @@ const sectionContent = {
           </li>
 
           <li>
-            Coursework in advanced digital
-            art, photography, video art,
+            Advanced coursework in digital art,
+            photography, video art,
             black-and-white photography,
             and art and ecology
           </li>
@@ -422,37 +412,36 @@ const sectionContent = {
 
       `
         <p class="panel-kicker">
-          PAGE 03 · THE STUDENT LIFE
+          PAGE 03 · PHOTOGRAPHY
         </p>
 
         <h2>
-          Staff Photographer
+          The Student Life
         </h2>
 
         <p class="resume-meta">
+          Staff Photographer ·
           January 2024 – May 2025
         </p>
 
         <ul>
           <li>
             Produced more than 20 edited
-            photographs each week across
-            sports, clubs and campus events
+            photographs weekly
           </li>
 
           <li>
-            Adapted quickly to changing
-            assignments and deadlines
+            Covered sports, clubs and campus
+            events under deadline
           </li>
 
           <li>
-            Managed photography equipment
-            and workflows independently
+            Managed equipment and photography
+            workflows independently
           </li>
 
           <li>
-            Solved on-site technical problems
-            and delivered edited work using
+            Edited and delivered work using
             Adobe Lightroom Classic
           </li>
         </ul>
@@ -474,21 +463,19 @@ const sectionContent = {
 
         <ul>
           <li>
-            Created digital graphics, posters
-            and artist materials under tight
-            deadlines
+            Created graphics, posters and
+            digital artist materials
           </li>
 
           <li>
-            Produced work for artists including
+            Worked on projects involving
             Psychic Fever, Beno, Andre Martin
             and Enrico
           </li>
 
           <li>
-            Coordinated with editors,
-            incorporated feedback and
-            delivered polished assets
+            Incorporated editorial feedback
+            and delivered polished assets
           </li>
         </ul>
       `,
@@ -510,25 +497,21 @@ const sectionContent = {
         <ul>
           <li>
             Supported outreach, content
-            schedules, visual assets and
-            social-channel updates
+            schedules and visual assets
           </li>
 
           <li>
             Researched trends and fan behavior
-            for weekly marketing meetings
           </li>
 
           <li>
             Pitched social and event ideas
-            for artists including Bayli,
-            Tiana Major9, Frex and Esther Yu
+            for music artists
           </li>
 
           <li>
-            Wrote weekly project recaps while
-            maintaining organized and
-            confidential documentation
+            Wrote organized weekly project
+            recaps
           </li>
         </ul>
       `,
@@ -549,8 +532,8 @@ const sectionContent = {
 
         <ul>
           <li>
-            Provided first-line technical
-            assistance to students and faculty
+            Assisted students and faculty with
+            urgent technical needs
           </li>
 
           <li>
@@ -559,14 +542,13 @@ const sectionContent = {
           </li>
 
           <li>
-            Set up and troubleshot projectors,
-            computers and audio-visual hardware
+            Troubleshot projectors, computers
+            and audio-visual hardware
           </li>
 
           <li>
-            Maintained equipment records and
-            supported time-sensitive classroom
-            needs
+            Maintained accurate equipment
+            records
           </li>
         </ul>
       `,
@@ -591,19 +573,18 @@ const sectionContent = {
           </li>
 
           <li>
-            Contributed published photography
-            to Local Wolves Magazine
+            Contributed published work to
+            Local Wolves Magazine
           </li>
 
           <li>
-            Built a portfolio across fashion,
-            portrait and concert work
+            Built a fashion, portrait and
+            concert portfolio
           </li>
 
           <li>
-            Photographed artists including
-            Seo In Guk, Psychic Fever,
-            Milena and Enjambre
+            Photographed Seo In Guk,
+            Psychic Fever, Milena and Enjambre
           </li>
         </ul>
       `,
@@ -877,7 +858,7 @@ const phoneKeys = [
 ];
 
 /* ---------------------------------
-   PHONE STATE
+   STATE
 --------------------------------- */
 
 let isAnimating = false;
@@ -911,7 +892,7 @@ preloadImages([
 ]);
 
 /* ---------------------------------
-   STARTING PHONE SPRITE LOOP
+   STARTING PHONE SPRITE
 --------------------------------- */
 
 function startSpriteLoop() {
@@ -959,80 +940,35 @@ function formatOpenPhoneDate(date) {
     "Sat"
   ];
 
-  const year =
-    date.getFullYear();
-
-  const month =
-    padNumber(
-      date.getMonth() + 1
-    );
-
-  const day =
-    padNumber(
-      date.getDate()
-    );
-
-  const weekday =
-    weekdays[date.getDay()];
-
   return (
-    `${year}/${month}/${day}` +
-    `(${weekday})`
+    `${date.getFullYear()}/` +
+    `${padNumber(date.getMonth() + 1)}/` +
+    `${padNumber(date.getDate())}` +
+    `(${weekdays[date.getDay()]})`
   );
 }
 
 function formatOpenPhoneTime(date) {
-  const hours =
-    padNumber(
-      date.getHours()
-    );
-
-  const minutes =
-    padNumber(
-      date.getMinutes()
-    );
-
-  const seconds =
-    padNumber(
-      date.getSeconds()
-    );
-
   return (
-    `${hours}:` +
-    `${minutes}:` +
-    `${seconds}`
+    `${padNumber(date.getHours())}:` +
+    `${padNumber(date.getMinutes())}:` +
+    `${padNumber(date.getSeconds())}`
   );
 }
 
 function formatFrontPhoneDate(date) {
-  const year =
-    date.getFullYear();
-
-  const month =
-    padNumber(
-      date.getMonth() + 1
-    );
-
-  const day =
-    padNumber(
-      date.getDate()
-    );
-
-  return `${year}/${month}/${day}`;
+  return (
+    `${date.getFullYear()}/` +
+    `${padNumber(date.getMonth() + 1)}/` +
+    `${padNumber(date.getDate())}`
+  );
 }
 
 function formatFrontPhoneTime(date) {
-  const hours =
-    padNumber(
-      date.getHours()
-    );
-
-  const minutes =
-    padNumber(
-      date.getMinutes()
-    );
-
-  return `${hours}:${minutes}`;
+  return (
+    `${padNumber(date.getHours())}:` +
+    `${padNumber(date.getMinutes())}`
+  );
 }
 
 function updatePhoneClock() {
@@ -1055,9 +991,7 @@ function startPhoneClock() {
   updatePhoneClock();
 
   if (clockInterval !== null) {
-    window.clearInterval(
-      clockInterval
-    );
+    window.clearInterval(clockInterval);
   }
 
   clockInterval =
@@ -1068,48 +1002,36 @@ function startPhoneClock() {
 }
 
 /* ---------------------------------
-   VISIBILITY HELPERS
+   VISIBILITY
 --------------------------------- */
 
 function setFrontScreenVisible(visible) {
   frontScreen.style.display =
-    visible
-      ? "block"
-      : "none";
+    visible ? "block" : "none";
 
   frontScreen.setAttribute(
     "aria-hidden",
-    visible
-      ? "false"
-      : "true"
+    visible ? "false" : "true"
   );
 }
 
 function setOpenClockVisible(visible) {
   openScreenClock.style.display =
-    visible
-      ? "block"
-      : "none";
+    visible ? "block" : "none";
 
   openScreenClock.setAttribute(
     "aria-hidden",
-    visible
-      ? "false"
-      : "true"
+    visible ? "false" : "true"
   );
 }
 
 function setPhoneMenuVisible(visible) {
   phoneMenu.style.display =
-    visible
-      ? "block"
-      : "none";
+    visible ? "block" : "none";
 
   phoneMenu.setAttribute(
     "aria-hidden",
-    visible
-      ? "false"
-      : "true"
+    visible ? "false" : "true"
   );
 }
 
@@ -1128,20 +1050,14 @@ function setKeysEnabled(enabled) {
   });
 
   keyOverlay.style.visibility =
-    enabled
-      ? "visible"
-      : "hidden";
+    enabled ? "visible" : "hidden";
 
   keyOverlay.style.pointerEvents =
-    enabled
-      ? "auto"
-      : "none";
+    enabled ? "auto" : "none";
 
   keyOverlay.setAttribute(
     "aria-hidden",
-    enabled
-      ? "false"
-      : "true"
+    enabled ? "false" : "true"
   );
 }
 
@@ -1152,19 +1068,17 @@ function setKeysEnabled(enabled) {
 function updateMenuSelection() {
   menuItems.forEach(
     (item, index) => {
-      const isSelected =
+      const selected =
         index === selectedMenuIndex;
 
       item.classList.toggle(
         "is-selected",
-        isSelected
+        selected
       );
 
       item.setAttribute(
         "aria-selected",
-        isSelected
-          ? "true"
-          : "false"
+        selected ? "true" : "false"
       );
     }
   );
@@ -1172,9 +1086,7 @@ function updateMenuSelection() {
 
 function moveMenuSelection(direction) {
   const row =
-    Math.floor(
-      selectedMenuIndex / 2
-    );
+    Math.floor(selectedMenuIndex / 2);
 
   const column =
     selectedMenuIndex % 2;
@@ -1184,34 +1096,22 @@ function moveMenuSelection(direction) {
 
   if (direction === "up") {
     nextRow =
-      Math.max(
-        0,
-        row - 1
-      );
+      Math.max(0, row - 1);
   }
 
   if (direction === "down") {
     nextRow =
-      Math.min(
-        1,
-        row + 1
-      );
+      Math.min(1, row + 1);
   }
 
   if (direction === "left") {
     nextColumn =
-      Math.max(
-        0,
-        column - 1
-      );
+      Math.max(0, column - 1);
   }
 
   if (direction === "right") {
     nextColumn =
-      Math.min(
-        1,
-        column + 1
-      );
+      Math.min(1, column + 1);
   }
 
   selectedMenuIndex =
@@ -1228,14 +1128,13 @@ function selectCurrentMenuItem() {
     return;
   }
 
-  const sectionName =
-    selectedItem.dataset.section;
-
-  openContentPanel(sectionName);
+  openContentPanel(
+    selectedItem.dataset.section
+  );
 }
 
 /* ---------------------------------
-   CONTENT PANEL
+   SIDE CONTENT PANEL
 --------------------------------- */
 
 function openContentPanel(sectionName) {
@@ -1246,11 +1145,8 @@ function openContentPanel(sectionName) {
     return;
   }
 
-  activeSectionName =
-    sectionName;
-
-  activePageIndex =
-    0;
+  activeSectionName = sectionName;
+  activePageIndex = 0;
 
   renderPanelPage();
 
@@ -1282,11 +1178,8 @@ function closeContentPanel() {
     "true"
   );
 
-  activeSectionName =
-    null;
-
-  activePageIndex =
-    0;
+  activeSectionName = null;
+  activePageIndex = 0;
 }
 
 function renderPanelPage() {
@@ -1317,11 +1210,9 @@ function renderPanelPage() {
     activePageIndex ===
     totalPages - 1;
 
-  panelPage.scrollTop =
-    0;
+  panelPage.scrollTop = 0;
 
-  panelPage.style.animation =
-    "none";
+  panelPage.style.animation = "none";
 
   requestAnimationFrame(() => {
     panelPage.style.animation = "";
@@ -1329,11 +1220,10 @@ function renderPanelPage() {
 }
 
 function showPreviousPanelPage() {
-  if (!activeSectionName) {
-    return;
-  }
-
-  if (activePageIndex <= 0) {
+  if (
+    !activeSectionName ||
+    activePageIndex <= 0
+  ) {
     return;
   }
 
@@ -1350,11 +1240,8 @@ function showNextPanelPage() {
   const section =
     sectionContent[activeSectionName];
 
-  if (!section) {
-    return;
-  }
-
   if (
+    !section ||
     activePageIndex >=
     section.pages.length - 1
   ) {
@@ -1384,8 +1271,7 @@ function playAnimation(
 
   isAnimating = true;
 
-  flipTrigger.disabled =
-    true;
+  flipTrigger.disabled = true;
 
   setKeysEnabled(false);
 
@@ -1394,26 +1280,20 @@ function playAnimation(
   const interval =
     window.setInterval(() => {
       if (index < frames.length) {
-        frame.src =
-          frames[index];
+        frame.src = frames[index];
 
         index += 1;
 
         return;
       }
 
-      window.clearInterval(
-        interval
-      );
+      window.clearInterval(interval);
 
-      frame.src =
-        finalFrame;
+      frame.src = finalFrame;
 
-      isAnimating =
-        false;
+      isAnimating = false;
 
-      flipTrigger.disabled =
-        false;
+      flipTrigger.disabled = false;
 
       if (
         typeof callback ===
@@ -1425,16 +1305,11 @@ function playAnimation(
 }
 
 /* ---------------------------------
-   PHONE FLIP CLICK AREA
+   FLIP CLICK AREA
 --------------------------------- */
 
 function setFlipTriggerArea() {
   if (isOpen) {
-    /*
-      Open phone:
-      click the top cap to close.
-    */
-
     flipTrigger.style.left =
       "62px";
 
@@ -1452,12 +1327,6 @@ function setFlipTriggerArea() {
       "Close phone"
     );
   } else {
-    /*
-      Closed phone:
-      click the full phone front
-      to reopen.
-    */
-
     flipTrigger.style.left =
       "18px";
 
@@ -1478,7 +1347,7 @@ function setFlipTriggerArea() {
 }
 
 /* ---------------------------------
-   CREATE PHONE KEY BUTTONS
+   CREATE KEYPAD BUTTONS
 --------------------------------- */
 
 function renderKeys() {
@@ -1490,11 +1359,8 @@ function renderKeys() {
         "button"
       );
 
-    button.type =
-      "button";
-
-    button.className =
-      "phone-key";
+    button.type = "button";
+    button.className = "phone-key";
 
     if (key.className) {
       button.classList.add(
@@ -1502,8 +1368,7 @@ function renderKeys() {
       );
     }
 
-    button.dataset.key =
-      key.name;
+    button.dataset.key = key.name;
 
     button.setAttribute(
       "aria-label",
@@ -1595,11 +1460,6 @@ function handlePhoneKey(keyName) {
       "is-open"
     );
 
-  /*
-    When the side panel is open,
-    left and right change pages.
-  */
-
   if (panelIsOpen) {
     switch (keyName) {
       case "dpad-left":
@@ -1619,12 +1479,6 @@ function handlePhoneKey(keyName) {
         return;
     }
   }
-
-  /*
-    When the main menu is open,
-    directional buttons move
-    the selection.
-  */
 
   switch (keyName) {
     case "dpad-up":
@@ -1647,14 +1501,6 @@ function handlePhoneKey(keyName) {
     case "menu":
       selectCurrentMenuItem();
       break;
-
-    /*
-      Number shortcuts:
-      1 About
-      2 Site
-      3 History
-      4 Resume
-    */
 
     case "1":
       openContentPanel("about");
@@ -1680,7 +1526,7 @@ function handlePhoneKey(keyName) {
 }
 
 /* ---------------------------------
-   FIRST PHONE OPENING
+   FIRST OPENING
 --------------------------------- */
 
 function openPhoneForFirstTime() {
@@ -1693,8 +1539,7 @@ function openPhoneForFirstTime() {
 
   stopSpriteLoop();
 
-  spriteButton.hidden =
-    true;
+  spriteButton.hidden = true;
 
   spriteButton.style.display =
     "none";
@@ -1732,11 +1577,8 @@ function openPhoneForFirstTime() {
     openFrames,
     "images/42.png",
     () => {
-      hasOpenedOnce =
-        true;
-
-      isOpen =
-        true;
+      hasOpenedOnce = true;
+      isOpen = true;
 
       setFlipTriggerArea();
 
@@ -1776,8 +1618,7 @@ function closePhone() {
 
   setPhoneMenuVisible(false);
 
-  isOpen =
-    false;
+  isOpen = false;
 
   playAnimation(
     closeFrames,
@@ -1818,8 +1659,7 @@ function reopenPhone() {
     reopenFrames,
     "images/42.png",
     () => {
-      isOpen =
-        true;
+      isOpen = true;
 
       setFlipTriggerArea();
 
@@ -1835,7 +1675,7 @@ function reopenPhone() {
 }
 
 /* ---------------------------------
-   MENU AND PANEL EVENTS
+   MENU EVENTS
 --------------------------------- */
 
 function initializeMenuEvents() {
@@ -1846,8 +1686,7 @@ function initializeMenuEvents() {
         (event) => {
           event.stopPropagation();
 
-          selectedMenuIndex =
-            index;
+          selectedMenuIndex = index;
 
           updateMenuSelection();
 
@@ -1889,11 +1728,6 @@ function initializeMenuEvents() {
           "is-open"
         );
 
-      /*
-        Keyboard controls while
-        panel is open.
-      */
-
       if (panelIsOpen) {
         if (
           event.key ===
@@ -1922,11 +1756,6 @@ function initializeMenuEvents() {
 
         return;
       }
-
-      /*
-        Keyboard controls for
-        main phone menu.
-      */
 
       if (
         event.key ===
