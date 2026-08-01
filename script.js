@@ -43,6 +43,12 @@ const openScreenTime =
 const phoneMenu =
   document.getElementById("phone-menu");
 
+const dialScreen =
+  document.getElementById("dial-screen");
+
+const dialNumber =
+  document.getElementById("dial-number");
+
 const menuItems =
   Array.from(
     document.querySelectorAll(
@@ -103,7 +109,7 @@ const closeFrames = [
 ];
 
 /* ---------------------------------
-   CONTENT
+   PANEL CONTENT
 --------------------------------- */
 
 const sectionContent = {
@@ -225,18 +231,18 @@ const sectionContent = {
     pages: [
       `
         <p class="panel-quote">
-          First, there was a giant explosion that led to
-          the creation of planets, stars, dinosaurs,
-          people, the Industrial Revolution, wars,
-          governments, Wi-Fi, planes, and now this
-          application.
+          First, there was a giant explosion that
+          led to the creation of planets, stars,
+          dinosaurs, people, the Industrial
+          Revolution, wars, governments, Wi-Fi,
+          planes, and now this application.
         </p>
 
         <p>
-          Yet, there is still so much history that is
-          waiting to be written. Hopefully, I can be a
-          part of the history of Wieden and Kennedy's
-          residency program.
+          Yet, there is still so much history that
+          is waiting to be written. Hopefully, I
+          can be a part of the history of Wieden
+          and Kennedy's residency program.
         </p>
 
         <p>
@@ -299,17 +305,9 @@ const sectionContent = {
         </p>
 
         <ul>
-          <li>
-            Cumulative GPA: 3.8
-          </li>
-
-          <li>
-            Dean’s List
-          </li>
-
-          <li>
-            Scripps College Grant
-          </li>
+          <li>Cumulative GPA: 3.8</li>
+          <li>Dean’s List</li>
+          <li>Scripps College Grant</li>
 
           <li>
             Advanced coursework in digital art,
@@ -330,17 +328,19 @@ const sectionContent = {
 
         <ul>
           <li>
-            Produced 20+ edited photos weekly across
-            sports, clubs, and campus events,
-            consistently meeting deadlines and adapting
-            to different assignment needs
+            Produced 20+ edited photos weekly
+            across sports, clubs, and campus
+            events, consistently meeting
+            deadlines and adapting to different
+            assignment needs
           </li>
 
           <li>
-            Managed photography gear and workflows
-            independently, solved on-site technical
-            issues, and delivered high-quality images
-            using Adobe Lightroom Classic
+            Managed photography gear and
+            workflows independently, solved
+            on-site technical issues, and
+            delivered high-quality images using
+            Adobe Lightroom Classic
           </li>
         </ul>
       `,
@@ -357,18 +357,19 @@ const sectionContent = {
 
         <ul>
           <li>
-            Created digital graphics, posters, and
-            digital materials for artists, including
-            Psychic Fever, Beno, Andre Martin, and
-            Enrico, under tight deadlines, balancing
-            speed, accuracy, and clear communication
+            Created digital graphics, posters,
+            and digital materials for artists,
+            including Psychic Fever, Beno,
+            Andre Martin, and Enrico, under
+            tight deadlines, balancing speed,
+            accuracy, and clear communication
             with editors.
           </li>
 
           <li>
             Coordinated with editors via email,
-            incorporating feedback efficiently, and
-            delivered polished design assets
+            incorporating feedback efficiently,
+            and delivered polished design assets
           </li>
         </ul>
       `,
@@ -385,20 +386,21 @@ const sectionContent = {
 
         <ul>
           <li>
-            Supported with various tasks assigned by
-            upper management, such as sending outreach
-            emails, organizing content schedules,
-            creating and editing visual assets, and
-            updating social channels for artists and
-            their fan communities
+            Supported with various tasks assigned
+            by upper management, such as sending
+            outreach emails, organizing content
+            schedules, creating and editing visual
+            assets, and updating social channels
+            for artists and their fan communities
           </li>
 
           <li>
             Assisted weekly marketing meetings by
-            researching trends/fan behavior, reporting
-            on artists, and pitching creative ideas for
-            social media platforms or events for artists
-            such as Bayli, Tiana Major9, Frex, and
+            researching trends/fan behavior,
+            reporting on artists, and pitching
+            creative ideas for social media
+            platforms or events for artists such
+            as Bayli, Tiana Major9, Frex, and
             Esther Yu
           </li>
 
@@ -445,17 +447,17 @@ const sectionContent = {
 
           <li>
             Set up and troubleshot hardware for
-            audio-visual equipment, projectors, and
-            computers; escalated complex issues to
-            senior staff and ensured they moved
-            toward a resolution
+            audio-visual equipment, projectors,
+            and computers; escalated complex
+            issues to senior staff and ensured
+            they moved toward a resolution
           </li>
 
           <li>
             Verified the condition and availability
-            of equipment, maintained accurate records
-            on Excel, and provided support in
-            time-sensitive classroom environments
+            of equipment, maintained accurate
+            records on Excel, and provided support
+            in time-sensitive classroom environments
           </li>
         </ul>
       `,
@@ -471,24 +473,25 @@ const sectionContent = {
 
         <ul>
           <li>
-            Concert photographer for KLandMexico and
-            Blender Magazine, an emerging music
-            magazine covering Korean artists and
-            other rising international artists
+            Concert photographer for KLandMexico
+            and Blender Magazine, an emerging
+            music magazine covering Korean artists
+            and other rising international artists
           </li>
 
           <li>
             Contributed 5+ photographs within
-            published issues of Local Wolves Magazine,
-            selecting and editing images using Adobe
-            Lightroom Classic and Capture One
+            published issues of Local Wolves
+            Magazine, selecting and editing images
+            using Adobe Lightroom Classic and
+            Capture One
           </li>
 
           <li>
             Built a portfolio of fashion, portrait
-            photography, and concert photography for
-            artists such as Seo In Guk, Psychic Fever,
-            Milena, and Enjambre
+            photography, and concert photography
+            for artists such as Seo In Guk,
+            Psychic Fever, Milena, and Enjambre
           </li>
         </ul>
       `,
@@ -612,7 +615,7 @@ const phoneKeys = [
 
   {
     name: "lower-right",
-    label: "Back",
+    label: "Lower right key",
     x: 139,
     y: 381,
     width: 36,
@@ -630,7 +633,7 @@ const phoneKeys = [
 
   {
     name: "menu",
-    label: "Select highlighted menu item",
+    label: "Open menu",
     x: 94,
     y: 408,
     width: 38,
@@ -639,7 +642,7 @@ const phoneKeys = [
 
   {
     name: "end",
-    label: "Back",
+    label: "Clear number",
     x: 139,
     y: 408,
     width: 38,
@@ -648,7 +651,7 @@ const phoneKeys = [
 
   {
     name: "1",
-    label: "About shortcut",
+    label: "Number 1",
     x: 48,
     y: 439,
     width: 39,
@@ -657,7 +660,7 @@ const phoneKeys = [
 
   {
     name: "2",
-    label: "Sites shortcut",
+    label: "Number 2",
     x: 94,
     y: 439,
     width: 39,
@@ -666,7 +669,7 @@ const phoneKeys = [
 
   {
     name: "3",
-    label: "World History shortcut",
+    label: "Number 3",
     x: 139,
     y: 439,
     width: 39,
@@ -675,22 +678,97 @@ const phoneKeys = [
 
   {
     name: "4",
-    label: "Resume shortcut",
+    label: "Number 4",
     x: 48,
     y: 467,
+    width: 39,
+    height: 21
+  },
+
+  {
+    name: "5",
+    label: "Number 5",
+    x: 94,
+    y: 467,
+    width: 39,
+    height: 21
+  },
+
+  {
+    name: "6",
+    label: "Number 6",
+    x: 139,
+    y: 467,
+    width: 39,
+    height: 21
+  },
+
+  {
+    name: "7",
+    label: "Number 7",
+    x: 48,
+    y: 495,
+    width: 39,
+    height: 21
+  },
+
+  {
+    name: "8",
+    label: "Number 8",
+    x: 94,
+    y: 495,
+    width: 39,
+    height: 21
+  },
+
+  {
+    name: "9",
+    label: "Number 9",
+    x: 139,
+    y: 495,
+    width: 39,
+    height: 21
+  },
+
+  {
+    name: "*",
+    label: "Star",
+    x: 48,
+    y: 523,
+    width: 39,
+    height: 21
+  },
+
+  {
+    name: "0",
+    label: "Number 0",
+    x: 94,
+    y: 523,
+    width: 39,
+    height: 21
+  },
+
+  {
+    name: "#",
+    label: "Pound",
+    x: 139,
+    y: 523,
     width: 39,
     height: 21
   }
 ];
 
 /* ---------------------------------
-   STATE
+   PHONE STATE
 --------------------------------- */
 
 let isAnimating = false;
 let hasOpenedOnce = false;
 let isOpen = false;
 let isMenuVisible = false;
+let isDialScreenVisible = false;
+
+let enteredPhoneNumber = "";
 
 let spriteIndex = 0;
 let spriteInterval = null;
@@ -744,10 +822,7 @@ function stopSpriteLoop() {
     return;
   }
 
-  window.clearInterval(
-    spriteInterval
-  );
-
+  window.clearInterval(spriteInterval);
   spriteInterval = null;
 }
 
@@ -821,9 +896,7 @@ function startPhoneClock() {
   updatePhoneClock();
 
   if (clockInterval !== null) {
-    window.clearInterval(
-      clockInterval
-    );
+    window.clearInterval(clockInterval);
   }
 
   clockInterval =
@@ -834,7 +907,7 @@ function startPhoneClock() {
 }
 
 /* ---------------------------------
-   VISIBILITY
+   VISIBILITY HELPERS
 --------------------------------- */
 
 function setFrontScreenVisible(visible) {
@@ -879,6 +952,39 @@ function setPhoneMenuVisible(visible) {
       ? "false"
       : "true"
   );
+
+  if (visible) {
+    setDialScreenVisible(false);
+  }
+}
+
+function setDialScreenVisible(visible) {
+  isDialScreenVisible = visible;
+
+  dialScreen.classList.toggle(
+    "is-visible",
+    visible
+  );
+
+  dialScreen.setAttribute(
+    "aria-hidden",
+    visible
+      ? "false"
+      : "true"
+  );
+
+  if (visible) {
+    isMenuVisible = false;
+
+    phoneMenu.classList.remove(
+      "is-visible"
+    );
+
+    phoneMenu.setAttribute(
+      "aria-hidden",
+      "true"
+    );
+  }
 }
 
 function setKeysEnabled(enabled) {
@@ -914,7 +1020,48 @@ function setKeysEnabled(enabled) {
 }
 
 /* ---------------------------------
-   MENU
+   DIALING SCREEN
+--------------------------------- */
+
+function renderDialNumber() {
+  dialNumber.textContent =
+    enteredPhoneNumber;
+}
+
+function typeDialCharacter(character) {
+  if (enteredPhoneNumber.length >= 18) {
+    return;
+  }
+
+  enteredPhoneNumber += character;
+
+  setDialScreenVisible(true);
+  renderDialNumber();
+}
+
+function deleteDialCharacter() {
+  if (enteredPhoneNumber.length === 0) {
+    setDialScreenVisible(false);
+    return;
+  }
+
+  enteredPhoneNumber =
+    enteredPhoneNumber.slice(0, -1);
+
+  renderDialNumber();
+
+  if (enteredPhoneNumber.length === 0) {
+    setDialScreenVisible(false);
+  }
+}
+
+function clearDialNumber() {
+  enteredPhoneNumber = "";
+  renderDialNumber();
+}
+
+/* ---------------------------------
+   PHONE MENU
 --------------------------------- */
 
 function updateMenuSelection() {
@@ -1022,12 +1169,10 @@ function openContentPanel(sectionName) {
   }
 
   setPhoneMenuVisible(false);
+  setDialScreenVisible(false);
 
-  activeSectionName =
-    sectionName;
-
-  activePageIndex =
-    0;
+  activeSectionName = sectionName;
+  activePageIndex = 0;
 
   renderPanelPage();
 
@@ -1059,11 +1204,8 @@ function closeContentPanel() {
     "true"
   );
 
-  activeSectionName =
-    null;
-
-  activePageIndex =
-    0;
+  activeSectionName = null;
+  activePageIndex = 0;
 }
 
 function renderPanelPage() {
@@ -1094,8 +1236,7 @@ function renderPanelPage() {
     activePageIndex ===
     totalPages - 1;
 
-  panelPage.scrollTop =
-    0;
+  panelPage.scrollTop = 0;
 
   panelPage.style.animation =
     "none";
@@ -1114,7 +1255,6 @@ function showPreviousPanelPage() {
   }
 
   activePageIndex -= 1;
-
   renderPanelPage();
 }
 
@@ -1135,7 +1275,6 @@ function showNextPanelPage() {
   }
 
   activePageIndex += 1;
-
   renderPanelPage();
 }
 
@@ -1155,11 +1294,8 @@ function playAnimation(
     return;
   }
 
-  isAnimating =
-    true;
-
-  flipTrigger.disabled =
-    true;
+  isAnimating = true;
+  flipTrigger.disabled = true;
 
   setKeysEnabled(false);
 
@@ -1168,26 +1304,16 @@ function playAnimation(
   const interval =
     window.setInterval(() => {
       if (index < frames.length) {
-        frame.src =
-          frames[index];
-
+        frame.src = frames[index];
         index += 1;
-
         return;
       }
 
-      window.clearInterval(
-        interval
-      );
+      window.clearInterval(interval);
 
-      frame.src =
-        finalFrame;
-
-      isAnimating =
-        false;
-
-      flipTrigger.disabled =
-        false;
+      frame.src = finalFrame;
+      isAnimating = false;
+      flipTrigger.disabled = false;
 
       if (
         typeof callback ===
@@ -1199,7 +1325,7 @@ function playAnimation(
 }
 
 /* ---------------------------------
-   FLIP AREA
+   PHONE FLIP AREA
 --------------------------------- */
 
 function setFlipTriggerArea() {
@@ -1253,11 +1379,8 @@ function renderKeys() {
         "button"
       );
 
-    button.type =
-      "button";
-
-    button.className =
-      "phone-key";
+    button.type = "button";
+    button.className = "phone-key";
 
     if (key.className) {
       button.classList.add(
@@ -1358,24 +1481,104 @@ function handlePhoneKey(keyName) {
       "is-open"
     );
 
-  /* Home returns to the phone menu. */
+  const dialCharacters = [
+    "0",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "*",
+    "#"
+  ];
+
+  /* Number keys type onto the dialing screen. */
+  if (dialCharacters.includes(keyName)) {
+    if (panelIsOpen) {
+      closeContentPanel();
+    }
+
+    typeDialCharacter(keyName);
+    return;
+  }
+
+  /* Home returns to the main menu. */
   if (keyName === "home") {
     if (panelIsOpen) {
       closeContentPanel();
     }
 
+    setDialScreenVisible(false);
     setPhoneMenuVisible(true);
     updateMenuSelection();
 
     return;
   }
 
-  /* Back closes the panel or exits the menu. */
+  /* Back deletes a number or moves backward. */
   if (keyName === "back") {
+    if (isDialScreenVisible) {
+      deleteDialCharacter();
+      return;
+    }
+
     if (panelIsOpen) {
       closeContentPanel();
-    } else if (isMenuVisible) {
+      return;
+    }
+
+    if (isMenuVisible) {
       setPhoneMenuVisible(false);
+    }
+
+    return;
+  }
+
+  /* Red end button clears the number screen. */
+  if (keyName === "end") {
+    if (isDialScreenVisible) {
+      clearDialNumber();
+      setDialScreenVisible(false);
+      return;
+    }
+
+    if (panelIsOpen) {
+      closeContentPanel();
+      return;
+    }
+
+    setPhoneMenuVisible(false);
+    return;
+  }
+
+  /* Menu key opens the main menu. */
+  if (keyName === "menu") {
+    if (panelIsOpen) {
+      closeContentPanel();
+    }
+
+    setDialScreenVisible(false);
+    setPhoneMenuVisible(true);
+    updateMenuSelection();
+
+    return;
+  }
+
+  /* Center selects or opens the menu. */
+  if (keyName === "dpad-center") {
+    if (isDialScreenVisible) {
+      return;
+    }
+
+    if (!isMenuVisible) {
+      setPhoneMenuVisible(true);
+      updateMenuSelection();
+    } else {
+      selectCurrentMenuItem();
     }
 
     return;
@@ -1391,7 +1594,6 @@ function handlePhoneKey(keyName) {
         showNextPanelPage();
         return;
 
-      case "end":
       case "lower-right":
         closeContentPanel();
         return;
@@ -1401,83 +1603,29 @@ function handlePhoneKey(keyName) {
     }
   }
 
+  if (isDialScreenVisible) {
+    return;
+  }
+
   switch (keyName) {
-    case "dpad-center":
-      if (!isMenuVisible) {
-        setPhoneMenuVisible(true);
-        updateMenuSelection();
-      } else {
-        selectCurrentMenuItem();
-      }
-
-      break;
-
     case "dpad-up":
-      if (isMenuVisible) {
-        moveMenuSelection("up");
-      }
-
+      moveMenuSelection("up");
       break;
 
     case "dpad-down":
-      if (isMenuVisible) {
-        moveMenuSelection("down");
-      }
-
+      moveMenuSelection("down");
       break;
 
     case "dpad-left":
-      if (isMenuVisible) {
-        moveMenuSelection("left");
-      }
-
+      moveMenuSelection("left");
       break;
 
     case "dpad-right":
-      if (isMenuVisible) {
-        moveMenuSelection("right");
-      }
-
+      moveMenuSelection("right");
       break;
 
-    case "menu":
-      if (isMenuVisible) {
-        selectCurrentMenuItem();
-      }
-
-      break;
-
-    case "end":
     case "lower-right":
       setPhoneMenuVisible(false);
-      break;
-
-    case "1":
-      if (isMenuVisible) {
-        openContentPanel("about");
-      }
-
-      break;
-
-    case "2":
-      if (isMenuVisible) {
-        openContentPanel("site");
-      }
-
-      break;
-
-    case "3":
-      if (isMenuVisible) {
-        openContentPanel("history");
-      }
-
-      break;
-
-    case "4":
-      if (isMenuVisible) {
-        openContentPanel("resume");
-      }
-
       break;
 
     default:
@@ -1488,7 +1636,7 @@ function handlePhoneKey(keyName) {
 }
 
 /* ---------------------------------
-   FIRST OPENING
+   FIRST PHONE OPENING
 --------------------------------- */
 
 function openPhoneForFirstTime() {
@@ -1501,25 +1649,17 @@ function openPhoneForFirstTime() {
 
   stopSpriteLoop();
 
-  spriteButton.hidden =
-    true;
-
-  spriteButton.style.display =
-    "none";
-
-  sprite.style.display =
-    "none";
+  spriteButton.hidden = true;
+  spriteButton.style.display = "none";
+  sprite.style.display = "none";
 
   setKeysEnabled(false);
-
   setFrontScreenVisible(false);
-
   setOpenClockVisible(false);
-
   setPhoneMenuVisible(false);
+  setDialScreenVisible(false);
 
-  container.style.display =
-    "block";
+  container.style.display = "block";
 
   const sound1 =
     new Audio(
@@ -1543,22 +1683,15 @@ function openPhoneForFirstTime() {
     openFrames,
     "images/42.png",
     () => {
-      hasOpenedOnce =
-        true;
-
-      isOpen =
-        true;
+      hasOpenedOnce = true;
+      isOpen = true;
 
       setFlipTriggerArea();
-
       setKeysEnabled(true);
-
       setFrontScreenVisible(false);
-
       setOpenClockVisible(true);
-
       setPhoneMenuVisible(false);
-
+      setDialScreenVisible(false);
       updateMenuSelection();
     }
   );
@@ -1580,27 +1713,22 @@ function closePhone() {
   closeContentPanel();
 
   setKeysEnabled(false);
-
   setFrontScreenVisible(false);
-
   setOpenClockVisible(false);
-
   setPhoneMenuVisible(false);
+  setDialScreenVisible(false);
 
-  isOpen =
-    false;
+  isOpen = false;
 
   playAnimation(
     closeFrames,
     "images/50.png",
     () => {
       setFlipTriggerArea();
-
       setFrontScreenVisible(true);
-
       setOpenClockVisible(false);
-
       setPhoneMenuVisible(false);
+      setDialScreenVisible(false);
     }
   );
 }
@@ -1619,11 +1747,9 @@ function reopenPhone() {
   }
 
   setFrontScreenVisible(false);
-
   setOpenClockVisible(false);
-
   setPhoneMenuVisible(false);
-
+  setDialScreenVisible(false);
   setKeysEnabled(false);
 
   const reopenFrames =
@@ -1633,19 +1759,14 @@ function reopenPhone() {
     reopenFrames,
     "images/42.png",
     () => {
-      isOpen =
-        true;
+      isOpen = true;
 
       setFlipTriggerArea();
-
       setKeysEnabled(true);
-
       setFrontScreenVisible(false);
-
       setOpenClockVisible(true);
-
       setPhoneMenuVisible(false);
-
+      setDialScreenVisible(false);
       updateMenuSelection();
     }
   );
@@ -1667,8 +1788,7 @@ function initializeMenuEvents() {
             return;
           }
 
-          selectedMenuIndex =
-            index;
+          selectedMenuIndex = index;
 
           updateMenuSelection();
 
@@ -1710,32 +1830,60 @@ function initializeMenuEvents() {
           "is-open"
         );
 
-      if (panelIsOpen) {
-        if (
-          event.key ===
-          "ArrowLeft"
-        ) {
-          event.preventDefault();
-
-          showPreviousPanelPage();
-        }
-
-        if (
-          event.key ===
-          "ArrowRight"
-        ) {
-          event.preventDefault();
-
-          showNextPanelPage();
-        }
-
-        if (
-          event.key ===
-          "Escape"
-        ) {
+      if (/^[0-9]$/.test(event.key)) {
+        if (panelIsOpen) {
           closeContentPanel();
         }
 
+        typeDialCharacter(event.key);
+        return;
+      }
+
+      if (
+        event.key === "*" ||
+        event.key === "#"
+      ) {
+        if (panelIsOpen) {
+          closeContentPanel();
+        }
+
+        typeDialCharacter(event.key);
+        return;
+      }
+
+      if (
+        event.key === "Backspace" &&
+        isDialScreenVisible
+      ) {
+        event.preventDefault();
+        deleteDialCharacter();
+        return;
+      }
+
+      if (panelIsOpen) {
+        if (event.key === "ArrowLeft") {
+          event.preventDefault();
+          showPreviousPanelPage();
+        }
+
+        if (event.key === "ArrowRight") {
+          event.preventDefault();
+          showNextPanelPage();
+        }
+
+        if (event.key === "Escape") {
+          closeContentPanel();
+        }
+
+        return;
+      }
+
+      if (
+        event.key === "Escape" &&
+        isDialScreenVisible
+      ) {
+        clearDialNumber();
+        setDialScreenVisible(false);
         return;
       }
 
@@ -1745,9 +1893,12 @@ function initializeMenuEvents() {
       ) {
         event.preventDefault();
 
+        if (isDialScreenVisible) {
+          return;
+        }
+
         if (!isMenuVisible) {
           setPhoneMenuVisible(true);
-
           updateMenuSelection();
         } else {
           selectCurrentMenuItem();
@@ -1756,51 +1907,35 @@ function initializeMenuEvents() {
         return;
       }
 
-      if (
-        event.key ===
-        "Escape"
-      ) {
+      if (event.key === "Escape") {
         setPhoneMenuVisible(false);
         return;
       }
 
-      if (!isMenuVisible) {
+      if (
+        !isMenuVisible ||
+        isDialScreenVisible
+      ) {
         return;
       }
 
-      if (
-        event.key ===
-        "ArrowUp"
-      ) {
+      if (event.key === "ArrowUp") {
         event.preventDefault();
-
         moveMenuSelection("up");
       }
 
-      if (
-        event.key ===
-        "ArrowDown"
-      ) {
+      if (event.key === "ArrowDown") {
         event.preventDefault();
-
         moveMenuSelection("down");
       }
 
-      if (
-        event.key ===
-        "ArrowLeft"
-      ) {
+      if (event.key === "ArrowLeft") {
         event.preventDefault();
-
         moveMenuSelection("left");
       }
 
-      if (
-        event.key ===
-        "ArrowRight"
-      ) {
+      if (event.key === "ArrowRight") {
         event.preventDefault();
-
         moveMenuSelection("right");
       }
     }
@@ -1808,24 +1943,21 @@ function initializeMenuEvents() {
 }
 
 /* ---------------------------------
-   INITIALIZE
+   INITIALIZE PHONE
 --------------------------------- */
 
 function initializePhone() {
   renderKeys();
-
   initializeMenuEvents();
 
   setKeysEnabled(false);
-
   setFrontScreenVisible(false);
-
   setOpenClockVisible(false);
-
   setPhoneMenuVisible(false);
+  setDialScreenVisible(false);
+  clearDialNumber();
 
   startSpriteLoop();
-
   startPhoneClock();
 
   spriteButton.addEventListener(
