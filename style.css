@@ -95,7 +95,6 @@ img {
 
 /* ---------------------------------
    OPEN PHONE DATE AND TIME
-   moved higher toward the top line
 --------------------------------- */
 
 .open-screen-clock {
@@ -165,7 +164,6 @@ img {
   pointer-events: none;
 
   background: #e8ef17;
-
   border: 1px solid rgba(0, 0, 0, 0.65);
   border-radius: 2px;
 }
@@ -197,7 +195,7 @@ img {
 
 /* ---------------------------------
    FRONT SCREEN DATE AND TIME
-   larger and positioned at bottom
+   moved down by 3px
 --------------------------------- */
 
 .front-screen-clock {
@@ -205,7 +203,9 @@ img {
 
   left: 4px;
   right: 4px;
-  bottom: 4px;
+
+  /* previously 4px */
+  bottom: 1px;
 
   z-index: 3;
 
@@ -224,7 +224,8 @@ img {
     Georgia,
     serif;
 
-  font-size: 10px;
+  /* larger date */
+  font-size: 12px;
   font-weight: 700;
   line-height: 1;
   white-space: nowrap;
