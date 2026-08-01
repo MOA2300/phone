@@ -26,7 +26,8 @@
       <img
         id="sprite"
         src="DefineSprite_22/1.png"
-        alt="Closed flip phone"
+        alt="Small animated phone"
+        draggable="false"
       >
     </button>
 
@@ -39,26 +40,17 @@
       <img
         id="phone-frame"
         src="images/6.png"
-        alt="Flip phone"
+        alt="Interactive flip phone"
         draggable="false"
       >
 
-      <!-- Text displayed over the phone screen -->
-      <div
-        id="phone-display"
-        class="phone-display"
-        aria-live="polite"
-      >
-        <div id="phone-display-text"></div>
-      </div>
-
-      <!-- JavaScript adds all keypad buttons here -->
+      <!-- JavaScript adds the clickable keys here -->
       <div
         id="key-overlay"
         class="key-overlay"
       ></div>
 
-      <!-- Close and reopen trigger -->
+      <!-- Clickable area used to close and reopen the phone -->
       <button
         id="flip-trigger"
         class="flip-trigger"
