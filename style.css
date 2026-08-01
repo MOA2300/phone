@@ -192,24 +192,21 @@ body.panel-open .phone-container {
 /* ---------------------------------
    MAIN PHONE MENU
 
-   Left edge moved inward by 1.5px.
-   Width reduced by 1.5px.
-   Bottom reduced by 1.5px.
-
-   Current dimensions:
+   Updated measurements:
    left: 48.5px
+   top: 144px
    width: 128.5px
-   height: 120.5px
+   height: 121px
 --------------------------------- */
 
 .phone-menu {
   position: absolute;
 
   left: 48.5px;
-  top: 124px;
+  top: 144px;
 
   width: 128.5px;
-  height: 120.5px;
+  height: 121px;
 
   display: none;
 
@@ -273,7 +270,7 @@ body.panel-open .phone-container {
     repeat(2, minmax(0, 1fr));
 
   grid-template-rows:
-    repeat(2, 42.25px);
+    repeat(2, 42.5px);
 
   gap: 3px;
 }
@@ -286,7 +283,7 @@ body.panel-open .phone-container {
   position: relative;
 
   min-width: 0;
-  height: 42.25px;
+  height: 42.5px;
 
   display: flex;
   flex-direction: column;
