@@ -107,50 +107,49 @@ const phoneKeys = [
   },
 
   /*
-    Very small directional-arrow areas.
+    Smaller direction-arrow areas.
 
-    The left arrow has been moved
-    farther left to sit over the
-    visible arrow on the phone.
+    The up arrow has been moved higher.
+    The left arrow remains farther left.
   */
 
   {
     name: "dpad-up",
     label: "Up",
-    x: 104,
-    y: 349,
-    width: 14,
-    height: 8,
+    x: 105,
+    y: 345,
+    width: 12,
+    height: 6,
     className: "dpad-key"
   },
 
   {
     name: "dpad-left",
     label: "Left",
-    x: 86,
-    y: 360,
-    width: 8,
-    height: 14,
+    x: 85,
+    y: 361,
+    width: 6,
+    height: 12,
     className: "dpad-key"
   },
 
   {
     name: "dpad-right",
     label: "Right",
-    x: 129,
-    y: 360,
-    width: 8,
-    height: 14,
+    x: 131,
+    y: 361,
+    width: 6,
+    height: 12,
     className: "dpad-key"
   },
 
   {
     name: "dpad-down",
     label: "Down",
-    x: 104,
-    y: 389,
-    width: 14,
-    height: 8,
+    x: 105,
+    y: 390,
+    width: 12,
+    height: 6,
     className: "dpad-key"
   },
 
@@ -784,7 +783,7 @@ function handlePhoneKey(keyName) {
     case "end":
       /*
         The hang-up key does not
-        close the physical phone.
+        physically close the phone.
       */
 
       console.log(
