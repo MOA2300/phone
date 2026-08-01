@@ -5,22 +5,39 @@
 --------------------------------- */
 
 const spriteButton =
-  document.getElementById("sprite-button");
+  document.getElementById(
+    "sprite-button"
+  );
 
 const sprite =
-  document.getElementById("sprite");
+  document.getElementById(
+    "sprite"
+  );
 
 const frame =
-  document.getElementById("phone-frame");
+  document.getElementById(
+    "phone-frame"
+  );
 
 const container =
-  document.getElementById("phone-container");
+  document.getElementById(
+    "phone-container"
+  );
 
 const keyOverlay =
-  document.getElementById("key-overlay");
+  document.getElementById(
+    "key-overlay"
+  );
 
 const flipTrigger =
-  document.getElementById("flip-trigger");
+  document.getElementById(
+    "flip-trigger"
+  );
+
+const frontScreen =
+  document.getElementById(
+    "front-screen"
+  );
 
 /* ---------------------------------
    SMALL STARTING PHONE FRAMES
@@ -29,7 +46,9 @@ const flipTrigger =
 const spriteFrames = [];
 
 for (let i = 1; i <= 16; i += 1) {
-  spriteFrames.push(`DefineSprite_22/${i}.png`);
+  spriteFrames.push(
+    `DefineSprite_22/${i}.png`
+  );
 }
 
 /* ---------------------------------
@@ -62,10 +81,12 @@ const closeFrames = [
 /* ---------------------------------
    PHONE KEY COORDINATES
 
-   Based on the 236 × 656 open-phone PNG.
+   Based on the open 236 × 656 PNG.
 --------------------------------- */
 
 const phoneKeys = [
+  /* Upper side keys */
+
   {
     name: "upper-left",
     label: "Upper left key",
@@ -89,51 +110,55 @@ const phoneKeys = [
   {
     name: "dpad-up",
     label: "Up",
-    x: 88,
-    y: 345,
-    width: 46,
-    height: 23,
+    x: 99,
+    y: 347,
+    width: 24,
+    height: 12,
     className: "dpad-key"
   },
 
   {
     name: "dpad-left",
     label: "Left",
-    x: 82,
-    y: 355,
-    width: 23,
-    height: 34,
+    x: 91,
+    y: 360,
+    width: 12,
+    height: 19,
     className: "dpad-key"
   },
 
   {
     name: "dpad-right",
     label: "Right",
-    x: 119,
-    y: 355,
-    width: 23,
-    height: 34,
+    x: 123,
+    y: 360,
+    width: 12,
+    height: 19,
     className: "dpad-key"
   },
 
   {
     name: "dpad-down",
     label: "Down",
-    x: 88,
-    y: 378,
-    width: 46,
-    height: 23,
+    x: 99,
+    y: 385,
+    width: 24,
+    height: 12,
     className: "dpad-key"
   },
+
+  /* Center select button */
 
   {
     name: "dpad-center",
     label: "Select",
-    x: 94,
-    y: 353,
-    width: 36,
-    height: 36
+    x: 97,
+    y: 356,
+    width: 30,
+    height: 30
   },
+
+  /* Lower side keys */
 
   {
     name: "lower-left",
@@ -152,6 +177,8 @@ const phoneKeys = [
     width: 36,
     height: 21
   },
+
+  /* Call, menu and hang-up keys */
 
   {
     name: "call",
@@ -173,12 +200,14 @@ const phoneKeys = [
 
   {
     name: "end",
-    label: "End",
+    label: "Hang up",
     x: 139,
     y: 408,
     width: 38,
     height: 23
   },
+
+  /* Number row 1 */
 
   {
     name: "1",
@@ -207,6 +236,8 @@ const phoneKeys = [
     height: 21
   },
 
+  /* Number row 2 */
+
   {
     name: "4",
     label: "Number 4",
@@ -234,6 +265,8 @@ const phoneKeys = [
     height: 21
   },
 
+  /* Number row 3 */
+
   {
     name: "7",
     label: "Number 7",
@@ -260,6 +293,8 @@ const phoneKeys = [
     width: 39,
     height: 21
   },
+
+  /* Bottom number row */
 
   {
     name: "star",
@@ -314,7 +349,8 @@ function preloadImages(paths) {
 preloadImages([
   ...spriteFrames,
   ...openFrames,
-  ...closeFrames
+  ...closeFrames,
+  "images/bunny.png"
 ]);
 
 /* ---------------------------------
@@ -326,12 +362,15 @@ function startSpriteLoop() {
 
   sprite.src = spriteFrames[0];
 
-  spriteInterval = window.setInterval(() => {
-    spriteIndex =
-      (spriteIndex + 1) % spriteFrames.length;
+  spriteInterval =
+    window.setInterval(() => {
+      spriteIndex =
+        (spriteIndex + 1) %
+        spriteFrames.length;
 
-    sprite.src = spriteFrames[spriteIndex];
-  }, 160);
+      sprite.src =
+        spriteFrames[spriteIndex];
+    }, 160);
 }
 
 function stopSpriteLoop() {
@@ -339,8 +378,27 @@ function stopSpriteLoop() {
     return;
   }
 
-  window.clearInterval(spriteInterval);
+  window.clearInterval(
+    spriteInterval
+  );
+
   spriteInterval = null;
+}
+
+/* ---------------------------------
+   BUNNY SCREEN VISIBILITY
+--------------------------------- */
+
+function setFrontScreenVisible(visible) {
+  frontScreen.style.display =
+    visible
+      ? "block"
+      : "none";
+
+  frontScreen.setAttribute(
+    "aria-hidden",
+    visible ? "false" : "true"
+  );
 }
 
 /* ---------------------------------
@@ -349,18 +407,27 @@ function stopSpriteLoop() {
 
 function setKeysEnabled(enabled) {
   const buttons =
-    keyOverlay.querySelectorAll(".phone-key");
+    keyOverlay.querySelectorAll(
+      ".phone-key"
+    );
 
   buttons.forEach((button) => {
     button.disabled = !enabled;
-    button.classList.remove("is-pressed");
+
+    button.classList.remove(
+      "is-pressed"
+    );
   });
 
   keyOverlay.style.visibility =
-    enabled ? "visible" : "hidden";
+    enabled
+      ? "visible"
+      : "hidden";
 
   keyOverlay.style.pointerEvents =
-    enabled ? "auto" : "none";
+    enabled
+      ? "auto"
+      : "none";
 
   keyOverlay.setAttribute(
     "aria-hidden",
@@ -385,51 +452,91 @@ function playAnimation(
   }
 
   isAnimating = true;
+
   flipTrigger.disabled = true;
 
   setKeysEnabled(false);
 
   let index = 0;
 
-  const interval = window.setInterval(() => {
-    if (index < frames.length) {
-      frame.src = frames[index];
-      index += 1;
-      return;
-    }
+  const interval =
+    window.setInterval(() => {
+      if (index < frames.length) {
+        frame.src = frames[index];
 
-    window.clearInterval(interval);
+        index += 1;
 
-    frame.src = finalFrame;
-    isAnimating = false;
-    flipTrigger.disabled = false;
+        return;
+      }
 
-    if (typeof callback === "function") {
-      callback();
-    }
-  }, 90);
+      window.clearInterval(
+        interval
+      );
+
+      frame.src = finalFrame;
+
+      isAnimating = false;
+
+      flipTrigger.disabled = false;
+
+      if (
+        typeof callback === "function"
+      ) {
+        callback();
+      }
+    }, 90);
 }
 
 /* ---------------------------------
-   CLOSE AND REOPEN CLICK AREA
+   CLOSE / REOPEN CLICK AREA
 --------------------------------- */
 
 function setFlipTriggerArea() {
   if (isOpen) {
-    flipTrigger.style.left = "62px";
-    flipTrigger.style.top = "0px";
-    flipTrigger.style.width = "112px";
-    flipTrigger.style.height = "62px";
+    /*
+      Open phone:
+      click the top cap to close it.
+    */
+
+    flipTrigger.style.left =
+      "62px";
+
+    flipTrigger.style.top =
+      "0px";
+
+    flipTrigger.style.width =
+      "112px";
+
+    flipTrigger.style.height =
+      "62px";
 
     flipTrigger.setAttribute(
       "aria-label",
       "Close phone"
     );
   } else {
-    flipTrigger.style.left = "24px";
-    flipTrigger.style.top = "180px";
-    flipTrigger.style.width = "190px";
-    flipTrigger.style.height = "470px";
+    /*
+      Closed phone:
+
+      The 200 × 420 closed frame is
+      scaled and centered within the
+      236 × 656 phone container.
+
+      This area covers the complete
+      visible closed phone.
+    */
+
+    flipTrigger.style.left =
+      "18px";
+
+    flipTrigger.style.top =
+      "80px";
+
+    flipTrigger.style.width =
+      "200px";
+
+    flipTrigger.style.height =
+      "496px";
 
     flipTrigger.setAttribute(
       "aria-label",
@@ -439,7 +546,7 @@ function setFlipTriggerArea() {
 }
 
 /* ---------------------------------
-   CREATE ALL CLICKABLE KEYS
+   CREATE CLICKABLE KEYS
 --------------------------------- */
 
 function renderKeys() {
@@ -447,40 +554,61 @@ function renderKeys() {
 
   phoneKeys.forEach((key) => {
     const button =
-      document.createElement("button");
+      document.createElement(
+        "button"
+      );
 
     button.type = "button";
-    button.className = "phone-key";
+
+    button.className =
+      "phone-key";
 
     if (key.className) {
-      button.classList.add(key.className);
+      button.classList.add(
+        key.className
+      );
     }
 
-    button.dataset.key = key.name;
+    button.dataset.key =
+      key.name;
 
     button.setAttribute(
       "aria-label",
       key.label
     );
 
-    button.style.left = `${key.x}px`;
-    button.style.top = `${key.y}px`;
-    button.style.width = `${key.width}px`;
-    button.style.height = `${key.height}px`;
+    button.style.left =
+      `${key.x}px`;
+
+    button.style.top =
+      `${key.y}px`;
+
+    button.style.width =
+      `${key.width}px`;
+
+    button.style.height =
+      `${key.height}px`;
 
     button.addEventListener(
       "pointerdown",
       () => {
-        if (!isOpen || isAnimating) {
+        if (
+          !isOpen ||
+          isAnimating
+        ) {
           return;
         }
 
-        button.classList.add("is-pressed");
+        button.classList.add(
+          "is-pressed"
+        );
       }
     );
 
     const releaseKey = () => {
-      button.classList.remove("is-pressed");
+      button.classList.remove(
+        "is-pressed"
+      );
     };
 
     button.addEventListener(
@@ -503,15 +631,22 @@ function renderKeys() {
       (event) => {
         event.stopPropagation();
 
-        if (!isOpen || isAnimating) {
+        if (
+          !isOpen ||
+          isAnimating
+        ) {
           return;
         }
 
-        handlePhoneKey(key.name);
+        handlePhoneKey(
+          key.name
+        );
       }
     );
 
-    keyOverlay.appendChild(button);
+    keyOverlay.appendChild(
+      button
+    );
   });
 
   setKeysEnabled(false);
@@ -528,15 +663,29 @@ function handlePhoneKey(keyName) {
 
   switch (keyName) {
     case "end":
-      console.log("Hangup button pressed");
+      /*
+        The red hang-up key does not
+        physically close the phone.
+      */
+
+      console.log(
+        "Hang-up button pressed"
+      );
+
       break;
 
     case "call":
-      console.log("Call key pressed");
+      console.log(
+        "Call button pressed"
+      );
+
       break;
 
     case "menu":
-      console.log("Menu key pressed");
+      console.log(
+        "Menu button pressed"
+      );
+
       break;
 
     case "dpad-up":
@@ -575,7 +724,10 @@ function handlePhoneKey(keyName) {
     case "star":
     case "0":
     case "hash":
-      console.log(`${keyName} pressed`);
+      console.log(
+        `${keyName} pressed`
+      );
+
       break;
 
     default:
@@ -599,32 +751,57 @@ function openPhoneForFirstTime() {
 
   stopSpriteLoop();
 
+  /*
+    Hide the small phone before the
+    large-phone animation begins.
+  */
+
   spriteButton.hidden = true;
-  spriteButton.style.display = "none";
-  sprite.style.display = "none";
+
+  spriteButton.style.display =
+    "none";
+
+  sprite.style.display =
+    "none";
 
   setKeysEnabled(false);
 
-  container.style.display = "block";
+  setFrontScreenVisible(false);
+
+  container.style.display =
+    "block";
 
   const sound1 =
-    new Audio("sounds/27_fixed.mp3");
+    new Audio(
+      "sounds/27_fixed.mp3"
+    );
 
   const sound2 =
-    new Audio("sounds/28_fixed.mp3");
+    new Audio(
+      "sounds/28_fixed.mp3"
+    );
 
-  sound1.play().catch(() => {});
-  sound2.play().catch(() => {});
+  sound1
+    .play()
+    .catch(() => {});
+
+  sound2
+    .play()
+    .catch(() => {});
 
   playAnimation(
     openFrames,
     "images/42.png",
     () => {
       hasOpenedOnce = true;
+
       isOpen = true;
 
       setFlipTriggerArea();
+
       setKeysEnabled(true);
+
+      setFrontScreenVisible(false);
     }
   );
 }
@@ -642,7 +819,15 @@ function closePhone() {
     return;
   }
 
+  /*
+    Hide the keypad and bunny while
+    the closing animation is playing.
+  */
+
   setKeysEnabled(false);
+
+  setFrontScreenVisible(false);
+
   isOpen = false;
 
   playAnimation(
@@ -650,6 +835,13 @@ function closePhone() {
     "images/50.png",
     () => {
       setFlipTriggerArea();
+
+      /*
+        Show the bunny only when the
+        phone is completely closed.
+      */
+
+      setFrontScreenVisible(true);
     }
   );
 }
@@ -667,6 +859,12 @@ function reopenPhone() {
     return;
   }
 
+  /*
+    Hide the bunny before reopening.
+  */
+
+  setFrontScreenVisible(false);
+
   setKeysEnabled(false);
 
   const reopenFrames =
@@ -679,7 +877,10 @@ function reopenPhone() {
       isOpen = true;
 
       setFlipTriggerArea();
+
       setKeysEnabled(true);
+
+      setFrontScreenVisible(false);
     }
   );
 }
@@ -690,6 +891,11 @@ function reopenPhone() {
 
 function initializePhone() {
   renderKeys();
+
+  setKeysEnabled(false);
+
+  setFrontScreenVisible(false);
+
   startSpriteLoop();
 
   spriteButton.addEventListener(
