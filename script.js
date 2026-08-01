@@ -131,8 +131,8 @@ const sectionContent = {
               with a B.A. in Digital Art. I had
               the privilege of experimenting with
               various mediums in college,
-              including photography, printmaking,
-              and ceramics.
+              including graphic art, photography,
+              printmaking, and ceramics.
             </p>
 
             <p>
@@ -171,23 +171,18 @@ const sectionContent = {
   },
 
   site: {
-    title: "Site",
+    title: "Sites",
 
     pages: [
       `
-        <p class="panel-kicker">
-          PAGE 01 · PORTFOLIO
-        </p>
-
         <h2>
-          Enter the Rest of My Creative World
+          Visit My Portfolio Page:
         </h2>
 
         <p>
-          My portfolio includes photography,
-          visual design, interactive projects
-          and work shaped by identity, music,
-          fashion and digital culture.
+          Explore my photography, visual design,
+          interactive projects and other creative
+          work.
         </p>
 
         <p>
@@ -196,7 +191,28 @@ const sectionContent = {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Open leslieahuatzi.com ↗
+            leslieahuatzi.com ↗
+          </a>
+        </p>
+      `,
+
+      `
+        <h2>
+          Visit My LinkedIn:
+        </h2>
+
+        <p>
+          Connect with me and learn more about
+          my professional experience.
+        </p>
+
+        <p>
+          <a
+            href="https://www.linkedin.com/in/leslie-ahuatzi"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            www.linkedin.com/in/leslie-ahuatzi ↗
           </a>
         </p>
       `
@@ -600,7 +616,7 @@ const phoneKeys = [
 
   {
     name: "2",
-    label: "Site shortcut",
+    label: "Sites shortcut",
     x: 94,
     y: 439,
     width: 39,
