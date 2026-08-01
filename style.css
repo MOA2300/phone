@@ -460,7 +460,7 @@ body.panel-open .phone-container {
   transform: rotate(-15deg);
 }
 
-/* Résumé icon */
+/* Resume icon */
 
 .menu-icon-resume::before {
   content: "";
@@ -545,9 +545,6 @@ body.panel-open .phone-container {
 
 /* ---------------------------------
    CLOSED SCREEN BUNNY
-
-   Reduced inward by 0.4px
-   on every side.
 --------------------------------- */
 
 #front-screen-image {
@@ -1156,6 +1153,77 @@ body.panel-open .phone-container {
 
   font-weight: 800;
   letter-spacing: 0.5px;
+}
+
+/* ---------------------------------
+   ABOUT PAGE
+--------------------------------- */
+
+.about-page {
+  display: grid;
+
+  grid-template-columns:
+    minmax(130px, 0.8fr)
+    minmax(0, 1.7fr);
+
+  gap: 24px;
+
+  align-items: start;
+}
+
+.about-image-wrapper {
+  width: 100%;
+
+  overflow: hidden;
+
+  border: 1px solid #67675f;
+
+  background: #171717;
+
+  box-shadow:
+    7px 7px 0 #e4d000,
+    12px 12px 0 rgba(0, 0, 0, 0.5);
+}
+
+.about-image {
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  aspect-ratio: 4 / 5;
+
+  object-fit: cover;
+  object-position: center top;
+}
+
+.about-copy {
+  min-width: 0;
+}
+
+.about-copy h2 {
+  margin-top: 0;
+
+  text-transform: none;
+}
+
+.about-copy p {
+  max-width: none;
+}
+
+/* ---------------------------------
+   RESPONSIVE ABOUT PAGE
+--------------------------------- */
+
+@media (max-width: 650px) {
+  .about-page {
+    grid-template-columns: 1fr;
+  }
+
+  .about-image-wrapper {
+    width: min(240px, 100%);
+    margin: 0 auto 12px;
+  }
 }
 
 /* ---------------------------------
