@@ -225,19 +225,17 @@ const sectionContent = {
     pages: [
       `
         <p class="panel-quote">
-          First, there was a giant explosion
-          that led to the creation of planets,
-          stars, dinosaurs, people, the
-          Industrial Revolution, wars,
-          governments, Wi-Fi, planes, and now
-          this application.
+          First, there was a giant explosion that led to
+          the creation of planets, stars, dinosaurs,
+          people, the Industrial Revolution, wars,
+          governments, Wi-Fi, planes, and now this
+          application.
         </p>
 
         <p>
-          Yet, there is still so much history
-          that is waiting to be written.
-          Hopefully, I can be a part of the
-          history of Wieden and Kennedy's
+          Yet, there is still so much history that is
+          waiting to be written. Hopefully, I can be a
+          part of the history of Wieden and Kennedy's
           residency program.
         </p>
 
@@ -253,10 +251,6 @@ const sectionContent = {
 
     pages: [
       `
-        <p class="panel-kicker">
-          PAGE 01 · PROFILE
-        </p>
-
         <h2>
           Leslie Ahuatzi
         </h2>
@@ -296,10 +290,6 @@ const sectionContent = {
       `,
 
       `
-        <p class="panel-kicker">
-          PAGE 02 · EDUCATION
-        </p>
-
         <h2>
           Scripps College
         </h2>
@@ -309,9 +299,17 @@ const sectionContent = {
         </p>
 
         <ul>
-          <li>Cumulative GPA: 3.8</li>
-          <li>Dean’s List</li>
-          <li>Scripps College Grant</li>
+          <li>
+            Cumulative GPA: 3.8
+          </li>
+
+          <li>
+            Dean’s List
+          </li>
+
+          <li>
+            Scripps College Grant
+          </li>
 
           <li>
             Advanced coursework in digital art,
@@ -321,10 +319,6 @@ const sectionContent = {
       `,
 
       `
-        <p class="panel-kicker">
-          PAGE 03 · PHOTOGRAPHY
-        </p>
-
         <h2>
           The Student Life
         </h2>
@@ -336,27 +330,22 @@ const sectionContent = {
 
         <ul>
           <li>
-            Produced more than 20 edited
-            photographs weekly
+            Produced 20+ edited photos weekly across
+            sports, clubs, and campus events,
+            consistently meeting deadlines and adapting
+            to different assignment needs
           </li>
 
           <li>
-            Covered sports, clubs and campus
-            events under deadline
-          </li>
-
-          <li>
-            Managed equipment and workflows
-            independently
+            Managed photography gear and workflows
+            independently, solved on-site technical
+            issues, and delivered high-quality images
+            using Adobe Lightroom Classic
           </li>
         </ul>
       `,
 
       `
-        <p class="panel-kicker">
-          PAGE 04 · GRAPHIC DESIGN
-        </p>
-
         <h2>
           Alicia’s Studio
         </h2>
@@ -368,22 +357,23 @@ const sectionContent = {
 
         <ul>
           <li>
-            Created graphics, posters and
-            digital artist materials
+            Created digital graphics, posters, and
+            digital materials for artists, including
+            Psychic Fever, Beno, Andre Martin, and
+            Enrico, under tight deadlines, balancing
+            speed, accuracy, and clear communication
+            with editors.
           </li>
 
           <li>
-            Incorporated editorial feedback
-            and delivered polished assets
+            Coordinated with editors via email,
+            incorporating feedback efficiently, and
+            delivered polished design assets
           </li>
         </ul>
       `,
 
       `
-        <p class="panel-kicker">
-          PAGE 05 · MARKETING
-        </p>
-
         <h2>
           HowRU?
         </h2>
@@ -395,25 +385,39 @@ const sectionContent = {
 
         <ul>
           <li>
-            Supported outreach and content
-            scheduling
+            Supported with various tasks assigned by
+            upper management, such as sending outreach
+            emails, organizing content schedules,
+            creating and editing visual assets, and
+            updating social channels for artists and
+            their fan communities
           </li>
 
           <li>
-            Researched trends and fan behavior
+            Assisted weekly marketing meetings by
+            researching trends/fan behavior, reporting
+            on artists, and pitching creative ideas for
+            social media platforms or events for artists
+            such as Bayli, Tiana Major9, Frex, and
+            Esther Yu
           </li>
 
           <li>
-            Pitched social and event ideas
+            Wrote weekly recap emails summarizing
+            completed work for 4+ artists while
+            maintaining clear documentation and
+            confidentiality across internal teams
+          </li>
+
+          <li>
+            Supported campaigns in fast-paced
+            environments, adapting quickly to new
+            tools and evolving workflows
           </li>
         </ul>
       `,
 
       `
-        <p class="panel-kicker">
-          PAGE 06 · MEDIA SERVICES
-        </p>
-
         <h2>
           Scripps College
         </h2>
@@ -425,22 +429,38 @@ const sectionContent = {
 
         <ul>
           <li>
-            Supported students and faculty
-            with technical issues
+            Facilitated technical support for the
+            Media Services Department and assisted
+            the Scripps Community through office
+            support, acting as the primary customer
+            contact for urgent issues
           </li>
 
           <li>
-            Troubleshot AV equipment,
-            projectors and computers
+            Served as a first line of support for
+            students and faculty requesting AV
+            equipment, camera checkouts, or campus
+            tech help
+          </li>
+
+          <li>
+            Set up and troubleshot hardware for
+            audio-visual equipment, projectors, and
+            computers; escalated complex issues to
+            senior staff and ensured they moved
+            toward a resolution
+          </li>
+
+          <li>
+            Verified the condition and availability
+            of equipment, maintained accurate records
+            on Excel, and provided support in
+            time-sensitive classroom environments
           </li>
         </ul>
       `,
 
       `
-        <p class="panel-kicker">
-          PAGE 07 · FREELANCE
-        </p>
-
         <h2>
           Freelance Photographer
         </h2>
@@ -451,32 +471,35 @@ const sectionContent = {
 
         <ul>
           <li>
-            Photographed concerts and artists
+            Concert photographer for KLandMexico and
+            Blender Magazine, an emerging music
+            magazine covering Korean artists and
+            other rising international artists
           </li>
 
           <li>
-            Contributed published work to
-            Local Wolves Magazine
+            Contributed 5+ photographs within
+            published issues of Local Wolves Magazine,
+            selecting and editing images using Adobe
+            Lightroom Classic and Capture One
           </li>
 
           <li>
-            Built a fashion, portrait and
-            concert portfolio
+            Built a portfolio of fashion, portrait
+            photography, and concert photography for
+            artists such as Seo In Guk, Psychic Fever,
+            Milena, and Enjambre
           </li>
         </ul>
       `,
 
       `
-        <p class="panel-kicker">
-          PAGE 08 · TOOLKIT
-        </p>
-
         <h2>
           Skills and Interests
         </h2>
 
         <h3>
-          Creative tools
+          Creative Tools
         </h3>
 
         <p>
@@ -491,6 +514,15 @@ const sectionContent = {
 
         <p>
           Fluent in English and Spanish
+        </p>
+
+        <h3>
+          Interests
+        </h3>
+
+        <p>
+          Photography, Soccer, Design,
+          Printmaking, Films, Digital Marketing
         </p>
       `
     ]
@@ -669,7 +701,7 @@ let activeSectionName = null;
 let activePageIndex = 0;
 
 /* ---------------------------------
-   PRELOAD
+   PRELOAD IMAGES
 --------------------------------- */
 
 function preloadImages(paths) {
@@ -1068,7 +1100,7 @@ function renderPanelPage() {
   panelPage.style.animation =
     "none";
 
-  requestAnimationFrame(() => {
+  window.requestAnimationFrame(() => {
     panelPage.style.animation = "";
   });
 }
