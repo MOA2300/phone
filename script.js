@@ -535,8 +535,8 @@ const sectionContent = {
 
 const phoneKeys = [
   {
-    name: "upper-left",
-    label: "Upper left key",
+    name: "home",
+    label: "Home",
     x: 49,
     y: 341,
     width: 36,
@@ -544,8 +544,8 @@ const phoneKeys = [
   },
 
   {
-    name: "upper-right",
-    label: "Upper right key",
+    name: "back",
+    label: "Back",
     x: 139,
     y: 341,
     width: 36,
@@ -1357,6 +1357,29 @@ function handlePhoneKey(keyName) {
     contentPanel.classList.contains(
       "is-open"
     );
+
+  /* Home returns to the phone menu. */
+  if (keyName === "home") {
+    if (panelIsOpen) {
+      closeContentPanel();
+    }
+
+    setPhoneMenuVisible(true);
+    updateMenuSelection();
+
+    return;
+  }
+
+  /* Back closes the panel or exits the menu. */
+  if (keyName === "back") {
+    if (panelIsOpen) {
+      closeContentPanel();
+    } else if (isMenuVisible) {
+      setPhoneMenuVisible(false);
+    }
+
+    return;
+  }
 
   if (panelIsOpen) {
     switch (keyName) {
