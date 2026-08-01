@@ -5,22 +5,34 @@
 --------------------------------- */
 
 const spriteButton =
-  document.getElementById("sprite-button");
+  document.getElementById(
+    "sprite-button"
+  );
 
 const sprite =
-  document.getElementById("sprite");
+  document.getElementById(
+    "sprite"
+  );
 
 const frame =
-  document.getElementById("phone-frame");
+  document.getElementById(
+    "phone-frame"
+  );
 
 const container =
-  document.getElementById("phone-container");
+  document.getElementById(
+    "phone-container"
+  );
 
 const keyOverlay =
-  document.getElementById("key-overlay");
+  document.getElementById(
+    "key-overlay"
+  );
 
 const flipTrigger =
-  document.getElementById("flip-trigger");
+  document.getElementById(
+    "flip-trigger"
+  );
 
 /* ---------------------------------
    SMALL STARTING PHONE FRAMES
@@ -64,8 +76,10 @@ const closeFrames = [
 /* ---------------------------------
    PHONE KEY COORDINATES
 
-   These coordinates are based on
-   your 236 × 656 open-phone PNG.
+   Based on the actual open phone PNG:
+
+   Width: 236px
+   Height: 656px
 --------------------------------- */
 
 const phoneKeys = [
@@ -160,7 +174,7 @@ const phoneKeys = [
     height: 21
   },
 
-  /* Green call, middle menu and red end keys */
+  /* Green call, menu and red end keys */
 
   {
     name: "call",
@@ -367,22 +381,40 @@ function stopSpriteLoop() {
 }
 
 /* ---------------------------------
-   ENABLE OR DISABLE PHONE KEYS
+   SHOW OR HIDE THE KEYPAD
+
+   The keypad only becomes visible
+   when the phone is fully open.
 --------------------------------- */
 
 function setKeysEnabled(enabled) {
-  const keys =
+  const buttons =
     keyOverlay.querySelectorAll(
       ".phone-key"
     );
 
-  keys.forEach((button) => {
+  buttons.forEach((button) => {
     button.disabled = !enabled;
 
     button.classList.remove(
       "is-pressed"
     );
   });
+
+  keyOverlay.style.visibility =
+    enabled
+      ? "visible"
+      : "hidden";
+
+  keyOverlay.style.pointerEvents =
+    enabled
+      ? "auto"
+      : "none";
+
+  keyOverlay.setAttribute(
+    "aria-hidden",
+    enabled ? "false" : "true"
+  );
 }
 
 /* ---------------------------------
@@ -404,6 +436,11 @@ function playAnimation(
   isAnimating = true;
 
   flipTrigger.disabled = true;
+
+  /*
+    Hide keypad during every animation.
+  */
+
   setKeysEnabled(false);
 
   let index = 0;
@@ -412,19 +449,25 @@ function playAnimation(
     window.setInterval(() => {
       if (index < frames.length) {
         frame.src = frames[index];
+
         index += 1;
+
         return;
       }
 
-      window.clearInterval(interval);
+      window.clearInterval(
+        interval
+      );
 
       frame.src = finalFrame;
 
       isAnimating = false;
+
       flipTrigger.disabled = false;
 
       if (
-        typeof callback === "function"
+        typeof callback ===
+        "function"
       ) {
         callback();
       }
@@ -432,21 +475,29 @@ function playAnimation(
 }
 
 /* ---------------------------------
-   CLOSE / REOPEN CLICK AREA
+   CLOSE AND REOPEN CLICK AREA
 --------------------------------- */
 
 function setFlipTriggerArea() {
   if (isOpen) {
     /*
-      Open phone:
-      Only the top cap closes it.
+      OPEN PHONE:
+
+      Only the small top cap closes
+      the phone.
     */
 
-    flipTrigger.style.left = "62px";
-    flipTrigger.style.top = "0px";
+    flipTrigger.style.left =
+      "62px";
 
-    flipTrigger.style.width = "112px";
-    flipTrigger.style.height = "62px";
+    flipTrigger.style.top =
+      "0px";
+
+    flipTrigger.style.width =
+      "112px";
+
+    flipTrigger.style.height =
+      "62px";
 
     flipTrigger.setAttribute(
       "aria-label",
@@ -454,16 +505,26 @@ function setFlipTriggerArea() {
     );
   } else {
     /*
-      Closed phone:
-      The whole closed phone can be
-      clicked to reopen it.
+      CLOSED PHONE:
+
+      Covers the entire visible front
+      panel marked in red.
+
+      The closed phone image sits lower
+      inside the 236 × 656 frame canvas.
     */
 
-    flipTrigger.style.left = "25px";
-    flipTrigger.style.top = "0px";
+    flipTrigger.style.left =
+      "24px";
 
-    flipTrigger.style.width = "186px";
-    flipTrigger.style.height = "430px";
+    flipTrigger.style.top =
+      "180px";
+
+    flipTrigger.style.width =
+      "190px";
+
+    flipTrigger.style.height =
+      "470px";
 
     flipTrigger.setAttribute(
       "aria-label",
@@ -481,10 +542,14 @@ function renderKeys() {
 
   phoneKeys.forEach((key) => {
     const button =
-      document.createElement("button");
+      document.createElement(
+        "button"
+      );
 
     button.type = "button";
-    button.className = "phone-key";
+
+    button.className =
+      "phone-key";
 
     if (key.className) {
       button.classList.add(
@@ -492,7 +557,8 @@ function renderKeys() {
       );
     }
 
-    button.dataset.key = key.name;
+    button.dataset.key =
+      key.name;
 
     button.setAttribute(
       "aria-label",
@@ -560,12 +626,21 @@ function renderKeys() {
           return;
         }
 
-        handlePhoneKey(key.name);
+        handlePhoneKey(
+          key.name
+        );
       }
     );
 
-    keyOverlay.appendChild(button);
+    keyOverlay.appendChild(
+      button
+    );
   });
+
+  /*
+    Keep the keypad hidden when
+    the page first loads.
+  */
 
   setKeysEnabled(false);
 }
@@ -586,13 +661,13 @@ function handlePhoneKey(keyName) {
 
     case "call":
       console.log(
-        "Call key was pressed"
+        "Call key pressed"
       );
       break;
 
     case "menu":
       console.log(
-        "Menu key was pressed"
+        "Menu key pressed"
       );
       break;
 
@@ -633,7 +708,7 @@ function handlePhoneKey(keyName) {
     case "0":
     case "hash":
       console.log(
-        `${keyName} was pressed`
+        `${keyName} pressed`
       );
       break;
 
@@ -645,7 +720,7 @@ function handlePhoneKey(keyName) {
 }
 
 /* ---------------------------------
-   FIRST OPENING ANIMATION
+   OPEN PHONE FOR FIRST TIME
 --------------------------------- */
 
 function openPhoneForFirstTime() {
@@ -659,9 +734,9 @@ function openPhoneForFirstTime() {
   stopSpriteLoop();
 
   /*
-    Hide the small phone immediately
-    before the large-phone animation
-    begins.
+    Hide the small phone immediately,
+    before the first large-phone frame
+    appears.
   */
 
   spriteButton.hidden = true;
@@ -671,6 +746,12 @@ function openPhoneForFirstTime() {
 
   sprite.style.display =
     "none";
+
+  /*
+    Keep keys hidden during opening.
+  */
+
+  setKeysEnabled(false);
 
   container.style.display =
     "block";
@@ -685,18 +766,30 @@ function openPhoneForFirstTime() {
       "sounds/28_fixed.mp3"
     );
 
-  sound1.play().catch(() => {});
+  sound1
+    .play()
+    .catch(() => {});
 
-  sound2.play().catch(() => {});
+  sound2
+    .play()
+    .catch(() => {});
 
   playAnimation(
     openFrames,
     "images/42.png",
     () => {
       hasOpenedOnce = true;
+
       isOpen = true;
 
       setFlipTriggerArea();
+
+      /*
+        Reveal keys only after the
+        phone reaches the fully open
+        frame.
+      */
+
       setKeysEnabled(true);
     }
   );
@@ -715,14 +808,24 @@ function closePhone() {
     return;
   }
 
-  isOpen = false;
+  /*
+    Hide all keys before the first
+    closing frame appears.
+  */
 
   setKeysEnabled(false);
+
+  isOpen = false;
 
   playAnimation(
     closeFrames,
     "images/50.png",
     () => {
+      /*
+        Make the entire closed phone
+        clickable after closing ends.
+      */
+
       setFlipTriggerArea();
     }
   );
@@ -741,6 +844,13 @@ function reopenPhone() {
     return;
   }
 
+  /*
+    Keep keys hidden throughout the
+    reopening animation.
+  */
+
+  setKeysEnabled(false);
+
   const reopenFrames =
     [...closeFrames].reverse();
 
@@ -751,6 +861,12 @@ function reopenPhone() {
       isOpen = true;
 
       setFlipTriggerArea();
+
+      /*
+        Reveal the keypad only when
+        the open frame is complete.
+      */
+
       setKeysEnabled(true);
     }
   );
@@ -762,6 +878,7 @@ function reopenPhone() {
 
 function initializePhone() {
   renderKeys();
+
   startSpriteLoop();
 
   spriteButton.addEventListener(
