@@ -193,11 +193,11 @@ body.panel-open .phone-container {
 /* ---------------------------------
    MAIN PHONE MENU
 
-   Hidden until the center circle
-   is pressed.
+   The right edge has been reduced
+   by 10 pixels.
 
-   Reduced to fit inside the blue
-   interior screen.
+   Previous width: 145px
+   Updated width: 135px
 --------------------------------- */
 
 .phone-menu {
@@ -206,7 +206,7 @@ body.panel-open .phone-container {
   left: 47px;
   top: 124px;
 
-  width: 145px;
+  width: 135px;
   height: 122px;
 
   display: none;
