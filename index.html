@@ -45,12 +45,41 @@
         draggable="false"
       >
 
-      <!-- Bunny image on the closed phone display -->
+      <!-- Date and time on the open phone screen -->
+      <div
+        id="open-screen-clock"
+        class="open-screen-clock"
+        aria-hidden="true"
+      >
+        <div
+          id="open-screen-date"
+          class="open-screen-date"
+        ></div>
+
+        <div
+          id="open-screen-time"
+          class="open-screen-time"
+        ></div>
+      </div>
+
+      <!-- Closed phone front display -->
       <div
         id="front-screen"
         class="front-screen"
         aria-hidden="true"
       >
+        <div class="front-screen-clock">
+          <div
+            id="front-screen-date"
+            class="front-screen-date"
+          ></div>
+
+          <div
+            id="front-screen-time"
+            class="front-screen-time"
+          ></div>
+        </div>
+
         <img
           id="front-screen-image"
           src="images/bunny.png"
@@ -59,14 +88,14 @@
         >
       </div>
 
-      <!-- JavaScript adds the clickable keypad buttons here -->
+      <!-- JavaScript adds the keypad buttons here -->
       <div
         id="key-overlay"
         class="key-overlay"
         aria-hidden="true"
       ></div>
 
-      <!-- Clickable area for closing and reopening the phone -->
+      <!-- Clickable area used to close and reopen the phone -->
       <button
         id="flip-trigger"
         class="flip-trigger"
