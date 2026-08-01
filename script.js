@@ -86,7 +86,7 @@ const closeFrames = [
 --------------------------------- */
 
 const phoneKeys = [
-  /* Upper side keys */
+  /* Upper side buttons */
 
   {
     name: "upper-left",
@@ -106,12 +106,7 @@ const phoneKeys = [
     height: 21
   },
 
-  /*
-    Smaller direction-arrow areas.
-
-    The up arrow has been moved higher.
-    The left arrow remains farther left.
-  */
+  /* Small directional arrows */
 
   {
     name: "dpad-up",
@@ -164,7 +159,7 @@ const phoneKeys = [
     height: 28
   },
 
-  /* Lower side keys */
+  /* Lower side buttons */
 
   {
     name: "lower-left",
@@ -300,7 +295,7 @@ const phoneKeys = [
     height: 21
   },
 
-  /* Bottom row */
+  /* Bottom number row */
 
   {
     name: "star",
@@ -400,7 +395,10 @@ function padNumber(value) {
   return String(value).padStart(2, "0");
 }
 
-function formatPhoneDate(date) {
+/* Open phone:
+   year/month/day, weekday and seconds */
+
+function formatOpenPhoneDate(date) {
   const weekdays = [
     "Sun",
     "Mon",
@@ -432,7 +430,7 @@ function formatPhoneDate(date) {
   return `${year}/${month}/${day}(${weekday})`;
 }
 
-function formatPhoneTime(date) {
+function formatOpenPhoneTime(date) {
   const hours =
     padNumber(
       date.getHours()
@@ -451,26 +449,54 @@ function formatPhoneTime(date) {
   return `${hours}:${minutes}:${seconds}`;
 }
 
+/* Closed phone:
+   no weekday and no seconds */
+
+function formatFrontPhoneDate(date) {
+  const year =
+    date.getFullYear();
+
+  const month =
+    padNumber(
+      date.getMonth() + 1
+    );
+
+  const day =
+    padNumber(
+      date.getDate()
+    );
+
+  return `${year}/${month}/${day}`;
+}
+
+function formatFrontPhoneTime(date) {
+  const hours =
+    padNumber(
+      date.getHours()
+    );
+
+  const minutes =
+    padNumber(
+      date.getMinutes()
+    );
+
+  return `${hours}:${minutes}`;
+}
+
 function updatePhoneClock() {
   const now = new Date();
 
-  const dateText =
-    formatPhoneDate(now);
-
-  const timeText =
-    formatPhoneTime(now);
-
   frontScreenDate.textContent =
-    dateText;
+    formatFrontPhoneDate(now);
 
   frontScreenTime.textContent =
-    timeText;
+    formatFrontPhoneTime(now);
 
   openScreenDate.textContent =
-    dateText;
+    formatOpenPhoneDate(now);
 
   openScreenTime.textContent =
-    timeText;
+    formatOpenPhoneTime(now);
 }
 
 function startPhoneClock() {
@@ -640,7 +666,8 @@ function setFlipTriggerArea() {
   } else {
     /*
       Closed phone:
-      click the full front to reopen it.
+      click the complete front phone
+      to reopen it.
     */
 
     flipTrigger.style.left =
@@ -782,8 +809,8 @@ function handlePhoneKey(keyName) {
   switch (keyName) {
     case "end":
       /*
-        The hang-up key does not
-        physically close the phone.
+        Hang-up does not physically
+        close the flip phone.
       */
 
       console.log(
@@ -869,6 +896,10 @@ function openPhoneForFirstTime() {
 
   stopSpriteLoop();
 
+  /*
+    Hide the small phone immediately.
+  */
+
   spriteButton.hidden =
     true;
 
@@ -877,6 +908,10 @@ function openPhoneForFirstTime() {
 
   sprite.style.display =
     "none";
+
+  /*
+    Hide all overlays while opening.
+  */
 
   setKeysEnabled(false);
 
@@ -953,6 +988,11 @@ function closePhone() {
     "images/50.png",
     () => {
       setFlipTriggerArea();
+
+      /*
+        Show bunny, date and time after
+        the phone is fully closed.
+      */
 
       setFrontScreenVisible(true);
 
