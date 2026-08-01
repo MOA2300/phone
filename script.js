@@ -113,30 +113,30 @@ const sectionContent = {
     pages: [
       `
         <p class="panel-kicker">
-          PAGE 01 · ORIGIN STORY
+          About Myself
         </p>
 
         <h2>
-          Art was the beginning.
-          People became the purpose.
+          Art works best alongside functionality. 
         </h2>
 
         <p>
-          I began as an artist drawn to
-          photography, printmaking, video
-          and visual storytelling.
+          Hi, I'm Leslie! My art journey truly began in college where I 
+          was fortunate enough to experience various mediums including
+          photography, printmaking, video art,
+          graphic art, and ceramics.
         </p>
 
         <p>
           Over time, I realized that the
           strongest creative work does more
           than look polished. It helps people
-          feel seen, understood and curious.
+          feel seen, understood and presents a message.
         </p>
 
         <p>
           That realization led me from studio
-          art into design, marketing and
+          art into design, digital marketing and
           interactive digital experiences,
           without leaving my artistic instincts
           behind.
@@ -212,28 +212,6 @@ const sectionContent = {
       `,
 
       `
-        <p class="panel-kicker">
-          PAGE 04 · NEXT CHAPTER
-        </p>
-
-        <h2>
-          Still learning. Already building.
-        </h2>
-
-        <p>
-          My next step is to grow inside a
-          creative environment where art
-          direction, storytelling, strategy,
-          design and culture collide.
-        </p>
-
-        <p class="panel-quote">
-          I do not want to make work that
-          simply fills space. I want to make
-          work that changes the temperature
-          of it.
-        </p>
-      `
     ]
   },
 
@@ -243,7 +221,7 @@ const sectionContent = {
     pages: [
       `
         <p class="panel-kicker">
-          PAGE 01 · PORTFOLIO
+          Visit my Portfolio Site
         </p>
 
         <h2>
@@ -280,11 +258,11 @@ const sectionContent = {
         </p>
 
         <p class="panel-quote">
-          Nothing became everything.
-          Everything became stars, planets,
-          dinosaurs, people, Wi-Fi and this
-          application. Now we make things
-          before the deadline.
+          One day there was a big explosion that led to the creation of stars, planets, dinosaurs, 
+       people, the Industrial Revolution, wars, Wi-Fi, and even this application. Yet, there is still history that is waiting to be 
+       written, hopefully it will be one where we don't repeat the same mistakes from the past. Instead, it will be one filled 
+       with innovations in the creative field and where the role of artists is appreciated more. 
+
         </p>
       `
     ]
@@ -296,7 +274,7 @@ const sectionContent = {
     pages: [
       `
         <p class="panel-kicker">
-          PAGE 01 · PROFILE
+          Resume
         </p>
 
         <h2>
@@ -337,7 +315,7 @@ const sectionContent = {
 
       `
         <p class="panel-kicker">
-          PAGE 02 · EDUCATION
+          EDUCATION
         </p>
 
         <h2>
@@ -362,7 +340,7 @@ const sectionContent = {
 
       `
         <p class="panel-kicker">
-          PAGE 03 · PHOTOGRAPHY
+           PHOTOGRAPHY
         </p>
 
         <h2>
@@ -376,25 +354,20 @@ const sectionContent = {
 
         <ul>
           <li>
-            Produced more than 20 edited
-            photographs weekly
+            •	Produced 20+ edited photos weekly across sports, clubs, and campus events, consistently meeting deadlines and adapting to different assignment needs
           </li>
 
           <li>
-            Covered sports, clubs and campus
-            events under deadline
+           •	Managed photography gear and workflows independently, solved on-site technical issues, and delivered high-quality images using Adobe Lightroom Classic
           </li>
 
-          <li>
-            Managed equipment and workflows
-            independently
-          </li>
+          
         </ul>
       `,
 
       `
         <p class="panel-kicker">
-          PAGE 04 · GRAPHIC DESIGN
+         GRAPHIC DESIGN
         </p>
 
         <h2>
@@ -408,20 +381,20 @@ const sectionContent = {
 
         <ul>
           <li>
-            Created graphics, posters and
-            digital artist materials
+            •	Created digital graphics, posters, and digital materials for artists, including Psychic Fever, Beno, Andre Martin, and Enrico, under tight deadlines, balancing speed, accuracy, and clear communication with editors.
+
           </li>
 
           <li>
-            Incorporated editorial feedback
-            and delivered polished assets
+            •	Coordinated with editors via email, incorporating feedback efficiently, and delivered polished design assets 
+
           </li>
         </ul>
       `,
 
       `
         <p class="panel-kicker">
-          PAGE 05 · MARKETING
+          Digital Marketing
         </p>
 
         <h2>
@@ -435,23 +408,28 @@ const sectionContent = {
 
         <ul>
           <li>
-            Supported outreach and content
-            scheduling
+            •	Supported with various tasks assigned by upper management, such as sending outreach emails, organizing content schedules, creating and editing visual assets, and updating social channels for artists and their fan communities
           </li>
 
           <li>
-            Researched trends and fan behavior
+           •	Assisted weekly marketing meetings by researching trends/fan behavior, reporting on artists, and pitching creative ideas for social media platforms or events for artists such as Bayli, Tiana Major9, Frex, and Esther Yu
           </li>
 
           <li>
-            Pitched social and event ideas
+            •	Wrote weekly recap emails summarizing completed work for 4+ artists while maintaining clear documentation and confidentiality across internal teams
           </li>
+
+          <li> 
+             •	Supported campaigns in fast-paced environments, adapting quickly to new tools and evolving workflows
+          </li>
+
+
         </ul>
       `,
 
       `
         <p class="panel-kicker">
-          PAGE 06 · MEDIA SERVICES
+          Media Services
         </p>
 
         <h2>
@@ -465,20 +443,28 @@ const sectionContent = {
 
         <ul>
           <li>
-            Supported students and faculty
-            with technical issues
+            •	Facilitated technical support for the Media Services Department and assisted the Scripps Community through office support, acting as the primary customer contact for urgent issues
           </li>
 
           <li>
-            Troubleshot AV equipment,
-            projectors and computers
+            •	Served as a first line of support for students and faculty requesting AV equipment, camera checkouts, or campus tech help
           </li>
+
+          <li>
+            •	Set up and troubleshot hardware for audio-visual equipment, projectors, and computers; escalated complex issues to senior staff and ensured they moved toward a resolution
+          </li>
+
+          <li>
+            •	Verified the condition and availability of equipment, maintained accurate records on Excel, and provided support in time-sensitive classroom environments
+         </li>
+
+   
         </ul>
       `,
 
       `
         <p class="panel-kicker">
-          PAGE 07 · FREELANCE
+           FREELANCE
         </p>
 
         <h2>
@@ -491,24 +477,22 @@ const sectionContent = {
 
         <ul>
           <li>
-            Photographed concerts and artists
+            •	Concert photographer for KLandMexico and Blender Magazine, an emerging music magazine covering Korean artists and other rising international artists
           </li>
 
           <li>
-            Contributed published work to
-            Local Wolves Magazine
+           •	Contributed 5+ photographs within published issues of Local Wolves Magazine, selecting and editing images using Adobe Lightroom Classic and Capture One
           </li>
 
           <li>
-            Built a fashion, portrait and
-            concert portfolio
+           •	Built a portfolio of fashion, portrait photography, and concert photography for artists such as Seo In Guk, Psychic Fever, Milena, and Enjambre
           </li>
         </ul>
       `,
 
       `
         <p class="panel-kicker">
-          PAGE 08 · TOOLKIT
+          TOOLKIT
         </p>
 
         <h2>
