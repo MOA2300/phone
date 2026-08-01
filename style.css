@@ -18,9 +18,14 @@ body {
 body {
   min-height: 100vh;
   overflow: hidden;
+
   background: #000;
   color: #fff;
-  font-family: Arial, Helvetica, sans-serif;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
 }
 
 button,
@@ -38,6 +43,7 @@ button {
 
 .phone-stage {
   position: relative;
+
   width: 100vw;
   height: 100vh;
 
@@ -78,6 +84,7 @@ button {
 
 #sprite {
   display: block;
+
   user-select: none;
   pointer-events: none;
 }
@@ -100,7 +107,8 @@ button {
 
   transform-origin: center center;
 
-  transition: transform 420ms ease;
+  transition:
+    transform 420ms ease;
 }
 
 body.panel-open .phone-container {
@@ -146,6 +154,7 @@ body.panel-open .phone-container {
 
   color: #fff;
   text-align: left;
+
   pointer-events: none;
 
   text-shadow:
@@ -185,24 +194,24 @@ body.panel-open .phone-container {
    MAIN PHONE MENU
 
    Hidden until the center circle
-   is clicked.
+   is pressed.
 
-   Requested size:
-   1.78in wide × 2.1in tall
+   Reduced to fit inside the blue
+   interior screen.
 --------------------------------- */
 
 .phone-menu {
   position: absolute;
 
-  left: 50%;
-  top: 93px;
+  left: 47px;
+  top: 124px;
 
-  width: 1.78in;
-  height: 2.1in;
+  width: 145px;
+  height: 122px;
 
   display: none;
 
-  padding: 6px;
+  padding: 4px;
 
   z-index: 48;
 
@@ -217,13 +226,13 @@ body.panel-open .phone-container {
       rgba(165, 211, 221, 0.98)
     );
 
-  border: 1px solid rgba(30, 55, 62, 0.85);
+  border:
+    1px solid
+    rgba(30, 55, 62, 0.85);
 
   box-shadow:
     inset 0 0 7px rgba(255, 255, 255, 0.82),
     inset 0 0 12px rgba(39, 93, 103, 0.3);
-
-  transform: translateX(-50%);
 }
 
 .phone-menu.is-visible {
@@ -235,18 +244,18 @@ body.panel-open .phone-container {
 --------------------------------- */
 
 .phone-menu-heading {
-  height: 18px;
+  height: 11px;
 
-  margin: 0 0 5px;
+  margin: 0 0 3px;
 
   overflow: hidden;
 
   color: #687600;
 
-  font-size: 9px;
+  font-size: 7px;
   font-weight: 900;
-  letter-spacing: 1.2px;
-  line-height: 18px;
+  letter-spacing: 1px;
+  line-height: 11px;
 
   white-space: nowrap;
 }
@@ -262,9 +271,9 @@ body.panel-open .phone-container {
     repeat(2, minmax(0, 1fr));
 
   grid-template-rows:
-    repeat(2, 75px);
+    repeat(2, 43px);
 
-  gap: 5px;
+  gap: 3px;
 }
 
 /* ---------------------------------
@@ -275,26 +284,29 @@ body.panel-open .phone-container {
   position: relative;
 
   min-width: 0;
-  height: 75px;
+  height: 43px;
 
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 
-  padding: 4px;
+  padding: 2px;
 
   overflow: hidden;
 
-  border: 1px solid rgba(34, 51, 54, 0.45);
+  border:
+    1px solid
+    rgba(34, 51, 54, 0.45);
 
   color: #343434;
 
-  background: rgba(205, 215, 215, 0.88);
+  background:
+    rgba(205, 215, 215, 0.88);
 
-  font-size: 9px;
+  font-size: 7px;
   font-weight: 900;
-  letter-spacing: 0.35px;
+  letter-spacing: 0.25px;
 
   cursor: pointer;
 
@@ -315,7 +327,10 @@ body.panel-open .phone-container {
 
   border-color: #252525;
 
-  outline: 2px solid rgba(22, 22, 22, 0.92);
+  outline:
+    2px solid
+    rgba(22, 22, 22, 0.92);
+
   outline-offset: -2px;
 }
 
@@ -330,10 +345,17 @@ body.panel-open .phone-container {
   width: 0;
   height: 0;
 
-  border-left: 4px solid transparent;
-  border-top: 4px solid transparent;
-  border-right: 4px solid #202020;
-  border-bottom: 4px solid #202020;
+  border-left:
+    4px solid transparent;
+
+  border-top:
+    4px solid transparent;
+
+  border-right:
+    4px solid #202020;
+
+  border-bottom:
+    4px solid #202020;
 }
 
 .menu-item-label {
@@ -354,13 +376,13 @@ body.panel-open .phone-container {
 .menu-icon {
   position: relative;
 
-  width: 25px;
-  height: 25px;
+  width: 18px;
+  height: 18px;
 
   display: block;
   flex: 0 0 auto;
 
-  margin-bottom: 4px;
+  margin-bottom: 1px;
 }
 
 /* About icon */
@@ -370,11 +392,11 @@ body.panel-open .phone-container {
 
   position: absolute;
 
-  left: 8px;
-  top: 1px;
+  left: 6px;
+  top: 0;
 
-  width: 9px;
-  height: 9px;
+  width: 6px;
+  height: 6px;
 
   border-radius: 50%;
 
@@ -386,13 +408,14 @@ body.panel-open .phone-container {
 
   position: absolute;
 
-  left: 3px;
+  left: 2px;
   bottom: 1px;
 
-  width: 19px;
-  height: 11px;
+  width: 14px;
+  height: 8px;
 
-  border-radius: 9px 9px 2px 2px;
+  border-radius:
+    7px 7px 2px 2px;
 
   background: #555;
 }
@@ -410,7 +433,7 @@ body.panel-open .phone-container {
 
   border: 2px solid #555;
 
-  font-size: 19px;
+  font-size: 14px;
   font-weight: 900;
   line-height: 1;
 }
@@ -432,11 +455,11 @@ body.panel-open .phone-container {
 
   position: absolute;
 
-  left: 12px;
-  top: 5px;
+  left: 8px;
+  top: 4px;
 
   width: 2px;
-  height: 10px;
+  height: 7px;
 
   background: #555;
 
@@ -444,30 +467,30 @@ body.panel-open .phone-container {
   transform: rotate(-15deg);
 }
 
-/* Résumé icon */
+/* Resume icon */
 
 .menu-icon-resume::before {
   content: "";
 
   position: absolute;
 
-  left: 5px;
-  top: 1px;
+  left: 3px;
+  top: 0;
 
-  width: 16px;
-  height: 22px;
+  width: 12px;
+  height: 17px;
 
   border: 2px solid #555;
 
   background:
     linear-gradient(#555 0 0)
-      3px 5px / 8px 2px no-repeat,
+      2px 3px / 6px 2px no-repeat,
 
     linear-gradient(#555 0 0)
-      3px 10px / 8px 2px no-repeat,
+      2px 7px / 6px 2px no-repeat,
 
     linear-gradient(#555 0 0)
-      3px 15px / 6px 2px no-repeat;
+      2px 11px / 5px 2px no-repeat;
 }
 
 /* ---------------------------------
@@ -477,11 +500,11 @@ body.panel-open .phone-container {
 .phone-menu-instruction {
   position: absolute;
 
-  left: 6px;
-  right: 6px;
-  bottom: 3px;
+  left: 4px;
+  right: 4px;
+  bottom: 1px;
 
-  height: 11px;
+  height: 8px;
 
   margin: 0;
 
@@ -489,9 +512,9 @@ body.panel-open .phone-container {
 
   color: #4e5800;
 
-  font-size: 6px;
+  font-size: 5px;
   font-weight: 900;
-  line-height: 11px;
+  line-height: 8px;
 
   text-align: center;
   white-space: nowrap;
@@ -519,7 +542,10 @@ body.panel-open .phone-container {
 
   background: #e8ef17;
 
-  border: 1px solid rgba(0, 0, 0, 0.65);
+  border:
+    1px solid
+    rgba(0, 0, 0, 0.65);
+
   border-radius: 2px;
 }
 
@@ -568,6 +594,7 @@ body.panel-open .phone-container {
 
   color: #fff;
   text-align: left;
+
   pointer-events: none;
 
   text-shadow:
@@ -717,11 +744,14 @@ body.panel-open .phone-container {
 --------------------------------- */
 
 .phone-key:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.13);
+  background:
+    rgba(255, 255, 255, 0.13);
 }
 
 .phone-key.is-pressed {
-  background: rgba(255, 255, 255, 0.38);
+  background:
+    rgba(255, 255, 255, 0.38);
+
   filter: brightness(1.3);
 }
 
@@ -827,7 +857,9 @@ body.panel-open .phone-container {
   pointer-events: none;
 
   transition:
-    transform 430ms cubic-bezier(0.22, 0.8, 0.2, 1),
+    transform
+      430ms
+      cubic-bezier(0.22, 0.8, 0.2, 1),
     opacity 180ms ease,
     visibility 0s linear 430ms;
 }
@@ -844,7 +876,9 @@ body.panel-open .phone-container {
   pointer-events: auto;
 
   transition:
-    transform 430ms cubic-bezier(0.22, 0.8, 0.2, 1),
+    transform
+      430ms
+      cubic-bezier(0.22, 0.8, 0.2, 1),
     opacity 180ms ease,
     visibility 0s;
 }
@@ -879,9 +913,11 @@ body.panel-open .phone-container {
   align-items: center;
   justify-content: space-between;
 
-  padding: 17px 20px 13px;
+  padding:
+    17px 20px 13px;
 
-  border-bottom: 5px solid #f1db00;
+  border-bottom:
+    5px solid #f1db00;
 
   background:
     linear-gradient(
@@ -979,12 +1015,19 @@ body.panel-open .phone-container {
 
   overflow-y: auto;
 
-  padding: 28px 25px 24px;
+  padding:
+    28px 25px 24px;
 
   scrollbar-width: thin;
-  scrollbar-color: #e4d000 #252525;
 
-  animation: panelPageIn 250ms ease;
+  scrollbar-color:
+    #e4d000
+    #252525;
+
+  animation:
+    panelPageIn
+    250ms
+    ease;
 }
 
 .panel-page h2 {
@@ -1008,7 +1051,8 @@ body.panel-open .phone-container {
 }
 
 .panel-page h3 {
-  margin: 21px 0 8px;
+  margin:
+    21px 0 8px;
 
   color: #fff;
 
@@ -1067,11 +1111,15 @@ body.panel-open .phone-container {
 }
 
 .panel-kicker {
-  margin-bottom: 9px !important;
+  margin-bottom:
+    9px !important;
 
-  color: #9a9a90 !important;
+  color:
+    #9a9a90 !important;
 
-  font-size: 10px !important;
+  font-size:
+    10px !important;
+
   font-weight: 900;
   letter-spacing: 2px;
 }
@@ -1079,9 +1127,11 @@ body.panel-open .phone-container {
 .panel-quote {
   padding-left: 16px;
 
-  border-left: 4px solid #f3dc00;
+  border-left:
+    4px solid #f3dc00;
 
-  color: #fff !important;
+  color:
+    #fff !important;
 
   font-family:
     Georgia,
@@ -1095,13 +1145,17 @@ body.panel-open .phone-container {
       29px
     ) !important;
 
-  line-height: 1.3 !important;
+  line-height:
+    1.3 !important;
 }
 
 .resume-meta {
-  color: #a7a79e !important;
+  color:
+    #a7a79e !important;
 
-  font-size: 12px !important;
+  font-size:
+    12px !important;
+
   font-weight: 800;
   letter-spacing: 0.5px;
 }
@@ -1120,7 +1174,8 @@ body.panel-open .phone-container {
 
   color: #e4d000;
 
-  background: rgba(255, 255, 255, 0.025);
+  background:
+    rgba(255, 255, 255, 0.025);
 
   font-family:
     Georgia,
@@ -1159,7 +1214,8 @@ body.panel-open .phone-container {
 
   padding: 0 16px;
 
-  border-top: 1px solid #52524e;
+  border-top:
+    1px solid #52524e;
 
   color: #aaa99f;
   background: #181818;
@@ -1170,7 +1226,7 @@ body.panel-open .phone-container {
 }
 
 /* ---------------------------------
-   PANEL PAGE ANIMATION
+   PANEL ANIMATION
 --------------------------------- */
 
 @keyframes panelPageIn {
@@ -1186,7 +1242,7 @@ body.panel-open .phone-container {
 }
 
 /* ---------------------------------
-   RESPONSIVE PANEL
+   RESPONSIVE
 --------------------------------- */
 
 @media (max-width: 850px) {
@@ -1217,10 +1273,6 @@ body.panel-open .phone-container {
     display: none;
   }
 }
-
-/* ---------------------------------
-   PHONE SCALING
---------------------------------- */
 
 @media (max-height: 700px) {
   .phone-container {
@@ -1285,12 +1337,16 @@ body.panel-open .phone-container {
 
 .debug .phone-key {
   outline: 1px dashed cyan;
-  background: rgba(0, 255, 255, 0.08);
+
+  background:
+    rgba(0, 255, 255, 0.08);
 }
 
 .debug .flip-trigger {
   outline: 2px dashed lime;
-  background: rgba(0, 255, 0, 0.08);
+
+  background:
+    rgba(0, 255, 0, 0.08);
 }
 
 .debug .front-screen {
