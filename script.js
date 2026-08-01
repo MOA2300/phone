@@ -4,9 +4,9 @@ const container = document.getElementById("phone-container");
 const keyOverlay = document.getElementById("key-overlay");
 const flipTrigger = document.getElementById("flip-trigger");
 
-/* --------------------------------------------------
+/* ---------------------------------
    SPRITE FRAMES
--------------------------------------------------- */
+--------------------------------- */
 
 const spriteFrames = [];
 
@@ -14,9 +14,9 @@ for (let i = 1; i <= 16; i++) {
   spriteFrames.push(`DefineSprite_22/${i}.png`);
 }
 
-/* --------------------------------------------------
+/* ---------------------------------
    PHONE ANIMATION FRAMES
--------------------------------------------------- */
+--------------------------------- */
 
 const openFrames = [
   "images/6.png",
@@ -37,14 +37,14 @@ const closeFrames = [
   "images/50.png"
 ];
 
-/* --------------------------------------------------
+/* ---------------------------------
    PRELOAD IMAGES
--------------------------------------------------- */
+--------------------------------- */
 
 function preloadImages(paths) {
   paths.forEach((src) => {
-    const img = new Image();
-    img.src = src;
+    const image = new Image();
+    image.src = src;
   });
 }
 
@@ -54,9 +54,9 @@ preloadImages([
   ...closeFrames
 ]);
 
-/* --------------------------------------------------
-   STATE
--------------------------------------------------- */
+/* ---------------------------------
+   PHONE STATE
+--------------------------------- */
 
 let isAnimating = false;
 let hasOpenedOnce = false;
@@ -65,9 +65,9 @@ let isOpen = false;
 let spriteIndex = 0;
 let spriteInterval = null;
 
-/* --------------------------------------------------
-   SMALL SPRITE LOOP
--------------------------------------------------- */
+/* ---------------------------------
+   SMALL PHONE SPRITE LOOP
+--------------------------------- */
 
 function startSpriteLoop() {
   stopSpriteLoop();
@@ -79,15 +79,15 @@ function startSpriteLoop() {
 }
 
 function stopSpriteLoop() {
-  if (spriteInterval) {
+  if (spriteInterval !== null) {
     clearInterval(spriteInterval);
     spriteInterval = null;
   }
 }
 
-/* --------------------------------------------------
+/* ---------------------------------
    PHONE FRAME ANIMATION
--------------------------------------------------- */
+--------------------------------- */
 
 function playAnimation(frames, finalFrame, callback) {
   if (isAnimating) return;
@@ -97,14 +97,14 @@ function playAnimation(frames, finalFrame, callback) {
 
   let frameIndex = 0;
 
-  const interval = setInterval(() => {
+  const animationInterval = setInterval(() => {
     if (frameIndex < frames.length) {
       frame.src = frames[frameIndex];
-      frameIndex++;
+      frameIndex += 1;
       return;
     }
 
-    clearInterval(interval);
+    clearInterval(animationInterval);
 
     frame.src = finalFrame;
     isAnimating = false;
@@ -116,9 +116,9 @@ function playAnimation(frames, finalFrame, callback) {
   }, 90);
 }
 
-/* --------------------------------------------------
-   CLICKABLE FLIP AREA
--------------------------------------------------- */
+/* ---------------------------------
+   CLICKABLE PHONE AREA
+--------------------------------- */
 
 function setFlipTriggerArea() {
   flipTrigger.style.position = "absolute";
@@ -128,36 +128,49 @@ function setFlipTriggerArea() {
 
   if (isOpen) {
     /*
-      Clickable area over the upper hinge and top edge
-      of the fully opened phone.
+      OPEN PHONE:
+      Only the top hinge area is clickable.
     */
+
     flipTrigger.style.left = "35px";
     flipTrigger.style.top = "0px";
     flipTrigger.style.width = "145px";
     flipTrigger.style.height = "95px";
+
+    flipTrigger.setAttribute(
+      "aria-label",
+      "Close phone"
+    );
   } else {
     /*
-      Clickable area over the closed phone so the user
-      can click it again to reopen it.
+      CLOSED PHONE:
+      The entire closed phone is clickable.
     */
-    flipTrigger.style.left = "15px";
+
+    flipTrigger.style.left = "5px";
     flipTrigger.style.top = "0px";
-    flipTrigger.style.width = "170px";
-    flipTrigger.style.height = "180px";
+    flipTrigger.style.width = "190px";
+    flipTrigger.style.height = "390px";
+
+    flipTrigger.setAttribute(
+      "aria-label",
+      "Open phone"
+    );
   }
 }
 
-/* --------------------------------------------------
+/* ---------------------------------
    PHONE KEYS
--------------------------------------------------- */
+--------------------------------- */
 
 function renderKeys() {
   keyOverlay.innerHTML = "";
 
   if (!isOpen) return;
 
-  const key = "1key";
-  const pos = {
+  const keyName = "1key";
+
+  const position = {
     x: 464,
     y: 430
   };
@@ -168,98 +181,159 @@ function renderKeys() {
   button.type = "button";
   button.setAttribute("aria-label", "Phone key 1");
 
-  button.style.left = `${pos.x}px`;
-  button.style.top = `${pos.y}px`;
+  button.style.left = `${position.x}px`;
+  button.style.top = `${position.y}px`;
 
-  const hoverImg = document.createElement("img");
+  const hoverImage = document.createElement("img");
 
-  hoverImg.src = `normal keys/${key}.png`;
-  hoverImg.alt = "";
-  hoverImg.className = "key-overlay-img";
-  hoverImg.style.left = `${pos.x}px`;
-  hoverImg.style.top = `${pos.y}px`;
+  hoverImage.src = `normal keys/${keyName}.png`;
+  hoverImage.alt = "";
+  hoverImage.className = "key-overlay-img";
+
+  hoverImage.style.left = `${position.x}px`;
+  hoverImage.style.top = `${position.y}px`;
 
   button.addEventListener("click", (event) => {
-    if (!isOpen || isAnimating) {
-      event.preventDefault();
-      return;
-    }
+    event.stopPropagation();
 
-    console.log(`Key ${key} clicked`);
+    if (!isOpen || isAnimating) return;
+
+    console.log(`${keyName} clicked`);
   });
 
   keyOverlay.appendChild(button);
-  keyOverlay.appendChild(hoverImg);
+  keyOverlay.appendChild(hoverImage);
 }
 
-/* --------------------------------------------------
-   INITIALIZE SITE
--------------------------------------------------- */
+/* ---------------------------------
+   OPEN THE PHONE FOR THE FIRST TIME
+--------------------------------- */
 
-window.addEventListener("load", () => {
-  startSpriteLoop();
+function openPhoneForFirstTime() {
+  if (isAnimating || hasOpenedOnce) return;
 
-  /*
-    First click:
-    Hide the small sprite and open the phone.
-  */
-  sprite.addEventListener("click", () => {
-    if (isAnimating || hasOpenedOnce) return;
+  const sound1 = new Audio("sounds/27_fixed.mp3");
+  const sound2 = new Audio("sounds/28_fixed.mp3");
 
-    const sound1 = new Audio("sounds/27_fixed.mp3");
-    const sound2 = new Audio("sounds/28_fixed.mp3");
+  sound1.play().catch(() => {
+    console.log("The first sound could not play.");
+  });
 
-    sound1.play().catch(() => {
-      console.log("The first sound could not autoplay.");
-    });
+  sound2.play().catch(() => {
+    console.log("The second sound could not play.");
+  });
 
-    sound2.play().catch(() => {
-      console.log("The second sound could not autoplay.");
-    });
+  stopSpriteLoop();
 
-    stopSpriteLoop();
+  sprite.style.display = "none";
+  container.style.display = "flex";
 
-    sprite.style.display = "none";
-    container.style.display = "flex";
-
-    playAnimation(openFrames, "images/42.png", () => {
+  playAnimation(
+    openFrames,
+    "images/42.png",
+    () => {
       hasOpenedOnce = true;
       isOpen = true;
 
       setFlipTriggerArea();
       renderKeys();
-    });
-  });
-
-  /*
-    Click the top hinge:
-    Close or reopen the phone.
-  */
-  flipTrigger.addEventListener("click", (event) => {
-    event.stopPropagation();
-
-    if (isAnimating || !hasOpenedOnce) return;
-
-    if (isOpen) {
-      keyOverlay.innerHTML = "";
-
-      playAnimation(closeFrames, "images/50.png", () => {
-        isOpen = false;
-        setFlipTriggerArea();
-      });
-    } else {
-      const reopenFrames = [...closeFrames].reverse();
-
-      playAnimation(reopenFrames, "images/42.png", () => {
-        isOpen = true;
-        setFlipTriggerArea();
-        renderKeys();
-      });
     }
-  });
+  );
+}
+
+/* ---------------------------------
+   CLOSE THE PHONE
+--------------------------------- */
+
+function closePhone() {
+  if (isAnimating || !isOpen) return;
+
+  keyOverlay.innerHTML = "";
+
+  playAnimation(
+    closeFrames,
+    "images/50.png",
+    () => {
+      isOpen = false;
+      setFlipTriggerArea();
+    }
+  );
+}
+
+/* ---------------------------------
+   REOPEN THE PHONE
+--------------------------------- */
+
+function reopenPhone() {
+  if (isAnimating || isOpen) return;
+
+  const reopenFrames = [...closeFrames].reverse();
+
+  playAnimation(
+    reopenFrames,
+    "images/42.png",
+    () => {
+      isOpen = true;
+      setFlipTriggerArea();
+      renderKeys();
+    }
+  );
+}
+
+/* ---------------------------------
+   INITIALIZE
+--------------------------------- */
+
+window.addEventListener("load", () => {
+  startSpriteLoop();
+
+  sprite.addEventListener(
+    "click",
+    openPhoneForFirstTime
+  );
+
+  flipTrigger.addEventListener(
+    "click",
+    (event) => {
+      event.stopPropagation();
+
+      if (isAnimating || !hasOpenedOnce) {
+        return;
+      }
+
+      if (isOpen) {
+        closePhone();
+      } else {
+        reopenPhone();
+      }
+    }
+  );
+
+  flipTrigger.addEventListener(
+    "keydown",
+    (event) => {
+      if (
+        event.key !== "Enter" &&
+        event.key !== " "
+      ) {
+        return;
+      }
+
+      event.preventDefault();
+
+      if (isAnimating || !hasOpenedOnce) {
+        return;
+      }
+
+      if (isOpen) {
+        closePhone();
+      } else {
+        reopenPhone();
+      }
+    }
+  );
 });
-
-
+ 
 
 
 
