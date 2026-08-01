@@ -1,30 +1,37 @@
 "use strict";
 
 /* ---------------------------------
-   ELEMENTS
+   HTML ELEMENTS
 --------------------------------- */
 
-const spriteButton = document.getElementById("sprite-button");
-const sprite = document.getElementById("sprite");
+const spriteButton =
+  document.getElementById("sprite-button");
 
-const frame = document.getElementById("phone-frame");
-const container = document.getElementById("phone-container");
+const sprite =
+  document.getElementById("sprite");
 
-const keyOverlay = document.getElementById("key-overlay");
-const flipTrigger = document.getElementById("flip-trigger");
+const frame =
+  document.getElementById("phone-frame");
 
-const phoneDisplayText = document.getElementById(
-  "phone-display-text"
-);
+const container =
+  document.getElementById("phone-container");
+
+const keyOverlay =
+  document.getElementById("key-overlay");
+
+const flipTrigger =
+  document.getElementById("flip-trigger");
 
 /* ---------------------------------
-   STARTING SPRITE FRAMES
+   SMALL STARTING PHONE FRAMES
 --------------------------------- */
 
 const spriteFrames = [];
 
 for (let i = 1; i <= 16; i += 1) {
-  spriteFrames.push(`DefineSprite_22/${i}.png`);
+  spriteFrames.push(
+    `DefineSprite_22/${i}.png`
+  );
 }
 
 /* ---------------------------------
@@ -55,95 +62,131 @@ const closeFrames = [
 ];
 
 /* ---------------------------------
-   PHONE KEYS
+   PHONE KEY COORDINATES
 
-   Coordinates are based on a
-   200 × 600 phone container.
-
-   Change x, y, width, and height to align each
-   clickable area with your image.
+   These coordinates are based on
+   your 236 × 656 open-phone PNG.
 --------------------------------- */
 
 const phoneKeys = [
-  /* Upper rectangular buttons */
+  /* Upper keys beside the directional pad */
 
   {
-    name: "left-soft",
-    label: "Left soft key",
-    x: 15,
-    y: 330,
-    width: 46,
-    height: 26
-  },
-  {
-    name: "right-soft",
-    label: "Right soft key",
-    x: 139,
-    y: 330,
-    width: 46,
-    height: 26
-  },
-
-  /* Directional pad */
-
-  {
-    name: "up",
-    label: "Up",
-    x: 76,
-    y: 322,
-    width: 49,
-    height: 27
-  },
-  {
-    name: "left",
-    label: "Left",
-    x: 53,
-    y: 344,
+    name: "upper-left",
+    label: "Upper left key",
+    x: 49,
+    y: 341,
     width: 36,
-    height: 40
+    height: 21
   },
+
   {
-    name: "center",
-    label: "Select",
-    x: 77,
-    y: 340,
-    width: 48,
-    height: 48
+    name: "upper-right",
+    label: "Upper right key",
+    x: 139,
+    y: 341,
+    width: 36,
+    height: 21
   },
+
+  /* Direction pad */
+
   {
-    name: "right",
+    name: "dpad-up",
+    label: "Up",
+    x: 80,
+    y: 342,
+    width: 62,
+    height: 31,
+    className: "dpad-key"
+  },
+
+  {
+    name: "dpad-left",
+    label: "Left",
+    x: 78,
+    y: 348,
+    width: 31,
+    height: 48,
+    className: "dpad-key"
+  },
+
+  {
+    name: "dpad-right",
     label: "Right",
     x: 113,
-    y: 344,
-    width: 36,
-    height: 40
-  },
-  {
-    name: "down",
-    label: "Down",
-    x: 76,
-    y: 379,
-    width: 49,
-    height: 28
+    y: 348,
+    width: 31,
+    height: 48,
+    className: "dpad-key"
   },
 
-  /* Call and end buttons */
+  {
+    name: "dpad-down",
+    label: "Down",
+    x: 80,
+    y: 375,
+    width: 62,
+    height: 29,
+    className: "dpad-key"
+  },
+
+  {
+    name: "dpad-center",
+    label: "Select",
+    x: 94,
+    y: 353,
+    width: 36,
+    height: 36
+  },
+
+  /* Lower keys beside the directional pad */
+
+  {
+    name: "lower-left",
+    label: "Lower left key",
+    x: 49,
+    y: 381,
+    width: 36,
+    height: 21
+  },
+
+  {
+    name: "lower-right",
+    label: "Lower right key",
+    x: 139,
+    y: 381,
+    width: 36,
+    height: 21
+  },
+
+  /* Green call, middle menu and red end keys */
 
   {
     name: "call",
     label: "Call",
-    x: 15,
-    y: 378,
-    width: 47,
-    height: 28
+    x: 48,
+    y: 408,
+    width: 39,
+    height: 23
   },
+
+  {
+    name: "menu",
+    label: "Menu",
+    x: 94,
+    y: 408,
+    width: 38,
+    height: 23
+  },
+
   {
     name: "end",
-    label: "End call",
-    x: 138,
-    y: 378,
-    width: 47,
-    height: 28
+    label: "End",
+    x: 139,
+    y: 408,
+    width: 38,
+    height: 23
   },
 
   /* Number row 1 */
@@ -151,26 +194,28 @@ const phoneKeys = [
   {
     name: "1",
     label: "Number 1",
-    x: 18,
-    y: 416,
-    width: 47,
-    height: 27
+    x: 48,
+    y: 439,
+    width: 39,
+    height: 21
   },
+
   {
     name: "2",
     label: "Number 2",
-    x: 77,
-    y: 416,
-    width: 47,
-    height: 27
+    x: 94,
+    y: 439,
+    width: 39,
+    height: 21
   },
+
   {
     name: "3",
     label: "Number 3",
-    x: 136,
-    y: 416,
-    width: 47,
-    height: 27
+    x: 139,
+    y: 439,
+    width: 39,
+    height: 21
   },
 
   /* Number row 2 */
@@ -178,26 +223,28 @@ const phoneKeys = [
   {
     name: "4",
     label: "Number 4",
-    x: 18,
-    y: 451,
-    width: 47,
-    height: 27
+    x: 48,
+    y: 467,
+    width: 39,
+    height: 21
   },
+
   {
     name: "5",
     label: "Number 5",
-    x: 77,
-    y: 451,
-    width: 47,
-    height: 27
+    x: 94,
+    y: 467,
+    width: 39,
+    height: 21
   },
+
   {
     name: "6",
     label: "Number 6",
-    x: 136,
-    y: 451,
-    width: 47,
-    height: 27
+    x: 139,
+    y: 467,
+    width: 39,
+    height: 21
   },
 
   /* Number row 3 */
@@ -205,26 +252,28 @@ const phoneKeys = [
   {
     name: "7",
     label: "Number 7",
-    x: 18,
-    y: 486,
-    width: 47,
-    height: 27
+    x: 48,
+    y: 495,
+    width: 39,
+    height: 21
   },
+
   {
     name: "8",
     label: "Number 8",
-    x: 77,
-    y: 486,
-    width: 47,
-    height: 27
+    x: 94,
+    y: 495,
+    width: 39,
+    height: 21
   },
+
   {
     name: "9",
     label: "Number 9",
-    x: 136,
-    y: 486,
-    width: 47,
-    height: 27
+    x: 139,
+    y: 495,
+    width: 39,
+    height: 21
   },
 
   /* Bottom row */
@@ -232,31 +281,33 @@ const phoneKeys = [
   {
     name: "star",
     label: "Star",
-    x: 18,
-    y: 521,
-    width: 47,
-    height: 27
+    x: 48,
+    y: 523,
+    width: 39,
+    height: 21
   },
+
   {
     name: "0",
     label: "Number 0",
-    x: 77,
-    y: 521,
-    width: 47,
-    height: 27
+    x: 94,
+    y: 523,
+    width: 39,
+    height: 21
   },
+
   {
     name: "hash",
     label: "Hash",
-    x: 136,
-    y: 521,
-    width: 47,
-    height: 27
+    x: 139,
+    y: 523,
+    width: 39,
+    height: 21
   }
 ];
 
 /* ---------------------------------
-   STATE
+   PHONE STATE
 --------------------------------- */
 
 let isAnimating = false;
@@ -266,10 +317,8 @@ let isOpen = false;
 let spriteIndex = 0;
 let spriteInterval = null;
 
-let typedNumber = "";
-
 /* ---------------------------------
-   PRELOAD ALL IMAGES
+   PRELOAD IMAGES
 --------------------------------- */
 
 function preloadImages(paths) {
@@ -286,7 +335,7 @@ preloadImages([
 ]);
 
 /* ---------------------------------
-   STARTING SPRITE LOOP
+   SMALL PHONE SPRITE LOOP
 --------------------------------- */
 
 function startSpriteLoop() {
@@ -294,19 +343,46 @@ function startSpriteLoop() {
 
   sprite.src = spriteFrames[0];
 
-  spriteInterval = window.setInterval(() => {
-    spriteIndex =
-      (spriteIndex + 1) % spriteFrames.length;
+  spriteInterval =
+    window.setInterval(() => {
+      spriteIndex =
+        (spriteIndex + 1) %
+        spriteFrames.length;
 
-    sprite.src = spriteFrames[spriteIndex];
-  }, 160);
+      sprite.src =
+        spriteFrames[spriteIndex];
+    }, 160);
 }
 
 function stopSpriteLoop() {
-  if (spriteInterval === null) return;
+  if (spriteInterval === null) {
+    return;
+  }
 
-  window.clearInterval(spriteInterval);
+  window.clearInterval(
+    spriteInterval
+  );
+
   spriteInterval = null;
+}
+
+/* ---------------------------------
+   ENABLE OR DISABLE PHONE KEYS
+--------------------------------- */
+
+function setKeysEnabled(enabled) {
+  const keys =
+    keyOverlay.querySelectorAll(
+      ".phone-key"
+    );
+
+  keys.forEach((button) => {
+    button.disabled = !enabled;
+
+    button.classList.remove(
+      "is-pressed"
+    );
+  });
 }
 
 /* ---------------------------------
@@ -318,65 +394,76 @@ function playAnimation(
   finalFrame,
   callback
 ) {
-  if (isAnimating || frames.length === 0) return;
+  if (
+    isAnimating ||
+    frames.length === 0
+  ) {
+    return;
+  }
 
   isAnimating = true;
 
   flipTrigger.disabled = true;
-  disablePhoneKeys();
+  setKeysEnabled(false);
 
-  let frameIndex = 0;
+  let index = 0;
 
-  const animationInterval = window.setInterval(() => {
-    if (frameIndex < frames.length) {
-      frame.src = frames[frameIndex];
-      frameIndex += 1;
-      return;
-    }
+  const interval =
+    window.setInterval(() => {
+      if (index < frames.length) {
+        frame.src = frames[index];
+        index += 1;
+        return;
+      }
 
-    window.clearInterval(animationInterval);
+      window.clearInterval(interval);
 
-    frame.src = finalFrame;
-    isAnimating = false;
+      frame.src = finalFrame;
 
-    flipTrigger.disabled = false;
+      isAnimating = false;
+      flipTrigger.disabled = false;
 
-    if (typeof callback === "function") {
-      callback();
-    }
-
-    if (isOpen) {
-      enablePhoneKeys();
-    }
-  }, 90);
+      if (
+        typeof callback === "function"
+      ) {
+        callback();
+      }
+    }, 90);
 }
 
 /* ---------------------------------
-   FLIP TRIGGER POSITION
-
-   Open phone:
-   Trigger covers the top hinge.
-
-   Closed phone:
-   Trigger covers the whole closed phone.
+   CLOSE / REOPEN CLICK AREA
 --------------------------------- */
 
 function setFlipTriggerArea() {
   if (isOpen) {
-    flipTrigger.style.left = "0px";
+    /*
+      Open phone:
+      Only the top cap closes it.
+    */
+
+    flipTrigger.style.left = "62px";
     flipTrigger.style.top = "0px";
-    flipTrigger.style.width = "200px";
-    flipTrigger.style.height = "96px";
+
+    flipTrigger.style.width = "112px";
+    flipTrigger.style.height = "62px";
 
     flipTrigger.setAttribute(
       "aria-label",
       "Close phone"
     );
   } else {
-    flipTrigger.style.left = "0px";
+    /*
+      Closed phone:
+      The whole closed phone can be
+      clicked to reopen it.
+    */
+
+    flipTrigger.style.left = "25px";
     flipTrigger.style.top = "0px";
-    flipTrigger.style.width = "200px";
-    flipTrigger.style.height = "400px";
+
+    flipTrigger.style.width = "186px";
+    flipTrigger.style.height = "430px";
 
     flipTrigger.setAttribute(
       "aria-label",
@@ -386,17 +473,24 @@ function setFlipTriggerArea() {
 }
 
 /* ---------------------------------
-   CREATE CLICKABLE PHONE KEYS
+   CREATE ALL CLICKABLE KEYS
 --------------------------------- */
 
 function renderKeys() {
   keyOverlay.innerHTML = "";
 
   phoneKeys.forEach((key) => {
-    const button = document.createElement("button");
+    const button =
+      document.createElement("button");
 
     button.type = "button";
     button.className = "phone-key";
+
+    if (key.className) {
+      button.classList.add(
+        key.className
+      );
+    }
 
     button.dataset.key = key.name;
 
@@ -405,39 +499,53 @@ function renderKeys() {
       key.label
     );
 
-    button.style.left = `${key.x}px`;
-    button.style.top = `${key.y}px`;
-    button.style.width = `${key.width}px`;
-    button.style.height = `${key.height}px`;
+    button.style.left =
+      `${key.x}px`;
+
+    button.style.top =
+      `${key.y}px`;
+
+    button.style.width =
+      `${key.width}px`;
+
+    button.style.height =
+      `${key.height}px`;
 
     button.addEventListener(
       "pointerdown",
       () => {
-        if (!isOpen || isAnimating) return;
+        if (
+          !isOpen ||
+          isAnimating
+        ) {
+          return;
+        }
 
-        button.classList.add("is-pressed");
+        button.classList.add(
+          "is-pressed"
+        );
       }
     );
 
+    const releaseKey = () => {
+      button.classList.remove(
+        "is-pressed"
+      );
+    };
+
     button.addEventListener(
       "pointerup",
-      () => {
-        button.classList.remove("is-pressed");
-      }
+      releaseKey
     );
 
     button.addEventListener(
       "pointercancel",
-      () => {
-        button.classList.remove("is-pressed");
-      }
+      releaseKey
     );
 
     button.addEventListener(
       "pointerleave",
-      () => {
-        button.classList.remove("is-pressed");
-      }
+      releaseKey
     );
 
     button.addEventListener(
@@ -445,7 +553,12 @@ function renderKeys() {
       (event) => {
         event.stopPropagation();
 
-        if (!isOpen || isAnimating) return;
+        if (
+          !isOpen ||
+          isAnimating
+        ) {
+          return;
+        }
 
         handlePhoneKey(key.name);
       }
@@ -454,47 +567,59 @@ function renderKeys() {
     keyOverlay.appendChild(button);
   });
 
-  if (isOpen) {
-    enablePhoneKeys();
-  } else {
-    disablePhoneKeys();
-  }
+  setKeysEnabled(false);
 }
 
 /* ---------------------------------
-   ENABLE AND DISABLE KEYS
---------------------------------- */
-
-function disablePhoneKeys() {
-  const buttons =
-    keyOverlay.querySelectorAll(".phone-key");
-
-  buttons.forEach((button) => {
-    button.disabled = true;
-    button.classList.remove("is-pressed");
-  });
-}
-
-function enablePhoneKeys() {
-  if (!isOpen || isAnimating) return;
-
-  const buttons =
-    keyOverlay.querySelectorAll(".phone-key");
-
-  buttons.forEach((button) => {
-    button.disabled = false;
-  });
-}
-
-/* ---------------------------------
-   PHONE KEY ACTIONS
+   KEY ACTIONS
 --------------------------------- */
 
 function handlePhoneKey(keyName) {
-  playKeySound();
+  console.log(
+    `Phone key pressed: ${keyName}`
+  );
 
   switch (keyName) {
-    case "0":
+    case "end":
+      closePhone();
+      break;
+
+    case "call":
+      console.log(
+        "Call key was pressed"
+      );
+      break;
+
+    case "menu":
+      console.log(
+        "Menu key was pressed"
+      );
+      break;
+
+    case "dpad-up":
+      console.log("Move up");
+      break;
+
+    case "dpad-down":
+      console.log("Move down");
+      break;
+
+    case "dpad-left":
+      console.log("Move left");
+      break;
+
+    case "dpad-right":
+      console.log("Move right");
+      break;
+
+    case "dpad-center":
+      console.log("Select");
+      break;
+
+    case "upper-left":
+    case "upper-right":
+    case "lower-left":
+    case "lower-right":
     case "1":
     case "2":
     case "3":
@@ -504,144 +629,65 @@ function handlePhoneKey(keyName) {
     case "7":
     case "8":
     case "9":
-      enterCharacter(keyName);
-      break;
-
     case "star":
-      enterCharacter("*");
-      break;
-
+    case "0":
     case "hash":
-      enterCharacter("#");
-      break;
-
-    case "left-soft":
-      clearLastCharacter();
-      break;
-
-    case "right-soft":
-      clearPhoneDisplay();
-      break;
-
-    case "up":
-      showTemporaryMessage("UP");
-      break;
-
-    case "down":
-      showTemporaryMessage("DOWN");
-      break;
-
-    case "left":
-      showTemporaryMessage("LEFT");
-      break;
-
-    case "right":
-      showTemporaryMessage("RIGHT");
-      break;
-
-    case "center":
-      showTemporaryMessage("SELECT");
-      break;
-
-    case "call":
-      showTemporaryMessage("CALLING...");
-      break;
-
-    case "end":
-      closePhone();
+      console.log(
+        `${keyName} was pressed`
+      );
       break;
 
     default:
-      console.log(`Unknown key: ${keyName}`);
+      console.warn(
+        `No action assigned to ${keyName}`
+      );
   }
 }
 
 /* ---------------------------------
-   PHONE DISPLAY
---------------------------------- */
-
-function updatePhoneDisplay() {
-  phoneDisplayText.textContent = typedNumber;
-}
-
-function enterCharacter(character) {
-  const maximumCharacters = 12;
-
-  if (typedNumber.length >= maximumCharacters) {
-    return;
-  }
-
-  typedNumber += character;
-  updatePhoneDisplay();
-}
-
-function clearLastCharacter() {
-  typedNumber = typedNumber.slice(0, -1);
-  updatePhoneDisplay();
-}
-
-function clearPhoneDisplay() {
-  typedNumber = "";
-  updatePhoneDisplay();
-}
-
-function showTemporaryMessage(message) {
-  phoneDisplayText.textContent = message;
-
-  window.setTimeout(() => {
-    updatePhoneDisplay();
-  }, 600);
-}
-
-/* ---------------------------------
-   OPTIONAL KEYPAD SOUND
---------------------------------- */
-
-function playKeySound() {
-  /*
-    This checks for sounds/key.mp3.
-
-    Delete this function call from handlePhoneKey()
-    if you do not have that file.
-  */
-
-  const sound = new Audio("sounds/key.mp3");
-
-  sound.volume = 0.35;
-
-  sound.play().catch(() => {
-    /*
-      No error is shown if the optional sound file
-      does not exist.
-    */
-  });
-}
-
-/* ---------------------------------
-   FIRST OPENING
+   FIRST OPENING ANIMATION
 --------------------------------- */
 
 function openPhoneForFirstTime() {
-  if (isAnimating || hasOpenedOnce) return;
-
-  const sound1 =
-    new Audio("sounds/27_fixed.mp3");
-
-  const sound2 =
-    new Audio("sounds/28_fixed.mp3");
-
-  sound1.play().catch(() => {
-    console.log("Opening sound 1 could not play.");
-  });
-
-  sound2.play().catch(() => {
-    console.log("Opening sound 2 could not play.");
-  });
+  if (
+    isAnimating ||
+    hasOpenedOnce
+  ) {
+    return;
+  }
 
   stopSpriteLoop();
 
+  /*
+    Hide the small phone immediately
+    before the large-phone animation
+    begins.
+  */
+
   spriteButton.hidden = true;
-  container.style.display = "flex";
+
+  spriteButton.style.display =
+    "none";
+
+  sprite.style.display =
+    "none";
+
+  container.style.display =
+    "block";
+
+  const sound1 =
+    new Audio(
+      "sounds/27_fixed.mp3"
+    );
+
+  const sound2 =
+    new Audio(
+      "sounds/28_fixed.mp3"
+    );
+
+  sound1.play().catch(() => {});
+
+  sound2.play().catch(() => {});
 
   playAnimation(
     openFrames,
@@ -651,7 +697,7 @@ function openPhoneForFirstTime() {
       isOpen = true;
 
       setFlipTriggerArea();
-      enablePhoneKeys();
+      setKeysEnabled(true);
     }
   );
 }
@@ -670,7 +716,8 @@ function closePhone() {
   }
 
   isOpen = false;
-  disablePhoneKeys();
+
+  setKeysEnabled(false);
 
   playAnimation(
     closeFrames,
@@ -704,18 +751,17 @@ function reopenPhone() {
       isOpen = true;
 
       setFlipTriggerArea();
-      enablePhoneKeys();
+      setKeysEnabled(true);
     }
   );
 }
 
 /* ---------------------------------
-   INITIALIZE
+   INITIALIZE PHONE
 --------------------------------- */
 
 function initializePhone() {
   renderKeys();
-  updatePhoneDisplay();
   startSpriteLoop();
 
   spriteButton.addEventListener(
