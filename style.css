@@ -19,8 +19,8 @@ body {
   min-height: 100vh;
   overflow: hidden;
 
-  color: #fff;
   background: #000;
+  color: #fff;
 
   font-family:
     Arial,
@@ -75,7 +75,6 @@ button {
   appearance: none;
 
   background: transparent;
-
   cursor: pointer;
 }
 
@@ -237,56 +236,6 @@ body.panel-open .phone-container {
 
 .phone-menu.is-visible {
   display: block;
-}
-
-/* ---------------------------------
-   MENU CONTENT
---------------------------------- */
-
-.phone-menu-content {
-  position: relative;
-
-  width: 100%;
-  height: 100%;
-
-  z-index: 2;
-}
-
-/* ---------------------------------
-   DEFINE SPRITE 203 ANIMATION
---------------------------------- */
-
-.menu-photo-animation {
-  position: absolute;
-  inset: 0;
-
-  width: 100%;
-  height: 100%;
-
-  display: none;
-
-  z-index: 60;
-
-  object-fit: fill;
-  object-position: center;
-
-  image-rendering: pixelated;
-
-  pointer-events: none;
-  user-select: none;
-}
-
-.menu-photo-animation.is-playing {
-  display: block;
-}
-
-/*
-  The menu is hidden beneath the
-  animation while it is playing.
-*/
-
-.phone-menu.is-animating .phone-menu-content {
-  visibility: hidden;
 }
 
 /* ---------------------------------
@@ -884,9 +833,7 @@ body.panel-open .phone-container {
 
 .phone-key:disabled {
   background: transparent !important;
-
   outline: none;
-
   cursor: default;
 }
 
@@ -1317,7 +1264,6 @@ body.panel-open .phone-container {
 
 .panel-arrow:disabled {
   color: #555;
-
   cursor: default;
 }
 
@@ -1351,16 +1297,12 @@ body.panel-open .phone-container {
 @keyframes panelPageIn {
   from {
     opacity: 0;
-
-    transform:
-      translateX(9px);
+    transform: translateX(9px);
   }
 
   to {
     opacity: 1;
-
-    transform:
-      translateX(0);
+    transform: translateX(0);
   }
 }
 
