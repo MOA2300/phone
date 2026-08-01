@@ -49,6 +49,9 @@ const dialScreen =
 const dialNumber =
   document.getElementById("dial-number");
 
+const mailScreen =
+  document.getElementById("mail-screen");
+
 const menuItems =
   Array.from(
     document.querySelectorAll(
@@ -605,8 +608,8 @@ const phoneKeys = [
   },
 
   {
-    name: "lower-left",
-    label: "Lower left key",
+    name: "mail",
+    label: "Open mail message",
     x: 49,
     y: 381,
     width: 36,
@@ -767,6 +770,7 @@ let hasOpenedOnce = false;
 let isOpen = false;
 let isMenuVisible = false;
 let isDialScreenVisible = false;
+let isMailScreenVisible = false;
 
 let enteredPhoneNumber = "";
 
@@ -955,6 +959,7 @@ function setPhoneMenuVisible(visible) {
 
   if (visible) {
     setDialScreenVisible(false);
+    setMailScreenVisible(false);
   }
 }
 
@@ -981,6 +986,47 @@ function setDialScreenVisible(visible) {
     );
 
     phoneMenu.setAttribute(
+      "aria-hidden",
+      "true"
+    );
+
+    setMailScreenVisible(false);
+  }
+}
+
+function setMailScreenVisible(visible) {
+  isMailScreenVisible = visible;
+
+  mailScreen.classList.toggle(
+    "is-visible",
+    visible
+  );
+
+  mailScreen.setAttribute(
+    "aria-hidden",
+    visible
+      ? "false"
+      : "true"
+  );
+
+  if (visible) {
+    isMenuVisible = false;
+    isDialScreenVisible = false;
+
+    phoneMenu.classList.remove(
+      "is-visible"
+    );
+
+    phoneMenu.setAttribute(
+      "aria-hidden",
+      "true"
+    );
+
+    dialScreen.classList.remove(
+      "is-visible"
+    );
+
+    dialScreen.setAttribute(
       "aria-hidden",
       "true"
     );
@@ -1170,6 +1216,7 @@ function openContentPanel(sectionName) {
 
   setPhoneMenuVisible(false);
   setDialScreenVisible(false);
+  setMailScreenVisible(false);
 
   activeSectionName = sectionName;
   activePageIndex = 0;
@@ -1496,13 +1543,28 @@ function handlePhoneKey(keyName) {
     "#"
   ];
 
+  /* Mail button opens the message screen. */
+  if (keyName === "mail") {
+    if (panelIsOpen) {
+      closeContentPanel();
+    }
+
+    setPhoneMenuVisible(false);
+    setDialScreenVisible(false);
+    setMailScreenVisible(true);
+
+    return;
+  }
+
   /* Number keys type onto the dialing screen. */
   if (dialCharacters.includes(keyName)) {
     if (panelIsOpen) {
       closeContentPanel();
     }
 
+    setMailScreenVisible(false);
     typeDialCharacter(keyName);
+
     return;
   }
 
@@ -1513,14 +1575,20 @@ function handlePhoneKey(keyName) {
     }
 
     setDialScreenVisible(false);
+    setMailScreenVisible(false);
     setPhoneMenuVisible(true);
     updateMenuSelection();
 
     return;
   }
 
-  /* Back deletes a number or moves backward. */
+  /* Back closes mail, deletes a digit or moves backward. */
   if (keyName === "back") {
+    if (isMailScreenVisible) {
+      setMailScreenVisible(false);
+      return;
+    }
+
     if (isDialScreenVisible) {
       deleteDialCharacter();
       return;
@@ -1538,8 +1606,13 @@ function handlePhoneKey(keyName) {
     return;
   }
 
-  /* Red end button clears the number screen. */
+  /* Red end button closes active phone screens. */
   if (keyName === "end") {
+    if (isMailScreenVisible) {
+      setMailScreenVisible(false);
+      return;
+    }
+
     if (isDialScreenVisible) {
       clearDialNumber();
       setDialScreenVisible(false);
@@ -1552,6 +1625,7 @@ function handlePhoneKey(keyName) {
     }
 
     setPhoneMenuVisible(false);
+
     return;
   }
 
@@ -1562,6 +1636,7 @@ function handlePhoneKey(keyName) {
     }
 
     setDialScreenVisible(false);
+    setMailScreenVisible(false);
     setPhoneMenuVisible(true);
     updateMenuSelection();
 
@@ -1570,7 +1645,10 @@ function handlePhoneKey(keyName) {
 
   /* Center selects or opens the menu. */
   if (keyName === "dpad-center") {
-    if (isDialScreenVisible) {
+    if (
+      isDialScreenVisible ||
+      isMailScreenVisible
+    ) {
       return;
     }
 
@@ -1603,7 +1681,10 @@ function handlePhoneKey(keyName) {
     }
   }
 
-  if (isDialScreenVisible) {
+  if (
+    isDialScreenVisible ||
+    isMailScreenVisible
+  ) {
     return;
   }
 
@@ -1658,6 +1739,7 @@ function openPhoneForFirstTime() {
   setOpenClockVisible(false);
   setPhoneMenuVisible(false);
   setDialScreenVisible(false);
+  setMailScreenVisible(false);
 
   container.style.display = "block";
 
@@ -1692,6 +1774,7 @@ function openPhoneForFirstTime() {
       setOpenClockVisible(true);
       setPhoneMenuVisible(false);
       setDialScreenVisible(false);
+      setMailScreenVisible(false);
       updateMenuSelection();
     }
   );
@@ -1717,6 +1800,7 @@ function closePhone() {
   setOpenClockVisible(false);
   setPhoneMenuVisible(false);
   setDialScreenVisible(false);
+  setMailScreenVisible(false);
 
   isOpen = false;
 
@@ -1729,6 +1813,7 @@ function closePhone() {
       setOpenClockVisible(false);
       setPhoneMenuVisible(false);
       setDialScreenVisible(false);
+      setMailScreenVisible(false);
     }
   );
 }
@@ -1750,6 +1835,7 @@ function reopenPhone() {
   setOpenClockVisible(false);
   setPhoneMenuVisible(false);
   setDialScreenVisible(false);
+  setMailScreenVisible(false);
   setKeysEnabled(false);
 
   const reopenFrames =
@@ -1767,6 +1853,7 @@ function reopenPhone() {
       setOpenClockVisible(true);
       setPhoneMenuVisible(false);
       setDialScreenVisible(false);
+      setMailScreenVisible(false);
       updateMenuSelection();
     }
   );
@@ -1835,7 +1922,9 @@ function initializeMenuEvents() {
           closeContentPanel();
         }
 
+        setMailScreenVisible(false);
         typeDialCharacter(event.key);
+
         return;
       }
 
@@ -1847,7 +1936,9 @@ function initializeMenuEvents() {
           closeContentPanel();
         }
 
+        setMailScreenVisible(false);
         typeDialCharacter(event.key);
+
         return;
       }
 
@@ -1857,6 +1948,16 @@ function initializeMenuEvents() {
       ) {
         event.preventDefault();
         deleteDialCharacter();
+
+        return;
+      }
+
+      if (
+        event.key === "Escape" &&
+        isMailScreenVisible
+      ) {
+        setMailScreenVisible(false);
+
         return;
       }
 
@@ -1884,6 +1985,7 @@ function initializeMenuEvents() {
       ) {
         clearDialNumber();
         setDialScreenVisible(false);
+
         return;
       }
 
@@ -1893,7 +1995,10 @@ function initializeMenuEvents() {
       ) {
         event.preventDefault();
 
-        if (isDialScreenVisible) {
+        if (
+          isDialScreenVisible ||
+          isMailScreenVisible
+        ) {
           return;
         }
 
@@ -1909,12 +2014,14 @@ function initializeMenuEvents() {
 
       if (event.key === "Escape") {
         setPhoneMenuVisible(false);
+
         return;
       }
 
       if (
         !isMenuVisible ||
-        isDialScreenVisible
+        isDialScreenVisible ||
+        isMailScreenVisible
       ) {
         return;
       }
@@ -1955,6 +2062,8 @@ function initializePhone() {
   setOpenClockVisible(false);
   setPhoneMenuVisible(false);
   setDialScreenVisible(false);
+  setMailScreenVisible(false);
+
   clearDialNumber();
 
   startSpriteLoop();
