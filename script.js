@@ -126,8 +126,33 @@ function playPhoneSound(fileName) {
   sound
     .play()
     .catch(() => {
-      // Prevents console errors if audio is blocked.
+      // Prevents errors if the browser blocks audio.
     });
+}
+
+/* Reusable ringing sound for the green call button. */
+
+const callingSound =
+  new Audio(
+    "sounds/phonecalling.mp3"
+  );
+
+callingSound.loop = true;
+
+function startCallingSound() {
+  callingSound.pause();
+  callingSound.currentTime = 0;
+
+  callingSound
+    .play()
+    .catch(() => {
+      // Prevents errors if the browser blocks audio.
+    });
+}
+
+function stopCallingSound() {
+  callingSound.pause();
+  callingSound.currentTime = 0;
 }
 
 /* ---------------------------------
@@ -327,9 +352,17 @@ const sectionContent = {
         </p>
 
         <ul>
-          <li>Cumulative GPA: 3.8</li>
-          <li>Dean’s List</li>
-          <li>Scripps College Grant</li>
+          <li>
+            Cumulative GPA: 3.8
+          </li>
+
+          <li>
+            Dean’s List
+          </li>
+
+          <li>
+            Scripps College Grant
+          </li>
 
           <li>
             Advanced coursework in digital art,
@@ -646,7 +679,7 @@ const phoneKeys = [
 
   {
     name: "call",
-    label: "Call",
+    label: "Call entered number",
     x: 48,
     y: 408,
     width: 39,
@@ -664,7 +697,7 @@ const phoneKeys = [
 
   {
     name: "end",
-    label: "Clear number",
+    label: "End call",
     x: 139,
     y: 408,
     width: 38,
@@ -1029,6 +1062,8 @@ function setMailScreenVisible(visible) {
   );
 
   if (visible) {
+    stopCallingSound();
+
     isMenuVisible = false;
     isDialScreenVisible = false;
 
@@ -1094,6 +1129,8 @@ function renderDialNumber() {
 }
 
 function typeDialCharacter(character) {
+  stopCallingSound();
+
   if (enteredPhoneNumber.length >= 18) {
     return;
   }
@@ -1105,6 +1142,8 @@ function typeDialCharacter(character) {
 }
 
 function deleteDialCharacter() {
+  stopCallingSound();
+
   if (enteredPhoneNumber.length === 0) {
     setDialScreenVisible(false);
     return;
@@ -1232,6 +1271,8 @@ function openContentPanel(sectionName) {
   if (!section) {
     return;
   }
+
+  stopCallingSound();
 
   setPhoneMenuVisible(false);
   setDialScreenVisible(false);
@@ -1564,6 +1605,8 @@ function handlePhoneKey(keyName) {
 
   /* Mail button opens the message screen. */
   if (keyName === "mail") {
+    stopCallingSound();
+
     if (panelIsOpen) {
       closeContentPanel();
     }
@@ -1575,16 +1618,25 @@ function handlePhoneKey(keyName) {
     return;
   }
 
-  /* Green call button plays the ringing sound. */
+  /*
+    The green call button only rings when:
+    1. The number screen is visible.
+    2. At least one number has been entered.
+  */
   if (keyName === "call") {
-    playPhoneSound(
-      "phonecalling.mp3"
-    );
+    if (
+      !isDialScreenVisible ||
+      enteredPhoneNumber.length === 0
+    ) {
+      return;
+    }
+
+    startCallingSound();
 
     return;
   }
 
-  /* Number keys type and play matching sounds. */
+  /* Number keys type and play matching number sounds. */
   if (dialCharacters.includes(keyName)) {
     if (panelIsOpen) {
       closeContentPanel();
@@ -1603,22 +1655,29 @@ function handlePhoneKey(keyName) {
     return;
   }
 
-  /* Home returns to the main menu. */
+  /* Home ends the call and returns to the main menu. */
   if (keyName === "home") {
+    stopCallingSound();
+
     if (panelIsOpen) {
       closeContentPanel();
     }
 
+    clearDialNumber();
+
     setDialScreenVisible(false);
     setMailScreenVisible(false);
     setPhoneMenuVisible(true);
+
     updateMenuSelection();
 
     return;
   }
 
-  /* Back closes mail, deletes a digit or moves backward. */
+  /* Back stops ringing and moves backward. */
   if (keyName === "back") {
+    stopCallingSound();
+
     if (isMailScreenVisible) {
       setMailScreenVisible(false);
       return;
@@ -1641,8 +1700,10 @@ function handlePhoneKey(keyName) {
     return;
   }
 
-  /* Red end button closes active phone screens. */
+  /* Red hang-up button ends the call and closes screens. */
   if (keyName === "end") {
+    stopCallingSound();
+
     if (isMailScreenVisible) {
       setMailScreenVisible(false);
       return;
@@ -1664,8 +1725,10 @@ function handlePhoneKey(keyName) {
     return;
   }
 
-  /* Menu key opens the main menu. */
+  /* Menu key stops ringing and opens the main menu. */
   if (keyName === "menu") {
+    stopCallingSound();
+
     if (panelIsOpen) {
       closeContentPanel();
     }
@@ -1673,6 +1736,7 @@ function handlePhoneKey(keyName) {
     setDialScreenVisible(false);
     setMailScreenVisible(false);
     setPhoneMenuVisible(true);
+
     updateMenuSelection();
 
     return;
@@ -1741,6 +1805,7 @@ function handlePhoneKey(keyName) {
       break;
 
     case "lower-right":
+      stopCallingSound();
       setPhoneMenuVisible(false);
       break;
 
@@ -1763,6 +1828,7 @@ function openPhoneForFirstTime() {
     return;
   }
 
+  stopCallingSound();
   stopSpriteLoop();
 
   spriteButton.hidden = true;
@@ -1810,6 +1876,7 @@ function openPhoneForFirstTime() {
       setPhoneMenuVisible(false);
       setDialScreenVisible(false);
       setMailScreenVisible(false);
+
       updateMenuSelection();
     }
   );
@@ -1828,11 +1895,15 @@ function closePhone() {
     return;
   }
 
+  stopCallingSound();
+
   playPhoneSound(
     "closingphone.mp3"
   );
 
   closeContentPanel();
+
+  clearDialNumber();
 
   setKeysEnabled(false);
   setFrontScreenVisible(false);
@@ -1870,6 +1941,8 @@ function reopenPhone() {
     return;
   }
 
+  stopCallingSound();
+
   setFrontScreenVisible(false);
   setOpenClockVisible(false);
   setPhoneMenuVisible(false);
@@ -1893,6 +1966,7 @@ function reopenPhone() {
       setPhoneMenuVisible(false);
       setDialScreenVisible(false);
       setMailScreenVisible(false);
+
       updateMenuSelection();
     }
   );
@@ -1914,6 +1988,8 @@ function initializeMenuEvents() {
             return;
           }
 
+          stopCallingSound();
+
           selectedMenuIndex = index;
 
           updateMenuSelection();
@@ -1928,7 +2004,10 @@ function initializeMenuEvents() {
 
   panelClose.addEventListener(
     "click",
-    closeContentPanel
+    () => {
+      stopCallingSound();
+      closeContentPanel();
+    }
   );
 
   panelPrevious.addEventListener(
@@ -1997,6 +2076,7 @@ function initializeMenuEvents() {
       ) {
         event.preventDefault();
 
+        stopCallingSound();
         deleteDialCharacter();
 
         return;
@@ -2006,6 +2086,7 @@ function initializeMenuEvents() {
         event.key === "Escape" &&
         isMailScreenVisible
       ) {
+        stopCallingSound();
         setMailScreenVisible(false);
 
         return;
@@ -2023,6 +2104,7 @@ function initializeMenuEvents() {
         }
 
         if (event.key === "Escape") {
+          stopCallingSound();
           closeContentPanel();
         }
 
@@ -2033,6 +2115,7 @@ function initializeMenuEvents() {
         event.key === "Escape" &&
         isDialScreenVisible
       ) {
+        stopCallingSound();
         clearDialNumber();
         setDialScreenVisible(false);
 
@@ -2063,6 +2146,7 @@ function initializeMenuEvents() {
       }
 
       if (event.key === "Escape") {
+        stopCallingSound();
         setPhoneMenuVisible(false);
 
         return;
@@ -2106,6 +2190,8 @@ function initializeMenuEvents() {
 function initializePhone() {
   renderKeys();
   initializeMenuEvents();
+
+  stopCallingSound();
 
   setKeysEnabled(false);
   setFrontScreenVisible(false);
