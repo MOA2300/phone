@@ -95,14 +95,14 @@ img {
 
 /* ---------------------------------
    OPEN PHONE DATE AND TIME
-   moved down another 3.5px
+   moved down another 5px
 --------------------------------- */
 
 .open-screen-clock {
   position: absolute;
 
   left: 48px;
-  top: 90.5px;
+  top: 95.5px;
 
   width: 148px;
   height: 50px;
