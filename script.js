@@ -103,7 +103,7 @@ const closeFrames = [
 ];
 
 /* ---------------------------------
-   PANEL CONTENT
+   CONTENT
 --------------------------------- */
 
 const sectionContent = {
@@ -123,8 +123,8 @@ const sectionContent = {
 
         <p>
           I began as an artist drawn to
-          photography, printmaking, video and
-          visual storytelling.
+          photography, printmaking, video
+          and visual storytelling.
         </p>
 
         <p>
@@ -322,12 +322,11 @@ const sectionContent = {
 
         <p class="panel-quote">
           Nothing exploded into everything.
-          Everything cooled, collided and
-          became stars, planets, dinosaurs,
-          people, Wi-Fi and this application.
-          We are temporary stardust making
-          things—and trying to meet the
-          deadline.
+          Everything cooled, collided and became
+          stars, planets, dinosaurs, people,
+          Wi-Fi and this application. We are
+          temporary stardust making things—and
+          trying to meet the deadline.
         </p>
       `
     ]
@@ -532,8 +531,8 @@ const sectionContent = {
 
         <ul>
           <li>
-            Assisted students and faculty with
-            urgent technical needs
+            Assisted students and faculty
+            with urgent technical needs
           </li>
 
           <li>
@@ -605,8 +604,7 @@ const sectionContent = {
         <p>
           Adobe Photoshop, Lightroom,
           Illustrator, Premiere Pro,
-          Capture One, Microsoft Office
-          and Google Suite
+          Microsoft Office and Google Suite
         </p>
 
         <h3>
@@ -892,7 +890,7 @@ preloadImages([
 ]);
 
 /* ---------------------------------
-   STARTING PHONE SPRITE
+   STARTING SPRITE
 --------------------------------- */
 
 function startSpriteLoop() {
@@ -917,7 +915,6 @@ function stopSpriteLoop() {
   }
 
   window.clearInterval(spriteInterval);
-
   spriteInterval = null;
 }
 
@@ -1062,7 +1059,7 @@ function setKeysEnabled(enabled) {
 }
 
 /* ---------------------------------
-   MENU SELECTION
+   MENU
 --------------------------------- */
 
 function updateMenuSelection() {
@@ -1095,23 +1092,19 @@ function moveMenuSelection(direction) {
   let nextColumn = column;
 
   if (direction === "up") {
-    nextRow =
-      Math.max(0, row - 1);
+    nextRow = Math.max(0, row - 1);
   }
 
   if (direction === "down") {
-    nextRow =
-      Math.min(1, row + 1);
+    nextRow = Math.min(1, row + 1);
   }
 
   if (direction === "left") {
-    nextColumn =
-      Math.max(0, column - 1);
+    nextColumn = Math.max(0, column - 1);
   }
 
   if (direction === "right") {
-    nextColumn =
-      Math.min(1, column + 1);
+    nextColumn = Math.min(1, column + 1);
   }
 
   selectedMenuIndex =
@@ -1134,7 +1127,7 @@ function selectCurrentMenuItem() {
 }
 
 /* ---------------------------------
-   SIDE CONTENT PANEL
+   CONTENT PANEL
 --------------------------------- */
 
 function openContentPanel(sectionName) {
@@ -1207,8 +1200,7 @@ function renderPanelPage() {
     activePageIndex === 0;
 
   panelNext.disabled =
-    activePageIndex ===
-    totalPages - 1;
+    activePageIndex === totalPages - 1;
 
   panelPage.scrollTop = 0;
 
@@ -1228,7 +1220,6 @@ function showPreviousPanelPage() {
   }
 
   activePageIndex -= 1;
-
   renderPanelPage();
 }
 
@@ -1243,13 +1234,12 @@ function showNextPanelPage() {
   if (
     !section ||
     activePageIndex >=
-    section.pages.length - 1
+      section.pages.length - 1
   ) {
     return;
   }
 
   activePageIndex += 1;
-
   renderPanelPage();
 }
 
@@ -1270,7 +1260,6 @@ function playAnimation(
   }
 
   isAnimating = true;
-
   flipTrigger.disabled = true;
 
   setKeysEnabled(false);
@@ -1281,9 +1270,7 @@ function playAnimation(
     window.setInterval(() => {
       if (index < frames.length) {
         frame.src = frames[index];
-
         index += 1;
-
         return;
       }
 
@@ -1292,7 +1279,6 @@ function playAnimation(
       frame.src = finalFrame;
 
       isAnimating = false;
-
       flipTrigger.disabled = false;
 
       if (
@@ -1310,34 +1296,20 @@ function playAnimation(
 
 function setFlipTriggerArea() {
   if (isOpen) {
-    flipTrigger.style.left =
-      "62px";
-
-    flipTrigger.style.top =
-      "0px";
-
-    flipTrigger.style.width =
-      "112px";
-
-    flipTrigger.style.height =
-      "62px";
+    flipTrigger.style.left = "62px";
+    flipTrigger.style.top = "0px";
+    flipTrigger.style.width = "112px";
+    flipTrigger.style.height = "62px";
 
     flipTrigger.setAttribute(
       "aria-label",
       "Close phone"
     );
   } else {
-    flipTrigger.style.left =
-      "18px";
-
-    flipTrigger.style.top =
-      "80px";
-
-    flipTrigger.style.width =
-      "200px";
-
-    flipTrigger.style.height =
-      "496px";
+    flipTrigger.style.left = "18px";
+    flipTrigger.style.top = "80px";
+    flipTrigger.style.width = "200px";
+    flipTrigger.style.height = "496px";
 
     flipTrigger.setAttribute(
       "aria-label",
@@ -1347,7 +1319,7 @@ function setFlipTriggerArea() {
 }
 
 /* ---------------------------------
-   CREATE KEYPAD BUTTONS
+   CREATE PHONE KEYS
 --------------------------------- */
 
 function renderKeys() {
@@ -1540,20 +1512,19 @@ function openPhoneForFirstTime() {
   stopSpriteLoop();
 
   spriteButton.hidden = true;
-
-  spriteButton.style.display =
-    "none";
-
-  sprite.style.display =
-    "none";
+  spriteButton.style.display = "none";
+  sprite.style.display = "none";
 
   setKeysEnabled(false);
+
+  /* Closed-screen bunny must be hidden
+     while opening the phone. */
   setFrontScreenVisible(false);
+
   setOpenClockVisible(false);
   setPhoneMenuVisible(false);
 
-  container.style.display =
-    "block";
+  container.style.display = "block";
 
   const sound1 =
     new Audio(
@@ -1565,13 +1536,8 @@ function openPhoneForFirstTime() {
       "sounds/28_fixed.mp3"
     );
 
-  sound1
-    .play()
-    .catch(() => {});
-
-  sound2
-    .play()
-    .catch(() => {});
+  sound1.play().catch(() => {});
+  sound2.play().catch(() => {});
 
   playAnimation(
     openFrames,
@@ -1581,13 +1547,11 @@ function openPhoneForFirstTime() {
       isOpen = true;
 
       setFlipTriggerArea();
-
       setKeysEnabled(true);
 
+      /* Open-phone interface */
       setFrontScreenVisible(false);
-
       setOpenClockVisible(true);
-
       setPhoneMenuVisible(true);
 
       updateMenuSelection();
@@ -1612,10 +1576,10 @@ function closePhone() {
 
   setKeysEnabled(false);
 
+  /* Hide every screen overlay during
+     the closing animation. */
   setFrontScreenVisible(false);
-
   setOpenClockVisible(false);
-
   setPhoneMenuVisible(false);
 
   isOpen = false;
@@ -1626,7 +1590,11 @@ function closePhone() {
     () => {
       setFlipTriggerArea();
 
+      /* Bunny, date and time appear only
+         after the phone is fully closed. */
       setFrontScreenVisible(true);
+      setOpenClockVisible(false);
+      setPhoneMenuVisible(false);
     }
   );
 }
@@ -1644,12 +1612,12 @@ function reopenPhone() {
     return;
   }
 
+  /* Remove bunny screen before the
+     opening animation begins. */
   setFrontScreenVisible(false);
 
   setOpenClockVisible(false);
-
   setPhoneMenuVisible(false);
-
   setKeysEnabled(false);
 
   const reopenFrames =
@@ -1662,11 +1630,11 @@ function reopenPhone() {
       isOpen = true;
 
       setFlipTriggerArea();
-
       setKeysEnabled(true);
 
+      /* Restore blue-screen interface */
+      setFrontScreenVisible(false);
       setOpenClockVisible(true);
-
       setPhoneMenuVisible(true);
 
       updateMenuSelection();
@@ -1729,67 +1697,40 @@ function initializeMenuEvents() {
         );
 
       if (panelIsOpen) {
-        if (
-          event.key ===
-          "ArrowLeft"
-        ) {
+        if (event.key === "ArrowLeft") {
           event.preventDefault();
-
           showPreviousPanelPage();
         }
 
-        if (
-          event.key ===
-          "ArrowRight"
-        ) {
+        if (event.key === "ArrowRight") {
           event.preventDefault();
-
           showNextPanelPage();
         }
 
-        if (
-          event.key ===
-          "Escape"
-        ) {
+        if (event.key === "Escape") {
           closeContentPanel();
         }
 
         return;
       }
 
-      if (
-        event.key ===
-        "ArrowUp"
-      ) {
+      if (event.key === "ArrowUp") {
         event.preventDefault();
-
         moveMenuSelection("up");
       }
 
-      if (
-        event.key ===
-        "ArrowDown"
-      ) {
+      if (event.key === "ArrowDown") {
         event.preventDefault();
-
         moveMenuSelection("down");
       }
 
-      if (
-        event.key ===
-        "ArrowLeft"
-      ) {
+      if (event.key === "ArrowLeft") {
         event.preventDefault();
-
         moveMenuSelection("left");
       }
 
-      if (
-        event.key ===
-        "ArrowRight"
-      ) {
+      if (event.key === "ArrowRight") {
         event.preventDefault();
-
         moveMenuSelection("right");
       }
 
@@ -1798,7 +1739,6 @@ function initializeMenuEvents() {
         event.key === " "
       ) {
         event.preventDefault();
-
         selectCurrentMenuItem();
       }
     }
@@ -1811,19 +1751,17 @@ function initializeMenuEvents() {
 
 function initializePhone() {
   renderKeys();
-
   initializeMenuEvents();
 
   setKeysEnabled(false);
 
+  /* No screen overlays appear before
+     the initial phone animation. */
   setFrontScreenVisible(false);
-
   setOpenClockVisible(false);
-
   setPhoneMenuVisible(false);
 
   startSpriteLoop();
-
   startPhoneClock();
 
   spriteButton.addEventListener(
