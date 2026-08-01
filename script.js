@@ -4,34 +4,72 @@
    HTML ELEMENTS
 --------------------------------- */
 
-const spriteButton = document.getElementById("sprite-button");
-const sprite = document.getElementById("sprite");
-const frame = document.getElementById("phone-frame");
-const container = document.getElementById("phone-container");
-const keyOverlay = document.getElementById("key-overlay");
-const flipTrigger = document.getElementById("flip-trigger");
+const spriteButton =
+  document.getElementById("sprite-button");
 
-const frontScreen = document.getElementById("front-screen");
-const frontScreenDate = document.getElementById("front-screen-date");
-const frontScreenTime = document.getElementById("front-screen-time");
+const sprite =
+  document.getElementById("sprite");
 
-const openScreenClock = document.getElementById("open-screen-clock");
-const openScreenDate = document.getElementById("open-screen-date");
-const openScreenTime = document.getElementById("open-screen-time");
+const frame =
+  document.getElementById("phone-frame");
 
-const phoneMenu = document.getElementById("phone-menu");
+const container =
+  document.getElementById("phone-container");
 
-const menuItems = Array.from(
-  document.querySelectorAll(".phone-menu-item")
-);
+const keyOverlay =
+  document.getElementById("key-overlay");
 
-const contentPanel = document.getElementById("content-panel");
-const panelTitle = document.getElementById("panel-title");
-const panelPage = document.getElementById("panel-page");
-const panelPageNumber = document.getElementById("panel-page-number");
-const panelPrevious = document.getElementById("panel-previous");
-const panelNext = document.getElementById("panel-next");
-const panelClose = document.getElementById("panel-close");
+const flipTrigger =
+  document.getElementById("flip-trigger");
+
+const frontScreen =
+  document.getElementById("front-screen");
+
+const frontScreenDate =
+  document.getElementById("front-screen-date");
+
+const frontScreenTime =
+  document.getElementById("front-screen-time");
+
+const openScreenClock =
+  document.getElementById("open-screen-clock");
+
+const openScreenDate =
+  document.getElementById("open-screen-date");
+
+const openScreenTime =
+  document.getElementById("open-screen-time");
+
+const phoneMenu =
+  document.getElementById("phone-menu");
+
+const menuItems =
+  Array.from(
+    document.querySelectorAll(
+      ".phone-menu-item"
+    )
+  );
+
+const contentPanel =
+  document.getElementById("content-panel");
+
+const panelTitle =
+  document.getElementById("panel-title");
+
+const panelPage =
+  document.getElementById("panel-page");
+
+const panelPageNumber =
+  document.getElementById("panel-page-number");
+
+const panelPrevious =
+  document.getElementById("panel-previous");
+
+const panelNext =
+  document.getElementById("panel-next");
+
+const panelClose =
+  document.getElementById("panel-close");
 
 /* ---------------------------------
    PHONE IMAGE FRAMES
@@ -40,7 +78,9 @@ const panelClose = document.getElementById("panel-close");
 const spriteFrames = [];
 
 for (let i = 1; i <= 16; i += 1) {
-  spriteFrames.push(`DefineSprite_22/${i}.png`);
+  spriteFrames.push(
+    `DefineSprite_22/${i}.png`
+  );
 }
 
 const openFrames = [
@@ -63,12 +103,12 @@ const closeFrames = [
 ];
 
 /* ---------------------------------
-   PANEL CONTENT
+   CONTENT
 --------------------------------- */
 
 const sectionContent = {
   about: {
-    title: "About",
+    title: "About Me",
 
     pages: [
       `
@@ -87,36 +127,42 @@ const sectionContent = {
             </h2>
 
             <p>
-              I am a graduate of Scripps College with a
-              B.A. in Digital Art. I had the privilege of
-              experimenting with various mediums in college,
-              including graphic art, photography, digital
-              marketing, printmaking and ceramics.
+              I am a graduate of Scripps College
+              with a B.A. in Digital Art. I had
+              the privilege of experimenting with
+              various mediums in college,
+              including photography, printmaking,
+              and ceramics.
             </p>
 
             <p>
-              Over time, I realized that my strongest work
-              always had a strong message. This realization
-              led me into a digital marketing role. Here, I
-              grasped what it meant to create compelling
-              content that generates a big impact within a
+              Over time, I realized that my
+              strongest work always had a strong
+              message. This realization led me
+              into a digital marketing role.
+              Here, I grasped what it meant to
+              create compelling content that
+              generates a big impact within a
               target audience.
             </p>
 
             <p>
-              I love creating art, but I also love
-              transmitting stories. Many of my roles or
-              projects are part of fast-paced environments.
-              Thus, I have had to adapt to environments where
-              deadlines are tight and attention to detail is
-              a top priority.
+              I love creating art, but I also
+              love transmitting stories. Many
+              of my roles or projects are part
+              of fast-paced environments. Thus,
+              I have had to adapt to environments
+              where deadlines are tight and
+              attention to detail is a top
+              priority.
             </p>
 
             <p>
-              Furthermore, I am always open to feedback and
-              mentorship from others. My main goal in all of
-              my roles is to lead with empathy and clear
-              communication.
+              Furthermore, I am always open to
+              feedback and mentorship from
+              others. My main goal in all of my
+              roles is to lead with empathy and
+              clear communication.
             </p>
           </div>
         </div>
@@ -138,9 +184,10 @@ const sectionContent = {
         </h2>
 
         <p>
-          My portfolio includes photography, visual design,
-          interactive projects and work shaped by identity,
-          music, fashion and digital culture.
+          My portfolio includes photography,
+          visual design, interactive projects
+          and work shaped by identity, music,
+          fashion and digital culture.
         </p>
 
         <p>
@@ -166,10 +213,11 @@ const sectionContent = {
         </p>
 
         <p class="panel-quote">
-          Nothing became everything. Everything became
-          stars, planets, dinosaurs, people, Wi-Fi and this
-          application. Now we make things before the
-          deadline.
+          Nothing became everything.
+          Everything became stars, planets,
+          dinosaurs, people, Wi-Fi and this
+          application. Now we make things
+          before the deadline.
         </p>
       `
     ]
@@ -189,13 +237,15 @@ const sectionContent = {
         </h2>
 
         <p class="resume-meta">
-          Digital Artist · Photographer · Designer · Marketer
+          Digital Artist · Photographer ·
+          Designer · Marketer
         </p>
 
         <p>
-          Multidisciplinary creative with experience
-          translating ideas into photography, graphics,
-          video, digital content and audience-focused
+          Multidisciplinary creative with
+          experience translating ideas into
+          photography, graphics, video,
+          digital content and audience-focused
           marketing.
         </p>
 
@@ -255,21 +305,24 @@ const sectionContent = {
         </h2>
 
         <p class="resume-meta">
-          Staff Photographer · January 2024–May 2025
+          Staff Photographer ·
+          January 2024–May 2025
         </p>
 
         <ul>
           <li>
-            Produced more than 20 edited photographs weekly
+            Produced more than 20 edited
+            photographs weekly
           </li>
 
           <li>
-            Covered sports, clubs and campus events under
-            deadline
+            Covered sports, clubs and campus
+            events under deadline
           </li>
 
           <li>
-            Managed equipment and workflows independently
+            Managed equipment and workflows
+            independently
           </li>
         </ul>
       `,
@@ -284,18 +337,19 @@ const sectionContent = {
         </h2>
 
         <p class="resume-meta">
-          Graphic Designer · December 2024–March 2025
+          Graphic Designer ·
+          December 2024–March 2025
         </p>
 
         <ul>
           <li>
-            Created graphics, posters and digital artist
-            materials
+            Created graphics, posters and
+            digital artist materials
           </li>
 
           <li>
-            Incorporated editorial feedback and delivered
-            polished assets
+            Incorporated editorial feedback
+            and delivered polished assets
           </li>
         </ul>
       `,
@@ -310,12 +364,14 @@ const sectionContent = {
         </h2>
 
         <p class="resume-meta">
-          Marketing Intern · September 2024–January 2025
+          Marketing Intern ·
+          September 2024–January 2025
         </p>
 
         <ul>
           <li>
-            Supported outreach and content scheduling
+            Supported outreach and content
+            scheduling
           </li>
 
           <li>
@@ -338,18 +394,19 @@ const sectionContent = {
         </h2>
 
         <p class="resume-meta">
-          Media Services Intern · August 2023–December 2023
+          Media Services Intern ·
+          August 2023–December 2023
         </p>
 
         <ul>
           <li>
-            Supported students and faculty with technical
-            issues
+            Supported students and faculty
+            with technical issues
           </li>
 
           <li>
-            Troubleshot AV equipment, projectors and
-            computers
+            Troubleshot AV equipment,
+            projectors and computers
           </li>
         </ul>
       `,
@@ -373,12 +430,13 @@ const sectionContent = {
           </li>
 
           <li>
-            Contributed published work to Local Wolves
-            Magazine
+            Contributed published work to
+            Local Wolves Magazine
           </li>
 
           <li>
-            Built a fashion, portrait and concert portfolio
+            Built a fashion, portrait and
+            concert portfolio
           </li>
         </ul>
       `,
@@ -397,8 +455,9 @@ const sectionContent = {
         </h3>
 
         <p>
-          Photoshop, Lightroom, Illustrator, Premiere Pro,
-          Microsoft Office and Google Suite
+          Photoshop, Lightroom, Illustrator,
+          Premiere Pro, Microsoft Office
+          and Google Suite
         </p>
 
         <h3>
@@ -414,7 +473,7 @@ const sectionContent = {
 };
 
 /* ---------------------------------
-   PHONE BUTTON LOCATIONS
+   PHONE KEYS
 --------------------------------- */
 
 const phoneKeys = [
@@ -568,7 +627,7 @@ const phoneKeys = [
 ];
 
 /* ---------------------------------
-   PHONE STATE
+   STATE
 --------------------------------- */
 
 let isAnimating = false;
@@ -585,7 +644,7 @@ let activeSectionName = null;
 let activePageIndex = 0;
 
 /* ---------------------------------
-   PRELOAD IMAGES
+   PRELOAD
 --------------------------------- */
 
 function preloadImages(paths) {
@@ -612,10 +671,15 @@ function startSpriteLoop() {
 
   sprite.src = spriteFrames[0];
 
-  spriteInterval = window.setInterval(() => {
-    spriteIndex = (spriteIndex + 1) % spriteFrames.length;
-    sprite.src = spriteFrames[spriteIndex];
-  }, 160);
+  spriteInterval =
+    window.setInterval(() => {
+      spriteIndex =
+        (spriteIndex + 1) %
+        spriteFrames.length;
+
+      sprite.src =
+        spriteFrames[spriteIndex];
+    }, 160);
 }
 
 function stopSpriteLoop() {
@@ -623,7 +687,10 @@ function stopSpriteLoop() {
     return;
   }
 
-  window.clearInterval(spriteInterval);
+  window.clearInterval(
+    spriteInterval
+  );
+
   spriteInterval = null;
 }
 
@@ -680,49 +747,64 @@ function formatFrontPhoneTime(date) {
 function updatePhoneClock() {
   const now = new Date();
 
-  frontScreenDate.textContent = formatFrontPhoneDate(now);
-  frontScreenTime.textContent = formatFrontPhoneTime(now);
+  frontScreenDate.textContent =
+    formatFrontPhoneDate(now);
 
-  openScreenDate.textContent = formatOpenPhoneDate(now);
-  openScreenTime.textContent = formatOpenPhoneTime(now);
+  frontScreenTime.textContent =
+    formatFrontPhoneTime(now);
+
+  openScreenDate.textContent =
+    formatOpenPhoneDate(now);
+
+  openScreenTime.textContent =
+    formatOpenPhoneTime(now);
 }
 
 function startPhoneClock() {
   updatePhoneClock();
 
   if (clockInterval !== null) {
-    window.clearInterval(clockInterval);
+    window.clearInterval(
+      clockInterval
+    );
   }
 
-  clockInterval = window.setInterval(
-    updatePhoneClock,
-    1000
-  );
+  clockInterval =
+    window.setInterval(
+      updatePhoneClock,
+      1000
+    );
 }
 
 /* ---------------------------------
-   VISIBILITY HELPERS
+   VISIBILITY
 --------------------------------- */
 
 function setFrontScreenVisible(visible) {
-  frontScreen.style.display = visible
-    ? "block"
-    : "none";
+  frontScreen.style.display =
+    visible
+      ? "block"
+      : "none";
 
   frontScreen.setAttribute(
     "aria-hidden",
-    visible ? "false" : "true"
+    visible
+      ? "false"
+      : "true"
   );
 }
 
 function setOpenClockVisible(visible) {
-  openScreenClock.style.display = visible
-    ? "block"
-    : "none";
+  openScreenClock.style.display =
+    visible
+      ? "block"
+      : "none";
 
   openScreenClock.setAttribute(
     "aria-hidden",
-    visible ? "false" : "true"
+    visible
+      ? "false"
+      : "true"
   );
 }
 
@@ -736,52 +818,67 @@ function setPhoneMenuVisible(visible) {
 
   phoneMenu.setAttribute(
     "aria-hidden",
-    visible ? "false" : "true"
+    visible
+      ? "false"
+      : "true"
   );
 }
 
 function setKeysEnabled(enabled) {
-  const buttons = keyOverlay.querySelectorAll(
-    ".phone-key"
-  );
+  const buttons =
+    keyOverlay.querySelectorAll(
+      ".phone-key"
+    );
 
   buttons.forEach((button) => {
     button.disabled = !enabled;
-    button.classList.remove("is-pressed");
+
+    button.classList.remove(
+      "is-pressed"
+    );
   });
 
-  keyOverlay.style.visibility = enabled
-    ? "visible"
-    : "hidden";
+  keyOverlay.style.visibility =
+    enabled
+      ? "visible"
+      : "hidden";
 
-  keyOverlay.style.pointerEvents = enabled
-    ? "auto"
-    : "none";
+  keyOverlay.style.pointerEvents =
+    enabled
+      ? "auto"
+      : "none";
 
   keyOverlay.setAttribute(
     "aria-hidden",
-    enabled ? "false" : "true"
+    enabled
+      ? "false"
+      : "true"
   );
 }
 
 /* ---------------------------------
-   PHONE MENU
+   MENU
 --------------------------------- */
 
 function updateMenuSelection() {
-  menuItems.forEach((item, index) => {
-    const selected = index === selectedMenuIndex;
+  menuItems.forEach(
+    (item, index) => {
+      const selected =
+        index === selectedMenuIndex;
 
-    item.classList.toggle(
-      "is-selected",
-      selected
-    );
+      item.classList.toggle(
+        "is-selected",
+        selected
+      );
 
-    item.setAttribute(
-      "aria-selected",
-      selected ? "true" : "false"
-    );
-  });
+      item.setAttribute(
+        "aria-selected",
+        selected
+          ? "true"
+          : "false"
+      );
+    }
+  );
 }
 
 function moveMenuSelection(direction) {
@@ -789,29 +886,51 @@ function moveMenuSelection(direction) {
     return;
   }
 
-  const row = Math.floor(selectedMenuIndex / 2);
-  const column = selectedMenuIndex % 2;
+  const row =
+    Math.floor(
+      selectedMenuIndex / 2
+    );
+
+  const column =
+    selectedMenuIndex % 2;
 
   let nextRow = row;
   let nextColumn = column;
 
   if (direction === "up") {
-    nextRow = Math.max(0, row - 1);
+    nextRow =
+      Math.max(
+        0,
+        row - 1
+      );
   }
 
   if (direction === "down") {
-    nextRow = Math.min(1, row + 1);
+    nextRow =
+      Math.min(
+        1,
+        row + 1
+      );
   }
 
   if (direction === "left") {
-    nextColumn = Math.max(0, column - 1);
+    nextColumn =
+      Math.max(
+        0,
+        column - 1
+      );
   }
 
   if (direction === "right") {
-    nextColumn = Math.min(1, column + 1);
+    nextColumn =
+      Math.min(
+        1,
+        column + 1
+      );
   }
 
-  selectedMenuIndex = nextRow * 2 + nextColumn;
+  selectedMenuIndex =
+    nextRow * 2 + nextColumn;
 
   updateMenuSelection();
 }
@@ -821,7 +940,8 @@ function selectCurrentMenuItem() {
     return;
   }
 
-  const selectedItem = menuItems[selectedMenuIndex];
+  const selectedItem =
+    menuItems[selectedMenuIndex];
 
   if (!selectedItem) {
     return;
@@ -837,7 +957,8 @@ function selectCurrentMenuItem() {
 --------------------------------- */
 
 function openContentPanel(sectionName) {
-  const section = sectionContent[sectionName];
+  const section =
+    sectionContent[sectionName];
 
   if (!section) {
     return;
@@ -845,13 +966,21 @@ function openContentPanel(sectionName) {
 
   setPhoneMenuVisible(false);
 
-  activeSectionName = sectionName;
-  activePageIndex = 0;
+  activeSectionName =
+    sectionName;
+
+  activePageIndex =
+    0;
 
   renderPanelPage();
 
-  document.body.classList.add("panel-open");
-  contentPanel.classList.add("is-open");
+  document.body.classList.add(
+    "panel-open"
+  );
+
+  contentPanel.classList.add(
+    "is-open"
+  );
 
   contentPanel.setAttribute(
     "aria-hidden",
@@ -860,44 +989,61 @@ function openContentPanel(sectionName) {
 }
 
 function closeContentPanel() {
-  document.body.classList.remove("panel-open");
-  contentPanel.classList.remove("is-open");
+  document.body.classList.remove(
+    "panel-open"
+  );
+
+  contentPanel.classList.remove(
+    "is-open"
+  );
 
   contentPanel.setAttribute(
     "aria-hidden",
     "true"
   );
 
-  activeSectionName = null;
-  activePageIndex = 0;
+  activeSectionName =
+    null;
+
+  activePageIndex =
+    0;
 }
 
 function renderPanelPage() {
-  const section = sectionContent[activeSectionName];
+  const section =
+    sectionContent[activeSectionName];
 
   if (!section) {
     return;
   }
 
-  const totalPages = section.pages.length;
+  const totalPages =
+    section.pages.length;
 
-  panelTitle.textContent = section.title;
-  panelPage.innerHTML = section.pages[activePageIndex];
+  panelTitle.textContent =
+    section.title;
+
+  panelPage.innerHTML =
+    section.pages[activePageIndex];
 
   panelPageNumber.textContent =
     `${padNumber(activePageIndex + 1)} / ` +
     `${padNumber(totalPages)}`;
 
-  panelPrevious.disabled = activePageIndex === 0;
+  panelPrevious.disabled =
+    activePageIndex === 0;
 
   panelNext.disabled =
-    activePageIndex === totalPages - 1;
+    activePageIndex ===
+    totalPages - 1;
 
-  panelPage.scrollTop = 0;
+  panelPage.scrollTop =
+    0;
 
-  panelPage.style.animation = "none";
+  panelPage.style.animation =
+    "none";
 
-  window.requestAnimationFrame(() => {
+  requestAnimationFrame(() => {
     panelPage.style.animation = "";
   });
 }
@@ -911,6 +1057,7 @@ function showPreviousPanelPage() {
   }
 
   activePageIndex -= 1;
+
   renderPanelPage();
 }
 
@@ -919,16 +1066,19 @@ function showNextPanelPage() {
     return;
   }
 
-  const section = sectionContent[activeSectionName];
+  const section =
+    sectionContent[activeSectionName];
 
   if (
     !section ||
-    activePageIndex >= section.pages.length - 1
+    activePageIndex >=
+    section.pages.length - 1
   ) {
     return;
   }
 
   activePageIndex += 1;
+
   renderPanelPage();
 }
 
@@ -948,52 +1098,83 @@ function playAnimation(
     return;
   }
 
-  isAnimating = true;
-  flipTrigger.disabled = true;
+  isAnimating =
+    true;
+
+  flipTrigger.disabled =
+    true;
 
   setKeysEnabled(false);
 
   let index = 0;
 
-  const interval = window.setInterval(() => {
-    if (index < frames.length) {
-      frame.src = frames[index];
-      index += 1;
-      return;
-    }
+  const interval =
+    window.setInterval(() => {
+      if (index < frames.length) {
+        frame.src =
+          frames[index];
 
-    window.clearInterval(interval);
+        index += 1;
 
-    frame.src = finalFrame;
-    isAnimating = false;
-    flipTrigger.disabled = false;
+        return;
+      }
 
-    if (typeof callback === "function") {
-      callback();
-    }
-  }, 90);
+      window.clearInterval(
+        interval
+      );
+
+      frame.src =
+        finalFrame;
+
+      isAnimating =
+        false;
+
+      flipTrigger.disabled =
+        false;
+
+      if (
+        typeof callback ===
+        "function"
+      ) {
+        callback();
+      }
+    }, 90);
 }
 
 /* ---------------------------------
-   PHONE FLIP CLICK AREA
+   FLIP AREA
 --------------------------------- */
 
 function setFlipTriggerArea() {
   if (isOpen) {
-    flipTrigger.style.left = "62px";
-    flipTrigger.style.top = "0px";
-    flipTrigger.style.width = "112px";
-    flipTrigger.style.height = "62px";
+    flipTrigger.style.left =
+      "62px";
+
+    flipTrigger.style.top =
+      "0px";
+
+    flipTrigger.style.width =
+      "112px";
+
+    flipTrigger.style.height =
+      "62px";
 
     flipTrigger.setAttribute(
       "aria-label",
       "Close phone"
     );
   } else {
-    flipTrigger.style.left = "18px";
-    flipTrigger.style.top = "80px";
-    flipTrigger.style.width = "200px";
-    flipTrigger.style.height = "496px";
+    flipTrigger.style.left =
+      "18px";
+
+    flipTrigger.style.top =
+      "80px";
+
+    flipTrigger.style.width =
+      "200px";
+
+    flipTrigger.style.height =
+      "496px";
 
     flipTrigger.setAttribute(
       "aria-label",
@@ -1010,42 +1191,63 @@ function renderKeys() {
   keyOverlay.innerHTML = "";
 
   phoneKeys.forEach((key) => {
-    const button = document.createElement(
-      "button"
-    );
+    const button =
+      document.createElement(
+        "button"
+      );
 
-    button.type = "button";
-    button.className = "phone-key";
+    button.type =
+      "button";
+
+    button.className =
+      "phone-key";
 
     if (key.className) {
-      button.classList.add(key.className);
+      button.classList.add(
+        key.className
+      );
     }
 
-    button.dataset.key = key.name;
+    button.dataset.key =
+      key.name;
 
     button.setAttribute(
       "aria-label",
       key.label
     );
 
-    button.style.left = `${key.x}px`;
-    button.style.top = `${key.y}px`;
-    button.style.width = `${key.width}px`;
-    button.style.height = `${key.height}px`;
+    button.style.left =
+      `${key.x}px`;
+
+    button.style.top =
+      `${key.y}px`;
+
+    button.style.width =
+      `${key.width}px`;
+
+    button.style.height =
+      `${key.height}px`;
 
     button.addEventListener(
       "pointerdown",
       () => {
-        if (!isOpen || isAnimating) {
+        if (
+          !isOpen ||
+          isAnimating
+        ) {
           return;
         }
 
-        button.classList.add("is-pressed");
+        button.classList.add(
+          "is-pressed"
+        );
       }
     );
 
     const releaseKey = () => {
-      button.classList.remove("is-pressed");
+      button.classList.remove(
+        "is-pressed"
+      );
     };
 
     button.addEventListener(
@@ -1068,15 +1270,22 @@ function renderKeys() {
       (event) => {
         event.stopPropagation();
 
-        if (!isOpen || isAnimating) {
+        if (
+          !isOpen ||
+          isAnimating
+        ) {
           return;
         }
 
-        handlePhoneKey(key.name);
+        handlePhoneKey(
+          key.name
+        );
       }
     );
 
-    keyOverlay.appendChild(button);
+    keyOverlay.appendChild(
+      button
+    );
   });
 
   setKeysEnabled(false);
@@ -1088,7 +1297,9 @@ function renderKeys() {
 
 function handlePhoneKey(keyName) {
   const panelIsOpen =
-    contentPanel.classList.contains("is-open");
+    contentPanel.classList.contains(
+      "is-open"
+    );
 
   if (panelIsOpen) {
     switch (keyName) {
@@ -1122,23 +1333,38 @@ function handlePhoneKey(keyName) {
       break;
 
     case "dpad-up":
-      moveMenuSelection("up");
+      if (isMenuVisible) {
+        moveMenuSelection("up");
+      }
+
       break;
 
     case "dpad-down":
-      moveMenuSelection("down");
+      if (isMenuVisible) {
+        moveMenuSelection("down");
+      }
+
       break;
 
     case "dpad-left":
-      moveMenuSelection("left");
+      if (isMenuVisible) {
+        moveMenuSelection("left");
+      }
+
       break;
 
     case "dpad-right":
-      moveMenuSelection("right");
+      if (isMenuVisible) {
+        moveMenuSelection("right");
+      }
+
       break;
 
     case "menu":
-      selectCurrentMenuItem();
+      if (isMenuVisible) {
+        selectCurrentMenuItem();
+      }
+
       break;
 
     case "end":
@@ -1182,7 +1408,7 @@ function handlePhoneKey(keyName) {
 }
 
 /* ---------------------------------
-   FIRST PHONE OPENING
+   FIRST OPENING
 --------------------------------- */
 
 function openPhoneForFirstTime() {
@@ -1195,40 +1421,64 @@ function openPhoneForFirstTime() {
 
   stopSpriteLoop();
 
-  spriteButton.hidden = true;
-  spriteButton.style.display = "none";
-  sprite.style.display = "none";
+  spriteButton.hidden =
+    true;
+
+  spriteButton.style.display =
+    "none";
+
+  sprite.style.display =
+    "none";
 
   setKeysEnabled(false);
+
   setFrontScreenVisible(false);
+
   setOpenClockVisible(false);
+
   setPhoneMenuVisible(false);
 
-  container.style.display = "block";
+  container.style.display =
+    "block";
 
-  const sound1 = new Audio(
-    "sounds/27_fixed.mp3"
-  );
+  const sound1 =
+    new Audio(
+      "sounds/27_fixed.mp3"
+    );
 
-  const sound2 = new Audio(
-    "sounds/28_fixed.mp3"
-  );
+  const sound2 =
+    new Audio(
+      "sounds/28_fixed.mp3"
+    );
 
-  sound1.play().catch(() => {});
-  sound2.play().catch(() => {});
+  sound1
+    .play()
+    .catch(() => {});
+
+  sound2
+    .play()
+    .catch(() => {});
 
   playAnimation(
     openFrames,
     "images/42.png",
     () => {
-      hasOpenedOnce = true;
-      isOpen = true;
+      hasOpenedOnce =
+        true;
+
+      isOpen =
+        true;
 
       setFlipTriggerArea();
+
       setKeysEnabled(true);
+
       setFrontScreenVisible(false);
+
       setOpenClockVisible(true);
+
       setPhoneMenuVisible(false);
+
       updateMenuSelection();
     }
   );
@@ -1250,19 +1500,26 @@ function closePhone() {
   closeContentPanel();
 
   setKeysEnabled(false);
+
   setFrontScreenVisible(false);
+
   setOpenClockVisible(false);
+
   setPhoneMenuVisible(false);
 
-  isOpen = false;
+  isOpen =
+    false;
 
   playAnimation(
     closeFrames,
     "images/50.png",
     () => {
       setFlipTriggerArea();
+
       setFrontScreenVisible(true);
+
       setOpenClockVisible(false);
+
       setPhoneMenuVisible(false);
     }
   );
@@ -1282,25 +1539,33 @@ function reopenPhone() {
   }
 
   setFrontScreenVisible(false);
+
   setOpenClockVisible(false);
+
   setPhoneMenuVisible(false);
+
   setKeysEnabled(false);
 
-  const reopenFrames = [
-    ...closeFrames
-  ].reverse();
+  const reopenFrames =
+    [...closeFrames].reverse();
 
   playAnimation(
     reopenFrames,
     "images/42.png",
     () => {
-      isOpen = true;
+      isOpen =
+        true;
 
       setFlipTriggerArea();
+
       setKeysEnabled(true);
+
       setFrontScreenVisible(false);
+
       setOpenClockVisible(true);
+
       setPhoneMenuVisible(false);
+
       updateMenuSelection();
     }
   );
@@ -1311,26 +1576,29 @@ function reopenPhone() {
 --------------------------------- */
 
 function initializeMenuEvents() {
-  menuItems.forEach((item, index) => {
-    item.addEventListener(
-      "click",
-      (event) => {
-        event.stopPropagation();
+  menuItems.forEach(
+    (item, index) => {
+      item.addEventListener(
+        "click",
+        (event) => {
+          event.stopPropagation();
 
-        if (!isMenuVisible) {
-          return;
+          if (!isMenuVisible) {
+            return;
+          }
+
+          selectedMenuIndex =
+            index;
+
+          updateMenuSelection();
+
+          openContentPanel(
+            item.dataset.section
+          );
         }
-
-        selectedMenuIndex = index;
-
-        updateMenuSelection();
-
-        openContentPanel(
-          item.dataset.section
-        );
-      }
-    );
-  });
+      );
+    }
+  );
 
   panelClose.addEventListener(
     "click",
@@ -1350,7 +1618,10 @@ function initializeMenuEvents() {
   document.addEventListener(
     "keydown",
     (event) => {
-      if (!isOpen || isAnimating) {
+      if (
+        !isOpen ||
+        isAnimating
+      ) {
         return;
       }
 
@@ -1360,17 +1631,28 @@ function initializeMenuEvents() {
         );
 
       if (panelIsOpen) {
-        if (event.key === "ArrowLeft") {
+        if (
+          event.key ===
+          "ArrowLeft"
+        ) {
           event.preventDefault();
+
           showPreviousPanelPage();
         }
 
-        if (event.key === "ArrowRight") {
+        if (
+          event.key ===
+          "ArrowRight"
+        ) {
           event.preventDefault();
+
           showNextPanelPage();
         }
 
-        if (event.key === "Escape") {
+        if (
+          event.key ===
+          "Escape"
+        ) {
           closeContentPanel();
         }
 
@@ -1385,6 +1667,7 @@ function initializeMenuEvents() {
 
         if (!isMenuVisible) {
           setPhoneMenuVisible(true);
+
           updateMenuSelection();
         } else {
           selectCurrentMenuItem();
@@ -1393,7 +1676,10 @@ function initializeMenuEvents() {
         return;
       }
 
-      if (event.key === "Escape") {
+      if (
+        event.key ===
+        "Escape"
+      ) {
         setPhoneMenuVisible(false);
         return;
       }
@@ -1402,23 +1688,39 @@ function initializeMenuEvents() {
         return;
       }
 
-      if (event.key === "ArrowUp") {
+      if (
+        event.key ===
+        "ArrowUp"
+      ) {
         event.preventDefault();
+
         moveMenuSelection("up");
       }
 
-      if (event.key === "ArrowDown") {
+      if (
+        event.key ===
+        "ArrowDown"
+      ) {
         event.preventDefault();
+
         moveMenuSelection("down");
       }
 
-      if (event.key === "ArrowLeft") {
+      if (
+        event.key ===
+        "ArrowLeft"
+      ) {
         event.preventDefault();
+
         moveMenuSelection("left");
       }
 
-      if (event.key === "ArrowRight") {
+      if (
+        event.key ===
+        "ArrowRight"
+      ) {
         event.preventDefault();
+
         moveMenuSelection("right");
       }
     }
@@ -1426,19 +1728,24 @@ function initializeMenuEvents() {
 }
 
 /* ---------------------------------
-   INITIALIZE PHONE
+   INITIALIZE
 --------------------------------- */
 
 function initializePhone() {
   renderKeys();
+
   initializeMenuEvents();
 
   setKeysEnabled(false);
+
   setFrontScreenVisible(false);
+
   setOpenClockVisible(false);
+
   setPhoneMenuVisible(false);
 
   startSpriteLoop();
+
   startPhoneClock();
 
   spriteButton.addEventListener(
