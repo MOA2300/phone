@@ -1,215 +1,30 @@
 /* ---------------------------------
-   RESET
---------------------------------- */
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-html,
-body {
-  width: 100%;
-  min-height: 100%;
-  margin: 0;
-}
-
-body {
-  min-height: 100vh;
-  overflow: hidden;
-
-  background: #000;
-  color: #fff;
-
-  font-family:
-    Arial,
-    Helvetica,
-    sans-serif;
-}
-
-button,
-img {
-  -webkit-tap-highlight-color: transparent;
-}
-
-button {
-  font: inherit;
-}
-
-/* ---------------------------------
-   MAIN STAGE
---------------------------------- */
-
-.phone-stage {
-  position: relative;
-
-  width: 100vw;
-  height: 100vh;
-
-  display: grid;
-  place-items: center;
-
-  overflow: hidden;
-
-  background:
-    radial-gradient(
-      circle at center,
-      #171717 0%,
-      #050505 52%,
-      #000 100%
-    );
-}
-
-/* ---------------------------------
-   STARTING PHONE SPRITE
---------------------------------- */
-
-.sprite-button {
-  display: block;
-
-  padding: 0;
-  margin: 0;
-
-  border: 0;
-  appearance: none;
-
-  background: transparent;
-  cursor: pointer;
-}
-
-.sprite-button[hidden] {
-  display: none !important;
-}
-
-#sprite {
-  display: block;
-
-  user-select: none;
-  pointer-events: none;
-}
-
-/* ---------------------------------
-   PHONE CONTAINER
---------------------------------- */
-
-.phone-container {
-  position: relative;
-
-  width: 236px;
-  height: 656px;
-
-  display: none;
-
-  z-index: 20;
-
-  flex: 0 0 auto;
-
-  transform-origin: center center;
-
-  transition: transform 420ms ease;
-}
-
-body.panel-open .phone-container {
-  transform: translateX(235px);
-}
-
-/* ---------------------------------
-   PHONE FRAME
---------------------------------- */
-
-#phone-frame {
-  position: absolute;
-  inset: 0;
-
-  display: block;
-
-  width: 236px;
-  height: 656px;
-
-  object-fit: contain;
-  object-position: center top;
-
-  user-select: none;
-  pointer-events: none;
-}
-
-/* ---------------------------------
-   OPEN PHONE DATE AND TIME
---------------------------------- */
-
-.open-screen-clock {
-  position: absolute;
-
-  left: 53px;
-  top: 95.5px;
-
-  width: 136px;
-  height: 29px;
-
-  display: none;
-
-  z-index: 47;
-
-  color: #fff;
-  text-align: left;
-
-  pointer-events: none;
-
-  text-shadow:
-    1px 1px 0 rgba(0, 0, 0, 0.82),
-    0 0 2px rgba(0, 0, 0, 0.68);
-}
-
-.open-screen-date {
-  font-family:
-    "Times New Roman",
-    Georgia,
-    serif;
-
-  font-size: 11px;
-  font-weight: 700;
-  line-height: 1;
-
-  white-space: nowrap;
-}
-
-.open-screen-time {
-  margin-top: 1px;
-
-  font-family:
-    "Times New Roman",
-    Georgia,
-    serif;
-
-  font-size: 17px;
-  font-weight: 700;
-  line-height: 1;
-
-  white-space: nowrap;
-}
-
-/* ---------------------------------
    MAIN PHONE MENU
 
-   Updated width: 130px
+   Previous:
+   left: 47px;
+   width: 130px;
+   height: 122px;
+
+   Updated:
+   left: 48.5px;
+   width: 128.5px;
+   height: 120.5px;
 --------------------------------- */
 
 .phone-menu {
   position: absolute;
 
-  left: 47px;
+  left: 48.5px;
   top: 124px;
 
-  width: 130px;
-  height: 122px;
+  width: 128.5px;
+  height: 120.5px;
 
   display: none;
-
   padding: 4px;
 
   z-index: 48;
-
   overflow: hidden;
 
   color: #2b2b2b;
@@ -221,9 +36,7 @@ body.panel-open .phone-container {
       rgba(165, 211, 221, 0.98)
     );
 
-  border:
-    1px solid
-    rgba(30, 55, 62, 0.85);
+  border: 1px solid rgba(30, 55, 62, 0.85);
 
   box-shadow:
     inset 0 0 7px rgba(255, 255, 255, 0.82),
@@ -240,7 +53,6 @@ body.panel-open .phone-container {
 
 .phone-menu-heading {
   height: 11px;
-
   margin: 0 0 3px;
 
   overflow: hidden;
@@ -266,7 +78,7 @@ body.panel-open .phone-container {
     repeat(2, minmax(0, 1fr));
 
   grid-template-rows:
-    repeat(2, 43px);
+    repeat(2, 42.25px);
 
   gap: 3px;
 }
@@ -279,7 +91,7 @@ body.panel-open .phone-container {
   position: relative;
 
   min-width: 0;
-  height: 43px;
+  height: 42.25px;
 
   display: flex;
   flex-direction: column;
@@ -287,17 +99,12 @@ body.panel-open .phone-container {
   justify-content: center;
 
   padding: 2px;
-
   overflow: hidden;
 
-  border:
-    1px solid
-    rgba(34, 51, 54, 0.45);
+  border: 1px solid rgba(34, 51, 54, 0.45);
 
   color: #343434;
-
-  background:
-    rgba(205, 215, 215, 0.88);
+  background: rgba(205, 215, 215, 0.88);
 
   font-size: 7px;
   font-weight: 900;
@@ -322,10 +129,7 @@ body.panel-open .phone-container {
 
   border-color: #252525;
 
-  outline:
-    2px solid
-    rgba(22, 22, 22, 0.92);
-
+  outline: 2px solid rgba(22, 22, 22, 0.92);
   outline-offset: -2px;
 }
 
@@ -340,17 +144,10 @@ body.panel-open .phone-container {
   width: 0;
   height: 0;
 
-  border-left:
-    4px solid transparent;
-
-  border-top:
-    4px solid transparent;
-
-  border-right:
-    4px solid #202020;
-
-  border-bottom:
-    4px solid #202020;
+  border-left: 4px solid transparent;
+  border-top: 4px solid transparent;
+  border-right: 4px solid #202020;
+  border-bottom: 4px solid #202020;
 }
 
 .menu-item-label {
@@ -359,7 +156,6 @@ body.panel-open .phone-container {
   max-width: 100%;
 
   overflow: hidden;
-
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -394,7 +190,6 @@ body.panel-open .phone-container {
   height: 6px;
 
   border-radius: 50%;
-
   background: #555;
 }
 
@@ -409,9 +204,7 @@ body.panel-open .phone-container {
   width: 14px;
   height: 8px;
 
-  border-radius:
-    7px 7px 2px 2px;
-
+  border-radius: 7px 7px 2px 2px;
   background: #555;
 }
 
@@ -462,7 +255,7 @@ body.panel-open .phone-container {
   transform: rotate(-15deg);
 }
 
-/* Resume icon */
+/* Résumé icon */
 
 .menu-icon-resume::before {
   content: "";
@@ -500,7 +293,6 @@ body.panel-open .phone-container {
   bottom: 1px;
 
   height: 8px;
-
   margin: 0;
 
   overflow: hidden;
@@ -513,845 +305,4 @@ body.panel-open .phone-container {
 
   text-align: center;
   white-space: nowrap;
-}
-
-/* ---------------------------------
-   CLOSED PHONE FRONT SCREEN
---------------------------------- */
-
-.front-screen {
-  position: absolute;
-
-  left: 83px;
-  top: 278px;
-
-  width: 71px;
-  height: 94px;
-
-  display: none;
-  overflow: hidden;
-
-  z-index: 42;
-
-  pointer-events: none;
-
-  background: #e8ef17;
-
-  border:
-    1px solid
-    rgba(0, 0, 0, 0.65);
-
-  border-radius: 2px;
-}
-
-/* ---------------------------------
-   CLOSED SCREEN BUNNY
---------------------------------- */
-
-#front-screen-image {
-  position: absolute;
-  inset: 0;
-
-  display: block;
-
-  width: 100%;
-  height: 100%;
-
-  z-index: 1;
-
-  object-fit: cover;
-  object-position: center;
-
-  image-rendering: pixelated;
-
-  user-select: none;
-  pointer-events: none;
-
-  animation:
-    bunnyFlash
-    1s
-    steps(2, end)
-    infinite;
-}
-
-/* ---------------------------------
-   CLOSED SCREEN CLOCK
---------------------------------- */
-
-.front-screen-clock {
-  position: absolute;
-
-  left: 4px;
-  right: 4px;
-  bottom: 1px;
-
-  z-index: 3;
-
-  color: #fff;
-  text-align: left;
-
-  pointer-events: none;
-
-  text-shadow:
-    1px 1px 0 rgba(0, 0, 0, 0.92),
-    0 0 2px rgba(0, 0, 0, 0.8);
-}
-
-.front-screen-date {
-  font-family:
-    "Times New Roman",
-    Georgia,
-    serif;
-
-  font-size: 12px;
-  font-weight: 700;
-  line-height: 1;
-
-  white-space: nowrap;
-}
-
-.front-screen-time {
-  margin-top: 2px;
-
-  font-family:
-    "Times New Roman",
-    Georgia,
-    serif;
-
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 1;
-
-  white-space: nowrap;
-}
-
-/* ---------------------------------
-   BUNNY FLASH
---------------------------------- */
-
-@keyframes bunnyFlash {
-  0%,
-  100% {
-    opacity: 1;
-    filter: brightness(1);
-  }
-
-  50% {
-    opacity: 0.35;
-    filter: brightness(1.15);
-  }
-}
-
-/* ---------------------------------
-   KEYPAD OVERLAY
---------------------------------- */
-
-.key-overlay {
-  position: absolute;
-  inset: 0;
-
-  width: 236px;
-  height: 656px;
-
-  z-index: 50;
-
-  visibility: hidden;
-  pointer-events: none;
-}
-
-/* ---------------------------------
-   GENERAL PHONE KEYS
---------------------------------- */
-
-.phone-key {
-  position: absolute;
-
-  display: block;
-
-  padding: 0;
-  margin: 0;
-
-  border: 0;
-  appearance: none;
-
-  background: transparent;
-
-  cursor: pointer;
-
-  pointer-events: auto;
-  touch-action: manipulation;
-}
-
-.phone-key:not(.dpad-key):not([data-key="dpad-center"]) {
-  border-radius: 45%;
-}
-
-/* ---------------------------------
-   DIRECTION PAD SHAPES
---------------------------------- */
-
-.phone-key.dpad-key {
-  border-radius: 0;
-}
-
-.phone-key[data-key="dpad-up"] {
-  clip-path:
-    polygon(
-      50% 0,
-      100% 100%,
-      0 100%
-    );
-}
-
-.phone-key[data-key="dpad-down"] {
-  clip-path:
-    polygon(
-      0 0,
-      100% 0,
-      50% 100%
-    );
-}
-
-.phone-key[data-key="dpad-left"] {
-  clip-path:
-    polygon(
-      0 50%,
-      100% 0,
-      100% 100%
-    );
-}
-
-.phone-key[data-key="dpad-right"] {
-  clip-path:
-    polygon(
-      0 0,
-      100% 50%,
-      0 100%
-    );
-}
-
-.phone-key[data-key="dpad-center"] {
-  border-radius: 50%;
-}
-
-/* ---------------------------------
-   KEY INTERACTIONS
---------------------------------- */
-
-.phone-key:hover:not(:disabled) {
-  background:
-    rgba(255, 255, 255, 0.13);
-}
-
-.phone-key.is-pressed {
-  background:
-    rgba(255, 255, 255, 0.38);
-
-  filter: brightness(1.3);
-}
-
-.phone-key:disabled {
-  background: transparent !important;
-  outline: none;
-  cursor: default;
-}
-
-/* ---------------------------------
-   FLIP TRIGGER
---------------------------------- */
-
-.flip-trigger {
-  position: absolute;
-
-  display: block;
-
-  padding: 0;
-  margin: 0;
-
-  border: 0;
-  appearance: none;
-
-  background: transparent;
-
-  z-index: 80;
-
-  cursor: pointer;
-  touch-action: manipulation;
-}
-
-.flip-trigger:disabled {
-  cursor: default;
-}
-
-/* ---------------------------------
-   FOCUS
---------------------------------- */
-
-.phone-key:focus-visible,
-.flip-trigger:focus-visible,
-.sprite-button:focus-visible,
-.phone-menu-item:focus-visible,
-.panel-close:focus-visible,
-.panel-arrow:focus-visible {
-  outline: 2px solid #fff;
-  outline-offset: 2px;
-}
-
-/* ---------------------------------
-   SLIDING CONTENT PANEL
---------------------------------- */
-
-.content-panel {
-  position: absolute;
-
-  left: 50%;
-  top: 50%;
-
-  width:
-    min(
-      560px,
-      calc(100vw - 40px)
-    );
-
-  height:
-    min(
-      460px,
-      calc(100vh - 80px)
-    );
-
-  display: flex;
-  flex-direction: column;
-
-  z-index: 10;
-
-  color: #f1f1e8;
-
-  background:
-    linear-gradient(
-      135deg,
-      rgba(45, 45, 42, 0.98),
-      rgba(20, 20, 18, 0.98)
-    );
-
-  border: 1px solid #60605a;
-
-  box-shadow:
-    0 25px 65px rgba(0, 0, 0, 0.68),
-    inset 0 0 0 3px rgba(255, 255, 255, 0.025);
-
-  opacity: 0;
-
-  transform:
-    translate(-50%, -50%)
-    translateX(165px)
-    scaleX(0.05);
-
-  transform-origin: right center;
-
-  visibility: hidden;
-  pointer-events: none;
-
-  transition:
-    transform
-      430ms
-      cubic-bezier(0.22, 0.8, 0.2, 1),
-    opacity 180ms ease,
-    visibility 0s linear 430ms;
-}
-
-.content-panel.is-open {
-  opacity: 1;
-
-  transform:
-    translate(-50%, -50%)
-    translateX(-155px)
-    scaleX(1);
-
-  visibility: visible;
-  pointer-events: auto;
-
-  transition:
-    transform
-      430ms
-      cubic-bezier(0.22, 0.8, 0.2, 1),
-    opacity 180ms ease,
-    visibility 0s;
-}
-
-.content-panel-edge {
-  position: absolute;
-
-  right: -14px;
-  top: 20px;
-  bottom: 20px;
-
-  width: 14px;
-
-  background:
-    repeating-linear-gradient(
-      180deg,
-      #fff600 0 4px,
-      #282828 4px 8px
-    );
-
-  border: 1px solid #111;
-}
-
-/* ---------------------------------
-   PANEL HEADER
---------------------------------- */
-
-.content-panel-header {
-  min-height: 82px;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  padding:
-    17px 20px 13px;
-
-  border-bottom:
-    5px solid #f1db00;
-
-  background:
-    linear-gradient(
-      90deg,
-      #333 0%,
-      #242424 72%,
-      #191919 100%
-    );
-}
-
-.content-panel-label {
-  margin: 0 0 4px;
-
-  color: #c6c6bb;
-
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 2px;
-}
-
-.content-panel-header h1 {
-  margin: 0;
-
-  color: #fff;
-
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
-
-  font-size:
-    clamp(
-      25px,
-      4vw,
-      42px
-    );
-
-  line-height: 1;
-  letter-spacing: 1px;
-}
-
-.panel-close {
-  width: 38px;
-  height: 38px;
-
-  display: grid;
-  place-items: center;
-
-  padding: 0;
-
-  border: 1px solid #8b8b82;
-
-  color: #fff;
-  background: #191919;
-
-  font-size: 28px;
-  line-height: 1;
-
-  cursor: pointer;
-}
-
-.panel-close:hover {
-  color: #161616;
-  background: #f1db00;
-}
-
-/* ---------------------------------
-   PANEL BODY
---------------------------------- */
-
-.content-panel-body {
-  position: relative;
-
-  flex: 1;
-
-  display: grid;
-
-  grid-template-columns:
-    45px
-    1fr
-    45px;
-
-  min-height: 0;
-
-  background:
-    linear-gradient(
-      90deg,
-      rgba(255, 224, 0, 0.035),
-      transparent 35%
-    );
-}
-
-.panel-page {
-  min-width: 0;
-
-  overflow-y: auto;
-
-  padding:
-    28px 25px 24px;
-
-  scrollbar-width: thin;
-
-  scrollbar-color:
-    #e4d000
-    #252525;
-
-  animation:
-    panelPageIn
-    250ms
-    ease;
-}
-
-.panel-page h2 {
-  margin: 0 0 15px;
-
-  color: #f3dc00;
-
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
-
-  font-size:
-    clamp(
-      23px,
-      3.5vw,
-      34px
-    );
-
-  line-height: 1.08;
-}
-
-.panel-page h3 {
-  margin:
-    21px 0 8px;
-
-  color: #fff;
-
-  font-size: 13px;
-  letter-spacing: 1.4px;
-
-  text-transform: uppercase;
-}
-
-.panel-page p {
-  max-width: 48ch;
-
-  margin: 0 0 14px;
-
-  color: #deded5;
-
-  font-size:
-    clamp(
-      13px,
-      1.5vw,
-      16px
-    );
-
-  line-height: 1.6;
-}
-
-.panel-page strong {
-  color: #fff;
-}
-
-.panel-page ul {
-  margin: 8px 0 0;
-  padding-left: 19px;
-}
-
-.panel-page li {
-  margin-bottom: 9px;
-
-  color: #deded5;
-
-  font-size: 14px;
-  line-height: 1.45;
-}
-
-.panel-page a {
-  color: #f3dc00;
-
-  font-weight: 800;
-
-  text-decoration-thickness: 1px;
-  text-underline-offset: 4px;
-}
-
-.panel-page a:hover {
-  color: #fff;
-}
-
-.panel-kicker {
-  margin-bottom:
-    9px !important;
-
-  color:
-    #9a9a90 !important;
-
-  font-size:
-    10px !important;
-
-  font-weight: 900;
-  letter-spacing: 2px;
-}
-
-.panel-quote {
-  padding-left: 16px;
-
-  border-left:
-    4px solid #f3dc00;
-
-  color:
-    #fff !important;
-
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
-
-  font-size:
-    clamp(
-      19px,
-      3vw,
-      29px
-    ) !important;
-
-  line-height:
-    1.3 !important;
-}
-
-.resume-meta {
-  color:
-    #a7a79e !important;
-
-  font-size:
-    12px !important;
-
-  font-weight: 800;
-  letter-spacing: 0.5px;
-}
-
-/* ---------------------------------
-   PANEL ARROWS
---------------------------------- */
-
-.panel-arrow {
-  width: 100%;
-  height: 100%;
-
-  padding: 0;
-
-  border: 0;
-
-  color: #e4d000;
-
-  background:
-    rgba(255, 255, 255, 0.025);
-
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
-
-  font-size: 46px;
-
-  cursor: pointer;
-
-  transition:
-    color 150ms ease,
-    background 150ms ease;
-}
-
-.panel-arrow:hover:not(:disabled) {
-  color: #111;
-  background: #e4d000;
-}
-
-.panel-arrow:disabled {
-  color: #555;
-  cursor: default;
-}
-
-/* ---------------------------------
-   PANEL FOOTER
---------------------------------- */
-
-.content-panel-footer {
-  min-height: 38px;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  padding: 0 16px;
-
-  border-top:
-    1px solid #52524e;
-
-  color: #aaa99f;
-  background: #181818;
-
-  font-size: 9px;
-  font-weight: 900;
-  letter-spacing: 1.5px;
-}
-
-/* ---------------------------------
-   PANEL ANIMATION
---------------------------------- */
-
-@keyframes panelPageIn {
-  from {
-    opacity: 0;
-    transform: translateX(9px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-/* ---------------------------------
-   RESPONSIVE
---------------------------------- */
-
-@media (max-width: 850px) {
-  body.panel-open .phone-container {
-    transform: translateX(0);
-  }
-
-  .content-panel {
-    width: calc(100vw - 24px);
-    height: calc(100vh - 32px);
-
-    z-index: 100;
-
-    transform:
-      translate(-50%, -50%)
-      translateX(80px)
-      scaleX(0.05);
-  }
-
-  .content-panel.is-open {
-    transform:
-      translate(-50%, -50%)
-      translateX(0)
-      scaleX(1);
-  }
-
-  .content-panel-edge {
-    display: none;
-  }
-}
-
-@media (max-height: 700px) {
-  .phone-container {
-    transform: scale(0.9);
-  }
-
-  body.panel-open .phone-container {
-    transform:
-      translateX(220px)
-      scale(0.9);
-  }
-}
-
-@media (max-height: 620px) {
-  .phone-container {
-    transform: scale(0.78);
-  }
-
-  body.panel-open .phone-container {
-    transform:
-      translateX(205px)
-      scale(0.78);
-  }
-}
-
-@media (max-height: 530px) {
-  .phone-container {
-    transform: scale(0.65);
-  }
-
-  body.panel-open .phone-container {
-    transform:
-      translateX(180px)
-      scale(0.65);
-  }
-}
-
-@media (max-width: 280px) {
-  .phone-container {
-    transform: scale(0.82);
-  }
-}
-
-/* ---------------------------------
-   REDUCED MOTION
---------------------------------- */
-
-@media (prefers-reduced-motion: reduce) {
-  #front-screen-image {
-    animation: none;
-  }
-
-  .content-panel,
-  .phone-container {
-    transition: none;
-  }
-}
-
-/* ---------------------------------
-   DEBUG MODE
---------------------------------- */
-
-.debug .phone-key {
-  outline: 1px dashed cyan;
-
-  background:
-    rgba(0, 255, 255, 0.08);
-}
-
-.debug .flip-trigger {
-  outline: 2px dashed lime;
-
-  background:
-    rgba(0, 255, 0, 0.08);
-}
-
-.debug .front-screen {
-  outline: 2px dashed red;
-}
-
-.debug .open-screen-clock {
-  outline: 2px dashed orange;
-}
-
-.debug .phone-menu {
-  outline: 2px dashed magenta;
 }
