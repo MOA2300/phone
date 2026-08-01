@@ -193,20 +193,24 @@ body.panel-open .phone-container {
    MAIN PHONE MENU
 
    Updated measurements:
-   left: 49px
+   left: 48.7px
    top: 93.5px
-   width: 127.5px
-   height: 151.5px
+   width: 127.8px
+   height: 151.8px
+
+   The menu is stretched:
+   0.3px to the left
+   0.3px downward
 --------------------------------- */
 
 .phone-menu {
   position: absolute;
 
-  left: 49px;
+  left: 48.7px;
   top: 93.5px;
 
-  width: 127.5px;
-  height: 151.5px;
+  width: 127.8px;
+  height: 151.8px;
 
   display: none;
 
