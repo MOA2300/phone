@@ -192,26 +192,28 @@ body.panel-open .phone-container {
 /* ---------------------------------
    MAIN PHONE MENU
 
-   Stretched upward by 20px while
-   keeping the bottom edge unchanged.
+   Stretched upward by another 10px.
 
    Previous:
-   top: 124px;
-   height: 120.5px;
-
-   Updated:
    top: 104px;
    height: 140.5px;
+
+   Updated:
+   top: 94px;
+   height: 150.5px;
+
+   The bottom edge stays in the
+   same position.
 --------------------------------- */
 
 .phone-menu {
   position: absolute;
 
   left: 48.5px;
-  top: 104px;
+  top: 94px;
 
   width: 128.5px;
-  height: 140.5px;
+  height: 150.5px;
 
   display: none;
 
