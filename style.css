@@ -923,16 +923,6 @@ body.panel-open .phone-container {
     );
 }
 
-.content-panel-label {
-  margin: 0 0 4px;
-
-  color: #c6c6bb;
-
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 2px;
-}
-
 .content-panel-header h1 {
   margin: 0;
 
@@ -1163,7 +1153,7 @@ body.panel-open .phone-container {
   display: grid;
 
   grid-template-columns:
-    minmax(130px, 0.8fr)
+    minmax(170px, 0.9fr)
     minmax(0, 1.7fr);
 
   gap: 24px;
@@ -1174,15 +1164,13 @@ body.panel-open .phone-container {
 .about-image-wrapper {
   width: 100%;
 
-  overflow: hidden;
+  overflow: visible;
 
   border: 1px solid #67675f;
 
-  background: #171717;
+  background: transparent;
 
-  box-shadow:
-    7px 7px 0 #e4d000,
-    12px 12px 0 rgba(0, 0, 0, 0.5);
+  box-shadow: none;
 }
 
 .about-image {
@@ -1191,10 +1179,12 @@ body.panel-open .phone-container {
   width: 100%;
   height: auto;
 
-  aspect-ratio: 4 / 5;
+  max-width: 100%;
 
-  object-fit: cover;
-  object-position: center top;
+  object-fit: contain;
+  object-position: center;
+
+  aspect-ratio: auto;
 }
 
 .about-copy {
@@ -1221,7 +1211,7 @@ body.panel-open .phone-container {
   }
 
   .about-image-wrapper {
-    width: min(240px, 100%);
+    width: min(260px, 100%);
     margin: 0 auto 12px;
   }
 }
