@@ -43,7 +43,7 @@
         alt="Interactive flip phone"
       />
 
-      <!-- Date and time on the blue interior screen -->
+      <!-- Date and time on the open phone screen -->
       <div
         id="open-screen-clock"
         class="open-screen-clock"
@@ -60,7 +60,7 @@
         ></div>
       </div>
 
-      <!-- Menu inside the blue interior screen -->
+      <!-- Main phone menu -->
       <section
         id="phone-menu"
         class="phone-menu"
@@ -77,7 +77,6 @@
             class="phone-menu-item is-selected"
             type="button"
             data-section="about"
-            data-menu-index="0"
             aria-label="Open About Me section"
           >
             <span
@@ -94,7 +93,6 @@
             class="phone-menu-item"
             type="button"
             data-section="site"
-            data-menu-index="1"
             aria-label="Open Sites section"
           >
             <span
@@ -111,7 +109,6 @@
             class="phone-menu-item"
             type="button"
             data-section="history"
-            data-menu-index="2"
             aria-label="Open World History section"
           >
             <span
@@ -128,7 +125,6 @@
             class="phone-menu-item"
             type="button"
             data-section="resume"
-            data-menu-index="3"
             aria-label="Open Resume section"
           >
             <span
@@ -148,7 +144,29 @@
         </p>
       </section>
 
-      <!-- Small screen shown only when phone is closed -->
+      <!-- Number dialing screen -->
+      <section
+        id="dial-screen"
+        class="dial-screen"
+        aria-label="Phone number entry"
+        aria-hidden="true"
+      >
+        <div class="dial-screen-heading">
+          ENTER NUMBER
+        </div>
+
+        <div
+          id="dial-number"
+          class="dial-number"
+          aria-live="polite"
+        ></div>
+
+        <div class="dial-screen-footer">
+          BACK: DELETE
+        </div>
+      </section>
+
+      <!-- Small screen shown when phone is closed -->
       <div
         id="front-screen"
         class="front-screen"
@@ -173,14 +191,14 @@
         </div>
       </div>
 
-      <!-- Invisible phone-button hit areas -->
+      <!-- Invisible phone key hit areas -->
       <div
         id="key-overlay"
         class="key-overlay"
         aria-hidden="true"
       ></div>
 
-      <!-- Open/close phone trigger -->
+      <!-- Phone open and close trigger -->
       <button
         id="flip-trigger"
         class="flip-trigger"
@@ -202,11 +220,9 @@
       ></div>
 
       <header class="content-panel-header">
-        <div>
-          <h1 id="panel-title">
-            About Me
-          </h1>
-        </div>
+        <h1 id="panel-title">
+          About Me
+        </h1>
 
         <button
           id="panel-close"
