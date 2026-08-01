@@ -1,21 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Flip Phone Animation</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <!-- Sprite animation (loops until click) -->
-  <img id="sprite" src="DefineSprite_22/1.png" alt="Loading sprite..." />
+  <meta charset="UTF-8">
 
-  <!-- Flip phone container -->
-  <div id="phone-container" style="display: none;">
-    <img id="phone-frame" src="images/6.png" alt="Flip Phone Frame" />
-    <div id="flip-trigger" class="debug"></div>
-    <div id="key-overlay"></div>
-  </div>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Interactive Flip Phone</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <main class="phone-stage">
+
+    <!-- Small animated phone shown before opening -->
+    <button
+      id="sprite-button"
+      class="sprite-button"
+      type="button"
+      aria-label="Open phone"
+    >
+      <img
+        id="sprite"
+        src="DefineSprite_22/1.png"
+        alt="Closed flip phone"
+      >
+    </button>
+
+    <!-- Main interactive phone -->
+    <section
+      id="phone-container"
+      class="phone-container"
+      aria-label="Interactive flip phone"
+    >
+      <img
+        id="phone-frame"
+        src="images/6.png"
+        alt="Flip phone"
+        draggable="false"
+      >
+
+      <!-- Text displayed over the phone screen -->
+      <div
+        id="phone-display"
+        class="phone-display"
+        aria-live="polite"
+      >
+        <div id="phone-display-text"></div>
+      </div>
+
+      <!-- JavaScript adds all keypad buttons here -->
+      <div
+        id="key-overlay"
+        class="key-overlay"
+      ></div>
+
+      <!-- Close and reopen trigger -->
+      <button
+        id="flip-trigger"
+        class="flip-trigger"
+        type="button"
+        aria-label="Close phone"
+      ></button>
+    </section>
+
+  </main>
 
   <script src="script.js"></script>
 </body>
