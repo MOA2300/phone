@@ -5,39 +5,40 @@
 --------------------------------- */
 
 const spriteButton =
-  document.getElementById(
-    "sprite-button"
-  );
+  document.getElementById("sprite-button");
 
 const sprite =
-  document.getElementById(
-    "sprite"
-  );
+  document.getElementById("sprite");
 
 const frame =
-  document.getElementById(
-    "phone-frame"
-  );
+  document.getElementById("phone-frame");
 
 const container =
-  document.getElementById(
-    "phone-container"
-  );
+  document.getElementById("phone-container");
 
 const keyOverlay =
-  document.getElementById(
-    "key-overlay"
-  );
+  document.getElementById("key-overlay");
 
 const flipTrigger =
-  document.getElementById(
-    "flip-trigger"
-  );
+  document.getElementById("flip-trigger");
 
 const frontScreen =
-  document.getElementById(
-    "front-screen"
-  );
+  document.getElementById("front-screen");
+
+const frontScreenDate =
+  document.getElementById("front-screen-date");
+
+const frontScreenTime =
+  document.getElementById("front-screen-time");
+
+const openScreenClock =
+  document.getElementById("open-screen-clock");
+
+const openScreenDate =
+  document.getElementById("open-screen-date");
+
+const openScreenTime =
+  document.getElementById("open-screen-time");
 
 /* ---------------------------------
    SMALL STARTING PHONE FRAMES
@@ -81,7 +82,7 @@ const closeFrames = [
 /* ---------------------------------
    PHONE KEY COORDINATES
 
-   Based on the open 236 × 656 PNG.
+   Based on the 236 × 656 open phone.
 --------------------------------- */
 
 const phoneKeys = [
@@ -105,57 +106,57 @@ const phoneKeys = [
     height: 21
   },
 
-  /* Smaller directional arrows */
+  /* Small directional arrows */
 
   {
     name: "dpad-up",
     label: "Up",
-    x: 99,
-    y: 347,
-    width: 24,
-    height: 12,
+    x: 101,
+    y: 348,
+    width: 20,
+    height: 10,
     className: "dpad-key"
   },
 
   {
     name: "dpad-left",
     label: "Left",
-    x: 91,
-    y: 360,
-    width: 12,
-    height: 19,
+    x: 93,
+    y: 361,
+    width: 10,
+    height: 16,
     className: "dpad-key"
   },
 
   {
     name: "dpad-right",
     label: "Right",
-    x: 123,
-    y: 360,
-    width: 12,
-    height: 19,
+    x: 124,
+    y: 361,
+    width: 10,
+    height: 16,
     className: "dpad-key"
   },
 
   {
     name: "dpad-down",
     label: "Down",
-    x: 99,
-    y: 385,
-    width: 24,
-    height: 12,
+    x: 101,
+    y: 386,
+    width: 20,
+    height: 10,
     className: "dpad-key"
   },
 
-  /* Center select button */
+  /* Center select */
 
   {
     name: "dpad-center",
     label: "Select",
-    x: 97,
-    y: 356,
-    width: 30,
-    height: 30
+    x: 98,
+    y: 357,
+    width: 28,
+    height: 28
   },
 
   /* Lower side keys */
@@ -178,7 +179,7 @@ const phoneKeys = [
     height: 21
   },
 
-  /* Call, menu and hang-up keys */
+  /* Call, menu and hang-up */
 
   {
     name: "call",
@@ -294,7 +295,7 @@ const phoneKeys = [
     height: 21
   },
 
-  /* Bottom number row */
+  /* Bottom row */
 
   {
     name: "star",
@@ -334,6 +335,7 @@ let isOpen = false;
 
 let spriteIndex = 0;
 let spriteInterval = null;
+let clockInterval = null;
 
 /* ---------------------------------
    PRELOAD IMAGES
@@ -386,7 +388,104 @@ function stopSpriteLoop() {
 }
 
 /* ---------------------------------
-   BUNNY SCREEN VISIBILITY
+   PHONE CLOCK
+--------------------------------- */
+
+function padNumber(value) {
+  return String(value).padStart(2, "0");
+}
+
+function formatPhoneDate(date) {
+  const weekdays = [
+    "Sun",
+    "Mon",
+    "Tue",
+    "Wed",
+    "Thu",
+    "Fri",
+    "Sat"
+  ];
+
+  const year =
+    date.getFullYear();
+
+  const month =
+    padNumber(
+      date.getMonth() + 1
+    );
+
+  const day =
+    padNumber(
+      date.getDate()
+    );
+
+  const weekday =
+    weekdays[
+      date.getDay()
+    ];
+
+  return `${year}/${month}/${day}(${weekday})`;
+}
+
+function formatPhoneTime(date) {
+  const hours =
+    padNumber(
+      date.getHours()
+    );
+
+  const minutes =
+    padNumber(
+      date.getMinutes()
+    );
+
+  const seconds =
+    padNumber(
+      date.getSeconds()
+    );
+
+  return `${hours}:${minutes}:${seconds}`;
+}
+
+function updatePhoneClock() {
+  const now = new Date();
+
+  const dateText =
+    formatPhoneDate(now);
+
+  const timeText =
+    formatPhoneTime(now);
+
+  frontScreenDate.textContent =
+    dateText;
+
+  frontScreenTime.textContent =
+    timeText;
+
+  openScreenDate.textContent =
+    dateText;
+
+  openScreenTime.textContent =
+    timeText;
+}
+
+function startPhoneClock() {
+  updatePhoneClock();
+
+  if (clockInterval !== null) {
+    window.clearInterval(
+      clockInterval
+    );
+  }
+
+  clockInterval =
+    window.setInterval(
+      updatePhoneClock,
+      1000
+    );
+}
+
+/* ---------------------------------
+   SCREEN VISIBILITY
 --------------------------------- */
 
 function setFrontScreenVisible(visible) {
@@ -401,8 +500,20 @@ function setFrontScreenVisible(visible) {
   );
 }
 
+function setOpenClockVisible(visible) {
+  openScreenClock.style.display =
+    visible
+      ? "block"
+      : "none";
+
+  openScreenClock.setAttribute(
+    "aria-hidden",
+    visible ? "false" : "true"
+  );
+}
+
 /* ---------------------------------
-   SHOW OR HIDE KEYPAD
+   KEYPAD VISIBILITY
 --------------------------------- */
 
 function setKeysEnabled(enabled) {
@@ -461,8 +572,12 @@ function playAnimation(
 
   const interval =
     window.setInterval(() => {
-      if (index < frames.length) {
-        frame.src = frames[index];
+      if (
+        index <
+        frames.length
+      ) {
+        frame.src =
+          frames[index];
 
         index += 1;
 
@@ -473,14 +588,17 @@ function playAnimation(
         interval
       );
 
-      frame.src = finalFrame;
+      frame.src =
+        finalFrame;
 
       isAnimating = false;
 
-      flipTrigger.disabled = false;
+      flipTrigger.disabled =
+        false;
 
       if (
-        typeof callback === "function"
+        typeof callback ===
+        "function"
       ) {
         callback();
       }
@@ -488,7 +606,7 @@ function playAnimation(
 }
 
 /* ---------------------------------
-   CLOSE / REOPEN CLICK AREA
+   FLIP CLICK AREA
 --------------------------------- */
 
 function setFlipTriggerArea() {
@@ -517,13 +635,7 @@ function setFlipTriggerArea() {
   } else {
     /*
       Closed phone:
-
-      The 200 × 420 closed frame is
-      scaled and centered within the
-      236 × 656 phone container.
-
-      This area covers the complete
-      visible closed phone.
+      click the full phone to reopen it.
     */
 
     flipTrigger.style.left =
@@ -546,7 +658,7 @@ function setFlipTriggerArea() {
 }
 
 /* ---------------------------------
-   CREATE CLICKABLE KEYS
+   CREATE KEYPAD BUTTONS
 --------------------------------- */
 
 function renderKeys() {
@@ -558,7 +670,8 @@ function renderKeys() {
         "button"
       );
 
-    button.type = "button";
+    button.type =
+      "button";
 
     button.className =
       "phone-key";
@@ -663,29 +776,21 @@ function handlePhoneKey(keyName) {
 
   switch (keyName) {
     case "end":
-      /*
-        The red hang-up key does not
-        physically close the phone.
-      */
-
       console.log(
         "Hang-up button pressed"
       );
-
       break;
 
     case "call":
       console.log(
         "Call button pressed"
       );
-
       break;
 
     case "menu":
       console.log(
         "Menu button pressed"
       );
-
       break;
 
     case "dpad-up":
@@ -727,7 +832,6 @@ function handlePhoneKey(keyName) {
       console.log(
         `${keyName} pressed`
       );
-
       break;
 
     default:
@@ -738,7 +842,7 @@ function handlePhoneKey(keyName) {
 }
 
 /* ---------------------------------
-   OPEN PHONE FOR FIRST TIME
+   FIRST OPENING
 --------------------------------- */
 
 function openPhoneForFirstTime() {
@@ -752,11 +856,11 @@ function openPhoneForFirstTime() {
   stopSpriteLoop();
 
   /*
-    Hide the small phone before the
-    large-phone animation begins.
+    Hide the small phone immediately.
   */
 
-  spriteButton.hidden = true;
+  spriteButton.hidden =
+    true;
 
   spriteButton.style.display =
     "none";
@@ -764,9 +868,15 @@ function openPhoneForFirstTime() {
   sprite.style.display =
     "none";
 
+  /*
+    Hide screen overlays during animation.
+  */
+
   setKeysEnabled(false);
 
   setFrontScreenVisible(false);
+
+  setOpenClockVisible(false);
 
   container.style.display =
     "block";
@@ -793,15 +903,19 @@ function openPhoneForFirstTime() {
     openFrames,
     "images/42.png",
     () => {
-      hasOpenedOnce = true;
+      hasOpenedOnce =
+        true;
 
-      isOpen = true;
+      isOpen =
+        true;
 
       setFlipTriggerArea();
 
       setKeysEnabled(true);
 
       setFrontScreenVisible(false);
+
+      setOpenClockVisible(true);
     }
   );
 }
@@ -819,16 +933,14 @@ function closePhone() {
     return;
   }
 
-  /*
-    Hide the keypad and bunny while
-    the closing animation is playing.
-  */
-
   setKeysEnabled(false);
 
   setFrontScreenVisible(false);
 
-  isOpen = false;
+  setOpenClockVisible(false);
+
+  isOpen =
+    false;
 
   playAnimation(
     closeFrames,
@@ -837,11 +949,13 @@ function closePhone() {
       setFlipTriggerArea();
 
       /*
-        Show the bunny only when the
-        phone is completely closed.
+        Show bunny and clock only after
+        the phone is fully closed.
       */
 
       setFrontScreenVisible(true);
+
+      setOpenClockVisible(false);
     }
   );
 }
@@ -860,10 +974,13 @@ function reopenPhone() {
   }
 
   /*
-    Hide the bunny before reopening.
+    Hide the closed-phone display
+    before animation begins.
   */
 
   setFrontScreenVisible(false);
+
+  setOpenClockVisible(false);
 
   setKeysEnabled(false);
 
@@ -874,19 +991,22 @@ function reopenPhone() {
     reopenFrames,
     "images/42.png",
     () => {
-      isOpen = true;
+      isOpen =
+        true;
 
       setFlipTriggerArea();
 
       setKeysEnabled(true);
 
       setFrontScreenVisible(false);
+
+      setOpenClockVisible(true);
     }
   );
 }
 
 /* ---------------------------------
-   INITIALIZE PHONE
+   INITIALIZE
 --------------------------------- */
 
 function initializePhone() {
@@ -896,7 +1016,11 @@ function initializePhone() {
 
   setFrontScreenVisible(false);
 
+  setOpenClockVisible(false);
+
   startSpriteLoop();
+
+  startPhoneClock();
 
   spriteButton.addEventListener(
     "click",
