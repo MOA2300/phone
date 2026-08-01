@@ -112,6 +112,25 @@ const closeFrames = [
 ];
 
 /* ---------------------------------
+   PHONE SOUNDS
+--------------------------------- */
+
+function playPhoneSound(fileName) {
+  const sound =
+    new Audio(
+      `sounds/${fileName}`
+    );
+
+  sound.currentTime = 0;
+
+  sound
+    .play()
+    .catch(() => {
+      // Prevents console errors if audio is blocked.
+    });
+}
+
+/* ---------------------------------
    PANEL CONTENT
 --------------------------------- */
 
@@ -1556,13 +1575,29 @@ function handlePhoneKey(keyName) {
     return;
   }
 
-  /* Number keys type onto the dialing screen. */
+  /* Green call button plays the ringing sound. */
+  if (keyName === "call") {
+    playPhoneSound(
+      "phonecalling.mp3"
+    );
+
+    return;
+  }
+
+  /* Number keys type and play matching sounds. */
   if (dialCharacters.includes(keyName)) {
     if (panelIsOpen) {
       closeContentPanel();
     }
 
     setMailScreenVisible(false);
+
+    if (/^[0-9]$/.test(keyName)) {
+      playPhoneSound(
+        `${keyName}.mp3`
+      );
+    }
+
     typeDialCharacter(keyName);
 
     return;
@@ -1793,6 +1828,10 @@ function closePhone() {
     return;
   }
 
+  playPhoneSound(
+    "closingphone.mp3"
+  );
+
   closeContentPanel();
 
   setKeysEnabled(false);
@@ -1923,7 +1962,14 @@ function initializeMenuEvents() {
         }
 
         setMailScreenVisible(false);
-        typeDialCharacter(event.key);
+
+        playPhoneSound(
+          `${event.key}.mp3`
+        );
+
+        typeDialCharacter(
+          event.key
+        );
 
         return;
       }
@@ -1937,7 +1983,10 @@ function initializeMenuEvents() {
         }
 
         setMailScreenVisible(false);
-        typeDialCharacter(event.key);
+
+        typeDialCharacter(
+          event.key
+        );
 
         return;
       }
@@ -1947,6 +1996,7 @@ function initializeMenuEvents() {
         isDialScreenVisible
       ) {
         event.preventDefault();
+
         deleteDialCharacter();
 
         return;
