@@ -41,9 +41,6 @@ const menuItems = Array.from(
   document.querySelectorAll(".phone-menu-item")
 );
 
-const menuPhotoAnimation =
-  document.getElementById("menu-photo-animation");
-
 const keyOverlay =
   document.getElementById("key-overlay");
 
@@ -99,24 +96,6 @@ const CLOSE_PHONE_FRAMES = [
 ];
 
 const PHONE_FRAME_SPEED = 90;
-
-/* ---------------------------------
-   MENU PHOTO ANIMATION
---------------------------------- */
-
-const MENU_ANIMATION_FRAME_COUNT = 71;
-
-/*
-  Lower number = faster animation.
-  45ms makes 71 frames last about
-  3.2 seconds.
-*/
-
-const MENU_ANIMATION_SPEED = 45;
-
-let menuAnimationFrame = 1;
-let menuAnimationTimer = null;
-let isMenuAnimationPlaying = false;
 
 /* ---------------------------------
    STATE
@@ -291,25 +270,10 @@ function preloadImages(paths) {
   });
 }
 
-function preloadMenuAnimation() {
-  for (
-    let frame = 1;
-    frame <= MENU_ANIMATION_FRAME_COUNT;
-    frame += 1
-  ) {
-    const image = new Image();
-
-    image.src =
-      `images/DefineSprite_203/${frame}.png`;
-  }
-}
-
 preloadImages([
   ...OPEN_PHONE_FRAMES,
   ...CLOSE_PHONE_FRAMES
 ]);
-
-preloadMenuAnimation();
 
 /* ---------------------------------
    CLOCK
@@ -397,88 +361,10 @@ function playFrameSequence(
 }
 
 /* ---------------------------------
-   MENU PHOTO ANIMATION
---------------------------------- */
-
-function stopMenuPhotoAnimation({
-  resetFrame = true
-} = {}) {
-  if (menuAnimationTimer !== null) {
-    window.clearInterval(menuAnimationTimer);
-    menuAnimationTimer = null;
-  }
-
-  isMenuAnimationPlaying = false;
-
-  phoneMenu.classList.remove("is-animating");
-
-  menuPhotoAnimation.classList.remove(
-    "is-playing"
-  );
-
-  if (resetFrame) {
-    menuAnimationFrame = 1;
-
-    menuPhotoAnimation.src =
-      "images/DefineSprite_203/1.png";
-  }
-}
-
-function finishMenuPhotoAnimation() {
-  stopMenuPhotoAnimation({
-    resetFrame: false
-  });
-
-  menuAnimationFrame =
-    MENU_ANIMATION_FRAME_COUNT;
-
-  menuPhotoAnimation.src =
-    `images/DefineSprite_203/${MENU_ANIMATION_FRAME_COUNT}.png`;
-
-  updateMenuSelection();
-}
-
-function startMenuPhotoAnimation() {
-  stopMenuPhotoAnimation();
-
-  isMenuAnimationPlaying = true;
-  menuAnimationFrame = 1;
-
-  phoneMenu.classList.add("is-animating");
-
-  menuPhotoAnimation.classList.add(
-    "is-playing"
-  );
-
-  menuPhotoAnimation.src =
-    "images/DefineSprite_203/1.png";
-
-  menuAnimationTimer = window.setInterval(() => {
-    menuAnimationFrame += 1;
-
-    if (
-      menuAnimationFrame >
-      MENU_ANIMATION_FRAME_COUNT
-    ) {
-      finishMenuPhotoAnimation();
-      return;
-    }
-
-    menuPhotoAnimation.src =
-      `images/DefineSprite_203/${menuAnimationFrame}.png`;
-  }, MENU_ANIMATION_SPEED);
-}
-
-/* ---------------------------------
    MENU VISIBILITY
 --------------------------------- */
 
-function setPhoneMenuVisible(
-  visible,
-  {
-    playAnimation = true
-  } = {}
-) {
+function setPhoneMenuVisible(visible) {
   isMenuVisible = visible;
 
   phoneMenu.classList.toggle(
@@ -486,18 +372,9 @@ function setPhoneMenuVisible(
     visible
   );
 
-  if (!visible) {
-    stopMenuPhotoAnimation();
-
-    return;
-  }
-
-  selectedMenuIndex = 0;
-
-  updateMenuSelection();
-
-  if (playAnimation) {
-    startMenuPhotoAnimation();
+  if (visible) {
+    selectedMenuIndex = 0;
+    updateMenuSelection();
   }
 }
 
@@ -523,10 +400,7 @@ function updateMenuSelection() {
 }
 
 function moveMenuSelection(direction) {
-  if (
-    !isMenuVisible ||
-    isMenuAnimationPlaying
-  ) {
+  if (!isMenuVisible) {
     return;
   }
 
@@ -570,22 +444,20 @@ function moveMenuSelection(direction) {
 }
 
 function selectCurrentMenuItem() {
-  if (
-    !isMenuVisible ||
-    isMenuAnimationPlaying
-  ) {
+  if (!isMenuVisible) {
     return;
   }
 
   const selectedItem =
     menuItems[selectedMenuIndex];
 
-  if (!selectedItem) return;
+  if (!selectedItem) {
+    return;
+  }
 
-  const pageId =
-    selectedItem.dataset.page;
-
-  openPanelById(pageId);
+  openPanelById(
+    selectedItem.dataset.page
+  );
 }
 
 /* ---------------------------------
@@ -608,9 +480,7 @@ async function openPhone() {
   phoneContainer.style.display = "block";
 
   frontScreen.style.display = "none";
-
   openScreenClock.style.display = "none";
-
   keyOverlay.style.visibility = "hidden";
 
   setPhoneMenuVisible(false);
@@ -628,7 +498,6 @@ async function openPhone() {
   isPhoneAnimating = false;
 
   openScreenClock.style.display = "block";
-
   keyOverlay.style.visibility = "visible";
 }
 
@@ -645,13 +514,11 @@ async function closePhone() {
   }
 
   closePanel();
-
   setPhoneMenuVisible(false);
 
   isPhoneAnimating = true;
 
   openScreenClock.style.display = "none";
-
   keyOverlay.style.visibility = "hidden";
 
   await playFrameSequence(
@@ -668,8 +535,6 @@ async function closePhone() {
   isPhoneAnimating = false;
 
   frontScreen.style.display = "block";
-
-  keyOverlay.style.visibility = "hidden";
 }
 
 /* ---------------------------------
@@ -690,12 +555,12 @@ async function reopenPhone() {
 
   setPhoneMenuVisible(false);
 
-  const reverseFrames = [
+  const reverseCloseFrames = [
     ...CLOSE_PHONE_FRAMES
   ].reverse();
 
   await playFrameSequence(
-    reverseFrames
+    reverseCloseFrames
   );
 
   await playFrameSequence(
@@ -712,7 +577,6 @@ async function reopenPhone() {
   isPhoneAnimating = false;
 
   openScreenClock.style.display = "block";
-
   keyOverlay.style.visibility = "visible";
 }
 
@@ -747,7 +611,9 @@ function openPanelById(pageId) {
       (page) => page.id === pageId
     );
 
-  if (pageIndex === -1) return;
+  if (pageIndex === -1) {
+    return;
+  }
 
   currentPanelIndex = pageIndex;
 
@@ -790,7 +656,6 @@ function showPreviousPanelPage() {
   }
 
   currentPanelIndex -= 1;
-
   updatePanel();
 }
 
@@ -803,7 +668,6 @@ function showNextPanelPage() {
   }
 
   currentPanelIndex += 1;
-
   updatePanel();
 }
 
@@ -851,14 +715,10 @@ function handlePhoneKey(keyName) {
   if (keyName === "dpad-center") {
     if (!isMenuVisible) {
       setPhoneMenuVisible(true);
-
       return;
     }
 
-    if (!isMenuAnimationPlaying) {
-      selectCurrentMenuItem();
-    }
-
+    selectCurrentMenuItem();
     return;
   }
 
@@ -867,7 +727,6 @@ function handlePhoneKey(keyName) {
     !isMenuVisible
   ) {
     setPhoneMenuVisible(true);
-
     return;
   }
 
@@ -946,12 +805,7 @@ menuItems.forEach((item, index) => {
   item.addEventListener(
     "mouseenter",
     () => {
-      if (isMenuAnimationPlaying) {
-        return;
-      }
-
       selectedMenuIndex = index;
-
       updateMenuSelection();
     }
   );
@@ -959,14 +813,9 @@ menuItems.forEach((item, index) => {
   item.addEventListener(
     "click",
     () => {
-      if (isMenuAnimationPlaying) {
-        return;
-      }
-
       selectedMenuIndex = index;
 
       updateMenuSelection();
-
       selectCurrentMenuItem();
     }
   );
@@ -987,21 +836,21 @@ panelClose.addEventListener(
   closePanel
 );
 
-/* Keyboard support */
+/* Keyboard controls */
 
 document.addEventListener(
   "keydown",
   (event) => {
-    if (!isPhoneOpen) return;
+    if (!isPhoneOpen) {
+      return;
+    }
 
     const panelIsOpen =
       contentPanel.classList.contains(
         "is-open"
       );
 
-    if (
-      event.key === "Escape"
-    ) {
+    if (event.key === "Escape") {
       if (panelIsOpen) {
         closePanel();
       } else {
@@ -1011,35 +860,23 @@ document.addEventListener(
       return;
     }
 
-    if (
-      event.key === "ArrowUp"
-    ) {
+    if (event.key === "ArrowUp") {
       event.preventDefault();
-
       handlePhoneKey("dpad-up");
     }
 
-    if (
-      event.key === "ArrowDown"
-    ) {
+    if (event.key === "ArrowDown") {
       event.preventDefault();
-
       handlePhoneKey("dpad-down");
     }
 
-    if (
-      event.key === "ArrowLeft"
-    ) {
+    if (event.key === "ArrowLeft") {
       event.preventDefault();
-
       handlePhoneKey("dpad-left");
     }
 
-    if (
-      event.key === "ArrowRight"
-    ) {
+    if (event.key === "ArrowRight") {
       event.preventDefault();
-
       handlePhoneKey("dpad-right");
     }
 
@@ -1048,7 +885,6 @@ document.addEventListener(
       event.key === " "
     ) {
       event.preventDefault();
-
       handlePhoneKey("dpad-center");
     }
   }
