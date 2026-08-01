@@ -86,6 +86,7 @@ img {
   display: none;
 
   flex: 0 0 auto;
+
   transform-origin: center center;
 }
 
@@ -116,12 +117,11 @@ img {
 .open-screen-clock {
   position: absolute;
 
-  /* lifted upward toward the top line */
   left: 58px;
   top: 84px;
 
   width: 135px;
-  height: 48px;
+  height: 55px;
 
   display: none;
 
@@ -149,7 +149,8 @@ img {
 }
 
 .open-screen-time {
-  margin-top: 2px;
+  /* Pushes only the time farther down */
+  margin-top: 8px;
 
   font-family:
     "Times New Roman",
@@ -190,7 +191,7 @@ img {
   border-radius: 2px;
 }
 
-/* Clock overlays the bunny image */
+/* Clock overlays the bunny */
 
 .front-screen-clock {
   position: absolute;
@@ -236,7 +237,7 @@ img {
   line-height: 1;
 }
 
-/* Bunny fills the full front display */
+/* Bunny fills the complete front screen */
 
 #front-screen-image {
   position: absolute;
@@ -409,10 +410,12 @@ img {
 /* ---------------------------------
    DEBUG MODE
 
-   Change:
+   Temporarily change:
+
    <body>
 
    to:
+
    <body class="debug">
 --------------------------------- */
 
