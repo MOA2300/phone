@@ -16,7 +16,7 @@
 <body>
   <main class="phone-stage">
 
-    <!-- Small animated phone shown at the beginning -->
+    <!-- Small animated phone shown before opening -->
     <button
       id="sprite-button"
       class="sprite-button"
@@ -31,12 +31,13 @@
       >
     </button>
 
-    <!-- Main phone animation -->
+    <!-- Main interactive phone -->
     <section
       id="phone-container"
       class="phone-container"
       aria-label="Interactive flip phone"
     >
+      <!-- Phone animation frame -->
       <img
         id="phone-frame"
         src="images/6.png"
@@ -44,14 +45,28 @@
         draggable="false"
       >
 
-      <!-- JavaScript adds all keypad buttons here -->
+      <!-- Bunny image on the closed phone display -->
+      <div
+        id="front-screen"
+        class="front-screen"
+        aria-hidden="true"
+      >
+        <img
+          id="front-screen-image"
+          src="images/bunny.png"
+          alt="Pixel bunny"
+          draggable="false"
+        >
+      </div>
+
+      <!-- JavaScript adds the clickable keypad buttons here -->
       <div
         id="key-overlay"
         class="key-overlay"
         aria-hidden="true"
       ></div>
 
-      <!-- Used to close and reopen the phone -->
+      <!-- Clickable area for closing and reopening the phone -->
       <button
         id="flip-trigger"
         class="flip-trigger"
