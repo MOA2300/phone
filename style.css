@@ -19,8 +19,8 @@ body {
   min-height: 100vh;
   overflow: hidden;
 
-  background: #000;
   color: #fff;
+  background: #000;
 
   font-family:
     Arial,
@@ -75,6 +75,7 @@ button {
   appearance: none;
 
   background: transparent;
+
   cursor: pointer;
 }
 
@@ -192,15 +193,11 @@ body.panel-open .phone-container {
 /* ---------------------------------
    MAIN PHONE MENU
 
-   Updated measurements:
+   Current measurements:
    left: 48.4px
    top: 93.5px
    width: 128.1px
-   height: 151.8px
-
-   The left side is stretched
-   outward by another 0.3px while
-   the right edge stays unchanged.
+   height: 152px
 --------------------------------- */
 
 .phone-menu {
@@ -210,7 +207,7 @@ body.panel-open .phone-container {
   top: 93.5px;
 
   width: 128.1px;
-  height: 151.8px;
+  height: 152px;
 
   display: none;
 
@@ -240,6 +237,56 @@ body.panel-open .phone-container {
 
 .phone-menu.is-visible {
   display: block;
+}
+
+/* ---------------------------------
+   MENU CONTENT
+--------------------------------- */
+
+.phone-menu-content {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  z-index: 2;
+}
+
+/* ---------------------------------
+   DEFINE SPRITE 203 ANIMATION
+--------------------------------- */
+
+.menu-photo-animation {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: none;
+
+  z-index: 60;
+
+  object-fit: fill;
+  object-position: center;
+
+  image-rendering: pixelated;
+
+  pointer-events: none;
+  user-select: none;
+}
+
+.menu-photo-animation.is-playing {
+  display: block;
+}
+
+/*
+  The menu is hidden beneath the
+  animation while it is playing.
+*/
+
+.phone-menu.is-animating .phone-menu-content {
+  visibility: hidden;
 }
 
 /* ---------------------------------
@@ -348,17 +395,10 @@ body.panel-open .phone-container {
   width: 0;
   height: 0;
 
-  border-left:
-    4px solid transparent;
-
-  border-top:
-    4px solid transparent;
-
-  border-right:
-    4px solid #202020;
-
-  border-bottom:
-    4px solid #202020;
+  border-left: 4px solid transparent;
+  border-top: 4px solid transparent;
+  border-right: 4px solid #202020;
+  border-bottom: 4px solid #202020;
 }
 
 .menu-item-label {
@@ -417,8 +457,7 @@ body.panel-open .phone-container {
   width: 14px;
   height: 8px;
 
-  border-radius:
-    7px 7px 2px 2px;
+  border-radius: 7px 7px 2px 2px;
 
   background: #555;
 }
@@ -470,7 +509,7 @@ body.panel-open .phone-container {
   transform: rotate(-15deg);
 }
 
-/* Resume icon */
+/* Résumé icon */
 
 .menu-icon-resume::before {
   content: "";
@@ -695,15 +734,33 @@ body.panel-open .phone-container {
   border-radius: 45%;
 }
 
-/* ---------------------------------
-   DIRECTION PAD SHAPES
---------------------------------- */
+/* Upper phone keys */
 
-.phone-key.dpad-key {
-  border-radius: 0;
+.phone-key[data-key="upper-left"] {
+  left: 49px;
+  top: 341px;
+
+  width: 36px;
+  height: 21px;
 }
 
+.phone-key[data-key="upper-right"] {
+  left: 139px;
+  top: 341px;
+
+  width: 36px;
+  height: 21px;
+}
+
+/* Direction pad */
+
 .phone-key[data-key="dpad-up"] {
+  left: 105px;
+  top: 345px;
+
+  width: 12px;
+  height: 6px;
+
   clip-path:
     polygon(
       50% 0,
@@ -712,16 +769,13 @@ body.panel-open .phone-container {
     );
 }
 
-.phone-key[data-key="dpad-down"] {
-  clip-path:
-    polygon(
-      0 0,
-      100% 0,
-      50% 100%
-    );
-}
-
 .phone-key[data-key="dpad-left"] {
+  left: 85px;
+  top: 361px;
+
+  width: 6px;
+  height: 12px;
+
   clip-path:
     polygon(
       0 50%,
@@ -731,6 +785,12 @@ body.panel-open .phone-container {
 }
 
 .phone-key[data-key="dpad-right"] {
+  left: 131px;
+  top: 361px;
+
+  width: 6px;
+  height: 12px;
+
   clip-path:
     polygon(
       0 0,
@@ -739,8 +799,71 @@ body.panel-open .phone-container {
     );
 }
 
+.phone-key[data-key="dpad-down"] {
+  left: 105px;
+  top: 390px;
+
+  width: 12px;
+  height: 6px;
+
+  clip-path:
+    polygon(
+      0 0,
+      100% 0,
+      50% 100%
+    );
+}
+
 .phone-key[data-key="dpad-center"] {
+  left: 98px;
+  top: 357px;
+
+  width: 28px;
+  height: 28px;
+
   border-radius: 50%;
+}
+
+/* Lower phone keys */
+
+.phone-key[data-key="lower-left"] {
+  left: 49px;
+  top: 381px;
+
+  width: 36px;
+  height: 21px;
+}
+
+.phone-key[data-key="lower-right"] {
+  left: 139px;
+  top: 381px;
+
+  width: 36px;
+  height: 21px;
+}
+
+.phone-key[data-key="call"] {
+  left: 48px;
+  top: 408px;
+
+  width: 39px;
+  height: 23px;
+}
+
+.phone-key[data-key="menu"] {
+  left: 94px;
+  top: 408px;
+
+  width: 38px;
+  height: 23px;
+}
+
+.phone-key[data-key="end"] {
+  left: 139px;
+  top: 408px;
+
+  width: 38px;
+  height: 23px;
 }
 
 /* ---------------------------------
@@ -761,7 +884,9 @@ body.panel-open .phone-container {
 
 .phone-key:disabled {
   background: transparent !important;
+
   outline: none;
+
   cursor: default;
 }
 
@@ -771,6 +896,12 @@ body.panel-open .phone-container {
 
 .flip-trigger {
   position: absolute;
+
+  left: 33px;
+  top: 18px;
+
+  width: 170px;
+  height: 305px;
 
   display: block;
 
@@ -917,11 +1048,9 @@ body.panel-open .phone-container {
   align-items: center;
   justify-content: space-between;
 
-  padding:
-    17px 20px 13px;
+  padding: 17px 20px 13px;
 
-  border-bottom:
-    5px solid #f1db00;
+  border-bottom: 5px solid #f1db00;
 
   background:
     linear-gradient(
@@ -1000,9 +1129,7 @@ body.panel-open .phone-container {
   display: grid;
 
   grid-template-columns:
-    45px
-    1fr
-    45px;
+    45px 1fr 45px;
 
   min-height: 0;
 
@@ -1019,8 +1146,7 @@ body.panel-open .phone-container {
 
   overflow-y: auto;
 
-  padding:
-    28px 25px 24px;
+  padding: 28px 25px 24px;
 
   scrollbar-width: thin;
 
@@ -1055,8 +1181,7 @@ body.panel-open .phone-container {
 }
 
 .panel-page h3 {
-  margin:
-    21px 0 8px;
+  margin: 21px 0 8px;
 
   color: #fff;
 
@@ -1115,15 +1240,11 @@ body.panel-open .phone-container {
 }
 
 .panel-kicker {
-  margin-bottom:
-    9px !important;
+  margin-bottom: 9px !important;
 
-  color:
-    #9a9a90 !important;
+  color: #9a9a90 !important;
 
-  font-size:
-    10px !important;
-
+  font-size: 10px !important;
   font-weight: 900;
   letter-spacing: 2px;
 }
@@ -1131,11 +1252,9 @@ body.panel-open .phone-container {
 .panel-quote {
   padding-left: 16px;
 
-  border-left:
-    4px solid #f3dc00;
+  border-left: 4px solid #f3dc00;
 
-  color:
-    #fff !important;
+  color: #fff !important;
 
   font-family:
     Georgia,
@@ -1149,17 +1268,13 @@ body.panel-open .phone-container {
       29px
     ) !important;
 
-  line-height:
-    1.3 !important;
+  line-height: 1.3 !important;
 }
 
 .resume-meta {
-  color:
-    #a7a79e !important;
+  color: #a7a79e !important;
 
-  font-size:
-    12px !important;
-
+  font-size: 12px !important;
   font-weight: 800;
   letter-spacing: 0.5px;
 }
@@ -1202,6 +1317,7 @@ body.panel-open .phone-container {
 
 .panel-arrow:disabled {
   color: #555;
+
   cursor: default;
 }
 
@@ -1218,8 +1334,7 @@ body.panel-open .phone-container {
 
   padding: 0 16px;
 
-  border-top:
-    1px solid #52524e;
+  border-top: 1px solid #52524e;
 
   color: #aaa99f;
   background: #181818;
@@ -1236,12 +1351,16 @@ body.panel-open .phone-container {
 @keyframes panelPageIn {
   from {
     opacity: 0;
-    transform: translateX(9px);
+
+    transform:
+      translateX(9px);
   }
 
   to {
     opacity: 1;
-    transform: translateX(0);
+
+    transform:
+      translateX(0);
   }
 }
 
