@@ -16,7 +16,7 @@
 <body>
   <main class="phone-stage">
 
-    <!-- Small animated phone shown before opening -->
+    <!-- Small animated phone shown at the beginning -->
     <button
       id="sprite-button"
       class="sprite-button"
@@ -31,7 +31,7 @@
       >
     </button>
 
-    <!-- Main interactive phone -->
+    <!-- Main phone animation -->
     <section
       id="phone-container"
       class="phone-container"
@@ -44,13 +44,14 @@
         draggable="false"
       >
 
-      <!-- JavaScript adds the clickable keys here -->
+      <!-- JavaScript adds all keypad buttons here -->
       <div
         id="key-overlay"
         class="key-overlay"
+        aria-hidden="true"
       ></div>
 
-      <!-- Clickable area used to close and reopen the phone -->
+      <!-- Used to close and reopen the phone -->
       <button
         id="flip-trigger"
         class="flip-trigger"
