@@ -5,34 +5,22 @@
 --------------------------------- */
 
 const spriteButton =
-  document.getElementById(
-    "sprite-button"
-  );
+  document.getElementById("sprite-button");
 
 const sprite =
-  document.getElementById(
-    "sprite"
-  );
+  document.getElementById("sprite");
 
 const frame =
-  document.getElementById(
-    "phone-frame"
-  );
+  document.getElementById("phone-frame");
 
 const container =
-  document.getElementById(
-    "phone-container"
-  );
+  document.getElementById("phone-container");
 
 const keyOverlay =
-  document.getElementById(
-    "key-overlay"
-  );
+  document.getElementById("key-overlay");
 
 const flipTrigger =
-  document.getElementById(
-    "flip-trigger"
-  );
+  document.getElementById("flip-trigger");
 
 /* ---------------------------------
    SMALL STARTING PHONE FRAMES
@@ -76,15 +64,10 @@ const closeFrames = [
 /* ---------------------------------
    PHONE KEY COORDINATES
 
-   Based on the actual open phone PNG:
-
-   Width: 236px
-   Height: 656px
+   Based on the 236 × 656 open-phone PNG.
 --------------------------------- */
 
 const phoneKeys = [
-  /* Upper keys beside the directional pad */
-
   {
     name: "upper-left",
     label: "Upper left key",
@@ -102,8 +85,6 @@ const phoneKeys = [
     width: 36,
     height: 21
   },
-
-  /* Direction pad */
 
   {
     name: "dpad-up",
@@ -154,8 +135,6 @@ const phoneKeys = [
     height: 36
   },
 
-  /* Lower keys beside the directional pad */
-
   {
     name: "lower-left",
     label: "Lower left key",
@@ -173,8 +152,6 @@ const phoneKeys = [
     width: 36,
     height: 21
   },
-
-  /* Green call, menu and red end keys */
 
   {
     name: "call",
@@ -203,8 +180,6 @@ const phoneKeys = [
     height: 23
   },
 
-  /* Number row 1 */
-
   {
     name: "1",
     label: "Number 1",
@@ -231,8 +206,6 @@ const phoneKeys = [
     width: 39,
     height: 21
   },
-
-  /* Number row 2 */
 
   {
     name: "4",
@@ -261,8 +234,6 @@ const phoneKeys = [
     height: 21
   },
 
-  /* Number row 3 */
-
   {
     name: "7",
     label: "Number 7",
@@ -289,8 +260,6 @@ const phoneKeys = [
     width: 39,
     height: 21
   },
-
-  /* Bottom row */
 
   {
     name: "star",
@@ -381,10 +350,7 @@ function stopSpriteLoop() {
 }
 
 /* ---------------------------------
-   SHOW OR HIDE THE KEYPAD
-
-   The keypad only becomes visible
-   when the phone is fully open.
+   SHOW OR HIDE KEYPAD
 --------------------------------- */
 
 function setKeysEnabled(enabled) {
@@ -437,10 +403,6 @@ function playAnimation(
 
   flipTrigger.disabled = true;
 
-  /*
-    Hide keypad during every animation.
-  */
-
   setKeysEnabled(false);
 
   let index = 0;
@@ -449,25 +411,19 @@ function playAnimation(
     window.setInterval(() => {
       if (index < frames.length) {
         frame.src = frames[index];
-
         index += 1;
-
         return;
       }
 
-      window.clearInterval(
-        interval
-      );
+      window.clearInterval(interval);
 
       frame.src = finalFrame;
 
       isAnimating = false;
-
       flipTrigger.disabled = false;
 
       if (
-        typeof callback ===
-        "function"
+        typeof callback === "function"
       ) {
         callback();
       }
@@ -481,10 +437,8 @@ function playAnimation(
 function setFlipTriggerArea() {
   if (isOpen) {
     /*
-      OPEN PHONE:
-
-      Only the small top cap closes
-      the phone.
+      Open phone:
+      Only the top cap closes it.
     */
 
     flipTrigger.style.left =
@@ -505,13 +459,8 @@ function setFlipTriggerArea() {
     );
   } else {
     /*
-      CLOSED PHONE:
-
-      Covers the entire visible front
-      panel marked in red.
-
-      The closed phone image sits lower
-      inside the 236 × 656 frame canvas.
+      Closed phone:
+      The full front panel is clickable.
     */
 
     flipTrigger.style.left =
@@ -547,9 +496,7 @@ function renderKeys() {
       );
 
     button.type = "button";
-
-    button.className =
-      "phone-key";
+    button.className = "phone-key";
 
     if (key.className) {
       button.classList.add(
@@ -637,11 +584,6 @@ function renderKeys() {
     );
   });
 
-  /*
-    Keep the keypad hidden when
-    the page first loads.
-  */
-
   setKeysEnabled(false);
 }
 
@@ -656,7 +598,13 @@ function handlePhoneKey(keyName) {
 
   switch (keyName) {
     case "end":
-      closePhone();
+      /*
+        The red hangup key does not
+        physically close the phone.
+      */
+      console.log(
+        "Hangup button pressed"
+      );
       break;
 
     case "call":
@@ -733,12 +681,6 @@ function openPhoneForFirstTime() {
 
   stopSpriteLoop();
 
-  /*
-    Hide the small phone immediately,
-    before the first large-phone frame
-    appears.
-  */
-
   spriteButton.hidden = true;
 
   spriteButton.style.display =
@@ -746,10 +688,6 @@ function openPhoneForFirstTime() {
 
   sprite.style.display =
     "none";
-
-  /*
-    Keep keys hidden during opening.
-  */
 
   setKeysEnabled(false);
 
@@ -779,17 +717,9 @@ function openPhoneForFirstTime() {
     "images/42.png",
     () => {
       hasOpenedOnce = true;
-
       isOpen = true;
 
       setFlipTriggerArea();
-
-      /*
-        Reveal keys only after the
-        phone reaches the fully open
-        frame.
-      */
-
       setKeysEnabled(true);
     }
   );
@@ -808,11 +738,6 @@ function closePhone() {
     return;
   }
 
-  /*
-    Hide all keys before the first
-    closing frame appears.
-  */
-
   setKeysEnabled(false);
 
   isOpen = false;
@@ -821,11 +746,6 @@ function closePhone() {
     closeFrames,
     "images/50.png",
     () => {
-      /*
-        Make the entire closed phone
-        clickable after closing ends.
-      */
-
       setFlipTriggerArea();
     }
   );
@@ -844,11 +764,6 @@ function reopenPhone() {
     return;
   }
 
-  /*
-    Keep keys hidden throughout the
-    reopening animation.
-  */
-
   setKeysEnabled(false);
 
   const reopenFrames =
@@ -861,12 +776,6 @@ function reopenPhone() {
       isOpen = true;
 
       setFlipTriggerArea();
-
-      /*
-        Reveal the keypad only when
-        the open frame is complete.
-      */
-
       setKeysEnabled(true);
     }
   );
