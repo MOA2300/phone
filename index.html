@@ -17,7 +17,7 @@
 <body>
   <main class="phone-stage">
 
-    <!-- Starting animated phone -->
+    <!-- Initial animated phone sprite -->
     <button
       id="sprite-button"
       class="sprite-button"
@@ -31,7 +31,7 @@
       />
     </button>
 
-    <!-- Main phone -->
+    <!-- Main interactive phone -->
     <section
       id="phone-container"
       class="phone-container"
@@ -43,7 +43,7 @@
         alt="Interactive flip phone"
       />
 
-      <!-- Date and time on the open phone -->
+      <!-- Date and time on the blue interior screen -->
       <div
         id="open-screen-clock"
         class="open-screen-clock"
@@ -60,7 +60,7 @@
         ></div>
       </div>
 
-      <!-- Menu displayed inside the blue phone screen -->
+      <!-- Menu inside the blue interior screen -->
       <section
         id="phone-menu"
         class="phone-menu"
@@ -148,7 +148,7 @@
         </p>
       </section>
 
-      <!-- Closed-phone front screen -->
+      <!-- Small screen shown only when phone is closed -->
       <div
         id="front-screen"
         class="front-screen"
@@ -173,14 +173,14 @@
         </div>
       </div>
 
-      <!-- Invisible clickable keypad areas -->
+      <!-- Invisible phone-button hit areas -->
       <div
         id="key-overlay"
         class="key-overlay"
         aria-hidden="true"
       ></div>
 
-      <!-- Clickable phone cap/front -->
+      <!-- Open/close phone trigger -->
       <button
         id="flip-trigger"
         class="flip-trigger"
@@ -189,12 +189,12 @@
       ></button>
     </section>
 
-    <!-- Side information panel -->
+    <!-- Sliding content panel -->
     <aside
       id="content-panel"
       class="content-panel"
       aria-hidden="true"
-      aria-label="Portfolio content"
+      aria-label="Portfolio information"
     >
       <div
         class="content-panel-edge"
