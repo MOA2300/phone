@@ -18,13 +18,8 @@ body {
 body {
   min-height: 100vh;
   overflow: hidden;
-
   background: #000;
-
-  font-family:
-    Arial,
-    Helvetica,
-    sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 button,
@@ -44,7 +39,6 @@ img {
   place-items: center;
 
   overflow: hidden;
-
   background: #000;
 }
 
@@ -62,7 +56,6 @@ img {
   appearance: none;
 
   background: transparent;
-
   cursor: pointer;
 }
 
@@ -80,7 +73,7 @@ img {
 /* ---------------------------------
    MAIN PHONE CONTAINER
 
-   Based on the open-phone PNG:
+   Open phone image:
    236px × 656px
 --------------------------------- */
 
@@ -93,7 +86,6 @@ img {
   display: none;
 
   flex: 0 0 auto;
-
   transform-origin: center center;
 }
 
@@ -124,9 +116,9 @@ img {
 .open-screen-clock {
   position: absolute;
 
-  /* moved right and down */
+  /* lifted upward toward the top line */
   left: 58px;
-  top: 108px;
+  top: 84px;
 
   width: 135px;
   height: 48px;
@@ -136,7 +128,6 @@ img {
   z-index: 44;
 
   color: #fff;
-
   pointer-events: none;
 
   text-shadow:
@@ -153,6 +144,8 @@ img {
   font-size: 13px;
   font-weight: 700;
   line-height: 1;
+
+  white-space: nowrap;
 }
 
 .open-screen-time {
@@ -182,7 +175,6 @@ img {
   height: 94px;
 
   display: none;
-
   overflow: hidden;
 
   z-index: 42;
@@ -198,7 +190,7 @@ img {
   border-radius: 2px;
 }
 
-/* clock overlays on top of bunny */
+/* Clock overlays the bunny image */
 
 .front-screen-clock {
   position: absolute;
@@ -211,7 +203,6 @@ img {
   z-index: 3;
 
   color: #fff;
-
   pointer-events: none;
 
   text-shadow:
@@ -245,7 +236,7 @@ img {
   line-height: 1;
 }
 
-/* bunny fills full front screen */
+/* Bunny fills the full front display */
 
 #front-screen-image {
   position: absolute;
@@ -373,9 +364,7 @@ img {
 
 .phone-key:disabled {
   background: transparent !important;
-
   outline: none;
-
   cursor: default;
 }
 
@@ -410,7 +399,6 @@ img {
   z-index: 80;
 
   cursor: pointer;
-
   touch-action: manipulation;
 }
 
