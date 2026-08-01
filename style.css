@@ -546,17 +546,17 @@ body.panel-open .phone-container {
 /* ---------------------------------
    CLOSED SCREEN BUNNY
 
-   Reduced inward by 0.3px
+   Reduced inward by 0.4px
    on every side.
 --------------------------------- */
 
 #front-screen-image {
   position: absolute;
 
-  inset: 0.3px;
+  inset: 0.4px;
 
-  width: calc(100% - 0.6px);
-  height: calc(100% - 0.6px);
+  width: calc(100% - 0.8px);
+  height: calc(100% - 0.8px);
 
   display: block;
 
