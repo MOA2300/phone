@@ -220,20 +220,29 @@ const sectionContent = {
   },
 
   history: {
-    title: "History",
+    title: "World History",
 
     pages: [
       `
-        <p class="panel-kicker">
-          THE ENTIRE HISTORY OF THE UNIVERSE
+        <p class="panel-quote">
+          First, there was a giant explosion
+          that led to the creation of planets,
+          stars, dinosaurs, people, the
+          Industrial Revolution, wars,
+          governments, Wi-Fi, planes, and now
+          this application.
         </p>
 
-        <p class="panel-quote">
-          Nothing became everything.
-          Everything became stars, planets,
-          dinosaurs, people, Wi-Fi and this
-          application. Now we make things
-          before the deadline.
+        <p>
+          Yet, there is still so much history
+          that is waiting to be written.
+          Hopefully, I can be a part of the
+          history of Wieden and Kennedy's
+          residency program.
+        </p>
+
+        <p>
+          Together we can write the future.
         </p>
       `
     ]
@@ -525,7 +534,7 @@ const phoneKeys = [
     name: "dpad-left",
     label: "Left",
     x: 85,
-    y: 361,
+    y: 362.5,
     width: 6,
     height: 12,
     className: "dpad-key"
@@ -535,7 +544,7 @@ const phoneKeys = [
     name: "dpad-right",
     label: "Right",
     x: 131,
-    y: 361,
+    y: 362.5,
     width: 6,
     height: 12,
     className: "dpad-key"
@@ -625,7 +634,7 @@ const phoneKeys = [
 
   {
     name: "3",
-    label: "History shortcut",
+    label: "World History shortcut",
     x: 139,
     y: 439,
     width: 39,
