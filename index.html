@@ -17,7 +17,15 @@
 <body>
   <main class="phone-stage">
 
-    <!-- Initial animated phone sprite -->
+    <!-- Instructions shown before the phone animation -->
+    <img
+      id="instruction-text"
+      class="instruction-text"
+      src="images/instructiontext.png"
+      alt="Instructions for opening the interactive phone"
+    />
+
+    <!-- Initial animated mini phone -->
     <button
       id="sprite-button"
       class="sprite-button"
@@ -142,7 +150,7 @@
         </p>
       </section>
 
-      <!-- Number-entry screen -->
+      <!-- Phone number screen -->
       <section
         id="dial-screen"
         class="dial-screen"
@@ -164,7 +172,7 @@
         </div>
       </section>
 
-      <!-- Mail screen -->
+      <!-- Email screen -->
       <section
         id="mail-screen"
         class="mail-screen"
@@ -245,7 +253,7 @@
         aria-label="Photo gallery"
         aria-hidden="true"
       >
-        <!-- Thumbnail grid -->
+        <!-- Thumbnail-grid view -->
         <div
           id="gallery-grid-view"
           class="gallery-grid-view"
@@ -267,7 +275,7 @@
             </span>
 
             <span>
-              CENTER: VIEW
+              CENTER: VIEW · #: DELETE
             </span>
           </div>
         </div>
@@ -290,8 +298,46 @@
             </span>
 
             <span>
-              BACK: GALLERY
+              BACK: GALLERY · #: DELETE
             </span>
+          </div>
+        </div>
+
+        <!-- Delete confirmation -->
+        <div
+          id="gallery-delete-dialog"
+          class="gallery-delete-dialog"
+          aria-hidden="true"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Delete selected photo"
+        >
+          <div class="gallery-delete-box">
+            <p>
+              DELETE PHOTO?
+            </p>
+
+            <div class="gallery-delete-options">
+              <button
+                id="gallery-keep-photo"
+                class="gallery-delete-option is-selected"
+                type="button"
+              >
+                KEEP
+              </button>
+
+              <button
+                id="gallery-delete-photo"
+                class="gallery-delete-option"
+                type="button"
+              >
+                DELETE
+              </button>
+            </div>
+
+            <div class="gallery-delete-instruction">
+              ◀ ▶ CHOOSE · CENTER SELECT
+            </div>
           </div>
         </div>
       </section>
@@ -337,7 +383,7 @@
       ></button>
     </section>
 
-    <!-- Sliding content panel -->
+    <!-- Sliding portfolio panel -->
     <aside
       id="content-panel"
       class="content-panel"
