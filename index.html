@@ -43,7 +43,7 @@
         alt="Interactive flip phone"
       />
 
-      <!-- Date and time on the open phone screen -->
+      <!-- Date and time -->
       <div
         id="open-screen-clock"
         class="open-screen-clock"
@@ -60,7 +60,7 @@
         ></div>
       </div>
 
-      <!-- Main phone menu -->
+      <!-- Main menu -->
       <section
         id="phone-menu"
         class="phone-menu"
@@ -72,7 +72,6 @@
         </p>
 
         <div class="phone-menu-grid">
-
           <button
             class="phone-menu-item is-selected"
             type="button"
@@ -136,7 +135,6 @@
               RESUME
             </span>
           </button>
-
         </div>
 
         <p class="phone-menu-instruction">
@@ -144,7 +142,7 @@
         </p>
       </section>
 
-      <!-- Number dialing screen -->
+      <!-- Number screen -->
       <section
         id="dial-screen"
         class="dial-screen"
@@ -166,7 +164,7 @@
         </div>
       </section>
 
-      <!-- Mail message screen -->
+      <!-- Mail screen -->
       <section
         id="mail-screen"
         class="mail-screen"
@@ -205,7 +203,42 @@
         </div>
       </section>
 
-      <!-- Small screen shown when phone is closed -->
+      <!-- Camera screen -->
+      <section
+        id="camera-screen"
+        class="camera-screen"
+        aria-label="Camera"
+        aria-hidden="true"
+      >
+        <video
+          id="camera-preview"
+          class="camera-preview"
+          autoplay
+          muted
+          playsinline
+        ></video>
+
+        <canvas
+          id="camera-canvas"
+          class="camera-canvas"
+        ></canvas>
+
+        <img
+          id="captured-photo"
+          class="captured-photo"
+          alt="Photo captured using the phone camera"
+        />
+
+        <div
+          id="camera-message"
+          class="camera-message"
+          aria-live="polite"
+        >
+          CENTER: TAKE PHOTO
+        </div>
+      </section>
+
+      <!-- Closed phone screen -->
       <div
         id="front-screen"
         class="front-screen"
@@ -230,14 +263,14 @@
         </div>
       </div>
 
-      <!-- Invisible phone key hit areas -->
+      <!-- Invisible key hit areas -->
       <div
         id="key-overlay"
         class="key-overlay"
         aria-hidden="true"
       ></div>
 
-      <!-- Phone open and close trigger -->
+      <!-- Flip-phone trigger -->
       <button
         id="flip-trigger"
         class="flip-trigger"
@@ -274,7 +307,6 @@
       </header>
 
       <div class="content-panel-body">
-
         <button
           id="panel-previous"
           class="panel-arrow panel-arrow-left"
@@ -298,7 +330,6 @@
         >
           ›
         </button>
-
       </div>
 
       <footer class="content-panel-footer">
