@@ -43,7 +43,7 @@
         alt="Interactive flip phone"
       />
 
-      <!-- Date and time -->
+      <!-- Open-phone clock -->
       <div
         id="open-screen-clock"
         class="open-screen-clock"
@@ -60,7 +60,7 @@
         ></div>
       </div>
 
-      <!-- Main menu -->
+      <!-- Main phone menu -->
       <section
         id="phone-menu"
         class="phone-menu"
@@ -142,7 +142,7 @@
         </p>
       </section>
 
-      <!-- Number screen -->
+      <!-- Number-entry screen -->
       <section
         id="dial-screen"
         class="dial-screen"
@@ -234,11 +234,69 @@
           class="camera-message"
           aria-live="polite"
         >
-          CENTER: TAKE PHOTO
+          PRESS CAMERA TO TAKE PHOTO
         </div>
       </section>
 
-      <!-- Closed phone screen -->
+      <!-- Photo gallery -->
+      <section
+        id="gallery-screen"
+        class="gallery-screen"
+        aria-label="Photo gallery"
+        aria-hidden="true"
+      >
+        <!-- Thumbnail grid -->
+        <div
+          id="gallery-grid-view"
+          class="gallery-grid-view"
+        >
+          <div class="gallery-heading">
+            PHOTOS
+          </div>
+
+          <div
+            id="gallery-grid"
+            class="gallery-grid"
+            role="grid"
+            aria-label="Captured photos"
+          ></div>
+
+          <div class="gallery-footer">
+            <span id="gallery-page-number">
+              01 / 01
+            </span>
+
+            <span>
+              CENTER: VIEW
+            </span>
+          </div>
+        </div>
+
+        <!-- Full-image view -->
+        <div
+          id="gallery-photo-view"
+          class="gallery-photo-view"
+          aria-hidden="true"
+        >
+          <img
+            id="gallery-full-image"
+            class="gallery-full-image"
+            alt="Selected captured photo"
+          />
+
+          <div class="gallery-photo-footer">
+            <span id="gallery-photo-number">
+              01 / 01
+            </span>
+
+            <span>
+              BACK: GALLERY
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Closed-phone screen -->
       <div
         id="front-screen"
         class="front-screen"
@@ -263,14 +321,14 @@
         </div>
       </div>
 
-      <!-- Invisible key hit areas -->
+      <!-- Invisible phone-key hit areas -->
       <div
         id="key-overlay"
         class="key-overlay"
         aria-hidden="true"
       ></div>
 
-      <!-- Flip-phone trigger -->
+      <!-- Phone open/close trigger -->
       <button
         id="flip-trigger"
         class="flip-trigger"
