@@ -155,6 +155,23 @@ function stopCallingSound() {
   callingSound.currentTime = 0;
 }
 
+/* Keys that play the general phone-button sound. */
+
+const generalSoundKeys = new Set([
+  "dpad-up",
+  "dpad-down",
+  "dpad-left",
+  "dpad-right",
+  "dpad-center",
+  "mail",
+  "*",
+  "#",
+  "menu",
+  "lower-right",
+  "back",
+  "home"
+]);
+
 /* ---------------------------------
    PANEL CONTENT
 --------------------------------- */
@@ -670,7 +687,7 @@ const phoneKeys = [
 
   {
     name: "lower-right",
-    label: "Lower right key",
+    label: "Camera key",
     x: 139,
     y: 381,
     width: 36,
@@ -688,7 +705,7 @@ const phoneKeys = [
 
   {
     name: "menu",
-    label: "Open menu",
+    label: "A key or open menu",
     x: 94,
     y: 408,
     width: 38,
@@ -1645,6 +1662,17 @@ function handlePhoneKey(keyName) {
       "is-open"
     );
 
+  /*
+    These keys all play 27_fixed.mp3:
+    arrows, middle button, email, pound,
+    star, A key, camera, back and home.
+  */
+  if (generalSoundKeys.has(keyName)) {
+    playPhoneSound(
+      "27_fixed.mp3"
+    );
+  }
+
   const dialCharacters = [
     "0",
     "1",
@@ -1676,7 +1704,7 @@ function handlePhoneKey(keyName) {
   }
 
   /*
-    The green call button only works when:
+    The green call button works only when:
     1. The number screen is visible.
     2. At least one number has been entered.
   */
@@ -1685,7 +1713,13 @@ function handlePhoneKey(keyName) {
     return;
   }
 
-  /* Number keys type and play matching number sounds. */
+  /*
+    Number keys type on the screen.
+
+    Keys 0 through 9 play their individual sounds.
+    Star and pound play 27_fixed.mp3 through
+    generalSoundKeys.
+  */
   if (dialCharacters.includes(keyName)) {
     if (panelIsOpen) {
       closeContentPanel();
@@ -1774,7 +1808,7 @@ function handlePhoneKey(keyName) {
     return;
   }
 
-  /* Menu key stops ringing and opens the main menu. */
+  /* A/menu key stops ringing and opens the main menu. */
   if (keyName === "menu") {
     endCurrentCall();
 
@@ -2112,6 +2146,10 @@ function initializeMenuEvents() {
 
         setMailScreenVisible(false);
 
+        playPhoneSound(
+          "27_fixed.mp3"
+        );
+
         typeDialCharacter(
           event.key
         );
@@ -2124,6 +2162,10 @@ function initializeMenuEvents() {
         isDialScreenVisible
       ) {
         event.preventDefault();
+
+        playPhoneSound(
+          "27_fixed.mp3"
+        );
 
         endCurrentCall();
         deleteDialCharacter();
@@ -2144,11 +2186,21 @@ function initializeMenuEvents() {
       if (panelIsOpen) {
         if (event.key === "ArrowLeft") {
           event.preventDefault();
+
+          playPhoneSound(
+            "27_fixed.mp3"
+          );
+
           showPreviousPanelPage();
         }
 
         if (event.key === "ArrowRight") {
           event.preventDefault();
+
+          playPhoneSound(
+            "27_fixed.mp3"
+          );
+
           showNextPanelPage();
         }
 
@@ -2195,6 +2247,10 @@ function initializeMenuEvents() {
           return;
         }
 
+        playPhoneSound(
+          "27_fixed.mp3"
+        );
+
         if (!isMenuVisible) {
           setPhoneMenuVisible(true);
           updateMenuSelection();
@@ -2222,21 +2278,41 @@ function initializeMenuEvents() {
 
       if (event.key === "ArrowUp") {
         event.preventDefault();
+
+        playPhoneSound(
+          "27_fixed.mp3"
+        );
+
         moveMenuSelection("up");
       }
 
       if (event.key === "ArrowDown") {
         event.preventDefault();
+
+        playPhoneSound(
+          "27_fixed.mp3"
+        );
+
         moveMenuSelection("down");
       }
 
       if (event.key === "ArrowLeft") {
         event.preventDefault();
+
+        playPhoneSound(
+          "27_fixed.mp3"
+        );
+
         moveMenuSelection("left");
       }
 
       if (event.key === "ArrowRight") {
         event.preventDefault();
+
+        playPhoneSound(
+          "27_fixed.mp3"
+        );
+
         moveMenuSelection("right");
       }
     }
