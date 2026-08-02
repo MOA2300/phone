@@ -4,89 +4,172 @@
    HTML ELEMENTS
 --------------------------------- */
 
+const instructionText =
+  document.getElementById(
+    "instruction-text"
+  );
+
 const spriteButton =
-  document.getElementById("sprite-button");
+  document.getElementById(
+    "sprite-button"
+  );
 
 const sprite =
-  document.getElementById("sprite");
+  document.getElementById(
+    "sprite"
+  );
 
 const frame =
-  document.getElementById("phone-frame");
+  document.getElementById(
+    "phone-frame"
+  );
 
 const container =
-  document.getElementById("phone-container");
+  document.getElementById(
+    "phone-container"
+  );
 
 const keyOverlay =
-  document.getElementById("key-overlay");
+  document.getElementById(
+    "key-overlay"
+  );
 
 const flipTrigger =
-  document.getElementById("flip-trigger");
+  document.getElementById(
+    "flip-trigger"
+  );
 
 const frontScreen =
-  document.getElementById("front-screen");
+  document.getElementById(
+    "front-screen"
+  );
 
 const frontScreenDate =
-  document.getElementById("front-screen-date");
+  document.getElementById(
+    "front-screen-date"
+  );
 
 const frontScreenTime =
-  document.getElementById("front-screen-time");
+  document.getElementById(
+    "front-screen-time"
+  );
 
 const openScreenClock =
-  document.getElementById("open-screen-clock");
+  document.getElementById(
+    "open-screen-clock"
+  );
 
 const openScreenDate =
-  document.getElementById("open-screen-date");
+  document.getElementById(
+    "open-screen-date"
+  );
 
 const openScreenTime =
-  document.getElementById("open-screen-time");
+  document.getElementById(
+    "open-screen-time"
+  );
 
 const phoneMenu =
-  document.getElementById("phone-menu");
+  document.getElementById(
+    "phone-menu"
+  );
 
 const dialScreen =
-  document.getElementById("dial-screen");
+  document.getElementById(
+    "dial-screen"
+  );
 
 const dialNumber =
-  document.getElementById("dial-number");
+  document.getElementById(
+    "dial-number"
+  );
 
 const mailScreen =
-  document.getElementById("mail-screen");
+  document.getElementById(
+    "mail-screen"
+  );
 
 const cameraScreen =
-  document.getElementById("camera-screen");
+  document.getElementById(
+    "camera-screen"
+  );
 
 const cameraPreview =
-  document.getElementById("camera-preview");
+  document.getElementById(
+    "camera-preview"
+  );
 
 const cameraCanvas =
-  document.getElementById("camera-canvas");
+  document.getElementById(
+    "camera-canvas"
+  );
 
 const capturedPhoto =
-  document.getElementById("captured-photo");
+  document.getElementById(
+    "captured-photo"
+  );
 
 const cameraMessage =
-  document.getElementById("camera-message");
+  document.getElementById(
+    "camera-message"
+  );
 
 const galleryScreen =
-  document.getElementById("gallery-screen");
+  document.getElementById(
+    "gallery-screen"
+  );
 
 const galleryGridView =
-  document.getElementById("gallery-grid-view");
+  document.getElementById(
+    "gallery-grid-view"
+  );
 
 const galleryGrid =
-  document.getElementById("gallery-grid");
+  document.getElementById(
+    "gallery-grid"
+  );
 
 const galleryPageNumber =
-  document.getElementById("gallery-page-number");
+  document.getElementById(
+    "gallery-page-number"
+  );
 
 const galleryPhotoView =
-  document.getElementById("gallery-photo-view");
+  document.getElementById(
+    "gallery-photo-view"
+  );
 
 const galleryFullImage =
-  document.getElementById("gallery-full-image");
+  document.getElementById(
+    "gallery-full-image"
+  );
 
 const galleryPhotoNumber =
-  document.getElementById("gallery-photo-number");
+  document.getElementById(
+    "gallery-photo-number"
+  );
+
+const galleryDeleteDialog =
+  document.getElementById(
+    "gallery-delete-dialog"
+  );
+
+const galleryKeepPhoto =
+  document.getElementById(
+    "gallery-keep-photo"
+  );
+
+const galleryDeletePhoto =
+  document.getElementById(
+    "gallery-delete-photo"
+  );
+
+const galleryDeleteOptions =
+  Array.from(
+    document.querySelectorAll(
+      ".gallery-delete-option"
+    )
+  );
 
 const menuItems =
   Array.from(
@@ -96,25 +179,39 @@ const menuItems =
   );
 
 const contentPanel =
-  document.getElementById("content-panel");
+  document.getElementById(
+    "content-panel"
+  );
 
 const panelTitle =
-  document.getElementById("panel-title");
+  document.getElementById(
+    "panel-title"
+  );
 
 const panelPage =
-  document.getElementById("panel-page");
+  document.getElementById(
+    "panel-page"
+  );
 
 const panelPageNumber =
-  document.getElementById("panel-page-number");
+  document.getElementById(
+    "panel-page-number"
+  );
 
 const panelPrevious =
-  document.getElementById("panel-previous");
+  document.getElementById(
+    "panel-previous"
+  );
 
 const panelNext =
-  document.getElementById("panel-next");
+  document.getElementById(
+    "panel-next"
+  );
 
 const panelClose =
-  document.getElementById("panel-close");
+  document.getElementById(
+    "panel-close"
+  );
 
 /* ---------------------------------
    PHONE IMAGE FRAMES
@@ -161,9 +258,7 @@ function playPhoneSound(fileName) {
 
   sound
     .play()
-    .catch(() => {
-      // Audio may be blocked before user interaction.
-    });
+    .catch(() => {});
 }
 
 const callingSound =
@@ -187,20 +282,21 @@ function stopCallingSound() {
   callingSound.currentTime = 0;
 }
 
-const generalSoundKeys = new Set([
-  "dpad-up",
-  "dpad-down",
-  "dpad-left",
-  "dpad-right",
-  "dpad-center",
-  "mail",
-  "*",
-  "#",
-  "camera",
-  "lower-right",
-  "back",
-  "home"
-]);
+const generalSoundKeys =
+  new Set([
+    "dpad-up",
+    "dpad-down",
+    "dpad-left",
+    "dpad-right",
+    "dpad-center",
+    "mail",
+    "*",
+    "#",
+    "camera",
+    "lower-right",
+    "back",
+    "home"
+  ]);
 
 /* ---------------------------------
    PANEL CONTENT
@@ -844,7 +940,7 @@ const phoneKeys = [
 
   {
     name: "#",
-    label: "Pound",
+    label: "Pound or delete photo",
     x: 139,
     y: 523,
     width: 39,
@@ -866,6 +962,7 @@ let isMailScreenVisible = false;
 let isCameraScreenVisible = false;
 let isGalleryScreenVisible = false;
 let isGalleryPhotoVisible = false;
+let isGalleryDeleteVisible = false;
 
 let isCalling = false;
 let enteredPhoneNumber = "";
@@ -880,6 +977,7 @@ let savedPhotos = [];
 let galleryPageIndex = 0;
 let gallerySelectedIndex = 0;
 let galleryFullPhotoIndex = 0;
+let galleryDeleteChoice = 0;
 
 let spriteIndex = 0;
 let spriteInterval = null;
@@ -890,7 +988,8 @@ let activeSectionName = null;
 let activePageIndex = 0;
 
 const PHOTOS_PER_PAGE = 9;
-const PHOTO_STORAGE_KEY = "leslie-phone-gallery";
+const PHOTO_STORAGE_KEY =
+  "leslie-phone-gallery";
 
 /* ---------------------------------
    PRELOAD IMAGES
@@ -899,6 +998,7 @@ const PHOTO_STORAGE_KEY = "leslie-phone-gallery";
 function preloadImages(paths) {
   paths.forEach((src) => {
     const image = new Image();
+
     image.src = src;
   });
 }
@@ -908,7 +1008,8 @@ preloadImages([
   ...openFrames,
   ...closeFrames,
   "images/bunny.png",
-  "images/diva.jpg"
+  "images/diva.jpg",
+  "images/instructiontext.png"
 ]);
 
 /* ---------------------------------
@@ -936,7 +1037,10 @@ function stopSpriteLoop() {
     return;
   }
 
-  window.clearInterval(spriteInterval);
+  window.clearInterval(
+    spriteInterval
+  );
+
   spriteInterval = null;
 }
 
@@ -945,7 +1049,10 @@ function stopSpriteLoop() {
 --------------------------------- */
 
 function padNumber(value) {
-  return String(value).padStart(2, "0");
+  return String(value).padStart(
+    2,
+    "0"
+  );
 }
 
 function formatOpenPhoneDate(date) {
@@ -961,32 +1068,52 @@ function formatOpenPhoneDate(date) {
 
   return (
     `${date.getFullYear()}/` +
-    `${padNumber(date.getMonth() + 1)}/` +
-    `${padNumber(date.getDate())}` +
-    `(${weekdays[date.getDay()]})`
+    `${padNumber(
+      date.getMonth() + 1
+    )}/` +
+    `${padNumber(
+      date.getDate()
+    )}` +
+    `(${weekdays[
+      date.getDay()
+    ]})`
   );
 }
 
 function formatOpenPhoneTime(date) {
   return (
-    `${padNumber(date.getHours())}:` +
-    `${padNumber(date.getMinutes())}:` +
-    `${padNumber(date.getSeconds())}`
+    `${padNumber(
+      date.getHours()
+    )}:` +
+    `${padNumber(
+      date.getMinutes()
+    )}:` +
+    `${padNumber(
+      date.getSeconds()
+    )}`
   );
 }
 
 function formatFrontPhoneDate(date) {
   return (
     `${date.getFullYear()}/` +
-    `${padNumber(date.getMonth() + 1)}/` +
-    `${padNumber(date.getDate())}`
+    `${padNumber(
+      date.getMonth() + 1
+    )}/` +
+    `${padNumber(
+      date.getDate()
+    )}`
   );
 }
 
 function formatFrontPhoneTime(date) {
   return (
-    `${padNumber(date.getHours())}:` +
-    `${padNumber(date.getMinutes())}`
+    `${padNumber(
+      date.getHours()
+    )}:` +
+    `${padNumber(
+      date.getMinutes()
+    )}`
   );
 }
 
@@ -1010,7 +1137,9 @@ function startPhoneClock() {
   updatePhoneClock();
 
   if (clockInterval !== null) {
-    window.clearInterval(clockInterval);
+    window.clearInterval(
+      clockInterval
+    );
   }
 
   clockInterval =
@@ -1021,7 +1150,7 @@ function startPhoneClock() {
 }
 
 /* ---------------------------------
-   SCREEN HELPERS
+   BASIC SCREEN HELPERS
 --------------------------------- */
 
 function setFrontScreenVisible(visible) {
@@ -1104,7 +1233,191 @@ function hideCameraScreen() {
   );
 }
 
+/* ---------------------------------
+   GALLERY DELETE DIALOG
+--------------------------------- */
+
+function updateGalleryDeleteChoice() {
+  galleryDeleteOptions.forEach(
+    (option, index) => {
+      option.classList.toggle(
+        "is-selected",
+        index ===
+          galleryDeleteChoice
+      );
+    }
+  );
+}
+
+function closeGalleryDeleteDialog() {
+  isGalleryDeleteVisible = false;
+  galleryDeleteChoice = 0;
+
+  galleryDeleteDialog.classList.remove(
+    "is-visible"
+  );
+
+  galleryDeleteDialog.setAttribute(
+    "aria-hidden",
+    "true"
+  );
+
+  updateGalleryDeleteChoice();
+}
+
+function openGalleryDeleteDialog() {
+  if (
+    !isGalleryScreenVisible ||
+    savedPhotos.length === 0
+  ) {
+    return;
+  }
+
+  if (isGalleryPhotoVisible) {
+    galleryFullPhotoIndex =
+      Math.max(
+        0,
+        Math.min(
+          galleryFullPhotoIndex,
+          savedPhotos.length - 1
+        )
+      );
+  } else {
+    galleryFullPhotoIndex =
+      getGalleryPageStart() +
+      gallerySelectedIndex;
+  }
+
+  if (
+    !savedPhotos[
+      galleryFullPhotoIndex
+    ]
+  ) {
+    return;
+  }
+
+  isGalleryDeleteVisible = true;
+  galleryDeleteChoice = 0;
+
+  galleryDeleteDialog.classList.add(
+    "is-visible"
+  );
+
+  galleryDeleteDialog.setAttribute(
+    "aria-hidden",
+    "false"
+  );
+
+  updateGalleryDeleteChoice();
+}
+
+function moveGalleryDeleteChoice(direction) {
+  if (!isGalleryDeleteVisible) {
+    return;
+  }
+
+  if (direction === "left") {
+    galleryDeleteChoice = 0;
+  }
+
+  if (direction === "right") {
+    galleryDeleteChoice = 1;
+  }
+
+  updateGalleryDeleteChoice();
+}
+
+function confirmGalleryDeleteChoice() {
+  if (!isGalleryDeleteVisible) {
+    return;
+  }
+
+  if (galleryDeleteChoice === 0) {
+    closeGalleryDeleteDialog();
+    return;
+  }
+
+  deleteCurrentGalleryPhoto();
+}
+
+function deleteCurrentGalleryPhoto() {
+  if (
+    savedPhotos.length === 0 ||
+    !savedPhotos[
+      galleryFullPhotoIndex
+    ]
+  ) {
+    closeGalleryDeleteDialog();
+    return;
+  }
+
+  savedPhotos.splice(
+    galleryFullPhotoIndex,
+    1
+  );
+
+  persistSavedPhotos();
+
+  closeGalleryDeleteDialog();
+
+  if (savedPhotos.length === 0) {
+    galleryPageIndex = 0;
+    gallerySelectedIndex = 0;
+    galleryFullPhotoIndex = 0;
+
+    isGalleryPhotoVisible = false;
+
+    galleryPhotoView.classList.remove(
+      "is-visible"
+    );
+
+    galleryPhotoView.setAttribute(
+      "aria-hidden",
+      "true"
+    );
+
+    galleryGridView.style.display =
+      "flex";
+
+    galleryFullImage.removeAttribute(
+      "src"
+    );
+
+    renderGalleryPage();
+
+    return;
+  }
+
+  galleryFullPhotoIndex =
+    Math.min(
+      galleryFullPhotoIndex,
+      savedPhotos.length - 1
+    );
+
+  galleryPageIndex =
+    Math.floor(
+      galleryFullPhotoIndex /
+      PHOTOS_PER_PAGE
+    );
+
+  gallerySelectedIndex =
+    galleryFullPhotoIndex %
+    PHOTOS_PER_PAGE;
+
+  if (isGalleryPhotoVisible) {
+    renderFullGalleryPhoto();
+  } else {
+    renderGalleryPage();
+  }
+}
+
+/* ---------------------------------
+   GALLERY VISIBILITY
+--------------------------------- */
+
 function hideGalleryScreen() {
+  closeGalleryDeleteDialog();
+
   isGalleryScreenVisible = false;
   isGalleryPhotoVisible = false;
 
@@ -1149,6 +1462,7 @@ function setPhoneMenuVisible(visible) {
   }
 
   stopCamera();
+
   hideDialScreen();
   hideMailScreen();
   hideGalleryScreen();
@@ -1172,6 +1486,7 @@ function setDialScreenVisible(visible) {
   }
 
   stopCamera();
+
   hidePhoneMenu();
   hideMailScreen();
   hideGalleryScreen();
@@ -1327,18 +1642,21 @@ function loadSavedPhotos() {
     }
 
     const parsedPhotos =
-      JSON.parse(storedPhotos);
+      JSON.parse(
+        storedPhotos
+      );
 
     savedPhotos =
       Array.isArray(parsedPhotos)
         ? parsedPhotos.filter(
             (photo) =>
-              typeof photo === "string"
+              typeof photo ===
+              "string"
           )
         : [];
   } catch (error) {
     console.warn(
-      "Could not load saved photos:",
+      "Could not load photos:",
       error
     );
 
@@ -1350,13 +1668,15 @@ function persistSavedPhotos() {
   try {
     window.localStorage.setItem(
       PHOTO_STORAGE_KEY,
-      JSON.stringify(savedPhotos)
+      JSON.stringify(
+        savedPhotos
+      )
     );
 
     return true;
   } catch (error) {
     console.warn(
-      "The browser could not permanently save every photo:",
+      "Could not save all photos:",
       error
     );
 
@@ -1445,7 +1765,8 @@ async function openCamera() {
 
   if (
     !navigator.mediaDevices ||
-    !navigator.mediaDevices.getUserMedia
+    !navigator.mediaDevices
+      .getUserMedia
   ) {
     cameraMessage.textContent =
       "CAMERA NOT SUPPORTED";
@@ -1460,13 +1781,14 @@ async function openCamera() {
 
   try {
     const stream =
-      await navigator.mediaDevices.getUserMedia({
-        video: {
-          facingMode: "user"
-        },
+      await navigator.mediaDevices
+        .getUserMedia({
+          video: {
+            facingMode: "user"
+          },
 
-        audio: false
-      });
+          audio: false
+        });
 
     if (!isCameraScreenVisible) {
       stream
@@ -1476,6 +1798,7 @@ async function openCamera() {
         });
 
       isOpeningCamera = false;
+
       return;
     }
 
@@ -1535,10 +1858,6 @@ function takeCameraPhoto() {
     return;
   }
 
-  /*
-    Reduce the saved size so more photos can fit
-    inside browser storage.
-  */
   const outputWidth = 480;
 
   const outputHeight =
@@ -1563,7 +1882,10 @@ function takeCameraPhoto() {
     0
   );
 
-  context.scale(-1, 1);
+  context.scale(
+    -1,
+    1
+  );
 
   context.drawImage(
     cameraPreview,
@@ -1606,6 +1928,7 @@ function takeCameraPhoto() {
 function handleCameraButton() {
   if (!isCameraScreenVisible) {
     openCamera();
+
     return;
   }
 
@@ -1615,6 +1938,7 @@ function handleCameraButton() {
 
   if (!hasCapturedPhoto) {
     takeCameraPhoto();
+
     return;
   }
 
@@ -1648,7 +1972,8 @@ function getGalleryPhotosOnPage() {
 
   return savedPhotos.slice(
     pageStart,
-    pageStart + PHOTOS_PER_PAGE
+    pageStart +
+      PHOTOS_PER_PAGE
   );
 }
 
@@ -1670,6 +1995,7 @@ function normalizeGallerySelection() {
 
   if (pagePhotos.length === 0) {
     gallerySelectedIndex = 0;
+
     return;
   }
 
@@ -1891,6 +2217,7 @@ function moveGallerySelection(direction) {
   if (
     !isGalleryScreenVisible ||
     isGalleryPhotoVisible ||
+    isGalleryDeleteVisible ||
     savedPhotos.length === 0
   ) {
     return;
@@ -1901,11 +2228,6 @@ function moveGallerySelection(direction) {
 
   const currentIndex =
     gallerySelectedIndex;
-
-  const currentRow =
-    Math.floor(
-      currentIndex / 3
-    );
 
   const currentColumn =
     currentIndex % 3;
@@ -1933,8 +2255,10 @@ function moveGallerySelection(direction) {
     ) {
       const finalRowStart =
         Math.floor(
-          (pagePhotos.length - 1) /
-          3
+          (
+            pagePhotos.length -
+            1
+          ) / 3
         ) * 3;
 
       nextIndex =
@@ -1948,7 +2272,9 @@ function moveGallerySelection(direction) {
 
   if (direction === "left") {
     if (currentIndex === 0) {
-      if (moveToPreviousGalleryPage()) {
+      if (
+        moveToPreviousGalleryPage()
+      ) {
         return;
       }
     } else if (currentColumn > 0) {
@@ -1962,7 +2288,9 @@ function moveGallerySelection(direction) {
       currentIndex ===
       pagePhotos.length - 1
     ) {
-      if (moveToNextGalleryPage()) {
+      if (
+        moveToNextGalleryPage()
+      ) {
         return;
       }
     } else if (
@@ -2036,6 +2364,8 @@ function renderFullGalleryPhoto() {
 }
 
 function closeFullGalleryPhoto() {
+  closeGalleryDeleteDialog();
+
   isGalleryPhotoVisible = false;
 
   galleryPhotoView.classList.remove(
@@ -2066,6 +2396,7 @@ function closeFullGalleryPhoto() {
 function showPreviousGalleryPhoto() {
   if (
     !isGalleryPhotoVisible ||
+    isGalleryDeleteVisible ||
     savedPhotos.length === 0
   ) {
     return;
@@ -2083,6 +2414,7 @@ function showPreviousGalleryPhoto() {
 function showNextGalleryPhoto() {
   if (
     !isGalleryPhotoVisible ||
+    isGalleryDeleteVisible ||
     savedPhotos.length === 0
   ) {
     return;
@@ -2169,7 +2501,10 @@ function renderDialNumber() {
 function typeDialCharacter(character) {
   endCurrentCall();
 
-  if (enteredPhoneNumber.length >= 18) {
+  if (
+    enteredPhoneNumber.length >=
+    18
+  ) {
     return;
   }
 
@@ -2182,8 +2517,11 @@ function typeDialCharacter(character) {
 function deleteDialCharacter() {
   endCurrentCall();
 
-  if (enteredPhoneNumber.length === 0) {
+  if (
+    enteredPhoneNumber.length === 0
+  ) {
     hideDialScreen();
+
     return;
   }
 
@@ -2195,13 +2533,16 @@ function deleteDialCharacter() {
 
   renderDialNumber();
 
-  if (enteredPhoneNumber.length === 0) {
+  if (
+    enteredPhoneNumber.length === 0
+  ) {
     hideDialScreen();
   }
 }
 
 function clearDialNumber() {
   enteredPhoneNumber = "";
+
   renderDialNumber();
 }
 
@@ -2213,7 +2554,8 @@ function updateMenuSelection() {
   menuItems.forEach(
     (item, index) => {
       const selected =
-        index === selectedMenuIndex;
+        index ===
+        selectedMenuIndex;
 
       item.classList.toggle(
         "is-selected",
@@ -2420,6 +2762,7 @@ function showPreviousPanelPage() {
   }
 
   activePageIndex -= 1;
+
   renderPanelPage();
 }
 
@@ -2442,6 +2785,7 @@ function showNextPanelPage() {
   }
 
   activePageIndex += 1;
+
   renderPanelPage();
 }
 
@@ -2475,6 +2819,7 @@ function playAnimation(
           frames[index];
 
         index += 1;
+
         return;
       }
 
@@ -2553,7 +2898,9 @@ function renderKeys() {
       );
 
     button.type = "button";
-    button.className = "phone-key";
+
+    button.className =
+      "phone-key";
 
     if (key.className) {
       button.classList.add(
@@ -2679,7 +3026,56 @@ function handlePhoneKey(keyName) {
     "#"
   ];
 
-  /* Black camera button */
+  /*
+    Delete confirmation takes control of
+    the arrows, center and Back buttons.
+  */
+  if (isGalleryDeleteVisible) {
+    if (keyName === "dpad-left") {
+      moveGalleryDeleteChoice(
+        "left"
+      );
+
+      return;
+    }
+
+    if (keyName === "dpad-right") {
+      moveGalleryDeleteChoice(
+        "right"
+      );
+
+      return;
+    }
+
+    if (keyName === "dpad-center") {
+      confirmGalleryDeleteChoice();
+
+      return;
+    }
+
+    if (keyName === "back") {
+      closeGalleryDeleteDialog();
+
+      return;
+    }
+
+    return;
+  }
+
+  /*
+    Pound opens the delete confirmation
+    while the gallery is open.
+  */
+  if (
+    keyName === "#" &&
+    isGalleryScreenVisible
+  ) {
+    openGalleryDeleteDialog();
+
+    return;
+  }
+
+  /* Black camera button. */
   if (keyName === "camera") {
     endCurrentCall();
 
@@ -2688,12 +3084,13 @@ function handlePhoneKey(keyName) {
     }
 
     hideGalleryScreen();
+
     handleCameraButton();
 
     return;
   }
 
-  /* A button opens the gallery */
+  /* A button opens the gallery. */
   if (keyName === "lower-right") {
     endCurrentCall();
 
@@ -2701,12 +3098,14 @@ function handlePhoneKey(keyName) {
       closeContentPanel();
     }
 
-    setGalleryScreenVisible(true);
+    setGalleryScreenVisible(
+      true
+    );
 
     return;
   }
 
-  /* Mail button */
+  /* Email button. */
   if (keyName === "mail") {
     endCurrentCall();
     stopCamera();
@@ -2716,18 +3115,21 @@ function handlePhoneKey(keyName) {
       closeContentPanel();
     }
 
-    setMailScreenVisible(true);
+    setMailScreenVisible(
+      true
+    );
 
     return;
   }
 
-  /* Green call button */
+  /* Green call button. */
   if (keyName === "call") {
     launchDeviceCall();
+
     return;
   }
 
-  /* Number, star and pound keys */
+  /* Number, star and pound keys. */
   if (
     dialCharacters.includes(
       keyName
@@ -2759,7 +3161,7 @@ function handlePhoneKey(keyName) {
     return;
   }
 
-  /* Home */
+  /* Home button. */
   if (keyName === "home") {
     endCurrentCall();
     stopCamera();
@@ -2774,13 +3176,16 @@ function handlePhoneKey(keyName) {
     hideDialScreen();
     hideMailScreen();
 
-    setPhoneMenuVisible(true);
+    setPhoneMenuVisible(
+      true
+    );
+
     updateMenuSelection();
 
     return;
   }
 
-  /* Back */
+  /* Back button. */
   if (keyName === "back") {
     endCurrentCall();
 
@@ -2796,21 +3201,25 @@ function handlePhoneKey(keyName) {
 
     if (isCameraScreenVisible) {
       stopCamera();
+
       return;
     }
 
     if (isMailScreenVisible) {
       hideMailScreen();
+
       return;
     }
 
     if (isDialScreenVisible) {
       deleteDialCharacter();
+
       return;
     }
 
     if (panelIsOpen) {
       closeContentPanel();
+
       return;
     }
 
@@ -2821,7 +3230,7 @@ function handlePhoneKey(keyName) {
     return;
   }
 
-  /* Red hang-up */
+  /* Red hang-up button. */
   if (keyName === "end") {
     endCurrentCall();
     stopCamera();
@@ -2829,17 +3238,20 @@ function handlePhoneKey(keyName) {
 
     if (isMailScreenVisible) {
       hideMailScreen();
+
       return;
     }
 
     if (isDialScreenVisible) {
       clearDialNumber();
       hideDialScreen();
+
       return;
     }
 
     if (panelIsOpen) {
       closeContentPanel();
+
       return;
     }
 
@@ -2848,7 +3260,7 @@ function handlePhoneKey(keyName) {
     return;
   }
 
-  /* Center button */
+  /* Middle button. */
   if (keyName === "dpad-center") {
     if (isGalleryScreenVisible) {
       if (!isGalleryPhotoVisible) {
@@ -2867,7 +3279,10 @@ function handlePhoneKey(keyName) {
     }
 
     if (!isMenuVisible) {
-      setPhoneMenuVisible(true);
+      setPhoneMenuVisible(
+        true
+      );
+
       updateMenuSelection();
     } else {
       selectCurrentMenuItem();
@@ -2876,14 +3291,20 @@ function handlePhoneKey(keyName) {
     return;
   }
 
-  /* Gallery arrows */
+  /* Gallery arrows. */
   if (isGalleryScreenVisible) {
     if (isGalleryPhotoVisible) {
-      if (keyName === "dpad-left") {
+      if (
+        keyName ===
+        "dpad-left"
+      ) {
         showPreviousGalleryPhoto();
       }
 
-      if (keyName === "dpad-right") {
+      if (
+        keyName ===
+        "dpad-right"
+      ) {
         showNextGalleryPhoto();
       }
 
@@ -2891,25 +3312,33 @@ function handlePhoneKey(keyName) {
     }
 
     if (keyName === "dpad-up") {
-      moveGallerySelection("up");
+      moveGallerySelection(
+        "up"
+      );
     }
 
     if (keyName === "dpad-down") {
-      moveGallerySelection("down");
+      moveGallerySelection(
+        "down"
+      );
     }
 
     if (keyName === "dpad-left") {
-      moveGallerySelection("left");
+      moveGallerySelection(
+        "left"
+      );
     }
 
     if (keyName === "dpad-right") {
-      moveGallerySelection("right");
+      moveGallerySelection(
+        "right"
+      );
     }
 
     return;
   }
 
-  /* Content-panel arrows */
+  /* Portfolio-panel arrows. */
   if (panelIsOpen) {
     if (keyName === "dpad-left") {
       showPreviousPanelPage();
@@ -2932,19 +3361,27 @@ function handlePhoneKey(keyName) {
 
   switch (keyName) {
     case "dpad-up":
-      moveMenuSelection("up");
+      moveMenuSelection(
+        "up"
+      );
       break;
 
     case "dpad-down":
-      moveMenuSelection("down");
+      moveMenuSelection(
+        "down"
+      );
       break;
 
     case "dpad-left":
-      moveMenuSelection("left");
+      moveMenuSelection(
+        "left"
+      );
       break;
 
     case "dpad-right":
-      moveMenuSelection("right");
+      moveMenuSelection(
+        "right"
+      );
       break;
 
     default:
@@ -2953,7 +3390,7 @@ function handlePhoneKey(keyName) {
 }
 
 /* ---------------------------------
-   FIRST OPEN
+   FIRST PHONE OPENING
 --------------------------------- */
 
 function openPhoneForFirstTime() {
@@ -2963,6 +3400,10 @@ function openPhoneForFirstTime() {
   ) {
     return;
   }
+
+  instructionText.classList.add(
+    "is-hidden"
+  );
 
   endCurrentCall();
   stopCamera();
@@ -3108,7 +3549,7 @@ function reopenPhone() {
 }
 
 /* ---------------------------------
-   MENU AND PANEL EVENTS
+   MENU, GALLERY AND PANEL EVENTS
 --------------------------------- */
 
 function initializeMenuEvents() {
@@ -3131,6 +3572,48 @@ function initializeMenuEvents() {
           openContentPanel(
             item.dataset.section
           );
+        }
+      );
+    }
+  );
+
+  galleryKeepPhoto.addEventListener(
+    "click",
+    () => {
+      galleryDeleteChoice = 0;
+
+      confirmGalleryDeleteChoice();
+    }
+  );
+
+  galleryDeletePhoto.addEventListener(
+    "click",
+    () => {
+      galleryDeleteChoice = 1;
+
+      confirmGalleryDeleteChoice();
+    }
+  );
+
+  galleryDeleteOptions.forEach(
+    (option, index) => {
+      option.addEventListener(
+        "mouseenter",
+        () => {
+          galleryDeleteChoice =
+            index;
+
+          updateGalleryDeleteChoice();
+        }
+      );
+
+      option.addEventListener(
+        "focus",
+        () => {
+          galleryDeleteChoice =
+            index;
+
+          updateGalleryDeleteChoice();
         }
       );
     }
@@ -3166,6 +3649,79 @@ function initializeMenuEvents() {
           "is-open"
         );
 
+      /*
+        Delete-dialog keyboard controls.
+      */
+      if (isGalleryDeleteVisible) {
+        if (
+          event.key ===
+          "ArrowLeft"
+        ) {
+          event.preventDefault();
+
+          playPhoneSound(
+            "27_fixed.mp3"
+          );
+
+          moveGalleryDeleteChoice(
+            "left"
+          );
+
+          return;
+        }
+
+        if (
+          event.key ===
+          "ArrowRight"
+        ) {
+          event.preventDefault();
+
+          playPhoneSound(
+            "27_fixed.mp3"
+          );
+
+          moveGalleryDeleteChoice(
+            "right"
+          );
+
+          return;
+        }
+
+        if (
+          event.key === "Enter" ||
+          event.key === " "
+        ) {
+          event.preventDefault();
+
+          playPhoneSound(
+            "27_fixed.mp3"
+          );
+
+          confirmGalleryDeleteChoice();
+
+          return;
+        }
+
+        if (
+          event.key === "Escape" ||
+          event.key ===
+            "Backspace"
+        ) {
+          event.preventDefault();
+
+          playPhoneSound(
+            "27_fixed.mp3"
+          );
+
+          closeGalleryDeleteDialog();
+
+          return;
+        }
+
+        return;
+      }
+
+      /* Keyboard number entry. */
       if (
         /^[0-9]$/.test(
           event.key
@@ -3189,21 +3745,39 @@ function initializeMenuEvents() {
         return;
       }
 
-      if (
-        event.key === "*" ||
-        event.key === "#"
-      ) {
+      /*
+        Pound deletes a photo while the
+        gallery is open.
+      */
+      if (event.key === "#") {
         playPhoneSound(
           "27_fixed.mp3"
         );
 
-        typeDialCharacter(
-          event.key
-        );
+        if (
+          isGalleryScreenVisible
+        ) {
+          openGalleryDeleteDialog();
+
+          return;
+        }
+
+        typeDialCharacter("#");
 
         return;
       }
 
+      if (event.key === "*") {
+        playPhoneSound(
+          "27_fixed.mp3"
+        );
+
+        typeDialCharacter("*");
+
+        return;
+      }
+
+      /* C copies the camera button. */
       if (
         event.key.toLowerCase() ===
         "c"
@@ -3214,11 +3788,17 @@ function initializeMenuEvents() {
           "27_fixed.mp3"
         );
 
+        if (panelIsOpen) {
+          closeContentPanel();
+        }
+
+        hideGalleryScreen();
         handleCameraButton();
 
         return;
       }
 
+      /* A opens the gallery. */
       if (
         event.key.toLowerCase() ===
         "a"
@@ -3229,13 +3809,20 @@ function initializeMenuEvents() {
           "27_fixed.mp3"
         );
 
-        setGalleryScreenVisible(true);
+        if (panelIsOpen) {
+          closeContentPanel();
+        }
+
+        setGalleryScreenVisible(
+          true
+        );
 
         return;
       }
 
       if (
-        event.key === "Backspace"
+        event.key ===
+        "Backspace"
       ) {
         event.preventDefault();
 
@@ -3243,8 +3830,12 @@ function initializeMenuEvents() {
           "27_fixed.mp3"
         );
 
-        if (isGalleryScreenVisible) {
-          if (isGalleryPhotoVisible) {
+        if (
+          isGalleryScreenVisible
+        ) {
+          if (
+            isGalleryPhotoVisible
+          ) {
             closeFullGalleryPhoto();
           } else {
             hideGalleryScreen();
@@ -3260,13 +3851,15 @@ function initializeMenuEvents() {
         return;
       }
 
-      if (
-        event.key === "Escape"
-      ) {
+      if (event.key === "Escape") {
         endCurrentCall();
 
-        if (isGalleryScreenVisible) {
-          if (isGalleryPhotoVisible) {
+        if (
+          isGalleryScreenVisible
+        ) {
+          if (
+            isGalleryPhotoVisible
+          ) {
             closeFullGalleryPhoto();
           } else {
             hideGalleryScreen();
@@ -3275,24 +3868,30 @@ function initializeMenuEvents() {
           return;
         }
 
-        if (isCameraScreenVisible) {
+        if (
+          isCameraScreenVisible
+        ) {
           stopCamera();
+
           return;
         }
 
         if (isMailScreenVisible) {
           hideMailScreen();
+
           return;
         }
 
         if (isDialScreenVisible) {
           clearDialNumber();
           hideDialScreen();
+
           return;
         }
 
         if (panelIsOpen) {
           closeContentPanel();
+
           return;
         }
 
@@ -3322,8 +3921,12 @@ function initializeMenuEvents() {
           "27_fixed.mp3"
         );
 
-        if (isGalleryScreenVisible) {
-          if (!isGalleryPhotoVisible) {
+        if (
+          isGalleryScreenVisible
+        ) {
+          if (
+            !isGalleryPhotoVisible
+          ) {
             openSelectedGalleryPhoto();
           }
 
@@ -3339,7 +3942,10 @@ function initializeMenuEvents() {
         }
 
         if (!isMenuVisible) {
-          setPhoneMenuVisible(true);
+          setPhoneMenuVisible(
+            true
+          );
+
           updateMenuSelection();
         } else {
           selectCurrentMenuItem();
@@ -3368,13 +3974,21 @@ function initializeMenuEvents() {
         "27_fixed.mp3"
       );
 
-      if (isGalleryScreenVisible) {
-        if (isGalleryPhotoVisible) {
-          if (direction === "left") {
+      if (
+        isGalleryScreenVisible
+      ) {
+        if (
+          isGalleryPhotoVisible
+        ) {
+          if (
+            direction === "left"
+          ) {
             showPreviousGalleryPhoto();
           }
 
-          if (direction === "right") {
+          if (
+            direction === "right"
+          ) {
             showNextGalleryPhoto();
           }
         } else {
@@ -3387,11 +4001,15 @@ function initializeMenuEvents() {
       }
 
       if (panelIsOpen) {
-        if (direction === "left") {
+        if (
+          direction === "left"
+        ) {
           showPreviousPanelPage();
         }
 
-        if (direction === "right") {
+        if (
+          direction === "right"
+        ) {
           showNextPanelPage();
         }
 
@@ -3408,7 +4026,7 @@ function initializeMenuEvents() {
 }
 
 /* ---------------------------------
-   STOP HARDWARE WHEN LEAVING PAGE
+   STOP CAMERA AND AUDIO WHEN HIDDEN
 --------------------------------- */
 
 document.addEventListener(
@@ -3439,8 +4057,13 @@ function initializePhone() {
   renderKeys();
   initializeMenuEvents();
 
+  instructionText.classList.remove(
+    "is-hidden"
+  );
+
   endCurrentCall();
   stopCamera();
+  closeGalleryDeleteDialog();
 
   setKeysEnabled(false);
   setFrontScreenVisible(false);
