@@ -52,6 +52,21 @@ const dialNumber =
 const mailScreen =
   document.getElementById("mail-screen");
 
+const cameraScreen =
+  document.getElementById("camera-screen");
+
+const cameraPreview =
+  document.getElementById("camera-preview");
+
+const cameraCanvas =
+  document.getElementById("camera-canvas");
+
+const capturedPhoto =
+  document.getElementById("captured-photo");
+
+const cameraMessage =
+  document.getElementById("camera-message");
+
 const menuItems =
   Array.from(
     document.querySelectorAll(
@@ -126,11 +141,9 @@ function playPhoneSound(fileName) {
   sound
     .play()
     .catch(() => {
-      // Prevents errors if the browser blocks audio.
+      // Prevents errors if audio is blocked.
     });
 }
-
-/* Reusable ringing sound for the green call button. */
 
 const callingSound =
   new Audio(
@@ -146,7 +159,7 @@ function startCallingSound() {
   callingSound
     .play()
     .catch(() => {
-      // Prevents errors if the browser blocks audio.
+      // Prevents errors if audio is blocked.
     });
 }
 
@@ -154,8 +167,6 @@ function stopCallingSound() {
   callingSound.pause();
   callingSound.currentTime = 0;
 }
-
-/* Keys that play the general phone-button sound. */
 
 const generalSoundKeys = new Set([
   "dpad-up",
@@ -369,17 +380,9 @@ const sectionContent = {
         </p>
 
         <ul>
-          <li>
-            Cumulative GPA: 3.8
-          </li>
-
-          <li>
-            Dean’s List
-          </li>
-
-          <li>
-            Scripps College Grant
-          </li>
+          <li>Cumulative GPA: 3.8</li>
+          <li>Dean’s List</li>
+          <li>Scripps College Grant</li>
 
           <li>
             Advanced coursework in digital art,
@@ -669,7 +672,7 @@ const phoneKeys = [
 
   {
     name: "dpad-center",
-    label: "Open menu or select highlighted item",
+    label: "Select or take photo",
     x: 98,
     y: 357,
     width: 28,
@@ -687,7 +690,7 @@ const phoneKeys = [
 
   {
     name: "lower-right",
-    label: "Camera key",
+    label: "Open camera",
     x: 139,
     y: 381,
     width: 36,
@@ -705,7 +708,7 @@ const phoneKeys = [
 
   {
     name: "menu",
-    label: "A key or open menu",
+    label: "Open menu",
     x: 94,
     y: 408,
     width: 38,
@@ -831,19 +834,24 @@ const phoneKeys = [
 ];
 
 /* ---------------------------------
-   PHONE STATE
+   STATE
 --------------------------------- */
 
 let isAnimating = false;
 let hasOpenedOnce = false;
 let isOpen = false;
+
 let isMenuVisible = false;
 let isDialScreenVisible = false;
 let isMailScreenVisible = false;
-let isCalling = false;
+let isCameraScreenVisible = false;
 
+let isCalling = false;
 let enteredPhoneNumber = "";
 let callLaunchTimer = null;
+
+let cameraStream = null;
+let hasCapturedPhoto = false;
 
 let spriteIndex = 0;
 let spriteInterval = null;
@@ -982,6 +990,209 @@ function startPhoneClock() {
 }
 
 /* ---------------------------------
+   CAMERA
+--------------------------------- */
+
+function setCameraScreenVisible(visible) {
+  isCameraScreenVisible = visible;
+
+  cameraScreen.classList.toggle(
+    "is-visible",
+    visible
+  );
+
+  cameraScreen.setAttribute(
+    "aria-hidden",
+    visible
+      ? "false"
+      : "true"
+  );
+
+  if (visible) {
+    isMenuVisible = false;
+    isDialScreenVisible = false;
+    isMailScreenVisible = false;
+
+    phoneMenu.classList.remove(
+      "is-visible"
+    );
+
+    phoneMenu.setAttribute(
+      "aria-hidden",
+      "true"
+    );
+
+    dialScreen.classList.remove(
+      "is-visible"
+    );
+
+    dialScreen.setAttribute(
+      "aria-hidden",
+      "true"
+    );
+
+    mailScreen.classList.remove(
+      "is-visible"
+    );
+
+    mailScreen.setAttribute(
+      "aria-hidden",
+      "true"
+    );
+  }
+}
+
+function stopCameraStream() {
+  if (cameraStream) {
+    cameraStream
+      .getTracks()
+      .forEach((track) => {
+        track.stop();
+      });
+  }
+
+  cameraStream = null;
+  cameraPreview.srcObject = null;
+}
+
+function resetCameraDisplay() {
+  cameraPreview.style.display =
+    "block";
+
+  capturedPhoto.classList.remove(
+    "is-visible"
+  );
+
+  capturedPhoto.removeAttribute(
+    "src"
+  );
+
+  hasCapturedPhoto = false;
+
+  cameraMessage.textContent =
+    "CENTER: TAKE PHOTO";
+}
+
+function stopCamera() {
+  stopCameraStream();
+  setCameraScreenVisible(false);
+  resetCameraDisplay();
+}
+
+async function openCamera() {
+  endCurrentCall();
+  stopCameraStream();
+  resetCameraDisplay();
+
+  setCameraScreenVisible(true);
+
+  if (
+    !navigator.mediaDevices ||
+    !navigator.mediaDevices.getUserMedia
+  ) {
+    cameraMessage.textContent =
+      "CAMERA NOT SUPPORTED";
+
+    return;
+  }
+
+  cameraMessage.textContent =
+    "OPENING CAMERA...";
+
+  try {
+    cameraStream =
+      await navigator.mediaDevices.getUserMedia({
+        video: {
+          facingMode: "user"
+        },
+
+        audio: false
+      });
+
+    cameraPreview.srcObject =
+      cameraStream;
+
+    await cameraPreview.play();
+
+    cameraMessage.textContent =
+      "CENTER: TAKE PHOTO";
+  } catch (error) {
+    console.error(
+      "Could not open camera:",
+      error
+    );
+
+    cameraMessage.textContent =
+      "CAMERA PERMISSION DENIED";
+  }
+}
+
+function takeCameraPhoto() {
+  if (
+    !isCameraScreenVisible ||
+    !cameraStream ||
+    cameraPreview.videoWidth === 0 ||
+    cameraPreview.videoHeight === 0
+  ) {
+    return;
+  }
+
+  const context =
+    cameraCanvas.getContext("2d");
+
+  if (!context) {
+    cameraMessage.textContent =
+      "CAMERA ERROR";
+
+    return;
+  }
+
+  cameraCanvas.width =
+    cameraPreview.videoWidth;
+
+  cameraCanvas.height =
+    cameraPreview.videoHeight;
+
+  context.save();
+
+  context.translate(
+    cameraCanvas.width,
+    0
+  );
+
+  context.scale(-1, 1);
+
+  context.drawImage(
+    cameraPreview,
+    0,
+    0,
+    cameraCanvas.width,
+    cameraCanvas.height
+  );
+
+  context.restore();
+
+  capturedPhoto.src =
+    cameraCanvas.toDataURL(
+      "image/png"
+    );
+
+  capturedPhoto.classList.add(
+    "is-visible"
+  );
+
+  cameraPreview.style.display =
+    "none";
+
+  hasCapturedPhoto = true;
+
+  cameraMessage.textContent =
+    "CENTER: RETAKE · BACK: CLOSE";
+
+  stopCameraStream();
+}
+
+/* ---------------------------------
    VISIBILITY HELPERS
 --------------------------------- */
 
@@ -1029,6 +1240,8 @@ function setPhoneMenuVisible(visible) {
   );
 
   if (visible) {
+    stopCamera();
+
     setDialScreenVisible(false);
     setMailScreenVisible(false);
   }
@@ -1050,6 +1263,8 @@ function setDialScreenVisible(visible) {
   );
 
   if (visible) {
+    stopCamera();
+
     isMenuVisible = false;
 
     phoneMenu.classList.remove(
@@ -1081,7 +1296,8 @@ function setMailScreenVisible(visible) {
   );
 
   if (visible) {
-    stopCallingSound();
+    endCurrentCall();
+    stopCamera();
 
     isMenuVisible = false;
     isDialScreenVisible = false;
@@ -1154,6 +1370,7 @@ function cancelCallLaunch() {
 function endCurrentCall() {
   cancelCallLaunch();
   stopCallingSound();
+
   isCalling = false;
 }
 
@@ -1177,6 +1394,7 @@ function launchDeviceCall() {
   }
 
   isCalling = true;
+
   startCallingSound();
 
   callLaunchTimer =
@@ -1347,6 +1565,7 @@ function openContentPanel(sectionName) {
   }
 
   endCurrentCall();
+  stopCamera();
 
   setPhoneMenuVisible(false);
   setDialScreenVisible(false);
@@ -1460,7 +1679,7 @@ function showNextPanelPage() {
 }
 
 /* ---------------------------------
-   PHONE FRAME ANIMATION
+   PHONE ANIMATION
 --------------------------------- */
 
 function playAnimation(
@@ -1487,6 +1706,7 @@ function playAnimation(
       if (index < frames.length) {
         frame.src = frames[index];
         index += 1;
+
         return;
       }
 
@@ -1506,7 +1726,7 @@ function playAnimation(
 }
 
 /* ---------------------------------
-   PHONE FLIP AREA
+   FLIP AREA
 --------------------------------- */
 
 function setFlipTriggerArea() {
@@ -1662,11 +1882,6 @@ function handlePhoneKey(keyName) {
       "is-open"
     );
 
-  /*
-    These keys all play 27_fixed.mp3:
-    arrows, middle button, email, pound,
-    star, A key, camera, back and home.
-  */
   if (generalSoundKeys.has(keyName)) {
     playPhoneSound(
       "27_fixed.mp3"
@@ -1688,9 +1903,21 @@ function handlePhoneKey(keyName) {
     "#"
   ];
 
-  /* Mail button opens the message screen. */
+  /* Camera button */
+  if (keyName === "lower-right") {
+    if (panelIsOpen) {
+      closeContentPanel();
+    }
+
+    openCamera();
+
+    return;
+  }
+
+  /* Mail button */
   if (keyName === "mail") {
     endCurrentCall();
+    stopCamera();
 
     if (panelIsOpen) {
       closeContentPanel();
@@ -1703,24 +1930,17 @@ function handlePhoneKey(keyName) {
     return;
   }
 
-  /*
-    The green call button works only when:
-    1. The number screen is visible.
-    2. At least one number has been entered.
-  */
+  /* Green call button */
   if (keyName === "call") {
     launchDeviceCall();
+
     return;
   }
 
-  /*
-    Number keys type on the screen.
-
-    Keys 0 through 9 play their individual sounds.
-    Star and pound play 27_fixed.mp3 through
-    generalSoundKeys.
-  */
+  /* Number, star and pound keys */
   if (dialCharacters.includes(keyName)) {
+    stopCamera();
+
     if (panelIsOpen) {
       closeContentPanel();
     }
@@ -1738,9 +1958,10 @@ function handlePhoneKey(keyName) {
     return;
   }
 
-  /* Home ends the call and returns to the main menu. */
+  /* Home button */
   if (keyName === "home") {
     endCurrentCall();
+    stopCamera();
 
     if (panelIsOpen) {
       closeContentPanel();
@@ -1757,22 +1978,31 @@ function handlePhoneKey(keyName) {
     return;
   }
 
-  /* Back stops ringing and moves backward. */
+  /* Back button */
   if (keyName === "back") {
     endCurrentCall();
 
+    if (isCameraScreenVisible) {
+      stopCamera();
+
+      return;
+    }
+
     if (isMailScreenVisible) {
       setMailScreenVisible(false);
+
       return;
     }
 
     if (isDialScreenVisible) {
       deleteDialCharacter();
+
       return;
     }
 
     if (panelIsOpen) {
       closeContentPanel();
+
       return;
     }
 
@@ -1783,23 +2013,27 @@ function handlePhoneKey(keyName) {
     return;
   }
 
-  /* Red hang-up button ends the call and closes screens. */
+  /* Red hang-up button */
   if (keyName === "end") {
     endCurrentCall();
+    stopCamera();
 
     if (isMailScreenVisible) {
       setMailScreenVisible(false);
+
       return;
     }
 
     if (isDialScreenVisible) {
       clearDialNumber();
       setDialScreenVisible(false);
+
       return;
     }
 
     if (panelIsOpen) {
       closeContentPanel();
+
       return;
     }
 
@@ -1808,9 +2042,10 @@ function handlePhoneKey(keyName) {
     return;
   }
 
-  /* A/menu key stops ringing and opens the main menu. */
+  /* A/menu button */
   if (keyName === "menu") {
     endCurrentCall();
+    stopCamera();
 
     if (panelIsOpen) {
       closeContentPanel();
@@ -1825,8 +2060,18 @@ function handlePhoneKey(keyName) {
     return;
   }
 
-  /* Center selects or opens the menu. */
+  /* Middle directional button */
   if (keyName === "dpad-center") {
+    if (isCameraScreenVisible) {
+      if (hasCapturedPhoto) {
+        openCamera();
+      } else {
+        takeCameraPhoto();
+      }
+
+      return;
+    }
+
     if (
       isDialScreenVisible ||
       isMailScreenVisible
@@ -1854,10 +2099,6 @@ function handlePhoneKey(keyName) {
         showNextPanelPage();
         return;
 
-      case "lower-right":
-        closeContentPanel();
-        return;
-
       default:
         return;
     }
@@ -1865,7 +2106,8 @@ function handlePhoneKey(keyName) {
 
   if (
     isDialScreenVisible ||
-    isMailScreenVisible
+    isMailScreenVisible ||
+    isCameraScreenVisible
   ) {
     return;
   }
@@ -1887,11 +2129,6 @@ function handlePhoneKey(keyName) {
       moveMenuSelection("right");
       break;
 
-    case "lower-right":
-      endCurrentCall();
-      setPhoneMenuVisible(false);
-      break;
-
     default:
       console.log(
         `Phone key pressed: ${keyName}`
@@ -1900,7 +2137,7 @@ function handlePhoneKey(keyName) {
 }
 
 /* ---------------------------------
-   FIRST PHONE OPENING
+   FIRST OPEN
 --------------------------------- */
 
 function openPhoneForFirstTime() {
@@ -1912,6 +2149,7 @@ function openPhoneForFirstTime() {
   }
 
   endCurrentCall();
+  stopCamera();
   stopSpriteLoop();
 
   spriteButton.hidden = true;
@@ -1924,6 +2162,7 @@ function openPhoneForFirstTime() {
   setPhoneMenuVisible(false);
   setDialScreenVisible(false);
   setMailScreenVisible(false);
+  setCameraScreenVisible(false);
 
   container.style.display = "block";
 
@@ -1959,6 +2198,7 @@ function openPhoneForFirstTime() {
       setPhoneMenuVisible(false);
       setDialScreenVisible(false);
       setMailScreenVisible(false);
+      setCameraScreenVisible(false);
 
       updateMenuSelection();
     }
@@ -1979,13 +2219,13 @@ function closePhone() {
   }
 
   endCurrentCall();
+  stopCamera();
 
   playPhoneSound(
     "closingphone.mp3"
   );
 
   closeContentPanel();
-
   clearDialNumber();
 
   setKeysEnabled(false);
@@ -1994,6 +2234,7 @@ function closePhone() {
   setPhoneMenuVisible(false);
   setDialScreenVisible(false);
   setMailScreenVisible(false);
+  setCameraScreenVisible(false);
 
   isOpen = false;
 
@@ -2007,6 +2248,7 @@ function closePhone() {
       setPhoneMenuVisible(false);
       setDialScreenVisible(false);
       setMailScreenVisible(false);
+      setCameraScreenVisible(false);
     }
   );
 }
@@ -2025,12 +2267,14 @@ function reopenPhone() {
   }
 
   endCurrentCall();
+  stopCamera();
 
   setFrontScreenVisible(false);
   setOpenClockVisible(false);
   setPhoneMenuVisible(false);
   setDialScreenVisible(false);
   setMailScreenVisible(false);
+  setCameraScreenVisible(false);
   setKeysEnabled(false);
 
   const reopenFrames =
@@ -2049,6 +2293,7 @@ function reopenPhone() {
       setPhoneMenuVisible(false);
       setDialScreenVisible(false);
       setMailScreenVisible(false);
+      setCameraScreenVisible(false);
 
       updateMenuSelection();
     }
@@ -2072,6 +2317,7 @@ function initializeMenuEvents() {
           }
 
           endCurrentCall();
+          stopCamera();
 
           selectedMenuIndex = index;
 
@@ -2119,6 +2365,8 @@ function initializeMenuEvents() {
         );
 
       if (/^[0-9]$/.test(event.key)) {
+        stopCamera();
+
         if (panelIsOpen) {
           closeContentPanel();
         }
@@ -2140,6 +2388,8 @@ function initializeMenuEvents() {
         event.key === "*" ||
         event.key === "#"
       ) {
+        stopCamera();
+
         if (panelIsOpen) {
           closeContentPanel();
         }
@@ -2167,8 +2417,35 @@ function initializeMenuEvents() {
           "27_fixed.mp3"
         );
 
-        endCurrentCall();
         deleteDialCharacter();
+
+        return;
+      }
+
+      if (
+        event.key === "Escape" &&
+        isCameraScreenVisible
+      ) {
+        stopCamera();
+
+        return;
+      }
+
+      if (
+        event.key === "Enter" &&
+        isCameraScreenVisible
+      ) {
+        event.preventDefault();
+
+        playPhoneSound(
+          "27_fixed.mp3"
+        );
+
+        if (hasCapturedPhoto) {
+          openCamera();
+        } else {
+          takeCameraPhoto();
+        }
 
         return;
       }
@@ -2177,7 +2454,6 @@ function initializeMenuEvents() {
         event.key === "Escape" &&
         isMailScreenVisible
       ) {
-        endCurrentCall();
         setMailScreenVisible(false);
 
         return;
@@ -2205,7 +2481,6 @@ function initializeMenuEvents() {
         }
 
         if (event.key === "Escape") {
-          endCurrentCall();
           closeContentPanel();
         }
 
@@ -2263,6 +2538,7 @@ function initializeMenuEvents() {
 
       if (event.key === "Escape") {
         endCurrentCall();
+        stopCamera();
         setPhoneMenuVisible(false);
 
         return;
@@ -2271,7 +2547,8 @@ function initializeMenuEvents() {
       if (
         !isMenuVisible ||
         isDialScreenVisible ||
-        isMailScreenVisible
+        isMailScreenVisible ||
+        isCameraScreenVisible
       ) {
         return;
       }
@@ -2320,25 +2597,29 @@ function initializeMenuEvents() {
 }
 
 /* ---------------------------------
-   STOP AUDIO IF THE PAGE IS HIDDEN
+   STOP HARDWARE WHEN LEAVING PAGE
 --------------------------------- */
 
 document.addEventListener(
   "visibilitychange",
   () => {
     if (document.hidden) {
-      stopCallingSound();
+      endCurrentCall();
+      stopCameraStream();
     }
   }
 );
 
 window.addEventListener(
   "pagehide",
-  endCurrentCall
+  () => {
+    endCurrentCall();
+    stopCameraStream();
+  }
 );
 
 /* ---------------------------------
-   INITIALIZE PHONE
+   INITIALIZE
 --------------------------------- */
 
 function initializePhone() {
@@ -2346,6 +2627,7 @@ function initializePhone() {
   initializeMenuEvents();
 
   endCurrentCall();
+  stopCamera();
 
   setKeysEnabled(false);
   setFrontScreenVisible(false);
@@ -2353,6 +2635,7 @@ function initializePhone() {
   setPhoneMenuVisible(false);
   setDialScreenVisible(false);
   setMailScreenVisible(false);
+  setCameraScreenVisible(false);
 
   clearDialNumber();
 
