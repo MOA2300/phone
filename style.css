@@ -118,8 +118,8 @@ button {
   transform-origin: center center;
 
   animation:
-    miniPhonePulse 1.1s ease-in-out infinite,
-    miniPhoneSway 2.2s ease-in-out infinite;
+    miniPhonePulse 0.9s ease-in-out infinite,
+    miniPhoneSway 1.05s ease-in-out infinite;
 
   transition:
     opacity 180ms ease,
@@ -129,8 +129,8 @@ button {
 
 .sprite-button:hover {
   animation:
-    miniPhonePulse 0.75s ease-in-out infinite,
-    miniPhoneSway 1.5s ease-in-out infinite;
+    miniPhonePulse 0.7s ease-in-out infinite,
+    miniPhoneSway 0.8s ease-in-out infinite;
 }
 
 .sprite-button.is-stopping {
@@ -157,9 +157,6 @@ button {
   pointer-events: none;
 }
 
-/*
-  Small breathing motion for the blue-screen phone.
-*/
 @keyframes miniPhonePulse {
   0%,
   100% {
@@ -171,19 +168,16 @@ button {
   }
 }
 
-/*
-  Gentle sway from left to right.
-*/
 @keyframes miniPhoneSway {
   0%,
   100% {
-    rotate: -1.5deg;
-    translate: -3px 0;
+    rotate: -1.8deg;
+    translate: -4px 0;
   }
 
   50% {
-    rotate: 1.5deg;
-    translate: 3px 0;
+    rotate: 1.8deg;
+    translate: 4px 0;
   }
 }
 
