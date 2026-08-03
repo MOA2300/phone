@@ -245,6 +245,50 @@ const closeFrames = [
 ];
 
 /* ---------------------------------
+   STATE
+--------------------------------- */
+
+let isAnimating = false;
+let hasOpenedOnce = false;
+let isOpen = false;
+
+let isMenuVisible = false;
+let isDialScreenVisible = false;
+let isMailScreenVisible = false;
+let isCameraScreenVisible = false;
+let isGalleryScreenVisible = false;
+let isGalleryPhotoVisible = false;
+let isGalleryDeleteVisible = false;
+
+let isCalling = false;
+let enteredPhoneNumber = "";
+let callLaunchTimer = null;
+
+let cameraStream = null;
+let hasCapturedPhoto = false;
+let isOpeningCamera = false;
+
+let savedPhotos = [];
+
+let galleryPageIndex = 0;
+let gallerySelectedIndex = 0;
+let galleryFullPhotoIndex = 0;
+let galleryDeleteChoice = 0;
+
+let spriteIndex = 0;
+let spriteInterval = null;
+let clockInterval = null;
+
+let selectedMenuIndex = 0;
+let activeSectionName = null;
+let activePageIndex = 0;
+
+const PHOTOS_PER_PAGE = 9;
+
+const PHOTO_STORAGE_KEY =
+  "leslie-phone-gallery";
+
+/* ---------------------------------
    PHONE SOUNDS
 --------------------------------- */
 
@@ -296,30 +340,46 @@ miniPhoneRingSound.preload = "auto";
 miniPhoneRingSound.volume = 0.75;
 
 let miniPhoneAudioStarted = false;
+let miniPhoneAudioRequest = null;
 
-function startMiniPhoneSound() {
+async function startMiniPhoneSound() {
   if (
     hasOpenedOnce ||
     isAnimating ||
     spriteButton.hidden ||
-    miniPhoneAudioStarted
+    miniPhoneAudioStarted ||
+    miniPhoneAudioRequest
   ) {
     return;
   }
 
-  miniPhoneRingSound.currentTime = 0;
+  try {
+    miniPhoneRingSound.loop = true;
+    miniPhoneRingSound.volume = 0.75;
 
-  miniPhoneRingSound
-    .play()
-    .then(() => {
-      miniPhoneAudioStarted = true;
-    })
-    .catch(() => {
-      /*
-        Most browsers block sound until the user
-        interacts with the page.
-      */
-    });
+    if (
+      miniPhoneRingSound.paused &&
+      miniPhoneRingSound.currentTime > 0
+    ) {
+      miniPhoneRingSound.currentTime = 0;
+    }
+
+    miniPhoneAudioRequest =
+      miniPhoneRingSound.play();
+
+    await miniPhoneAudioRequest;
+
+    miniPhoneAudioStarted = true;
+  } catch (error) {
+    /*
+      Chrome may block audible autoplay until
+      the visitor interacts with the page.
+    */
+
+    miniPhoneAudioStarted = false;
+  } finally {
+    miniPhoneAudioRequest = null;
+  }
 }
 
 function stopMiniPhoneSound() {
@@ -327,6 +387,7 @@ function stopMiniPhoneSound() {
   miniPhoneRingSound.currentTime = 0;
 
   miniPhoneAudioStarted = false;
+  miniPhoneAudioRequest = null;
 }
 
 const generalSoundKeys =
@@ -994,50 +1055,6 @@ const phoneKeys = [
     height: 21
   }
 ];
-
-/* ---------------------------------
-   STATE
---------------------------------- */
-
-let isAnimating = false;
-let hasOpenedOnce = false;
-let isOpen = false;
-
-let isMenuVisible = false;
-let isDialScreenVisible = false;
-let isMailScreenVisible = false;
-let isCameraScreenVisible = false;
-let isGalleryScreenVisible = false;
-let isGalleryPhotoVisible = false;
-let isGalleryDeleteVisible = false;
-
-let isCalling = false;
-let enteredPhoneNumber = "";
-let callLaunchTimer = null;
-
-let cameraStream = null;
-let hasCapturedPhoto = false;
-let isOpeningCamera = false;
-
-let savedPhotos = [];
-
-let galleryPageIndex = 0;
-let gallerySelectedIndex = 0;
-let galleryFullPhotoIndex = 0;
-let galleryDeleteChoice = 0;
-
-let spriteIndex = 0;
-let spriteInterval = null;
-let clockInterval = null;
-
-let selectedMenuIndex = 0;
-let activeSectionName = null;
-let activePageIndex = 0;
-
-const PHOTOS_PER_PAGE = 9;
-
-const PHOTO_STORAGE_KEY =
-  "leslie-phone-gallery";
 
 /* ---------------------------------
    PRELOAD IMAGES
@@ -4068,19 +4085,54 @@ function initializeMenuEvents() {
 }
 
 /* ---------------------------------
-   MINI PHONE AUDIO UNLOCK
+   MINI PHONE AUDIO
 --------------------------------- */
 
 function initializeMiniPhoneAudio() {
-  /*
-    Try immediately. Browsers may block this.
-  */
-  startMiniPhoneSound();
+  miniPhoneRingSound.load();
 
   /*
-    Start the ring after the visitor's first
-    interaction if autoplay was blocked.
+    Attempt audible playback immediately.
+    Chrome can still reject this because of its
+    autoplay policy.
   */
+
+  startMiniPhoneSound();
+
+  miniPhoneRingSound.addEventListener(
+    "canplay",
+    startMiniPhoneSound,
+    {
+      once: true
+    }
+  );
+
+  miniPhoneRingSound.addEventListener(
+    "canplaythrough",
+    startMiniPhoneSound,
+    {
+      once: true
+    }
+  );
+
+  window.addEventListener(
+    "load",
+    startMiniPhoneSound,
+    {
+      once: true
+    }
+  );
+
+  window.addEventListener(
+    "pageshow",
+    startMiniPhoneSound
+  );
+
+  /*
+    Use the visitor's earliest interaction if
+    Chrome rejected all automatic attempts.
+  */
+
   const unlockMiniPhoneAudio = () => {
     if (
       !hasOpenedOnce &&
@@ -4095,8 +4147,16 @@ function initializeMiniPhoneAudio() {
     "pointerdown",
     unlockMiniPhoneAudio,
     {
-      once: true,
       capture: true
+    }
+  );
+
+  document.addEventListener(
+    "touchstart",
+    unlockMiniPhoneAudio,
+    {
+      capture: true,
+      passive: true
     }
   );
 
@@ -4104,13 +4164,13 @@ function initializeMiniPhoneAudio() {
     "keydown",
     unlockMiniPhoneAudio,
     {
-      once: true
+      capture: true
     }
   );
 }
 
 /* ---------------------------------
-   STOP CAMERA AND AUDIO WHEN HIDDEN
+   VISIBILITY CLEANUP
 --------------------------------- */
 
 document.addEventListener(
