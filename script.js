@@ -282,6 +282,53 @@ function stopCallingSound() {
   callingSound.currentTime = 0;
 }
 
+/* ---------------------------------
+   MINI PHONE RING
+--------------------------------- */
+
+const miniPhoneRingSound =
+  new Audio(
+    "sounds/phonering.mp3"
+  );
+
+miniPhoneRingSound.loop = true;
+miniPhoneRingSound.preload = "auto";
+miniPhoneRingSound.volume = 0.75;
+
+let miniPhoneAudioStarted = false;
+
+function startMiniPhoneSound() {
+  if (
+    hasOpenedOnce ||
+    isAnimating ||
+    spriteButton.hidden ||
+    miniPhoneAudioStarted
+  ) {
+    return;
+  }
+
+  miniPhoneRingSound.currentTime = 0;
+
+  miniPhoneRingSound
+    .play()
+    .then(() => {
+      miniPhoneAudioStarted = true;
+    })
+    .catch(() => {
+      /*
+        Most browsers block sound until the user
+        interacts with the page.
+      */
+    });
+}
+
+function stopMiniPhoneSound() {
+  miniPhoneRingSound.pause();
+  miniPhoneRingSound.currentTime = 0;
+
+  miniPhoneAudioStarted = false;
+}
+
 const generalSoundKeys =
   new Set([
     "dpad-up",
@@ -988,6 +1035,7 @@ let activeSectionName = null;
 let activePageIndex = 0;
 
 const PHOTOS_PER_PAGE = 9;
+
 const PHOTO_STORAGE_KEY =
   "leslie-phone-gallery";
 
@@ -1042,6 +1090,33 @@ function stopSpriteLoop() {
   );
 
   spriteInterval = null;
+}
+
+/* ---------------------------------
+   STARTING PHONE EXPERIENCE
+--------------------------------- */
+
+function removeStartingPhoneExperience() {
+  stopMiniPhoneSound();
+  stopSpriteLoop();
+
+  instructionText.classList.add(
+    "is-hidden"
+  );
+
+  spriteButton.classList.add(
+    "is-stopping"
+  );
+
+  window.setTimeout(() => {
+    spriteButton.hidden = true;
+
+    spriteButton.style.display =
+      "none";
+
+    sprite.style.display =
+      "none";
+  }, 180);
 }
 
 /* ---------------------------------
@@ -1334,6 +1409,7 @@ function confirmGalleryDeleteChoice() {
 
   if (galleryDeleteChoice === 0) {
     closeGalleryDeleteDialog();
+
     return;
   }
 
@@ -1348,6 +1424,7 @@ function deleteCurrentGalleryPhoto() {
     ]
   ) {
     closeGalleryDeleteDialog();
+
     return;
   }
 
@@ -1357,7 +1434,6 @@ function deleteCurrentGalleryPhoto() {
   );
 
   persistSavedPhotos();
-
   closeGalleryDeleteDialog();
 
   if (savedPhotos.length === 0) {
@@ -1458,6 +1534,7 @@ function hideAllPhoneScreens() {
 function setPhoneMenuVisible(visible) {
   if (!visible) {
     hidePhoneMenu();
+
     return;
   }
 
@@ -1482,6 +1559,7 @@ function setPhoneMenuVisible(visible) {
 function setDialScreenVisible(visible) {
   if (!visible) {
     hideDialScreen();
+
     return;
   }
 
@@ -1506,6 +1584,7 @@ function setDialScreenVisible(visible) {
 function setMailScreenVisible(visible) {
   if (!visible) {
     hideMailScreen();
+
     return;
   }
 
@@ -1531,6 +1610,7 @@ function setMailScreenVisible(visible) {
 function setCameraScreenVisible(visible) {
   if (!visible) {
     hideCameraScreen();
+
     return;
   }
 
@@ -1554,6 +1634,7 @@ function setCameraScreenVisible(visible) {
 function setGalleryScreenVisible(visible) {
   if (!visible) {
     hideGalleryScreen();
+
     return;
   }
 
@@ -1638,6 +1719,7 @@ function loadSavedPhotos() {
 
     if (!storedPhotos) {
       savedPhotos = [];
+
       return;
     }
 
@@ -3026,10 +3108,6 @@ function handlePhoneKey(keyName) {
     "#"
   ];
 
-  /*
-    Delete confirmation takes control of
-    the arrows, center and Back buttons.
-  */
   if (isGalleryDeleteVisible) {
     if (keyName === "dpad-left") {
       moveGalleryDeleteChoice(
@@ -3062,10 +3140,6 @@ function handlePhoneKey(keyName) {
     return;
   }
 
-  /*
-    Pound opens the delete confirmation
-    while the gallery is open.
-  */
   if (
     keyName === "#" &&
     isGalleryScreenVisible
@@ -3075,7 +3149,6 @@ function handlePhoneKey(keyName) {
     return;
   }
 
-  /* Black camera button. */
   if (keyName === "camera") {
     endCurrentCall();
 
@@ -3090,7 +3163,6 @@ function handlePhoneKey(keyName) {
     return;
   }
 
-  /* A button opens the gallery. */
   if (keyName === "lower-right") {
     endCurrentCall();
 
@@ -3105,7 +3177,6 @@ function handlePhoneKey(keyName) {
     return;
   }
 
-  /* Email button. */
   if (keyName === "mail") {
     endCurrentCall();
     stopCamera();
@@ -3122,14 +3193,12 @@ function handlePhoneKey(keyName) {
     return;
   }
 
-  /* Green call button. */
   if (keyName === "call") {
     launchDeviceCall();
 
     return;
   }
 
-  /* Number, star and pound keys. */
   if (
     dialCharacters.includes(
       keyName
@@ -3161,7 +3230,6 @@ function handlePhoneKey(keyName) {
     return;
   }
 
-  /* Home button. */
   if (keyName === "home") {
     endCurrentCall();
     stopCamera();
@@ -3185,7 +3253,6 @@ function handlePhoneKey(keyName) {
     return;
   }
 
-  /* Back button. */
   if (keyName === "back") {
     endCurrentCall();
 
@@ -3230,7 +3297,6 @@ function handlePhoneKey(keyName) {
     return;
   }
 
-  /* Red hang-up button. */
   if (keyName === "end") {
     endCurrentCall();
     stopCamera();
@@ -3260,7 +3326,6 @@ function handlePhoneKey(keyName) {
     return;
   }
 
-  /* Middle button. */
   if (keyName === "dpad-center") {
     if (isGalleryScreenVisible) {
       if (!isGalleryPhotoVisible) {
@@ -3291,7 +3356,6 @@ function handlePhoneKey(keyName) {
     return;
   }
 
-  /* Gallery arrows. */
   if (isGalleryScreenVisible) {
     if (isGalleryPhotoVisible) {
       if (
@@ -3338,7 +3402,6 @@ function handlePhoneKey(keyName) {
     return;
   }
 
-  /* Portfolio-panel arrows. */
   if (panelIsOpen) {
     if (keyName === "dpad-left") {
       showPreviousPanelPage();
@@ -3401,21 +3464,10 @@ function openPhoneForFirstTime() {
     return;
   }
 
-  instructionText.classList.add(
-    "is-hidden"
-  );
+  removeStartingPhoneExperience();
 
   endCurrentCall();
   stopCamera();
-  stopSpriteLoop();
-
-  spriteButton.hidden = true;
-
-  spriteButton.style.display =
-    "none";
-
-  sprite.style.display =
-    "none";
 
   setKeysEnabled(false);
   setFrontScreenVisible(false);
@@ -3649,9 +3701,6 @@ function initializeMenuEvents() {
           "is-open"
         );
 
-      /*
-        Delete-dialog keyboard controls.
-      */
       if (isGalleryDeleteVisible) {
         if (
           event.key ===
@@ -3721,7 +3770,6 @@ function initializeMenuEvents() {
         return;
       }
 
-      /* Keyboard number entry. */
       if (
         /^[0-9]$/.test(
           event.key
@@ -3745,10 +3793,6 @@ function initializeMenuEvents() {
         return;
       }
 
-      /*
-        Pound deletes a photo while the
-        gallery is open.
-      */
       if (event.key === "#") {
         playPhoneSound(
           "27_fixed.mp3"
@@ -3777,7 +3821,6 @@ function initializeMenuEvents() {
         return;
       }
 
-      /* C copies the camera button. */
       if (
         event.key.toLowerCase() ===
         "c"
@@ -3798,7 +3841,6 @@ function initializeMenuEvents() {
         return;
       }
 
-      /* A opens the gallery. */
       if (
         event.key.toLowerCase() ===
         "a"
@@ -4026,6 +4068,48 @@ function initializeMenuEvents() {
 }
 
 /* ---------------------------------
+   MINI PHONE AUDIO UNLOCK
+--------------------------------- */
+
+function initializeMiniPhoneAudio() {
+  /*
+    Try immediately. Browsers may block this.
+  */
+  startMiniPhoneSound();
+
+  /*
+    Start the ring after the visitor's first
+    interaction if autoplay was blocked.
+  */
+  const unlockMiniPhoneAudio = () => {
+    if (
+      !hasOpenedOnce &&
+      !isAnimating &&
+      !spriteButton.hidden
+    ) {
+      startMiniPhoneSound();
+    }
+  };
+
+  document.addEventListener(
+    "pointerdown",
+    unlockMiniPhoneAudio,
+    {
+      once: true,
+      capture: true
+    }
+  );
+
+  document.addEventListener(
+    "keydown",
+    unlockMiniPhoneAudio,
+    {
+      once: true
+    }
+  );
+}
+
+/* ---------------------------------
    STOP CAMERA AND AUDIO WHEN HIDDEN
 --------------------------------- */
 
@@ -4035,6 +4119,17 @@ document.addEventListener(
     if (document.hidden) {
       endCurrentCall();
       stopCameraStream();
+      stopMiniPhoneSound();
+
+      return;
+    }
+
+    if (
+      !hasOpenedOnce &&
+      !isAnimating &&
+      !spriteButton.hidden
+    ) {
+      startMiniPhoneSound();
     }
   }
 );
@@ -4044,6 +4139,7 @@ window.addEventListener(
   () => {
     endCurrentCall();
     stopCameraStream();
+    stopMiniPhoneSound();
   }
 );
 
@@ -4061,6 +4157,18 @@ function initializePhone() {
     "is-hidden"
   );
 
+  spriteButton.hidden = false;
+
+  spriteButton.style.display =
+    "block";
+
+  spriteButton.classList.remove(
+    "is-stopping"
+  );
+
+  sprite.style.display =
+    "block";
+
   endCurrentCall();
   stopCamera();
   closeGalleryDeleteDialog();
@@ -4075,6 +4183,7 @@ function initializePhone() {
 
   startSpriteLoop();
   startPhoneClock();
+  initializeMiniPhoneAudio();
 
   spriteButton.addEventListener(
     "click",
