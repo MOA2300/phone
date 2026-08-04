@@ -99,6 +99,77 @@ button {
 }
 
 /* ---------------------------------
+   AUDIO TOGGLE BUTTON
+--------------------------------- */
+
+.audio-toggle {
+  position: absolute;
+
+  left: calc(50% - 535px);
+  top: calc(50% + 185px);
+
+  width: 455px;
+  height: auto;
+
+  z-index: 18;
+
+  display: block;
+
+  padding: 0;
+  margin: 0;
+
+  border: 0;
+  appearance: none;
+
+  background: transparent;
+
+  cursor: pointer;
+
+  transform-origin: center;
+
+  transition:
+    transform 160ms ease,
+    opacity 180ms ease,
+    visibility 180ms ease;
+}
+
+.audio-toggle:hover {
+  transform: scale(1.04);
+}
+
+.audio-toggle:active {
+  transform: scale(0.97);
+}
+
+.audio-toggle:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 6px;
+}
+
+.audio-toggle img {
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  object-fit: contain;
+
+  pointer-events: none;
+  user-select: none;
+}
+
+.audio-toggle.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+
+  pointer-events: none;
+}
+
+.audio-toggle[hidden] {
+  display: none !important;
+}
+
+/* ---------------------------------
    STARTING MINI PHONE
 --------------------------------- */
 
@@ -1887,6 +1958,27 @@ body.panel-open .phone-container {
       scale(0.96);
   }
 
+  .audio-toggle {
+    left: 50%;
+    top: calc(50% - 105px);
+
+    width: 310px;
+
+    transform: translateX(-50%);
+  }
+
+  .audio-toggle:hover {
+    transform:
+      translateX(-50%)
+      scale(1.04);
+  }
+
+  .audio-toggle:active {
+    transform:
+      translateX(-50%)
+      scale(0.97);
+  }
+
   .about-page {
     grid-template-columns: 1fr;
   }
@@ -1972,6 +2064,7 @@ body.panel-open .phone-container {
   .content-panel,
   .phone-container,
   .instruction-text,
+  .audio-toggle,
   .sprite-button {
     transition: none;
   }
