@@ -62,16 +62,16 @@ button {
 }
 
 /* ---------------------------------
-   STARTING INSTRUCTION IMAGE
+   INSTRUCTION IMAGE
 --------------------------------- */
 
 .instruction-text {
   position: absolute;
 
-  left: calc(50% - 560px);
-  top: 50%;
+  left: calc(50% - 510px);
+  top: calc(50% - 90px);
 
-  width: 500px;
+  width: 390px;
   height: auto;
 
   z-index: 15;
@@ -105,36 +105,69 @@ button {
 .audio-toggle {
   position: absolute;
 
-  left: calc(50% - 535px);
-  top: calc(50% + 185px);
+  left: calc(50% - 495px);
+  top: calc(50% + 205px);
 
-  width: 455px;
-  height: auto;
+  width: 340px;
+  min-height: 82px;
 
   z-index: 18;
 
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  padding: 0;
+  padding: 12px 22px;
   margin: 0;
 
-  border: 0;
+  border: 2px solid rgba(112, 255, 54, 0.78);
+  border-radius: 18px;
+
   appearance: none;
 
-  background: transparent;
+  color: #fff;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(49, 79, 32, 0.72),
+      rgba(8, 17, 5, 0.96)
+    );
+
+  box-shadow:
+    0 0 9px rgba(76, 255, 29, 0.65),
+    0 0 24px rgba(76, 255, 29, 0.28),
+    inset 0 0 15px rgba(118, 255, 67, 0.18);
 
   cursor: pointer;
 
-  transform-origin: center;
+  transform-origin: center center;
 
   transition:
-    transform 160ms ease,
+    transform 150ms ease,
+    border-color 150ms ease,
+    background 150ms ease,
+    box-shadow 150ms ease,
     opacity 180ms ease,
     visibility 180ms ease;
 }
 
 .audio-toggle:hover {
-  transform: scale(1.04);
+  transform: scale(1.045);
+
+  border-color: #c4ff89;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(70, 105, 48, 0.82),
+      rgba(12, 25, 7, 0.98)
+    );
+
+  box-shadow:
+    0 0 13px rgba(89, 255, 35, 0.88),
+    0 0 34px rgba(89, 255, 35, 0.45),
+    inset 0 0 18px rgba(133, 255, 82, 0.25);
 }
 
 .audio-toggle:active {
@@ -143,13 +176,30 @@ button {
 
 .audio-toggle:focus-visible {
   outline: 3px solid #fff;
-  outline-offset: 6px;
+  outline-offset: 5px;
 }
 
-.audio-toggle img {
+.audio-toggle.is-audio-on {
+  border-color: #e8ff42;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(92, 113, 27, 0.86),
+      rgba(20, 29, 5, 0.98)
+    );
+
+  box-shadow:
+    0 0 14px rgba(213, 255, 44, 0.92),
+    0 0 38px rgba(99, 255, 35, 0.58),
+    inset 0 0 19px rgba(220, 255, 73, 0.28);
+}
+
+.audio-toggle-image {
   display: block;
 
-  width: 100%;
+  width: 230px;
+  max-width: 100%;
   height: auto;
 
   object-fit: contain;
@@ -210,9 +260,7 @@ button {
   opacity: 0;
   visibility: hidden;
 
-  transform:
-    scale(0.9)
-    rotate(0deg);
+  transform: scale(0.9);
 
   pointer-events: none;
 }
@@ -378,7 +426,7 @@ body.panel-open .phone-container {
 }
 
 /* ---------------------------------
-   MAIN PHONE MENU
+   PHONE MENU
 --------------------------------- */
 
 .phone-menu {
@@ -999,10 +1047,7 @@ body.panel-open .phone-container {
 .gallery-thumbnail.is-selected {
   border-color: #202020;
 
-  outline:
-    2px solid
-    #e9f000;
-
+  outline: 2px solid #e9f000;
   outline-offset: -2px;
 }
 
@@ -1117,7 +1162,7 @@ body.panel-open .phone-container {
 }
 
 /* ---------------------------------
-   GALLERY DELETE DIALOG
+   DELETE DIALOG
 --------------------------------- */
 
 .gallery-delete-dialog {
@@ -1212,10 +1257,7 @@ body.panel-open .phone-container {
       #bfd300
     );
 
-  outline:
-    2px solid
-    #202020;
-
+  outline: 2px solid #202020;
   outline-offset: -2px;
 }
 
@@ -1230,7 +1272,7 @@ body.panel-open .phone-container {
 }
 
 /* ---------------------------------
-   CLOSED PHONE FRONT SCREEN
+   CLOSED PHONE SCREEN
 --------------------------------- */
 
 .front-screen {
@@ -1590,10 +1632,6 @@ body.panel-open .phone-container {
   border: 1px solid #111;
 }
 
-/* ---------------------------------
-   PANEL HEADER
---------------------------------- */
-
 .content-panel-header {
   min-height: 82px;
 
@@ -1660,10 +1698,6 @@ body.panel-open .phone-container {
   color: #161616;
   background: #f1db00;
 }
-
-/* ---------------------------------
-   PANEL BODY
---------------------------------- */
 
 .content-panel-body {
   position: relative;
@@ -1816,10 +1850,6 @@ body.panel-open .phone-container {
   letter-spacing: 0.5px;
 }
 
-/* ---------------------------------
-   ABOUT PAGE
---------------------------------- */
-
 .about-page {
   display: grid;
 
@@ -1840,8 +1870,6 @@ body.panel-open .phone-container {
   border: 1px solid #67675f;
 
   background: transparent;
-
-  box-shadow: none;
 }
 
 .about-image {
@@ -1863,10 +1891,6 @@ body.panel-open .phone-container {
 .about-copy p {
   max-width: none;
 }
-
-/* ---------------------------------
-   PANEL ARROWS
---------------------------------- */
 
 .panel-arrow {
   width: 100%;
@@ -1901,10 +1925,6 @@ body.panel-open .phone-container {
 
   cursor: default;
 }
-
-/* ---------------------------------
-   PANEL FOOTER
---------------------------------- */
 
 .content-panel-footer {
   min-height: 38px;
@@ -1945,9 +1965,9 @@ body.panel-open .phone-container {
 @media (max-width: 650px) {
   .instruction-text {
     left: 50%;
-    top: calc(50% - 285px);
+    top: calc(50% - 245px);
 
-    width: 340px;
+    width: 300px;
 
     transform: translateX(-50%);
   }
@@ -1960,9 +1980,12 @@ body.panel-open .phone-container {
 
   .audio-toggle {
     left: 50%;
-    top: calc(50% - 105px);
+    top: calc(50% - 70px);
 
-    width: 310px;
+    width: 265px;
+    min-height: 68px;
+
+    padding: 9px 15px;
 
     transform: translateX(-50%);
   }
@@ -1977,6 +2000,10 @@ body.panel-open .phone-container {
     transform:
       translateX(-50%)
       scale(0.97);
+  }
+
+  .audio-toggle-image {
+    width: 185px;
   }
 
   .about-page {
