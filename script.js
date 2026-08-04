@@ -9,6 +9,16 @@ const instructionText =
     "instruction-text"
   );
 
+const audioToggle =
+  document.getElementById(
+    "audio-toggle"
+  );
+
+const audioToggleImage =
+  document.getElementById(
+    "audio-toggle-image"
+  );
+
 const spriteButton =
   document.getElementById(
     "sprite-button"
@@ -219,9 +229,9 @@ const panelClose =
 
 const spriteFrames = [];
 
-for (let i = 1; i <= 16; i += 1) {
+for (let index = 1; index <= 16; index += 1) {
   spriteFrames.push(
-    `DefineSprite_22/${i}.png`
+    `DefineSprite_22/${index}.png`
   );
 }
 
@@ -289,7 +299,7 @@ const PHOTO_STORAGE_KEY =
   "leslie-phone-gallery";
 
 /* ---------------------------------
-   PHONE SOUNDS
+   SOUNDS
 --------------------------------- */
 
 function playPhoneSound(fileName) {
@@ -327,7 +337,7 @@ function stopCallingSound() {
 }
 
 /* ---------------------------------
-   MINI PHONE RING
+   MINI PHONE AUDIO TOGGLE
 --------------------------------- */
 
 const miniPhoneRingSound =
@@ -339,55 +349,91 @@ miniPhoneRingSound.loop = true;
 miniPhoneRingSound.preload = "auto";
 miniPhoneRingSound.volume = 0.75;
 
-let miniPhoneAudioStarted = false;
-let miniPhoneAudioRequest = null;
+let isMiniPhoneAudioOn = false;
 
-async function startMiniPhoneSound() {
+function updateAudioToggle() {
+  if (isMiniPhoneAudioOn) {
+    audioToggleImage.src =
+      "images/audioon.png";
+
+    audioToggleImage.alt =
+      "Turn audio off";
+
+    audioToggle.setAttribute(
+      "aria-label",
+      "Turn phone ringing audio off"
+    );
+
+    audioToggle.setAttribute(
+      "aria-pressed",
+      "true"
+    );
+
+    return;
+  }
+
+  audioToggleImage.src =
+    "images/audiooff.png";
+
+  audioToggleImage.alt =
+    "Turn audio on";
+
+  audioToggle.setAttribute(
+    "aria-label",
+    "Turn phone ringing audio on"
+  );
+
+  audioToggle.setAttribute(
+    "aria-pressed",
+    "false"
+  );
+}
+
+async function turnMiniPhoneAudioOn() {
   if (
     hasOpenedOnce ||
-    isAnimating ||
-    spriteButton.hidden ||
-    miniPhoneAudioStarted ||
-    miniPhoneAudioRequest
+    spriteButton.hidden
   ) {
     return;
   }
 
   try {
-    miniPhoneRingSound.loop = true;
-    miniPhoneRingSound.volume = 0.75;
+    miniPhoneRingSound.currentTime = 0;
 
-    if (
-      miniPhoneRingSound.paused &&
-      miniPhoneRingSound.currentTime > 0
-    ) {
-      miniPhoneRingSound.currentTime = 0;
-    }
+    await miniPhoneRingSound.play();
 
-    miniPhoneAudioRequest =
-      miniPhoneRingSound.play();
+    isMiniPhoneAudioOn = true;
 
-    await miniPhoneAudioRequest;
-
-    miniPhoneAudioStarted = true;
+    updateAudioToggle();
   } catch (error) {
-    /*
-      Chrome may block audible autoplay until
-      the visitor interacts with the page.
-    */
+    console.warn(
+      "The ringtone could not start:",
+      error
+    );
 
-    miniPhoneAudioStarted = false;
-  } finally {
-    miniPhoneAudioRequest = null;
+    isMiniPhoneAudioOn = false;
+
+    updateAudioToggle();
   }
 }
 
-function stopMiniPhoneSound() {
+function turnMiniPhoneAudioOff() {
   miniPhoneRingSound.pause();
   miniPhoneRingSound.currentTime = 0;
 
-  miniPhoneAudioStarted = false;
-  miniPhoneAudioRequest = null;
+  isMiniPhoneAudioOn = false;
+
+  updateAudioToggle();
+}
+
+function toggleMiniPhoneAudio() {
+  if (isMiniPhoneAudioOn) {
+    turnMiniPhoneAudioOff();
+
+    return;
+  }
+
+  turnMiniPhoneAudioOn();
 }
 
 const generalSoundKeys =
@@ -1074,7 +1120,9 @@ preloadImages([
   ...closeFrames,
   "images/bunny.png",
   "images/diva.jpg",
-  "images/instructiontext.png"
+  "images/instructiontext.png",
+  "images/audiooff.png",
+  "images/audioon.png"
 ]);
 
 /* ---------------------------------
@@ -1114,10 +1162,14 @@ function stopSpriteLoop() {
 --------------------------------- */
 
 function removeStartingPhoneExperience() {
-  stopMiniPhoneSound();
+  turnMiniPhoneAudioOff();
   stopSpriteLoop();
 
   instructionText.classList.add(
+    "is-hidden"
+  );
+
+  audioToggle.classList.add(
     "is-hidden"
   );
 
@@ -1133,6 +1185,8 @@ function removeStartingPhoneExperience() {
 
     sprite.style.display =
       "none";
+
+    audioToggle.hidden = true;
   }, 180);
 }
 
@@ -3618,7 +3672,7 @@ function reopenPhone() {
 }
 
 /* ---------------------------------
-   MENU, GALLERY AND PANEL EVENTS
+   EVENTS
 --------------------------------- */
 
 function initializeMenuEvents() {
@@ -3725,10 +3779,6 @@ function initializeMenuEvents() {
         ) {
           event.preventDefault();
 
-          playPhoneSound(
-            "27_fixed.mp3"
-          );
-
           moveGalleryDeleteChoice(
             "left"
           );
@@ -3741,10 +3791,6 @@ function initializeMenuEvents() {
           "ArrowRight"
         ) {
           event.preventDefault();
-
-          playPhoneSound(
-            "27_fixed.mp3"
-          );
 
           moveGalleryDeleteChoice(
             "right"
@@ -3759,10 +3805,6 @@ function initializeMenuEvents() {
         ) {
           event.preventDefault();
 
-          playPhoneSound(
-            "27_fixed.mp3"
-          );
-
           confirmGalleryDeleteChoice();
 
           return;
@@ -3774,10 +3816,6 @@ function initializeMenuEvents() {
             "Backspace"
         ) {
           event.preventDefault();
-
-          playPhoneSound(
-            "27_fixed.mp3"
-          );
 
           closeGalleryDeleteDialog();
 
@@ -3792,13 +3830,6 @@ function initializeMenuEvents() {
           event.key
         )
       ) {
-        stopCamera();
-        hideGalleryScreen();
-
-        if (panelIsOpen) {
-          closeContentPanel();
-        }
-
         playPhoneSound(
           `${event.key}.mp3`
         );
@@ -3811,10 +3842,6 @@ function initializeMenuEvents() {
       }
 
       if (event.key === "#") {
-        playPhoneSound(
-          "27_fixed.mp3"
-        );
-
         if (
           isGalleryScreenVisible
         ) {
@@ -3829,10 +3856,6 @@ function initializeMenuEvents() {
       }
 
       if (event.key === "*") {
-        playPhoneSound(
-          "27_fixed.mp3"
-        );
-
         typeDialCharacter("*");
 
         return;
@@ -3843,10 +3866,6 @@ function initializeMenuEvents() {
         "c"
       ) {
         event.preventDefault();
-
-        playPhoneSound(
-          "27_fixed.mp3"
-        );
 
         if (panelIsOpen) {
           closeContentPanel();
@@ -3864,10 +3883,6 @@ function initializeMenuEvents() {
       ) {
         event.preventDefault();
 
-        playPhoneSound(
-          "27_fixed.mp3"
-        );
-
         if (panelIsOpen) {
           closeContentPanel();
         }
@@ -3884,10 +3899,6 @@ function initializeMenuEvents() {
         "Backspace"
       ) {
         event.preventDefault();
-
-        playPhoneSound(
-          "27_fixed.mp3"
-        );
 
         if (
           isGalleryScreenVisible
@@ -3976,10 +3987,6 @@ function initializeMenuEvents() {
       ) {
         event.preventDefault();
 
-        playPhoneSound(
-          "27_fixed.mp3"
-        );
-
         if (
           isGalleryScreenVisible
         ) {
@@ -4028,10 +4035,6 @@ function initializeMenuEvents() {
       }
 
       event.preventDefault();
-
-      playPhoneSound(
-        "27_fixed.mp3"
-      );
 
       if (
         isGalleryScreenVisible
@@ -4085,91 +4088,6 @@ function initializeMenuEvents() {
 }
 
 /* ---------------------------------
-   MINI PHONE AUDIO
---------------------------------- */
-
-function initializeMiniPhoneAudio() {
-  miniPhoneRingSound.load();
-
-  /*
-    Attempt audible playback immediately.
-    Chrome can still reject this because of its
-    autoplay policy.
-  */
-
-  startMiniPhoneSound();
-
-  miniPhoneRingSound.addEventListener(
-    "canplay",
-    startMiniPhoneSound,
-    {
-      once: true
-    }
-  );
-
-  miniPhoneRingSound.addEventListener(
-    "canplaythrough",
-    startMiniPhoneSound,
-    {
-      once: true
-    }
-  );
-
-  window.addEventListener(
-    "load",
-    startMiniPhoneSound,
-    {
-      once: true
-    }
-  );
-
-  window.addEventListener(
-    "pageshow",
-    startMiniPhoneSound
-  );
-
-  /*
-    Use the visitor's earliest interaction if
-    Chrome rejected all automatic attempts.
-  */
-
-  const unlockMiniPhoneAudio = () => {
-    if (
-      !hasOpenedOnce &&
-      !isAnimating &&
-      !spriteButton.hidden
-    ) {
-      startMiniPhoneSound();
-    }
-  };
-
-  document.addEventListener(
-    "pointerdown",
-    unlockMiniPhoneAudio,
-    {
-      capture: true
-    }
-  );
-
-  document.addEventListener(
-    "touchstart",
-    unlockMiniPhoneAudio,
-    {
-      capture: true,
-      passive: true
-    }
-  );
-
-  document.addEventListener(
-    "keydown",
-    unlockMiniPhoneAudio,
-    {
-      capture: true
-    }
-  );
-}
-
-/* ---------------------------------
    VISIBILITY CLEANUP
 --------------------------------- */
 
@@ -4179,17 +4097,22 @@ document.addEventListener(
     if (document.hidden) {
       endCurrentCall();
       stopCameraStream();
-      stopMiniPhoneSound();
+
+      if (isMiniPhoneAudioOn) {
+        miniPhoneRingSound.pause();
+      }
 
       return;
     }
 
     if (
+      isMiniPhoneAudioOn &&
       !hasOpenedOnce &&
-      !isAnimating &&
       !spriteButton.hidden
     ) {
-      startMiniPhoneSound();
+      miniPhoneRingSound
+        .play()
+        .catch(() => {});
     }
   }
 );
@@ -4199,7 +4122,7 @@ window.addEventListener(
   () => {
     endCurrentCall();
     stopCameraStream();
-    stopMiniPhoneSound();
+    turnMiniPhoneAudioOff();
   }
 );
 
@@ -4217,6 +4140,12 @@ function initializePhone() {
     "is-hidden"
   );
 
+  audioToggle.hidden = false;
+
+  audioToggle.classList.remove(
+    "is-hidden"
+  );
+
   spriteButton.hidden = false;
 
   spriteButton.style.display =
@@ -4228,6 +4157,10 @@ function initializePhone() {
 
   sprite.style.display =
     "block";
+
+  isMiniPhoneAudioOn = false;
+
+  updateAudioToggle();
 
   endCurrentCall();
   stopCamera();
@@ -4243,7 +4176,15 @@ function initializePhone() {
 
   startSpriteLoop();
   startPhoneClock();
-  initializeMiniPhoneAudio();
+
+  audioToggle.addEventListener(
+    "click",
+    (event) => {
+      event.stopPropagation();
+
+      toggleMiniPhoneAudio();
+    }
+  );
 
   spriteButton.addEventListener(
     "click",
