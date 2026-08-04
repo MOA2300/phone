@@ -25,6 +25,21 @@
       alt="Instructions for opening the interactive phone"
     />
 
+    <!-- Audio on/off button -->
+    <button
+      id="audio-toggle"
+      class="audio-toggle"
+      type="button"
+      aria-label="Turn phone ringing audio on"
+      aria-pressed="false"
+    >
+      <img
+        id="audio-toggle-image"
+        src="images/audiooff.png"
+        alt="Turn audio on"
+      />
+    </button>
+
     <!-- Initial animated mini phone -->
     <button
       id="sprite-button"
@@ -253,7 +268,6 @@
         aria-label="Photo gallery"
         aria-hidden="true"
       >
-        <!-- Thumbnail-grid view -->
         <div
           id="gallery-grid-view"
           class="gallery-grid-view"
@@ -280,7 +294,6 @@
           </div>
         </div>
 
-        <!-- Full-image view -->
         <div
           id="gallery-photo-view"
           class="gallery-photo-view"
@@ -303,7 +316,6 @@
           </div>
         </div>
 
-        <!-- Delete confirmation -->
         <div
           id="gallery-delete-dialog"
           class="gallery-delete-dialog"
@@ -367,14 +379,12 @@
         </div>
       </div>
 
-      <!-- Invisible phone-key hit areas -->
       <div
         id="key-overlay"
         class="key-overlay"
         aria-hidden="true"
       ></div>
 
-      <!-- Phone open/close trigger -->
       <button
         id="flip-trigger"
         class="flip-trigger"
