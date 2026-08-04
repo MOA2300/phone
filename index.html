@@ -8,7 +8,7 @@
     content="width=device-width, initial-scale=1"
   />
 
-  <title>Leslie Ahuatzi | Creative Application</title>
+  <title>Leslie Ahuatzi | Interactive Phone</title>
 
   <link rel="stylesheet" href="style.css" />
   <script src="script.js" defer></script>
@@ -17,15 +17,15 @@
 <body>
   <main class="phone-stage">
 
-    <!-- Instructions shown before the phone animation -->
+    <!-- Intro instructions -->
     <img
       id="instruction-text"
       class="instruction-text"
       src="images/instructiontext.png"
-      alt="Instructions for opening the interactive phone"
+      alt="Click anywhere on the phone to interact"
     />
 
-    <!-- Audio on/off button -->
+    <!-- Audio toggle -->
     <button
       id="audio-toggle"
       class="audio-toggle"
@@ -35,12 +35,13 @@
     >
       <img
         id="audio-toggle-image"
+        class="audio-toggle-image"
         src="images/audiooff.png"
         alt="Turn audio on"
       />
     </button>
 
-    <!-- Initial animated mini phone -->
+    <!-- Animated miniature phone -->
     <button
       id="sprite-button"
       class="sprite-button"
@@ -83,7 +84,7 @@
         ></div>
       </div>
 
-      <!-- Main phone menu -->
+      <!-- Main menu -->
       <section
         id="phone-menu"
         class="phone-menu"
@@ -99,7 +100,8 @@
             class="phone-menu-item is-selected"
             type="button"
             data-section="about"
-            aria-label="Open About Me section"
+            aria-label="Open About Me"
+            aria-selected="true"
           >
             <span
               class="menu-icon menu-icon-about"
@@ -115,7 +117,8 @@
             class="phone-menu-item"
             type="button"
             data-section="site"
-            aria-label="Open Sites section"
+            aria-label="Open Sites"
+            aria-selected="false"
           >
             <span
               class="menu-icon menu-icon-site"
@@ -131,7 +134,8 @@
             class="phone-menu-item"
             type="button"
             data-section="history"
-            aria-label="Open History section"
+            aria-label="Open History"
+            aria-selected="false"
           >
             <span
               class="menu-icon menu-icon-history"
@@ -147,7 +151,8 @@
             class="phone-menu-item"
             type="button"
             data-section="resume"
-            aria-label="Open Resume section"
+            aria-label="Open Resume"
+            aria-selected="false"
           >
             <span
               class="menu-icon menu-icon-resume"
@@ -165,7 +170,7 @@
         </p>
       </section>
 
-      <!-- Phone number screen -->
+      <!-- Dial screen -->
       <section
         id="dial-screen"
         class="dial-screen"
@@ -187,11 +192,11 @@
         </div>
       </section>
 
-      <!-- Email screen -->
+      <!-- Mail screen -->
       <section
         id="mail-screen"
         class="mail-screen"
-        aria-label="Message to the Wieden and Kennedy team"
+        aria-label="Message"
         aria-hidden="true"
       >
         <div class="mail-screen-heading">
@@ -226,7 +231,7 @@
         </div>
       </section>
 
-      <!-- Camera screen -->
+      <!-- Camera -->
       <section
         id="camera-screen"
         class="camera-screen"
@@ -249,7 +254,7 @@
         <img
           id="captured-photo"
           class="captured-photo"
-          alt="Photo captured using the phone camera"
+          alt="Photo captured with the phone camera"
         />
 
         <div
@@ -261,7 +266,7 @@
         </div>
       </section>
 
-      <!-- Photo gallery -->
+      <!-- Gallery -->
       <section
         id="gallery-screen"
         class="gallery-screen"
@@ -319,10 +324,10 @@
         <div
           id="gallery-delete-dialog"
           class="gallery-delete-dialog"
-          aria-hidden="true"
           role="dialog"
           aria-modal="true"
           aria-label="Delete selected photo"
+          aria-hidden="true"
         >
           <div class="gallery-delete-box">
             <p>
@@ -379,12 +384,14 @@
         </div>
       </div>
 
+      <!-- Dynamically generated phone keys -->
       <div
         id="key-overlay"
         class="key-overlay"
         aria-hidden="true"
       ></div>
 
+      <!-- Opens/closes the flip phone -->
       <button
         id="flip-trigger"
         class="flip-trigger"
@@ -393,12 +400,12 @@
       ></button>
     </section>
 
-    <!-- Sliding portfolio panel -->
+    <!-- Portfolio content panel -->
     <aside
       id="content-panel"
       class="content-panel"
-      aria-hidden="true"
       aria-label="Portfolio information"
+      aria-hidden="true"
     >
       <div
         class="content-panel-edge"
