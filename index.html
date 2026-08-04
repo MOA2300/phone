@@ -1,40 +1,469 @@
-<!-- Intro instructions -->
-<img
-  id="instruction-text"
-  class="instruction-text"
-  src="images/instructiontext.png"
-  alt="Click anywhere on the phone to interact"
-/>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
 
-<!--
-  Starts by displaying “Turn audio on.”
-  audioon.png must be the image that says Turn audio on.
--->
-<button
-  id="audio-toggle"
-  class="audio-toggle"
-  type="button"
-  aria-label="Turn phone ringing audio on"
-  aria-pressed="false"
->
-  <img
-    id="audio-toggle-image"
-    class="audio-toggle-image"
-    src="images/audioon.png"
-    alt="Turn audio on"
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
   />
-</button>
 
-<!-- Animated miniature phone -->
-<button
-  id="sprite-button"
-  class="sprite-button"
-  type="button"
-  aria-label="Open Leslie's interactive phone"
->
-  <img
-    id="sprite"
-    src="DefineSprite_22/1.png"
-    alt=""
-  />
-</button>
+  <title>Leslie Ahuatzi Application</title>
+
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <main class="phone-stage">
+
+    <!-- Intro instruction image -->
+    <img
+      id="instruction-text"
+      class="instruction-text"
+      src="images/instructiontext.png"
+      alt="Click anywhere on the phone to interact"
+    />
+
+    <!-- Intro ringtone toggle -->
+    <button
+      id="audio-toggle"
+      class="audio-toggle"
+      type="button"
+      aria-label="Turn phone ringing audio on"
+      aria-pressed="false"
+    >
+      <img
+        id="audio-toggle-image"
+        class="audio-toggle-image"
+        src="images/audioon.png"
+        alt="Turn audio on"
+      />
+    </button>
+
+    <!-- Animated miniature phone -->
+    <button
+      id="sprite-button"
+      class="sprite-button"
+      type="button"
+      aria-label="Open Leslie's interactive phone"
+    >
+      <img
+        id="sprite"
+        src="DefineSprite_22/1.png"
+        alt=""
+      />
+    </button>
+
+    <!-- Main interactive phone -->
+    <section
+      id="phone-container"
+      class="phone-container"
+      aria-label="Interactive flip phone portfolio"
+    >
+      <img
+        id="phone-frame"
+        src="images/6.png"
+        alt="Interactive flip phone"
+      />
+
+      <!-- Clock shown while phone is open -->
+      <div
+        id="open-screen-clock"
+        class="open-screen-clock"
+        aria-hidden="true"
+      >
+        <div
+          id="open-screen-date"
+          class="open-screen-date"
+        ></div>
+
+        <div
+          id="open-screen-time"
+          class="open-screen-time"
+        ></div>
+      </div>
+
+      <!-- Main phone menu -->
+      <section
+        id="phone-menu"
+        class="phone-menu"
+        aria-label="Portfolio menu"
+        aria-hidden="true"
+      >
+        <p class="phone-menu-heading">
+          MAIN MENU
+        </p>
+
+        <div class="phone-menu-grid">
+          <button
+            class="phone-menu-item is-selected"
+            type="button"
+            data-section="about"
+            aria-label="Open About Me"
+            aria-selected="true"
+          >
+            <span
+              class="menu-icon menu-icon-about"
+              aria-hidden="true"
+            ></span>
+
+            <span class="menu-item-label">
+              ABOUT
+            </span>
+          </button>
+
+          <button
+            class="phone-menu-item"
+            type="button"
+            data-section="site"
+            aria-label="Open Sites"
+            aria-selected="false"
+          >
+            <span
+              class="menu-icon menu-icon-site"
+              aria-hidden="true"
+            ></span>
+
+            <span class="menu-item-label">
+              SITES
+            </span>
+          </button>
+
+          <button
+            class="phone-menu-item"
+            type="button"
+            data-section="history"
+            aria-label="Open History"
+            aria-selected="false"
+          >
+            <span
+              class="menu-icon menu-icon-history"
+              aria-hidden="true"
+            ></span>
+
+            <span class="menu-item-label">
+              HISTORY
+            </span>
+          </button>
+
+          <button
+            class="phone-menu-item"
+            type="button"
+            data-section="resume"
+            aria-label="Open Resume"
+            aria-selected="false"
+          >
+            <span
+              class="menu-icon menu-icon-resume"
+              aria-hidden="true"
+            ></span>
+
+            <span class="menu-item-label">
+              RESUME
+            </span>
+          </button>
+        </div>
+
+        <p class="phone-menu-instruction">
+          ▲▼◀▶ MOVE · CENTER SELECT
+        </p>
+      </section>
+
+      <!-- Dialing screen -->
+      <section
+        id="dial-screen"
+        class="dial-screen"
+        aria-label="Phone number entry"
+        aria-hidden="true"
+      >
+        <div class="dial-screen-heading">
+          ENTER NUMBER
+        </div>
+
+        <div
+          id="dial-number"
+          class="dial-number"
+          aria-live="polite"
+        ></div>
+
+        <div class="dial-screen-footer">
+          BACK: DELETE
+        </div>
+      </section>
+
+      <!-- Mail screen -->
+      <section
+        id="mail-screen"
+        class="mail-screen"
+        aria-label="Message"
+        aria-hidden="true"
+      >
+        <div class="mail-screen-heading">
+          NEW MESSAGE
+        </div>
+
+        <div class="mail-message">
+          <p>
+            <strong>To:</strong>
+            Wieden + Kennedy Team
+          </p>
+
+          <p>
+            <strong>From:</strong>
+            Leslie Ahuatzi
+          </p>
+
+          <p>
+            Thank you for viewing my application.
+            Please choose me—you will not regret it.
+            If you don't, you will be missing out.
+          </p>
+
+          <p>
+            <strong>P.S.</strong>
+            I promise I can crack a few jokes.
+          </p>
+        </div>
+
+        <div class="mail-screen-footer">
+          BACK: CLOSE
+        </div>
+      </section>
+
+      <!-- Camera screen -->
+      <section
+        id="camera-screen"
+        class="camera-screen"
+        aria-label="Camera"
+        aria-hidden="true"
+      >
+        <video
+          id="camera-preview"
+          class="camera-preview"
+          autoplay
+          muted
+          playsinline
+        ></video>
+
+        <canvas
+          id="camera-canvas"
+          class="camera-canvas"
+        ></canvas>
+
+        <img
+          id="captured-photo"
+          class="captured-photo"
+          alt="Photo captured with the phone camera"
+        />
+
+        <div
+          id="camera-message"
+          class="camera-message"
+          aria-live="polite"
+        >
+          PRESS CAMERA TO TAKE PHOTO
+        </div>
+      </section>
+
+      <!-- Photo gallery -->
+      <section
+        id="gallery-screen"
+        class="gallery-screen"
+        aria-label="Photo gallery"
+        aria-hidden="true"
+      >
+        <div
+          id="gallery-grid-view"
+          class="gallery-grid-view"
+        >
+          <div class="gallery-heading">
+            PHOTOS
+          </div>
+
+          <div
+            id="gallery-grid"
+            class="gallery-grid"
+            role="grid"
+            aria-label="Captured photos"
+          ></div>
+
+          <div class="gallery-footer">
+            <span id="gallery-page-number">
+              01 / 01
+            </span>
+
+            <span>
+              CENTER: VIEW · #: DELETE
+            </span>
+          </div>
+        </div>
+
+        <div
+          id="gallery-photo-view"
+          class="gallery-photo-view"
+          aria-hidden="true"
+        >
+          <img
+            id="gallery-full-image"
+            class="gallery-full-image"
+            alt="Selected captured photo"
+          />
+
+          <div class="gallery-photo-footer">
+            <span id="gallery-photo-number">
+              01 / 01
+            </span>
+
+            <span>
+              BACK: GALLERY · #: DELETE
+            </span>
+          </div>
+        </div>
+
+        <div
+          id="gallery-delete-dialog"
+          class="gallery-delete-dialog"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Delete selected photo"
+          aria-hidden="true"
+        >
+          <div class="gallery-delete-box">
+            <p>
+              DELETE PHOTO?
+            </p>
+
+            <div class="gallery-delete-options">
+              <button
+                id="gallery-keep-photo"
+                class="gallery-delete-option is-selected"
+                type="button"
+              >
+                KEEP
+              </button>
+
+              <button
+                id="gallery-delete-photo"
+                class="gallery-delete-option"
+                type="button"
+              >
+                DELETE
+              </button>
+            </div>
+
+            <div class="gallery-delete-instruction">
+              ◀ ▶ CHOOSE · CENTER SELECT
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Closed phone front screen -->
+      <div
+        id="front-screen"
+        class="front-screen"
+        aria-hidden="true"
+      >
+        <img
+          id="front-screen-image"
+          src="images/bunny.png"
+          alt=""
+        />
+
+        <div class="front-screen-clock">
+          <div
+            id="front-screen-date"
+            class="front-screen-date"
+          ></div>
+
+          <div
+            id="front-screen-time"
+            class="front-screen-time"
+          ></div>
+        </div>
+      </div>
+
+      <!-- Dynamically generated key buttons -->
+      <div
+        id="key-overlay"
+        class="key-overlay"
+        aria-hidden="true"
+      ></div>
+
+      <!-- Transparent phone opening/closing area -->
+      <button
+        id="flip-trigger"
+        class="flip-trigger"
+        type="button"
+        aria-label="Close phone"
+      ></button>
+    </section>
+
+    <!-- Sliding portfolio panel -->
+    <aside
+      id="content-panel"
+      class="content-panel"
+      aria-label="Portfolio information"
+      aria-hidden="true"
+    >
+      <div
+        class="content-panel-edge"
+        aria-hidden="true"
+      ></div>
+
+      <header class="content-panel-header">
+        <h1 id="panel-title">
+          About Me
+        </h1>
+
+        <button
+          id="panel-close"
+          class="panel-close"
+          type="button"
+          aria-label="Close section"
+        >
+          ×
+        </button>
+      </header>
+
+      <div class="content-panel-body">
+        <button
+          id="panel-previous"
+          class="panel-arrow panel-arrow-left"
+          type="button"
+          aria-label="Previous page"
+        >
+          ‹
+        </button>
+
+        <article
+          id="panel-page"
+          class="panel-page"
+          aria-live="polite"
+        ></article>
+
+        <button
+          id="panel-next"
+          class="panel-arrow panel-arrow-right"
+          type="button"
+          aria-label="Next page"
+        >
+          ›
+        </button>
+      </div>
+
+      <footer class="content-panel-footer">
+        <span id="panel-page-number">
+          01 / 01
+        </span>
+
+        <span>
+          USE ◀ ▶ TO EXPLORE
+        </span>
+      </footer>
+    </aside>
+
+  </main>
+</body>
+</html>
