@@ -1,230 +1,144 @@
 "use strict";
 
 /* ---------------------------------
-   HTML ELEMENTS
+   ELEMENTS
 --------------------------------- */
 
 const instructionText =
-  document.getElementById(
-    "instruction-text"
-  );
+  document.getElementById("instruction-text");
 
 const audioToggle =
-  document.getElementById(
-    "audio-toggle"
-  );
+  document.getElementById("audio-toggle");
 
 const audioToggleImage =
-  document.getElementById(
-    "audio-toggle-image"
-  );
+  document.getElementById("audio-toggle-image");
 
 const spriteButton =
-  document.getElementById(
-    "sprite-button"
-  );
+  document.getElementById("sprite-button");
 
 const sprite =
-  document.getElementById(
-    "sprite"
-  );
+  document.getElementById("sprite");
 
 const frame =
-  document.getElementById(
-    "phone-frame"
-  );
+  document.getElementById("phone-frame");
 
 const container =
-  document.getElementById(
-    "phone-container"
-  );
+  document.getElementById("phone-container");
 
 const keyOverlay =
-  document.getElementById(
-    "key-overlay"
-  );
+  document.getElementById("key-overlay");
 
 const flipTrigger =
-  document.getElementById(
-    "flip-trigger"
-  );
+  document.getElementById("flip-trigger");
 
 const frontScreen =
-  document.getElementById(
-    "front-screen"
-  );
+  document.getElementById("front-screen");
 
 const frontScreenDate =
-  document.getElementById(
-    "front-screen-date"
-  );
+  document.getElementById("front-screen-date");
 
 const frontScreenTime =
-  document.getElementById(
-    "front-screen-time"
-  );
+  document.getElementById("front-screen-time");
 
 const openScreenClock =
-  document.getElementById(
-    "open-screen-clock"
-  );
+  document.getElementById("open-screen-clock");
 
 const openScreenDate =
-  document.getElementById(
-    "open-screen-date"
-  );
+  document.getElementById("open-screen-date");
 
 const openScreenTime =
-  document.getElementById(
-    "open-screen-time"
-  );
+  document.getElementById("open-screen-time");
 
 const phoneMenu =
-  document.getElementById(
-    "phone-menu"
-  );
+  document.getElementById("phone-menu");
 
 const dialScreen =
-  document.getElementById(
-    "dial-screen"
-  );
+  document.getElementById("dial-screen");
 
 const dialNumber =
-  document.getElementById(
-    "dial-number"
-  );
+  document.getElementById("dial-number");
 
 const mailScreen =
-  document.getElementById(
-    "mail-screen"
-  );
+  document.getElementById("mail-screen");
 
 const cameraScreen =
-  document.getElementById(
-    "camera-screen"
-  );
+  document.getElementById("camera-screen");
 
 const cameraPreview =
-  document.getElementById(
-    "camera-preview"
-  );
+  document.getElementById("camera-preview");
 
 const cameraCanvas =
-  document.getElementById(
-    "camera-canvas"
-  );
+  document.getElementById("camera-canvas");
 
 const capturedPhoto =
-  document.getElementById(
-    "captured-photo"
-  );
+  document.getElementById("captured-photo");
 
 const cameraMessage =
-  document.getElementById(
-    "camera-message"
-  );
+  document.getElementById("camera-message");
 
 const galleryScreen =
-  document.getElementById(
-    "gallery-screen"
-  );
+  document.getElementById("gallery-screen");
 
 const galleryGridView =
-  document.getElementById(
-    "gallery-grid-view"
-  );
+  document.getElementById("gallery-grid-view");
 
 const galleryGrid =
-  document.getElementById(
-    "gallery-grid"
-  );
+  document.getElementById("gallery-grid");
 
 const galleryPageNumber =
-  document.getElementById(
-    "gallery-page-number"
-  );
+  document.getElementById("gallery-page-number");
 
 const galleryPhotoView =
-  document.getElementById(
-    "gallery-photo-view"
-  );
+  document.getElementById("gallery-photo-view");
 
 const galleryFullImage =
-  document.getElementById(
-    "gallery-full-image"
-  );
+  document.getElementById("gallery-full-image");
 
 const galleryPhotoNumber =
-  document.getElementById(
-    "gallery-photo-number"
-  );
+  document.getElementById("gallery-photo-number");
 
 const galleryDeleteDialog =
-  document.getElementById(
-    "gallery-delete-dialog"
-  );
+  document.getElementById("gallery-delete-dialog");
 
 const galleryKeepPhoto =
-  document.getElementById(
-    "gallery-keep-photo"
-  );
+  document.getElementById("gallery-keep-photo");
 
 const galleryDeletePhoto =
-  document.getElementById(
-    "gallery-delete-photo"
-  );
+  document.getElementById("gallery-delete-photo");
 
 const galleryDeleteOptions =
   Array.from(
-    document.querySelectorAll(
-      ".gallery-delete-option"
-    )
+    document.querySelectorAll(".gallery-delete-option")
   );
 
 const menuItems =
   Array.from(
-    document.querySelectorAll(
-      ".phone-menu-item"
-    )
+    document.querySelectorAll(".phone-menu-item")
   );
 
 const contentPanel =
-  document.getElementById(
-    "content-panel"
-  );
+  document.getElementById("content-panel");
 
 const panelTitle =
-  document.getElementById(
-    "panel-title"
-  );
+  document.getElementById("panel-title");
 
 const panelPage =
-  document.getElementById(
-    "panel-page"
-  );
+  document.getElementById("panel-page");
 
 const panelPageNumber =
-  document.getElementById(
-    "panel-page-number"
-  );
+  document.getElementById("panel-page-number");
 
 const panelPrevious =
-  document.getElementById(
-    "panel-previous"
-  );
+  document.getElementById("panel-previous");
 
 const panelNext =
-  document.getElementById(
-    "panel-next"
-  );
+  document.getElementById("panel-next");
 
 const panelClose =
-  document.getElementById(
-    "panel-close"
-  );
+  document.getElementById("panel-close");
 
 /* ---------------------------------
-   PHONE IMAGE FRAMES
+   FRAME PATHS
 --------------------------------- */
 
 const spriteFrames = [];
@@ -293,6 +207,9 @@ let selectedMenuIndex = 0;
 let activeSectionName = null;
 let activePageIndex = 0;
 
+let isMiniPhoneAudioOn = false;
+let isMiniPhoneAudioChanging = false;
+
 const PHOTOS_PER_PAGE = 9;
 
 const PHOTO_STORAGE_KEY =
@@ -304,21 +221,15 @@ const PHOTO_STORAGE_KEY =
 
 function playPhoneSound(fileName) {
   const sound =
-    new Audio(
-      `sounds/${fileName}`
-    );
+    new Audio(`sounds/${fileName}`);
 
   sound.currentTime = 0;
 
-  sound
-    .play()
-    .catch(() => {});
+  sound.play().catch(() => {});
 }
 
 const callingSound =
-  new Audio(
-    "sounds/phonecalling.mp3"
-  );
+  new Audio("sounds/phonecalling.mp3");
 
 callingSound.loop = true;
 
@@ -326,9 +237,7 @@ function startCallingSound() {
   callingSound.pause();
   callingSound.currentTime = 0;
 
-  callingSound
-    .play()
-    .catch(() => {});
+  callingSound.play().catch(() => {});
 }
 
 function stopCallingSound() {
@@ -337,22 +246,23 @@ function stopCallingSound() {
 }
 
 /* ---------------------------------
-   MINI PHONE AUDIO TOGGLE
+   INTRO RINGTONE TOGGLE
 --------------------------------- */
 
 const miniPhoneRingSound =
-  new Audio(
-    "sounds/phonering.mp3"
-  );
+  new Audio("sounds/phonering.mp3");
 
 miniPhoneRingSound.loop = true;
 miniPhoneRingSound.preload = "auto";
 miniPhoneRingSound.volume = 0.75;
 
-let isMiniPhoneAudioOn = false;
-
 function updateAudioToggle() {
   if (isMiniPhoneAudioOn) {
+    /*
+      Audio is playing, so show the option
+      that lets the visitor turn it off.
+    */
+
     audioToggleImage.src =
       "images/audioon.png";
 
@@ -369,8 +279,17 @@ function updateAudioToggle() {
       "true"
     );
 
+    audioToggle.classList.add(
+      "is-audio-on"
+    );
+
     return;
   }
+
+  /*
+    Audio is not playing, so show the option
+    that lets the visitor turn it on.
+  */
 
   audioToggleImage.src =
     "images/audiooff.png";
@@ -387,15 +306,22 @@ function updateAudioToggle() {
     "aria-pressed",
     "false"
   );
+
+  audioToggle.classList.remove(
+    "is-audio-on"
+  );
 }
 
 async function turnMiniPhoneAudioOn() {
   if (
     hasOpenedOnce ||
-    spriteButton.hidden
+    spriteButton.hidden ||
+    isMiniPhoneAudioChanging
   ) {
     return;
   }
+
+  isMiniPhoneAudioChanging = true;
 
   try {
     miniPhoneRingSound.currentTime = 0;
@@ -403,8 +329,6 @@ async function turnMiniPhoneAudioOn() {
     await miniPhoneRingSound.play();
 
     isMiniPhoneAudioOn = true;
-
-    updateAudioToggle();
   } catch (error) {
     console.warn(
       "The ringtone could not start:",
@@ -412,6 +336,8 @@ async function turnMiniPhoneAudioOn() {
     );
 
     isMiniPhoneAudioOn = false;
+  } finally {
+    isMiniPhoneAudioChanging = false;
 
     updateAudioToggle();
   }
@@ -422,11 +348,16 @@ function turnMiniPhoneAudioOff() {
   miniPhoneRingSound.currentTime = 0;
 
   isMiniPhoneAudioOn = false;
+  isMiniPhoneAudioChanging = false;
 
   updateAudioToggle();
 }
 
 function toggleMiniPhoneAudio() {
+  if (isMiniPhoneAudioChanging) {
+    return;
+  }
+
   if (isMiniPhoneAudioOn) {
     turnMiniPhoneAudioOff();
 
@@ -526,7 +457,7 @@ const sectionContent = {
     pages: [
       `
         <h2>
-          Visit My Portfolio Page:
+          Visit My Portfolio Page
         </h2>
 
         <p>
@@ -548,7 +479,7 @@ const sectionContent = {
 
       `
         <h2>
-          Visit My LinkedIn:
+          Visit My LinkedIn
         </h2>
 
         <p>
@@ -562,7 +493,7 @@ const sectionContent = {
             target="_blank"
             rel="noopener noreferrer"
           >
-            www.linkedin.com/in/leslie-ahuatzi ↗
+            linkedin.com/in/leslie-ahuatzi ↗
           </a>
         </p>
       `
@@ -674,17 +605,13 @@ const sectionContent = {
           <li>
             Produced 20+ edited photos weekly
             across sports, clubs, and campus
-            events, consistently meeting
-            deadlines and adapting to different
-            assignment needs
+            events while meeting deadlines.
           </li>
 
           <li>
             Managed photography gear and
-            workflows independently, solved
-            on-site technical issues, and
-            delivered high-quality images using
-            Adobe Lightroom Classic
+            workflows independently and edited
+            images using Adobe Lightroom Classic.
           </li>
         </ul>
       `,
@@ -701,19 +628,14 @@ const sectionContent = {
 
         <ul>
           <li>
-            Created digital graphics, posters,
-            and digital materials for artists,
-            including Psychic Fever, Beno,
-            Andre Martin, and Enrico, under
-            tight deadlines, balancing speed,
-            accuracy, and clear communication
-            with editors.
+            Created digital graphics and
+            promotional materials for artists
+            under tight deadlines.
           </li>
 
           <li>
-            Coordinated with editors via email,
-            incorporating feedback efficiently,
-            and delivered polished design assets
+            Incorporated editor feedback and
+            delivered polished design assets.
           </li>
         </ul>
       `,
@@ -730,35 +652,18 @@ const sectionContent = {
 
         <ul>
           <li>
-            Supported with various tasks assigned
-            by upper management, such as sending
-            outreach emails, organizing content
-            schedules, creating and editing visual
-            assets, and updating social channels
-            for artists and their fan communities
+            Supported outreach, content schedules,
+            visual assets, and social channels.
           </li>
 
           <li>
-            Assisted weekly marketing meetings by
-            researching trends/fan behavior,
-            reporting on artists, and pitching
-            creative ideas for social media
-            platforms or events for artists such
-            as Bayli, Tiana Major9, Frex, and
-            Esther Yu
+            Researched trends and fan behavior
+            and pitched creative social ideas.
           </li>
 
           <li>
-            Wrote weekly recap emails summarizing
-            completed work for 4+ artists while
-            maintaining clear documentation and
-            confidentiality across internal teams
-          </li>
-
-          <li>
-            Supported campaigns in fast-paced
-            environments, adapting quickly to new
-            tools and evolving workflows
+            Wrote weekly recap emails and
+            maintained clear documentation.
           </li>
         </ul>
       `,
@@ -775,33 +680,18 @@ const sectionContent = {
 
         <ul>
           <li>
-            Facilitated technical support for the
-            Media Services Department and assisted
-            the Scripps Community through office
-            support, acting as the primary customer
-            contact for urgent issues
+            Provided technical and office support
+            for students and faculty.
           </li>
 
           <li>
-            Served as a first line of support for
-            students and faculty requesting AV
-            equipment, camera checkouts, or campus
-            tech help
+            Set up and troubleshot AV equipment,
+            projectors, computers, and cameras.
           </li>
 
           <li>
-            Set up and troubleshot hardware for
-            audio-visual equipment, projectors,
-            and computers; escalated complex
-            issues to senior staff and ensured
-            they moved toward a resolution
-          </li>
-
-          <li>
-            Verified the condition and availability
-            of equipment, maintained accurate
-            records on Excel, and provided support
-            in time-sensitive classroom environments
+            Maintained equipment records and
+            supported time-sensitive events.
           </li>
         </ul>
       `,
@@ -817,25 +707,19 @@ const sectionContent = {
 
         <ul>
           <li>
-            Concert photographer for KLandMexico
-            and Blender Magazine, an emerging
-            music magazine covering Korean artists
-            and other rising international artists
+            Photographed concerts, portraits,
+            fashion, and editorial assignments.
           </li>
 
           <li>
-            Contributed 5+ photographs within
-            published issues of Local Wolves
-            Magazine, selecting and editing images
-            using Adobe Lightroom Classic and
-            Capture One
+            Contributed photographs to
+            Local Wolves Magazine.
           </li>
 
           <li>
-            Built a portfolio of fashion, portrait
-            photography, and concert photography
-            for artists such as Seo In Guk,
-            Psychic Fever, Milena, and Enjambre
+            Photographed artists including
+            Seo In Guk, Psychic Fever,
+            Milena, and Enjambre.
           </li>
         </ul>
       `,
@@ -851,7 +735,7 @@ const sectionContent = {
 
         <p>
           Photoshop, Lightroom, Illustrator,
-          Premiere Pro, Microsoft Office
+          Premiere Pro, Microsoft Office,
           and Google Suite
         </p>
 
@@ -868,8 +752,8 @@ const sectionContent = {
         </h3>
 
         <p>
-          Photography, Soccer, Design,
-          Printmaking, Films, Digital Marketing
+          Photography, soccer, design,
+          printmaking, film, and digital marketing
         </p>
       `
     ]
@@ -950,7 +834,7 @@ const phoneKeys = [
 
   {
     name: "mail",
-    label: "Open mail message",
+    label: "Open mail",
     x: 49,
     y: 381,
     width: 36,
@@ -959,7 +843,7 @@ const phoneKeys = [
 
   {
     name: "lower-right",
-    label: "Open photo gallery",
+    label: "Open gallery",
     x: 139,
     y: 381,
     width: 36,
@@ -1103,13 +987,12 @@ const phoneKeys = [
 ];
 
 /* ---------------------------------
-   PRELOAD IMAGES
+   PRELOAD
 --------------------------------- */
 
 function preloadImages(paths) {
   paths.forEach((src) => {
     const image = new Image();
-
     image.src = src;
   });
 }
@@ -1126,7 +1009,7 @@ preloadImages([
 ]);
 
 /* ---------------------------------
-   STARTING SPRITE
+   INTRO SPRITE
 --------------------------------- */
 
 function startSpriteLoop() {
@@ -1150,15 +1033,13 @@ function stopSpriteLoop() {
     return;
   }
 
-  window.clearInterval(
-    spriteInterval
-  );
+  window.clearInterval(spriteInterval);
 
   spriteInterval = null;
 }
 
 /* ---------------------------------
-   STARTING PHONE EXPERIENCE
+   REMOVE INTRO
 --------------------------------- */
 
 function removeStartingPhoneExperience() {
@@ -1179,12 +1060,8 @@ function removeStartingPhoneExperience() {
 
   window.setTimeout(() => {
     spriteButton.hidden = true;
-
-    spriteButton.style.display =
-      "none";
-
-    sprite.style.display =
-      "none";
+    spriteButton.style.display = "none";
+    sprite.style.display = "none";
 
     audioToggle.hidden = true;
   }, 180);
@@ -1195,10 +1072,7 @@ function removeStartingPhoneExperience() {
 --------------------------------- */
 
 function padNumber(value) {
-  return String(value).padStart(
-    2,
-    "0"
-  );
+  return String(value).padStart(2, "0");
 }
 
 function formatOpenPhoneDate(date) {
@@ -1214,52 +1088,32 @@ function formatOpenPhoneDate(date) {
 
   return (
     `${date.getFullYear()}/` +
-    `${padNumber(
-      date.getMonth() + 1
-    )}/` +
-    `${padNumber(
-      date.getDate()
-    )}` +
-    `(${weekdays[
-      date.getDay()
-    ]})`
+    `${padNumber(date.getMonth() + 1)}/` +
+    `${padNumber(date.getDate())}` +
+    `(${weekdays[date.getDay()]})`
   );
 }
 
 function formatOpenPhoneTime(date) {
   return (
-    `${padNumber(
-      date.getHours()
-    )}:` +
-    `${padNumber(
-      date.getMinutes()
-    )}:` +
-    `${padNumber(
-      date.getSeconds()
-    )}`
+    `${padNumber(date.getHours())}:` +
+    `${padNumber(date.getMinutes())}:` +
+    `${padNumber(date.getSeconds())}`
   );
 }
 
 function formatFrontPhoneDate(date) {
   return (
     `${date.getFullYear()}/` +
-    `${padNumber(
-      date.getMonth() + 1
-    )}/` +
-    `${padNumber(
-      date.getDate()
-    )}`
+    `${padNumber(date.getMonth() + 1)}/` +
+    `${padNumber(date.getDate())}`
   );
 }
 
 function formatFrontPhoneTime(date) {
   return (
-    `${padNumber(
-      date.getHours()
-    )}:` +
-    `${padNumber(
-      date.getMinutes()
-    )}`
+    `${padNumber(date.getHours())}:` +
+    `${padNumber(date.getMinutes())}`
   );
 }
 
@@ -1283,9 +1137,7 @@ function startPhoneClock() {
   updatePhoneClock();
 
   if (clockInterval !== null) {
-    window.clearInterval(
-      clockInterval
-    );
+    window.clearInterval(clockInterval);
   }
 
   clockInterval =
@@ -1296,34 +1148,26 @@ function startPhoneClock() {
 }
 
 /* ---------------------------------
-   BASIC SCREEN HELPERS
+   SCREEN HELPERS
 --------------------------------- */
 
 function setFrontScreenVisible(visible) {
   frontScreen.style.display =
-    visible
-      ? "block"
-      : "none";
+    visible ? "block" : "none";
 
   frontScreen.setAttribute(
     "aria-hidden",
-    visible
-      ? "false"
-      : "true"
+    visible ? "false" : "true"
   );
 }
 
 function setOpenClockVisible(visible) {
   openScreenClock.style.display =
-    visible
-      ? "block"
-      : "none";
+    visible ? "block" : "none";
 
   openScreenClock.setAttribute(
     "aria-hidden",
-    visible
-      ? "false"
-      : "true"
+    visible ? "false" : "true"
   );
 }
 
@@ -1380,7 +1224,7 @@ function hideCameraScreen() {
 }
 
 /* ---------------------------------
-   GALLERY DELETE DIALOG
+   DELETE DIALOG
 --------------------------------- */
 
 function updateGalleryDeleteChoice() {
@@ -1388,8 +1232,7 @@ function updateGalleryDeleteChoice() {
     (option, index) => {
       option.classList.toggle(
         "is-selected",
-        index ===
-          galleryDeleteChoice
+        index === galleryDeleteChoice
       );
     }
   );
@@ -1434,11 +1277,7 @@ function openGalleryDeleteDialog() {
       gallerySelectedIndex;
   }
 
-  if (
-    !savedPhotos[
-      galleryFullPhotoIndex
-    ]
-  ) {
+  if (!savedPhotos[galleryFullPhotoIndex]) {
     return;
   }
 
@@ -1490,9 +1329,7 @@ function confirmGalleryDeleteChoice() {
 function deleteCurrentGalleryPhoto() {
   if (
     savedPhotos.length === 0 ||
-    !savedPhotos[
-      galleryFullPhotoIndex
-    ]
+    !savedPhotos[galleryFullPhotoIndex]
   ) {
     closeGalleryDeleteDialog();
 
@@ -1760,25 +1597,19 @@ function setKeysEnabled(enabled) {
   });
 
   keyOverlay.style.visibility =
-    enabled
-      ? "visible"
-      : "hidden";
+    enabled ? "visible" : "hidden";
 
   keyOverlay.style.pointerEvents =
-    enabled
-      ? "auto"
-      : "none";
+    enabled ? "auto" : "none";
 
   keyOverlay.setAttribute(
     "aria-hidden",
-    enabled
-      ? "false"
-      : "true"
+    enabled ? "false" : "true"
   );
 }
 
 /* ---------------------------------
-   SAVED PHOTO STORAGE
+   PHOTO STORAGE
 --------------------------------- */
 
 function loadSavedPhotos() {
@@ -1795,16 +1626,13 @@ function loadSavedPhotos() {
     }
 
     const parsedPhotos =
-      JSON.parse(
-        storedPhotos
-      );
+      JSON.parse(storedPhotos);
 
     savedPhotos =
       Array.isArray(parsedPhotos)
         ? parsedPhotos.filter(
             (photo) =>
-              typeof photo ===
-              "string"
+              typeof photo === "string"
           )
         : [];
   } catch (error) {
@@ -1821,9 +1649,7 @@ function persistSavedPhotos() {
   try {
     window.localStorage.setItem(
       PHOTO_STORAGE_KEY,
-      JSON.stringify(
-        savedPhotos
-      )
+      JSON.stringify(savedPhotos)
     );
 
     return true;
@@ -1918,8 +1744,7 @@ async function openCamera() {
 
   if (
     !navigator.mediaDevices ||
-    !navigator.mediaDevices
-      .getUserMedia
+    !navigator.mediaDevices.getUserMedia
   ) {
     cameraMessage.textContent =
       "CAMERA NOT SUPPORTED";
@@ -2000,9 +1825,7 @@ function takeCameraPhoto() {
   }
 
   const context =
-    cameraCanvas.getContext(
-      "2d"
-    );
+    cameraCanvas.getContext("2d");
 
   if (!context) {
     cameraMessage.textContent =
@@ -2099,7 +1922,7 @@ function handleCameraButton() {
 }
 
 /* ---------------------------------
-   PHOTO GALLERY
+   GALLERY
 --------------------------------- */
 
 function getGalleryPageCount() {
@@ -2172,9 +1995,7 @@ function renderGalleryPage() {
 
   if (savedPhotos.length === 0) {
     const emptyMessage =
-      document.createElement(
-        "div"
-      );
+      document.createElement("div");
 
     emptyMessage.className =
       "gallery-empty-message";
@@ -2202,9 +2023,7 @@ function renderGalleryPage() {
 
     if (!photo) {
       const emptySlot =
-        document.createElement(
-          "div"
-        );
+        document.createElement("div");
 
       emptySlot.className =
         "gallery-empty-slot";
@@ -2226,9 +2045,7 @@ function renderGalleryPage() {
       index;
 
     const button =
-      document.createElement(
-        "button"
-      );
+      document.createElement("button");
 
     button.type = "button";
 
@@ -2242,28 +2059,21 @@ function renderGalleryPage() {
 
     button.setAttribute(
       "aria-label",
-      `View photo ${
-        absoluteIndex + 1
-      }`
+      `View photo ${absoluteIndex + 1}`
     );
 
     button.classList.toggle(
       "is-selected",
-      index ===
-        gallerySelectedIndex
+      index === gallerySelectedIndex
     );
 
     const image =
-      document.createElement(
-        "img"
-      );
+      document.createElement("img");
 
     image.src = photo;
 
     image.alt =
-      `Captured photo ${
-        absoluteIndex + 1
-      }`;
+      `Captured photo ${absoluteIndex + 1}`;
 
     button.appendChild(image);
 
@@ -2322,8 +2132,7 @@ function updateGallerySelection() {
     (thumbnail, index) => {
       thumbnail.classList.toggle(
         "is-selected",
-        index ===
-          gallerySelectedIndex
+        index === gallerySelectedIndex
       );
     }
   );
@@ -2425,9 +2234,7 @@ function moveGallerySelection(direction) {
 
   if (direction === "left") {
     if (currentIndex === 0) {
-      if (
-        moveToPreviousGalleryPage()
-      ) {
+      if (moveToPreviousGalleryPage()) {
         return;
       }
     } else if (currentColumn > 0) {
@@ -2441,14 +2248,10 @@ function moveGallerySelection(direction) {
       currentIndex ===
       pagePhotos.length - 1
     ) {
-      if (
-        moveToNextGalleryPage()
-      ) {
+      if (moveToNextGalleryPage()) {
         return;
       }
-    } else if (
-      currentColumn < 2
-    ) {
+    } else if (currentColumn < 2) {
       nextIndex =
         currentIndex + 1;
     }
@@ -2483,9 +2286,7 @@ function openSelectedGalleryPhoto() {
 
 function renderFullGalleryPhoto() {
   const photo =
-    savedPhotos[
-      galleryFullPhotoIndex
-    ];
+    savedPhotos[galleryFullPhotoIndex];
 
   if (!photo) {
     return;
@@ -2643,7 +2444,7 @@ function launchDeviceCall() {
 }
 
 /* ---------------------------------
-   DIALING SCREEN
+   DIALING
 --------------------------------- */
 
 function renderDialNumber() {
@@ -2655,8 +2456,7 @@ function typeDialCharacter(character) {
   endCurrentCall();
 
   if (
-    enteredPhoneNumber.length >=
-    18
+    enteredPhoneNumber.length >= 18
   ) {
     return;
   }
@@ -2700,15 +2500,14 @@ function clearDialNumber() {
 }
 
 /* ---------------------------------
-   PHONE MENU
+   MENU
 --------------------------------- */
 
 function updateMenuSelection() {
   menuItems.forEach(
     (item, index) => {
       const selected =
-        index ===
-        selectedMenuIndex;
+        index === selectedMenuIndex;
 
       item.classList.toggle(
         "is-selected",
@@ -2717,9 +2516,7 @@ function updateMenuSelection() {
 
       item.setAttribute(
         "aria-selected",
-        selected
-          ? "true"
-          : "false"
+        selected ? "true" : "false"
       );
     }
   );
@@ -2786,9 +2583,7 @@ function selectCurrentMenuItem() {
   }
 
   const selectedItem =
-    menuItems[
-      selectedMenuIndex
-    ];
+    menuItems[selectedMenuIndex];
 
   if (!selectedItem) {
     return;
@@ -2860,9 +2655,7 @@ function closeContentPanel() {
 
 function renderPanelPage() {
   const section =
-    sectionContent[
-      activeSectionName
-    ];
+    sectionContent[activeSectionName];
 
   if (!section) {
     return;
@@ -2875,16 +2668,12 @@ function renderPanelPage() {
     section.title;
 
   panelPage.innerHTML =
-    section.pages[
-      activePageIndex
-    ];
+    section.pages[activePageIndex];
 
   panelPageNumber.textContent =
     `${padNumber(
       activePageIndex + 1
-    )} / ${padNumber(
-      totalPages
-    )}`;
+    )} / ${padNumber(totalPages)}`;
 
   panelPrevious.disabled =
     activePageIndex === 0;
@@ -2900,8 +2689,7 @@ function renderPanelPage() {
 
   window.requestAnimationFrame(
     () => {
-      panelPage.style.animation =
-        "";
+      panelPage.style.animation = "";
     }
   );
 }
@@ -2925,9 +2713,7 @@ function showNextPanelPage() {
   }
 
   const section =
-    sectionContent[
-      activeSectionName
-    ];
+    sectionContent[activeSectionName];
 
   if (
     !section ||
@@ -2943,7 +2729,7 @@ function showNextPanelPage() {
 }
 
 /* ---------------------------------
-   PHONE ANIMATION
+   PHONE FRAME ANIMATION
 --------------------------------- */
 
 function playAnimation(
@@ -2976,9 +2762,7 @@ function playAnimation(
         return;
       }
 
-      window.clearInterval(
-        interval
-      );
+      window.clearInterval(interval);
 
       frame.src =
         finalFrame;
@@ -2987,8 +2771,7 @@ function playAnimation(
       flipTrigger.disabled = false;
 
       if (
-        typeof callback ===
-        "function"
+        typeof callback === "function"
       ) {
         callback();
       }
@@ -2996,7 +2779,7 @@ function playAnimation(
 }
 
 /* ---------------------------------
-   FLIP AREA
+   FLIP CLICK AREA
 --------------------------------- */
 
 function setFlipTriggerArea() {
@@ -3046,9 +2829,7 @@ function renderKeys() {
 
   phoneKeys.forEach((key) => {
     const button =
-      document.createElement(
-        "button"
-      );
+      document.createElement("button");
 
     button.type = "button";
 
@@ -3130,15 +2911,11 @@ function renderKeys() {
           return;
         }
 
-        handlePhoneKey(
-          key.name
-        );
+        handlePhoneKey(key.name);
       }
     );
 
-    keyOverlay.appendChild(
-      button
-    );
+    keyOverlay.appendChild(button);
   });
 
   setKeysEnabled(false);
@@ -3154,11 +2931,7 @@ function handlePhoneKey(keyName) {
       "is-open"
     );
 
-  if (
-    generalSoundKeys.has(
-      keyName
-    )
-  ) {
+  if (generalSoundKeys.has(keyName)) {
     playPhoneSound(
       "27_fixed.mp3"
     );
@@ -3181,17 +2954,13 @@ function handlePhoneKey(keyName) {
 
   if (isGalleryDeleteVisible) {
     if (keyName === "dpad-left") {
-      moveGalleryDeleteChoice(
-        "left"
-      );
+      moveGalleryDeleteChoice("left");
 
       return;
     }
 
     if (keyName === "dpad-right") {
-      moveGalleryDeleteChoice(
-        "right"
-      );
+      moveGalleryDeleteChoice("right");
 
       return;
     }
@@ -3241,9 +3010,7 @@ function handlePhoneKey(keyName) {
       closeContentPanel();
     }
 
-    setGalleryScreenVisible(
-      true
-    );
+    setGalleryScreenVisible(true);
 
     return;
   }
@@ -3257,9 +3024,7 @@ function handlePhoneKey(keyName) {
       closeContentPanel();
     }
 
-    setMailScreenVisible(
-      true
-    );
+    setMailScreenVisible(true);
 
     return;
   }
@@ -3270,11 +3035,7 @@ function handlePhoneKey(keyName) {
     return;
   }
 
-  if (
-    dialCharacters.includes(
-      keyName
-    )
-  ) {
+  if (dialCharacters.includes(keyName)) {
     stopCamera();
     hideGalleryScreen();
 
@@ -3284,19 +3045,13 @@ function handlePhoneKey(keyName) {
 
     hideMailScreen();
 
-    if (
-      /^[0-9]$/.test(
-        keyName
-      )
-    ) {
+    if (/^[0-9]$/.test(keyName)) {
       playPhoneSound(
         `${keyName}.mp3`
       );
     }
 
-    typeDialCharacter(
-      keyName
-    );
+    typeDialCharacter(keyName);
 
     return;
   }
@@ -3315,9 +3070,7 @@ function handlePhoneKey(keyName) {
     hideDialScreen();
     hideMailScreen();
 
-    setPhoneMenuVisible(
-      true
-    );
+    setPhoneMenuVisible(true);
 
     updateMenuSelection();
 
@@ -3415,10 +3168,7 @@ function handlePhoneKey(keyName) {
     }
 
     if (!isMenuVisible) {
-      setPhoneMenuVisible(
-        true
-      );
-
+      setPhoneMenuVisible(true);
       updateMenuSelection();
     } else {
       selectCurrentMenuItem();
@@ -3429,17 +3179,11 @@ function handlePhoneKey(keyName) {
 
   if (isGalleryScreenVisible) {
     if (isGalleryPhotoVisible) {
-      if (
-        keyName ===
-        "dpad-left"
-      ) {
+      if (keyName === "dpad-left") {
         showPreviousGalleryPhoto();
       }
 
-      if (
-        keyName ===
-        "dpad-right"
-      ) {
+      if (keyName === "dpad-right") {
         showNextGalleryPhoto();
       }
 
@@ -3447,27 +3191,19 @@ function handlePhoneKey(keyName) {
     }
 
     if (keyName === "dpad-up") {
-      moveGallerySelection(
-        "up"
-      );
+      moveGallerySelection("up");
     }
 
     if (keyName === "dpad-down") {
-      moveGallerySelection(
-        "down"
-      );
+      moveGallerySelection("down");
     }
 
     if (keyName === "dpad-left") {
-      moveGallerySelection(
-        "left"
-      );
+      moveGallerySelection("left");
     }
 
     if (keyName === "dpad-right") {
-      moveGallerySelection(
-        "right"
-      );
+      moveGallerySelection("right");
     }
 
     return;
@@ -3495,27 +3231,19 @@ function handlePhoneKey(keyName) {
 
   switch (keyName) {
     case "dpad-up":
-      moveMenuSelection(
-        "up"
-      );
+      moveMenuSelection("up");
       break;
 
     case "dpad-down":
-      moveMenuSelection(
-        "down"
-      );
+      moveMenuSelection("down");
       break;
 
     case "dpad-left":
-      moveMenuSelection(
-        "left"
-      );
+      moveMenuSelection("left");
       break;
 
     case "dpad-right":
-      moveMenuSelection(
-        "right"
-      );
+      moveMenuSelection("right");
       break;
 
     default:
@@ -3524,7 +3252,7 @@ function handlePhoneKey(keyName) {
 }
 
 /* ---------------------------------
-   FIRST PHONE OPENING
+   FIRST OPEN
 --------------------------------- */
 
 function openPhoneForFirstTime() {
@@ -3559,13 +3287,8 @@ function openPhoneForFirstTime() {
       "sounds/28_fixed.mp3"
     );
 
-  sound1
-    .play()
-    .catch(() => {});
-
-  sound2
-    .play()
-    .catch(() => {});
+  sound1.play().catch(() => {});
+  sound2.play().catch(() => {});
 
   playAnimation(
     openFrames,
@@ -3687,8 +3410,7 @@ function initializeMenuEvents() {
             return;
           }
 
-          selectedMenuIndex =
-            index;
+          selectedMenuIndex = index;
 
           updateMenuSelection();
 
@@ -3723,8 +3445,7 @@ function initializeMenuEvents() {
       option.addEventListener(
         "mouseenter",
         () => {
-          galleryDeleteChoice =
-            index;
+          galleryDeleteChoice = index;
 
           updateGalleryDeleteChoice();
         }
@@ -3733,8 +3454,7 @@ function initializeMenuEvents() {
       option.addEventListener(
         "focus",
         () => {
-          galleryDeleteChoice =
-            index;
+          galleryDeleteChoice = index;
 
           updateGalleryDeleteChoice();
         }
@@ -3773,28 +3493,18 @@ function initializeMenuEvents() {
         );
 
       if (isGalleryDeleteVisible) {
-        if (
-          event.key ===
-          "ArrowLeft"
-        ) {
+        if (event.key === "ArrowLeft") {
           event.preventDefault();
 
-          moveGalleryDeleteChoice(
-            "left"
-          );
+          moveGalleryDeleteChoice("left");
 
           return;
         }
 
-        if (
-          event.key ===
-          "ArrowRight"
-        ) {
+        if (event.key === "ArrowRight") {
           event.preventDefault();
 
-          moveGalleryDeleteChoice(
-            "right"
-          );
+          moveGalleryDeleteChoice("right");
 
           return;
         }
@@ -3812,8 +3522,7 @@ function initializeMenuEvents() {
 
         if (
           event.key === "Escape" ||
-          event.key ===
-            "Backspace"
+          event.key === "Backspace"
         ) {
           event.preventDefault();
 
@@ -3825,26 +3534,18 @@ function initializeMenuEvents() {
         return;
       }
 
-      if (
-        /^[0-9]$/.test(
-          event.key
-        )
-      ) {
+      if (/^[0-9]$/.test(event.key)) {
         playPhoneSound(
           `${event.key}.mp3`
         );
 
-        typeDialCharacter(
-          event.key
-        );
+        typeDialCharacter(event.key);
 
         return;
       }
 
       if (event.key === "#") {
-        if (
-          isGalleryScreenVisible
-        ) {
+        if (isGalleryScreenVisible) {
           openGalleryDeleteDialog();
 
           return;
@@ -3862,8 +3563,7 @@ function initializeMenuEvents() {
       }
 
       if (
-        event.key.toLowerCase() ===
-        "c"
+        event.key.toLowerCase() === "c"
       ) {
         event.preventDefault();
 
@@ -3878,8 +3578,7 @@ function initializeMenuEvents() {
       }
 
       if (
-        event.key.toLowerCase() ===
-        "a"
+        event.key.toLowerCase() === "a"
       ) {
         event.preventDefault();
 
@@ -3887,25 +3586,16 @@ function initializeMenuEvents() {
           closeContentPanel();
         }
 
-        setGalleryScreenVisible(
-          true
-        );
+        setGalleryScreenVisible(true);
 
         return;
       }
 
-      if (
-        event.key ===
-        "Backspace"
-      ) {
+      if (event.key === "Backspace") {
         event.preventDefault();
 
-        if (
-          isGalleryScreenVisible
-        ) {
-          if (
-            isGalleryPhotoVisible
-          ) {
+        if (isGalleryScreenVisible) {
+          if (isGalleryPhotoVisible) {
             closeFullGalleryPhoto();
           } else {
             hideGalleryScreen();
@@ -3924,12 +3614,8 @@ function initializeMenuEvents() {
       if (event.key === "Escape") {
         endCurrentCall();
 
-        if (
-          isGalleryScreenVisible
-        ) {
-          if (
-            isGalleryPhotoVisible
-          ) {
+        if (isGalleryScreenVisible) {
+          if (isGalleryPhotoVisible) {
             closeFullGalleryPhoto();
           } else {
             hideGalleryScreen();
@@ -3938,9 +3624,7 @@ function initializeMenuEvents() {
           return;
         }
 
-        if (
-          isCameraScreenVisible
-        ) {
+        if (isCameraScreenVisible) {
           stopCamera();
 
           return;
@@ -3987,12 +3671,8 @@ function initializeMenuEvents() {
       ) {
         event.preventDefault();
 
-        if (
-          isGalleryScreenVisible
-        ) {
-          if (
-            !isGalleryPhotoVisible
-          ) {
+        if (isGalleryScreenVisible) {
+          if (!isGalleryPhotoVisible) {
             openSelectedGalleryPhoto();
           }
 
@@ -4008,10 +3688,7 @@ function initializeMenuEvents() {
         }
 
         if (!isMenuVisible) {
-          setPhoneMenuVisible(
-            true
-          );
-
+          setPhoneMenuVisible(true);
           updateMenuSelection();
         } else {
           selectCurrentMenuItem();
@@ -4036,42 +3713,28 @@ function initializeMenuEvents() {
 
       event.preventDefault();
 
-      if (
-        isGalleryScreenVisible
-      ) {
-        if (
-          isGalleryPhotoVisible
-        ) {
-          if (
-            direction === "left"
-          ) {
+      if (isGalleryScreenVisible) {
+        if (isGalleryPhotoVisible) {
+          if (direction === "left") {
             showPreviousGalleryPhoto();
           }
 
-          if (
-            direction === "right"
-          ) {
+          if (direction === "right") {
             showNextGalleryPhoto();
           }
         } else {
-          moveGallerySelection(
-            direction
-          );
+          moveGallerySelection(direction);
         }
 
         return;
       }
 
       if (panelIsOpen) {
-        if (
-          direction === "left"
-        ) {
+        if (direction === "left") {
           showPreviousPanelPage();
         }
 
-        if (
-          direction === "right"
-        ) {
+        if (direction === "right") {
           showNextPanelPage();
         }
 
@@ -4079,9 +3742,7 @@ function initializeMenuEvents() {
       }
 
       if (isMenuVisible) {
-        moveMenuSelection(
-          direction
-        );
+        moveMenuSelection(direction);
       }
     }
   );
@@ -4140,11 +3801,25 @@ function initializePhone() {
     "is-hidden"
   );
 
+  /*
+    The page always begins with:
+    - audio off
+    - “Turn audio on” image
+  */
+
+  isMiniPhoneAudioOn = false;
+  isMiniPhoneAudioChanging = false;
+
+  miniPhoneRingSound.pause();
+  miniPhoneRingSound.currentTime = 0;
+
   audioToggle.hidden = false;
 
   audioToggle.classList.remove(
     "is-hidden"
   );
+
+  updateAudioToggle();
 
   spriteButton.hidden = false;
 
@@ -4157,10 +3832,6 @@ function initializePhone() {
 
   sprite.style.display =
     "block";
-
-  isMiniPhoneAudioOn = false;
-
-  updateAudioToggle();
 
   endCurrentCall();
   stopCamera();
@@ -4180,6 +3851,7 @@ function initializePhone() {
   audioToggle.addEventListener(
     "click",
     (event) => {
+      event.preventDefault();
       event.stopPropagation();
 
       toggleMiniPhoneAudio();
